@@ -3,9 +3,5 @@
   "buildCommand": "cd web-pcces/frontend && npm ci && npm run build && cp -r dist/* ../../api/static/",
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.py" }
-  ],
-  "env": {
-    "PCCES_JWT_ALGORITHM": "HS256",
-    "PCCES_TOKEN_EXPIRE_MINUTES": "480"
-  }
+  ]
 }
