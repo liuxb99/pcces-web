@@ -1,6 +1,16 @@
 # History
 TIME_PENDING | [x] 初始化 workflow
 TIME_PENDING | [x] 讀取 PCCES 原始碼，分析功能結構
+TIME_PENDING | [x] 識別場景：web-development
+TIME_PENDING | [x] 產出需求分析與技術選型（之前階段）
+TIME_PENDING | [x] 使用 explore 子代理全面調研 PCCES 源碼架構
+TIME_PENDING | [x] 產出 PCCES_源碼調研報告.md
+TIME_PENDING | [x] 產出 PCCES_網頁版遷移規劃.md（6 階段、技術選型、風險對策）
+TIME_PENDING | [ ] 等待用戶確認規劃後進入 Phase 1 開發
+TIME_PENDING | [x] 源碼調研結果整合至任務體系（TASK-003）
+TIME_PENDING | [x] 更新 workflow：將分析連結至現有專案架構
+TIME_PENDING | [x] 初始化 workflow
+TIME_PENDING | [x] 讀取 PCCES 原始碼，分析功能結構
 TIME_PENDING | [x] 識別場景：web-development，決定使用 React + FastAPI 技術棧
 TIME_PENDING | [x] 產出需求分析與技術選型
 TIME_PENDING | [x] 建立 config/scene_rules.yaml, .claude-agents/, tasks/ 控制文檔

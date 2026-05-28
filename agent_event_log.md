@@ -5,3 +5,18 @@ TIME_PENDING | REQUIREMENT_ANALYSIS | PCCES 網頁版需求分析完成
 TIME_PENDING | EXPLORE_SURVEY | 使用 explore 子代理調查 PCCES 資料模型，獲得完整欄位定義
 TIME_PENDING | BACKEND_CREATED | 建立 FastAPI 後端：6 models, 6 schemas, 6 services, 5 API routes
 TIME_PENDING | FRONTEND_CREATED | 建立 React 前端：6 pages, layout, store, api client
+TIME_PENDING | SOURCE_ANALYSIS | 使用 explore 子代理全面調研 PCCES 源碼架構（~97 工具調用）
+TIME_PENDING | DOC_CREATED | 產出 PCCES_源碼調研報告.md（21,246 字元，599 行）
+TIME_PENDING | PLAN_CREATED | 產出 PCCES_網頁版遷移規劃.md（13,080 字元，6 階段路線圖）
+TIME_PENDING | TASK_CREATED | 建立 TASK-003 整合調研結果至任務體系
+TIME_PENDING | WORKFLOW_MERGED | 將源碼分析文件連結至現有 web-pcces 專案架構
+TIME_PENDING | TASK_001_DONE | 核心框架完成（92分）
+TIME_PENDING | TASK_002_DONE | 示範資料修復完成（100分）
+TIME_PENDING | TASK_003_DONE | 源碼調研報告完成
+TIME_PENDING | TASK_004_DONE | 計價管理模組完成（90分）
+TIME_PENDING | TASK_005_DONE | 分包合約管理完成（90分）
+TIME_PENDING | TASK_006_DONE | 工項單價庫完成（90分）
+TIME_PENDING | TASK_007_DONE | 系統維護完成（95分）
+TIME_PENDING | TASK_008_DEV_DONE | 比較分析開發完成
+TIME_PENDING | TASK_008_REVIEW | 比較分析評分84分，不合格
+TIME_PENDING | MODE_SWITCH | 模式切換 -> 自動連續模式

@@ -2,6 +2,7 @@
 
 import { create } from 'zustand';
 import type { User, Project, BudgetItem } from './types';
+import { featureFlagApi } from './api';
 
 interface AppState {
   // 認證
@@ -22,6 +23,11 @@ interface AppState {
   // 全域載入
   loading: boolean;
   setLoading: (loading: boolean) => void;
+
+  // 功能開關
+  featureFlags: Record<string, boolean>;
+  loadFeatureFlags: () => Promise<void>;
+  isFeatureEnabled: (flagKey: string) => boolean;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -48,4 +54,22 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   loading: false,
   setLoading: (loading) => set({ loading }),
+
+  // 功能開關
+  featureFlags: {},
+  loadFeatureFlags: async () => {
+    try {
+      const flags = await featureFlagApi.listEnabled();
+      const map: Record<string, boolean> = {};
+      flags.forEach((f) => { map[f.flag_key] = f.is_enabled; });
+      set({ featureFlags: map });
+    } catch {
+      // 預設全部啟用（向後相容）
+    }
+  },
+  isFeatureEnabled: (flagKey) => {
+    const state = get();
+    // 若 store 中無該 key，預設為 true（向後相容）
+    return state.featureFlags[flagKey] ?? true;
+  },
 }));

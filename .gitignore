@@ -36,3 +36,4 @@ tmp/
 # Secret
 *.env
 **/config.yaml
+.vercel
