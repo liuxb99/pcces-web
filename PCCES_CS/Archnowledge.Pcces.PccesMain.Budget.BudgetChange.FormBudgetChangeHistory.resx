@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="gridBudExeItemA.ColumnInfo" xml:space="preserve"><value>16,1,0,0,0,110,Columns:0{Width:14;Name:"RowIndicator";AllowDragging:False;AllowResizing:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:105;Name:"ItemNo";Caption:"項次";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	2{Width:150;Name:"CName";Caption:"項目及說明";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	3{Width:52;Name:"UnitName";Caption:"單位";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	4{Width:42;Name:"Analysis";Caption:"分析";AllowEditing:False;TextAlign:CenterCenter;ImageAlign:CenterCenter;}	5{Name:"PccesCode";Caption:"工項代碼";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	6{Name:"Qty";Caption:"數量";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,##0.####";}	7{Name:"Cost";Caption:"單價 ";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,##0.####";}	8{Name:"Amount";Caption:"複價";DataType:System.Decimal;TextAlign:RightCenter;}	9{Name:"ReapportionmentQty";Caption:"追加減數量";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,##0.####";}	10{Name:"ReapportionmentAmount";Caption:"追加減複價";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,##0.####";}	11{Width:150;Name:"BudgetChangeReason";Caption:"變更原因";DataType:System.String;TextAlign:LeftCenter;}	12{Width:150;Name:"VersionHistory";Caption:"變更歷程";DataType:System.String;TextAlign:LeftCenter;}	13{Name:"Kind";Caption:"Kind";Visible:False;DataType:System.String;TextAlign:LeftCenter;}	14{Name:"SNo";Caption:"SNo";Visible:False;DataType:System.Int32;TextAlign:RightCenter;}	15{Name:"PubCode";Caption:"PubCode";Visible:False;DataType:System.Int32;TextAlign:RightCenter;}	</value></data>
+  <data name="gridBudgetChangeProject.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11pt;BackColor:237, 243, 254;ForeColor:Black;TextAlign:GeneralCenter;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:GeneralCenter;}	Focus{Font:細明體, 10pt, style=Bold;BackColor:White;TextAlign:LeftCenter;Border:Double,1,96, 145, 234,Both;}	Search{Font:細明體, 9.75pt;BackColor:White;Border:Double,1,96, 145, 234,Both;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:232, 232, 232;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="imageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAu
+MC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAA
+ACZTeXN0ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkD
+AAAADwMAAAB8BgAAAk1TRnQBSQFMAwEBAAEEAQABBAEAARABAAEQAQAE/wEZAQAI/wFCAU0BNgcA
+ATYDAAEoAwABQAMAARADAAEBAQABGAYAAQwSAAHXAcIBsgGdAY8BggGMAX8BdAGMAX8BdAGMAX4B
+dAGMAX4BdAGMAX8BdAGMAX4BdAGMAX8BdAGMAX8BdAGMAX4BdAGMAX4BdAGMAX8BdAGMAX4BdAGR
+AYMBeAGRAYMBeJAAAfoB5QHSAe4B1wHDAdUBvwGuAdUBvwGuAdUBwAGuAdUBvwGuAdUBvwGuAdUB
+vwGuAdUBvwGuAdUBwAGuAdUBwAGuAdUBvwGuAdUBvwGuAdUBvwGuAdQBvwGuAbIBoQGSkAAB+gHl
+AdQB+QHhAc4B+AHeAcoB+AHeAcoBgAGEAdoBHAEnAaQBaAFqAdoB+AHeAckB+AHeAcoB+AHeAckB
++AHeAcoB+AHeAcoB+AHfAcoB+AHfAcoB4wHLAbkBtAGiAZOQAAH5AeQB0gH5AeABywH4Ad0BxwGn
+AaoB5AEcAScBpAEoAS8BxwEVARkBywGNAZEB3QH4Ad0BxwH4Ad0BxwH4Ad0BxgH4Ad0BxwH4Ad0B
+xwH4Ad0BxwHjAcoBtQG0AaABkJAAAfkB4wHQAfkB3wHJAVoBXwHTARgBHwG3ATgBPwHXATUBOQHr
+ASUBKQHbARUBGQHLAfgB3AHFAfgB3AHFAfgB3AHFAfgB3AHFAfgB3AHFAfgB3AHFAeMByQK0AaAB
+j5AAAfkB4gHPASEBJAHNASgBLwHHAUgBTwHnAXEBeAH/AVgBXwH3AVwBWAH3ASUBKQHbAVABSgHU
+AfcB3AHFAfgB3AHFAfgB3AHFAfcB3AHFAfgB3AHFAeMByQK0AaABj5AAAfkB4gHPAYEBiwH/AXEB
+eAH/AXEBeAH/AWsBcgH2AfgB3AHFAX4BhAH1AXEBeAH/ASgBLwHHAaABnwHbAfcB3AHFAfgB3AHF
+AfgB3AHFAfcB3AHFAeIByQK0AaABj5AAAfgB4gHPAfgB3gHJAZEBlAH/AYYBjAH/AfcB3AHFAfcB
+3AHFAfcB3AHFAXcBfgH/AVwBWAH3ASgBIQHMAbYBtQHdAfgB3AHFAfcB3AHFAfgB2wHFAeMByQK0
+AaABj5AAAfgB4gHPAfgB3gHJAfcB2wHFAfcB3AHFAfcB3AHFAfcB3AHFAfcB2wHFAfcB3AHFAXcB
+agH3AUUBSQH7AT0BPwHRAsMB4QH3AdwBxQH3AdwBxQHjAckBtAGzAaABj5AAAfgB4QHPAfgB3gHJ
+AfcB2wHFAfcB3AHFAfcB2wHFAfcB2wHFAfcB3AHFAfcB2wHFAfcB3AHFAnsB9AE9ATUB6wFQAU0B
+xALRAeUB9wHbAcUB4gHJAbQBswGfAY+QAAH4AeEBzwH4Ad4ByQH3AdsBxQH3AdsBxQH3AdsBxQH3
+AdsBxQH3AdwBxQH3AdsBxQH3AdwBxQH3AdsBxQGKAYcB9AE1ATkB6wFQAUwBxQLBAd8B4gHIAbQB
+swGfAY+QAAH4AeIB0AH4Ad4ByQH3AdsBxQH3AdsBxQH3AdsBxQH3AdsBxQH3AdsBxQH3AdsBxQH3
+AdsBxQH3AdsBxQH3AdsBxQGKAYcB9AEsASgBxwE8AT8B0QLPAeMBswGfAY+QAAH4AeMB0gH4Ad8B
+ywH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxQH3
+AdwBxgGKAYcB9AFGAT8B6gFzAXgBzgGzAaABkJAAAfkB5AHUAfkB4AHNAfgB3QHIAfgB3QHJAfgB
+3QHJAfgB3QHJAfgB3QHJAfgB3QHJAfgB3QHJAfgB3QHJAfgB3QHIAfgB3QHIAfgB3QHIArsB9wFj
+AXAB+AG0AaABkZAAAfkB5gHWAfkB5AHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB
+4wHRAfkB4wHSAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfgB4AHMAcYBsgGikAAB+gHr
+Ad4B+gHrAd0B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B
++gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHpAdsB+AHiAc+QAAFCAU0BPgcAAT4DAAEoAwABQAMA
+ARADAAEBAQABAQUAAYAXAAP/gQAL</value></data><data name="appearance1.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAA5gQAAAJCTeYEAAAAAAAA
+NgAAACgAAAAUAAAAFAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/////////0KX/0sD/
+07z/0rz/07z/077/07//077/0r7/0b7/0r7/077/07//07//1cL/2rT////////////at8xmqM5H
+j8VPlsZQmchOl8hPmMhOm8pNoM9Oo9FMo9FMpdFNpNFNpdNNptRKm89Zn8zHstX////o07xOsOMA
+fNEJhtQLhdkNiNcMiNcNi9sPk9YKl9gJnNwIodwEpeAAqOIArOUAqOUAo+AAgM0ul8rgrMfM1dwj
+pPARnfYpp/gvqvgzrvo1sPwvrv0rrvwitPwctvsjxfsl0Pwi2v0W1vsS0PoOzPkGtukIhs7Hwb/U
+19otqfoYoPsurPs2r/s5sfwxrvxBs/tnx/ts0ftp2Pxf1Pso0/oM1/sb2vsd2vsPy/YEwPEPndvK
+v8HR1tsxrPogpfo6sfs/tPw8svt+zPra7/rt9vrZ8fnW8fnu9PnZ7flk1vsU1fwb2/wY1foFv/AN
+ndvJwMHQ1ts1r/ssq/tDtfxBtfuFzvnw9/q64vppw/o6w/pCwvpbyfr+/v7+/v5c1fsP1/wY1voE
+vvAOm9nKwMDO1ds2sPsyrvtEt/xavvri8fqv3vo7s/tBtfw+vPs2w/svw/sfwfr+/v7+/v4b1/sY
+1/sPvO4OmtfKwMDS1tpAtPs3sftJt/yBzPrg8fllwvtGt/xMuvxMvfs/w/s6xvsixvtM0vv+/v5W
+2foSzPoVtesRltTJwMDU2NpHuPxHtvxLt/yY1fve8Ppev/tHuPxLufw+t/sqs/s0wPsqyfs7yfrU
+6Pl21foZxPoirfEYlNfLwsHS2NtGuPxKtvxOuPyX0/rc7/liwPtLuPxHuPx6yvx9yvs5vvspw/s8
+xfr+/v5x0/khxfsnrvMYlNfMwcDS19pLuvxRufxavvyP0Pns8/huxPpEt/xDt/zY7fvv+PtCv/sf
+uftQyPrs9PtZxvkfsPwop+kbktDKwMDT19pUvvxZvvxhwfxtxfrl8/q+4fpIt/s+tfzK5fvj8Ps9
+sfwnq/uz4PvT7fstqvorqvwppOwej9DKwL/T2NpYvvxkwPx1yPxkwfuR0/n6+vmq2vk+tfvM5/vi
+7/szrvuW1Pn2+fpdvvogpvourv0mnu4fis/Mwb/S19pdwfxrxPx3yfx0x/xjwfuX1Pqq2vpIt/vJ
+5/vh8fs/s/uW0fhvxPogpvssq/otrP0knu4gis/Mwb/S19tlxP15yfqN0Pl5yft0x/xhwPxavvxQ
+ufzZ7Pvw9/xLuPw3sfwzsPs3sPsyrvoyr/0mn+4eic7MwL/T19tuyPyN0Pmd1veHz/l0x/x3yPxo
+xPxgwPyW1Pyd1vxbvvxSu/xPuvxFtvxBtPs3sv0moO4XhMvJv73V4NVrxv6Nz/ei1/aU0fd9yvp6
+yPt0x/ttxPtbvvtcvvtkwftfvvtZvPtRuvtFtvo5sfwinOsRgs/MwML///+g2uxiyP9jxf9Wwf9K
+vf9Euv89t/8/t/89uP89t/80tf8vsv8qr/8or/8eqf8Rpf8Kle9nv9j///////////+/09KuzeKw
+z+GtzuGszeGuzeKtzeKszeKozOKpzOKpzeKpzOOqzeKnzOKgyOSuztr///////8L</value></data><data name="appearance5.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAANgMAAAJCTTYDAAAAAAAA
+NgAAACgAAAAQAAAAEAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD///8YcRsPYhAQaxAQ
+aRAPaQ8Pag8RaxEUaxQOchEAcwoCbwIAagEAbAANYQ3///8cgiIIfBMkhiEgiiEiiyEhiiEhkCEd
+kB0WjhYgmyAPmQ8Pmw8JlwcAlQAAewAKZxcLhhcjkh8ymyc2mzc2mzU1mzU0nzRBp0FfvF8VpRUj
+rCMPsRASsQoEpwAAkwAAagAXjBYmkyk6nTxBokFApUFFpkM3njfM48z///9qx2oLrwsivSILtQwK
+rQsAmwAAbgAikSA6nTJDokNJp0lKqklEqks5pjyUzpT////7/vtkzmQHsgcauRsOqw8LnwsHdAAq
+lSlDoTxNp05Wq1ZWqlVRqVdIqkotny2Lyoz////7/ftlzGcJrAEZrxMNng4QcwozmTNDoUVPp09E
+okREo0RHokY4ojc2ozYhmiFswWz+/v73+vdkxGAIogUhoSIQcxE+nj5EoUR2unbn8ufj8ePm8efl
+8uXk8eTl8eXb7tv7/Pv5+/n3+/hkvmQTlxMVdRU9nj1KpEqIw4j8/Pz4+vj6+/r6+/r5+vn5+/n0
+9/T7/Pv3+vf//v9vwXAOjg4WdBZLpUthrmFisGJeq15VplVMp0xAn0A+nz4elB5htmH+/f77/ft3
+wHYOjxknliwgcx9JpElosmhvsW9ksWRcrFxSqFJKokoulS51s3X//////v9+wn4SjhI5mzgxlDEh
+cyFSqFJxuHF3undqsWpjr2JZqlhLokuBvoH////+/v6BwIEZjRk3nDcumS4wlTEjcyNbrlyBwYOI
+xIdwuW9js2ldr2FMp0re7t7///+SyJIlkyU9nz04nTgxmzEvlC8bdRtstGii0JiazZyKxol0unhs
+tm9vt25zuXOVyZVOpk5gsGBKpUpJpEk+nz42mDYSbxFls2aTzYukzJmBwYJ4vHdttm1os2hfr19X
+q1dosmhUqlRVqlVMpUw7nzsniycTbh////9otGlgr15Wq1dMpkxMpkxKpEpMpkxNoE08nTw5nDk8
+njwzmjMokSgphin///8L</value></data><data name="gridBudgetChangeProject.ColumnInfo" xml:space="preserve"><value>8,1,0,0,0,110,Columns:0{Width:14;Name:"RowIndicator";AllowDragging:False;AllowResizing:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:41;Name:"ChangeVersion";Caption:"次別";AllowEditing:False;DataType:System.Int32;TextAlign:RightCenter;}	2{Width:83;Name:"ChangeDate";Caption:"變更日期";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	3{Width:116;Name:"Amount";Caption:"變更後總價";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,##0.####";TextAlign:RightCenter;}	4{Width:175;Name:"Purpose";Caption:"主旨";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	5{Width:88;Name:"Approver";Caption:"負責人";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	6{Width:125;Name:"COMSExpandBudget";Caption:"是否公告至COMS";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;}	7{Width:116;Name:"ReapportionmentToTalAmount";Caption:"追加減總價";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,##0.####";TextAlign:RightCenter;}	</value></data>
+  <data name="gridBudExeItemA.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11pt;BackColor:237, 243, 254;ForeColor:Black;TextAlign:GeneralCenter;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:GeneralCenter;}	Focus{Font:細明體, 10pt, style=Bold;BackColor:White;TextAlign:LeftCenter;Border:Double,1,96, 145, 234,Both;}	Search{Font:細明體, 9.75pt;BackColor:White;Border:Double,1,96, 145, 234,Both;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:232, 232, 232;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  </root>

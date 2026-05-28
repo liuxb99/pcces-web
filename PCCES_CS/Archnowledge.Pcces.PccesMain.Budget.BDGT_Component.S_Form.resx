@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="gridItemB.ColumnInfo" xml:space="preserve"><value>4,0,0,0,0,110,Columns:0{Width:45;Name:"VarSign";Caption:"± 號";DataType:System.String;TextAlign:CenterCenter;TextAlignFixed:GeneralTop;}	1{Width:135;Name:"ItemNo";Caption:"選項代碼";DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	2{Name:"CName";Caption:"選項名稱";DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	3{Name:"PrintNo";Visible:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	</value></data>
+  <data name="appearance21.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAANgMAAAJCTTYDAAAAAAAA
+NgAAACgAAAAQAAAAEAAAAAEAGAAAAAAAAAAAABILAAASCwAAAAAAAAAAAAD/////////////////
+///////////////////////////////////////////////////////F3f8PQfmQuf7x+P//////
+///////////////////////x+P////////////////8cWPsAAuwHKvfb6v//////////////////
+//////8mXvu/2f/////////////////K3f4ABewBDPEpYvv0+f/////////////////j7/8CG/Xe
+7P/////////////////+//84YfoACvMEIPbR5f/+///+///2+v/2+v8HKvc3Z/v/////////////
+///////////u9f8EIPYACPELNfm01/+y1f+y1f8ZUPoCGPXq8///////////////////////////
+///w9/8HJfYBDPEQPPl8sP4MNvkBEfR2nv3////////////////////////////////////w9/8H
+JfYBEfQBEfQDF/QEG/b////////////////////////////////////////////S5P8BEfQDF/YE
+IPb4+//////////////////////////////////////////n8f8iSPoDF/QCGPUCGPURPPn+////
+//////////////////////////////+hwP4DG/YDG/ZXhvzf7P9RfvwDG/Zqkfz+////////////
+///////7/f/a6f9MdfsDG/YDG/ZAcfz7/f/////5/P8sW/oDG/ZrlPz+//////////////+20P4X
+TfoDF/QDG/Z/pf3////////////////4+//P4/8JKfhkjPz///////////+51P4DG/YFI/fD2v//
+///////////////////////////z+P+/1/7////////////M4f8YR/rX5///////////////////
+////////////////////////////////////////////////////////////////////////////
+//////////////////8L</value></data><data name="appearance22.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAANgMAAAJCTTYDAAAAAAAA
+NgAAACgAAAAQAAAAEAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD///8YcRsPYhAQaxAQ
+aRAPaQ8Pag8RaxEUaxQOchEAcwoCbwIAagEAbAANYQ3///8cgiIIfBMkhiEgiiEiiyEhiiEhkCEd
+kB0WjhYgmyAPmQ8Pmw8JlwcAlQAAewAKZxcLhhcjkh8ymyc2mzc2mzU1mzU0nzRBp0FfvF8VpRUj
+rCMPsRASsQoEpwAAkwAAagAXjBYmkyk6nTxBokFApUFFpkM3njfM48z///9qx2oLrwsivSILtQwK
+rQsAmwAAbgAikSA6nTJDokNJp0lKqklEqks5pjyUzpT////7/vtkzmQHsgcauRsOqw8LnwsHdAAq
+lSlDoTxNp05Wq1ZWqlVRqVdIqkotny2Lyoz////7/ftlzGcJrAEZrxMNng4QcwozmTNDoUVPp09E
+okREo0RHokY4ojc2ozYhmiFswWz+/v73+vdkxGAIogUhoSIQcxE+nj5EoUR2unbn8ufj8ePm8efl
+8uXk8eTl8eXb7tv7/Pv5+/n3+/hkvmQTlxMVdRU9nj1KpEqIw4j8/Pz4+vj6+/r6+/r5+vn5+/n0
+9/T7/Pv3+vf//v9vwXAOjg4WdBZLpUthrmFisGJeq15VplVMp0xAn0A+nz4elB5htmH+/f77/ft3
+wHYOjxknliwgcx9JpElosmhvsW9ksWRcrFxSqFJKokoulS51s3X//////v9+wn4SjhI5mzgxlDEh
+cyFSqFJxuHF3undqsWpjr2JZqlhLokuBvoH////+/v6BwIEZjRk3nDcumS4wlTEjcyNbrlyBwYOI
+xIdwuW9js2ldr2FMp0re7t7///+SyJIlkyU9nz04nTgxmzEvlC8bdRtstGii0JiazZyKxol0unhs
+tm9vt25zuXOVyZVOpk5gsGBKpUpJpEk+nz42mDYSbxFls2aTzYukzJmBwYJ4vHdttm1os2hfr19X
+q1dosmhUqlRVqlVMpUw7nzsniycTbh////9otGlgr15Wq1dMpkxMpkxKpEpMpkxNoE08nTw5nDk8
+njwzmjMokSgphin///8L</value></data><data name="gridItemC.ColumnInfo" xml:space="preserve"><value>6,0,0,0,0,110,Columns:0{Width:150;Name:"Lower";Caption:"下限";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,###,###,##0";TextAlignFixed:GeneralTop;}	1{Width:100;Name:"MidText";AllowEditing:False;DataType:System.String;TextAlign:CenterCenter;TextAlignFixed:GeneralTop;}	2{Width:180;Name:"Upper";Caption:"上限";AllowEditing:False;DataType:System.Decimal;Format:"###,###,###,###,###,##0";TextAlignFixed:GeneralTop;}	3{Width:80;Name:"Rate";Caption:"變動費率%";DataType:System.Decimal;TextAlignFixed:GeneralTop;}	4{Name:"PrintNo";Caption:"PrintNo";Visible:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	5{Name:"Formula";Caption:"公式";DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	</value></data>
+  <data name="gridItemB.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11pt;BackColor:237, 243, 254;ForeColor:Black;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;}	Focus{BackColor:102, 153, 255;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="imageList2.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAu
+MC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAA
+ACZTeXN0ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkD
+AAAADwMAAAB8AgAAAk1TRnQBSQFMAwEBAAEEAQABBAEAARABAAEQAQAE/wEZAQAI/wFCAU0BNgcA
+ATYDAAEoAwABQAMAARADAAEBAQABGAYAAQzVAANwAVABWAFQAxsB9wL4tAADoAMAAVABkAGwAR0B
+GAEOAZoBcAEcAZkBZgEAAZkBZgEAAZkBZgEAAZkBZgEAAZkBZgEAAZkBZgEAAZkBZgEAAZkBZgEA
+AZkBZpcAA6ABkAG4AcABcAHQAeABUAGYAbABGgEWAQ8BmgFxAR4BmQFmAQABmQFmAQABmQFmAQAB
+mQFmAQABmQFmAQABmQFmAQABmQFmAQABmQFmlwAD8QFQAaABsAGQAeAB8AFgAcAB0AFQAZgBsAMb
+A+SrAANmA5cBUAGgAbABkAHgAfABYAHAAdABUAGYAbADEwNxEmacAAHuAvQBYgGpAbEBkAHgAfAB
+YAHAAdABUAGYAbADFgHuAvGlAAlmAYYBiQGLAXABrgG+AZAB4AHwAXAByAHgAYABiAGAATEBOQGQ
+AYYBhwGQDGaiAAHzAfUB9wGEAbMBwgHQAbgBsAFwAYgB0AFgAXABsAFIAU8BnaIAD2YBfwGBAX8B
+YAFvAawBcAGQAeABYAF4AdABYQFvAacMZqgAAe8C7AGEAZABwgGAAY0BwAHjAecB8aIAKmb/AFcA
+Kmb/AP8AFQABQgFNAT4HAAE+AwABKAMAAUADAAEQAwABAQEAAQEFAAGAFwAD/wEAAv8GAAGHAf8G
+AAGgAQEGAAGAAQEGAAGAAf8GAAGAAQEGAAHgAT8GAAGAAQEGAAH4AR8GAAGAAQEGAAH+AR8GAAGA
+AQEGAAL/BgABgAEBBgAC/wYAAv8GAAs=</value></data><data name="gridItemC.Styles" xml:space="preserve"><value>Normal{Font:新細明體, 9pt;BackColor:237, 243, 254;ForeColor:Black;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:GeneralCenter;TextEffect:Flat;ImageAlign:LeftCenter;ImageSpacing:2;Trimming:None;WordWrap:False;Display:Stack;Format:"###,###,###,###,###,##0";}	Focus{Font:細明體, 10pt, style=Bold;BackColor:White;TextAlign:GeneralCenter;TextEffect:Flat;ImageAlign:LeftCenter;ImageSpacing:2;Trimming:None;WordWrap:False;Border:Double,1,102, 153, 255,Both;Display:Stack;Format:"###,###,###,###,###,##0";}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  </root>

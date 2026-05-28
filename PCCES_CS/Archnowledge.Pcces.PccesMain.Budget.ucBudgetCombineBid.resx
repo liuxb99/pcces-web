@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="gridBidItemA.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;TextAlign:GeneralCenter;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:GeneralCenter;}	Focus{Font:細明體, 10pt, style=Bold;BackColor:White;TextAlign:LeftCenter;Border:Double,1,96, 145, 234,Both;}	Search{Font:細明體, 9.75pt;BackColor:White;ForeColor:HighlightText;Border:Double,1,96, 145, 234,Both;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:232, 232, 232;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="gridBidItemA.ColumnInfo" xml:space="preserve"><value>12,1,0,0,0,110,Columns:0{Width:14;Name:"RowIndicator";AllowDragging:False;AllowResizing:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:40;Name:"selected";Caption:"勾選";DataType:System.Boolean;ImageAlign:CenterCenter;}	2{Width:100;AllowSorting:False;Name:"ItemNo";Caption:"項次";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	3{Width:200;Name:"CName";Caption:"項目及說明";DataType:System.String;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	4{Width:70;Name:"UnitName";Caption:"單位";DataType:System.String;TextAlign:LeftTop;TextAlignFixed:GeneralTop;}	5{Width:40;Name:"analysisImage";Caption:"分析";AllowEditing:False;DataType:System.String;TextAlign:LeftTop;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	6{Width:100;Name:"Qty";Caption:"數量";DataType:System.Decimal;Format:"###,###,###,##0";TextAlign:RightTop;TextAlignFixed:GeneralTop;}	7{Width:120;Name:"Cost";Caption:"單價";DataType:System.Decimal;Format:"###,###,###,##0";TextAlign:RightTop;TextAlignFixed:GeneralTop;}	8{Width:100;Name:"PccesCode";Caption:"工項代碼";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	9{Width:150;Name:"Memo";Caption:"備註";DataType:System.String;TextAlign:LeftTop;TextAlignFixed:GeneralTop;}	10{Name:"kind";Caption:"kind";Visible:False;DataType:System.String;TextAlign:LeftCenter;}	11{Name:"sNo";Caption:"sNo";Visible:False;DataType:System.Int32;TextAlign:RightCenter;}	</value></data>
+  <data name="imageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAu
+MC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAA
+ACZTeXN0ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkD
+AAAADwMAAAB8BgAAAk1TRnQBSQFMAwEBAAEEAQABBAEAARABAAEQAQAE/wEZAQAI/wFCAU0BNgcA
+ATYDAAEoAwABQAMAARADAAEBAQABGAYAAQwSAAHXAcIBsgGdAY8BggGMAX8BdAGMAX8BdAGMAX4B
+dAGMAX4BdAGMAX8BdAGMAX4BdAGMAX8BdAGMAX8BdAGMAX4BdAGMAX4BdAGMAX8BdAGMAX4BdAGR
+AYMBeAGRAYMBeJAAAfoB5QHSAe4B1wHDAdUBvwGuAdUBvwGuAdUBwAGuAdUBvwGuAdUBvwGuAdUB
+vwGuAdUBvwGuAdUBwAGuAdUBwAGuAdUBvwGuAdUBvwGuAdUBvwGuAdQBvwGuAbIBoQGSkAAB+gHl
+AdQB+QHhAc4B+AHeAcoB+AHeAcoBgAGEAdoBHAEnAaQBaAFqAdoB+AHeAckB+AHeAcoB+AHeAckB
++AHeAcoB+AHeAcoB+AHfAcoB+AHfAcoB4wHLAbkBtAGiAZOQAAH5AeQB0gH5AeABywH4Ad0BxwGn
+AaoB5AEcAScBpAEoAS8BxwEVARkBywGNAZEB3QH4Ad0BxwH4Ad0BxwH4Ad0BxgH4Ad0BxwH4Ad0B
+xwH4Ad0BxwHjAcoBtQG0AaABkJAAAfkB4wHQAfkB3wHJAVoBXwHTARgBHwG3ATgBPwHXATUBOQHr
+ASUBKQHbARUBGQHLAfgB3AHFAfgB3AHFAfgB3AHFAfgB3AHFAfgB3AHFAfgB3AHFAeMByQK0AaAB
+j5AAAfkB4gHPASEBJAHNASgBLwHHAUgBTwHnAXEBeAH/AVgBXwH3AVwBWAH3ASUBKQHbAVABSgHU
+AfcB3AHFAfgB3AHFAfgB3AHFAfcB3AHFAfgB3AHFAeMByQK0AaABj5AAAfkB4gHPAYEBiwH/AXEB
+eAH/AXEBeAH/AWsBcgH2AfgB3AHFAX4BhAH1AXEBeAH/ASgBLwHHAaABnwHbAfcB3AHFAfgB3AHF
+AfgB3AHFAfcB3AHFAeIByQK0AaABj5AAAfgB4gHPAfgB3gHJAZEBlAH/AYYBjAH/AfcB3AHFAfcB
+3AHFAfcB3AHFAXcBfgH/AVwBWAH3ASgBIQHMAbYBtQHdAfgB3AHFAfcB3AHFAfgB2wHFAeMByQK0
+AaABj5AAAfgB4gHPAfgB3gHJAfcB2wHFAfcB3AHFAfcB3AHFAfcB3AHFAfcB2wHFAfcB3AHFAXcB
+agH3AUUBSQH7AT0BPwHRAsMB4QH3AdwBxQH3AdwBxQHjAckBtAGzAaABj5AAAfgB4QHPAfgB3gHJ
+AfcB2wHFAfcB3AHFAfcB2wHFAfcB2wHFAfcB3AHFAfcB2wHFAfcB3AHFAnsB9AE9ATUB6wFQAU0B
+xALRAeUB9wHbAcUB4gHJAbQBswGfAY+QAAH4AeEBzwH4Ad4ByQH3AdsBxQH3AdsBxQH3AdsBxQH3
+AdsBxQH3AdwBxQH3AdsBxQH3AdwBxQH3AdsBxQGKAYcB9AE1ATkB6wFQAUwBxQLBAd8B4gHIAbQB
+swGfAY+QAAH4AeIB0AH4Ad4ByQH3AdsBxQH3AdsBxQH3AdsBxQH3AdsBxQH3AdsBxQH3AdsBxQH3
+AdsBxQH3AdsBxQH3AdsBxQGKAYcB9AEsASgBxwE8AT8B0QLPAeMBswGfAY+QAAH4AeMB0gH4Ad8B
+ywH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxgH3AdwBxQH3
+AdwBxgGKAYcB9AFGAT8B6gFzAXgBzgGzAaABkJAAAfkB5AHUAfkB4AHNAfgB3QHIAfgB3QHJAfgB
+3QHJAfgB3QHJAfgB3QHJAfgB3QHJAfgB3QHJAfgB3QHJAfgB3QHIAfgB3QHIAfgB3QHIArsB9wFj
+AXAB+AG0AaABkZAAAfkB5gHWAfkB5AHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB
+4wHRAfkB4wHSAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfkB4wHRAfgB4AHMAcYBsgGikAAB+gHr
+Ad4B+gHrAd0B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B
++gHrAd4B+gHrAd4B+gHrAd4B+gHrAd4B+gHpAdsB+AHiAc+QAAFCAU0BPgcAAT4DAAEoAwABQAMA
+ARADAAEBAQABAQUAAYAXAAP/gQAL</value></data></root>

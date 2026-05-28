@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="Grid1.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;TextAlign:GeneralBottom;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:LeftCenter;ImageAlign:CenterCenter;Border:None,1,Black,Both;Format:"###,###,###,##0";}	Focus{Font:細明體, 11.25pt;BackColor:102, 153, 255;Margins:0, 0, 0, 0;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:232, 232, 232;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="appearance1.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAA5gQAAAJCTeYEAAAAAAAA
+NgAAACgAAAAUAAAAFAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/////////////////
+///////92a73w3numDPtni/smy3okizytV//3LL/////////////////////////////////////
+///72af4w3fxo0fswYfj8f/f5/TY3uzL1enStI7fjDb2v3L/1JP/////////////////////////
+///605r1sFDzw3vz///r7vXcu6XTpYjQoYPQqJDOwLvE0+rRpm/akjL+zYj/////////////////
+///61qL2tFn5+fX4///aqYfBbTS6WRu1TQu1TQq3VRe6XSLEgVXKxMvBxdTXmkz9zIT/////////
+///74br1qT38+/f38+/RhEm/VQa8TwC8UQK6UQe3Tgq0SwezRwK0SQW8YCPNsKDHy9rdlzv/1Jb/
+///////50Zf3vWz8+/rZkU/GWQDKYwnJYATKZhDGYQ7BWAi8VAq3UAy1TAuzRwK7XiHQytHbr3j4
+wXT////74r/1mx/////qwprTbArUbwjUaADbhjDuy6jXgC/JXQDGXwq+Vwi4Twm1TQu0RwLEe0nW
+5//llCX/5sL4vGj505z89/LjmkvabADfdQDnpFb46df////orXDUawPOaAfGXwfAWAi4UAuzSAO6
+WhvYx8HlxZv2vGv1mBT+///35c/mjCLmewDxunX9+/j8+/n78+r58enggBPWbgDPaAfHXwe/Vgm2
+Tgq2Tg3Upofk9v/vlhn2oCX+/Pr32rbsiQnxiAD5umP98uL3oyz4yIT+///xvH7edADXcAbOZgfF
+XQi8VQyxQgDPlG3v/Pvxny32oCX9/Pr53bf1kgf6lQL9nA39pCD8mAT7nRL96tD9///sp1LcbwDU
+bgjLZArBWgyzRADSl3H1/PryoC71mRT9///858r7pCL9ohn9rTX9rzr9rjr9oRj9tUn+9+z78ebq
+oUzXbQDMXwDEXAm5Ugraq4z5///zmh74vWj605799uz8t1H9qi79vl79wWf9vV39s0b9nxL8tUz9
++PH8///vxJXcjkTFWwS/Xhfp18732qz3vWz74r/2nh/9///716D9t0/9yXv905L9y4D9u1r9rTT8
+lwD2qDr21Kj////pu5DEVwDQhEr9///1pjn74b3////50Zf4v27+/Pv9y4H9yHj92aH90Iz9vmD9
+rjb9nQ71iQDqhgrlkzbWdhnMaxfz7un50Zb3wXL////////64Lr2qT3++/f99Ob9zon9x3b9wmn9
+t1D9qi78mwrzjgPnfQDaagDVcxPx17/////3tlz6zo7////////////61qH4t1v9+vb+///91Jn9
+vV79rzn8mgb4jADviQPniBXlnEz48Oz////4wXX4xn3////////////////////50pr3s1P5xnz+
+///9+PL82qf8yHv4wXT1y5T348v////61J33tVf5yIH////////////////////////////62Kb4
+w3j2qEr60pz9///+///+///////75MT1oUr4wnT5zIv/////////////////////////////////
+///////73bn4xX32my72pC/2oy72my34umT62rj///////////////////////8L</value></data><data name="Grid1.ColumnInfo" xml:space="preserve"><value>11,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowDragging:False;AllowResizing:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:94;Name:"pccesCode";Caption:"pccesCode";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	2{Width:200;Name:"cName";Caption:"cName";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	3{Name:"FullItemNo";Caption:"FullItemNo";DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	4{Name:"BudPccesCode";Caption:"BudPccesCode";DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	5{Name:"BudResName";Caption:"BudResName";DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	6{Name:"usrQty";Caption:"usrQty";DataType:System.Decimal;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	7{Name:"usrAmt";Caption:"usrAmt";DataType:System.Decimal;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	8{Name:"svrPccesCode";Caption:"svrPccesCode";DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	9{Name:"svrItemQty";Caption:"svrItemQty";DataType:System.Decimal;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	10{Name:"svrItemAmt";Caption:"svrItemAmt";DataType:System.Decimal;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	</value></data>
+  </root>

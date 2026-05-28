@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+*.db
+*.db-journal
+*.ldb
+*.mdb
+
+# Node
+node_modules/
+web-pcces/frontend/dist/
+
+# Vercel
+.vercel/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+reports/
+uploads/
+tmp/
+
+# Secret
+*.env
+**/config.yaml

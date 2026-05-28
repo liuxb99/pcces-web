@@ -1,0 +1,417 @@
+$ curl -s -X POST http://localhost:8000/api/auth/register -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"admin123\",\"display_name\":\"管理者\",\"company\":\"測試機關\"}"
+[exit 0]
+<!doctype html>
+<html lang=en>
+  <head>
+    <title>sqlalchemy.exc.ArgumentError: For many-to-one relationship BudgetItem.children, delete-orphan cascade is normally configured only on the &#34;one&#34; side of a one-to-many relationship, and not on the &#34;many&#34; side of a many-to-one or many-to-many relationship.  To force this relationship to allow a particular &#34;BudgetItem&#34; object to be referenced by only a single &#34;BudgetItem&#34; object at a time via the BudgetItem.children relationship, which would allow delete-orphan cascade to take place in this direction, set the single_parent=True flag. (Background on this error at: https://sqlalche.me/e/20/bbf0)
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = true,
+          EVALEX_TRUSTED = false,
+          SECRET = "lLLXPbtBaWDtil0Xqb4G";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>ArgumentError</h1>
+<div class="detail">
+  <p class="errormsg">sqlalchemy.exc.ArgumentError: For many-to-one relationship BudgetItem.children, delete-orphan cascade is normally configured only on the &#34;one&#34; side of a one-to-many relationship, and not on the &#34;many&#34; side of a many-to-one or many-to-many relationship.  To force this relationship to allow a particular &#34;BudgetItem&#34; object to be referenced by only a single &#34;BudgetItem&#34; object at a time via the BudgetItem.children relationship, which would allow delete-orphan cascade to take place in this direction, set the single_parent=True flag. (Background on this error at: https://sqlalche.me/e/20/bbf0)
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-2309867080144">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask\app.py"</cite>,
+      line <em class="line">1536</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">    </span>) -&gt; cabc.Iterable[bytes]:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867085040">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask\app.py"</cite>,
+      line <em class="line">1514</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except:</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867085184">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask_cors\extension.py"</cite>,
+      line <em class="line">176</em>,
+      in <code class="function">wrapped_function</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span># These error handlers will still respect the behavior of the route</pre>
+<pre class="line before"><span class="ws">        </span>if options.get(&#34;intercept_exceptions&#34;, True):</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>def _after_request_decorator(f):</pre>
+<pre class="line before"><span class="ws">                </span>def wrapped_function(*args, **kwargs):</pre>
+<pre class="line current"><span class="ws">                    </span>return cors_after_request(app.make_response(f(*args, **kwargs)))
+<span class="ws">                    </span>                                            ^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">                </span>return wrapped_function</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>if hasattr(app, &#34;handle_exception&#34;):</pre>
+<pre class="line after"><span class="ws">                </span>app.handle_exception = _after_request_decorator(app.handle_exception)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867086912">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask\app.py"</cite>,
+      line <em class="line">1511</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: BaseException | None = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()
+<span class="ws">                </span>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867087056">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask\app.py"</cite>,
+      line <em class="line">919</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)
+<span class="ws">            </span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: ft.ResponseReturnValue | HTTPException,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867087200">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask_cors\extension.py"</cite>,
+      line <em class="line">176</em>,
+      in <code class="function">wrapped_function</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span># These error handlers will still respect the behavior of the route</pre>
+<pre class="line before"><span class="ws">        </span>if options.get(&#34;intercept_exceptions&#34;, True):</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>def _after_request_decorator(f):</pre>
+<pre class="line before"><span class="ws">                </span>def wrapped_function(*args, **kwargs):</pre>
+<pre class="line current"><span class="ws">                    </span>return cors_after_request(app.make_response(f(*args, **kwargs)))
+<span class="ws">                    </span>                                            ^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">                </span>return wrapped_function</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>if hasattr(app, &#34;handle_exception&#34;):</pre>
+<pre class="line after"><span class="ws">                </span>app.handle_exception = _after_request_decorator(app.handle_exception)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867087344">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask\app.py"</cite>,
+      line <em class="line">917</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self, _async_wrapper=self.ensure_sync)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()
+<span class="ws">                </span>     ^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867087488">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\flask\app.py"</cite>,
+      line <em class="line">902</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>and req.method == &#34;OPTIONS&#34;</pre>
+<pre class="line before"><span class="ws">        </span>):</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line before"><span class="ws">        </span>view_args: dict[str, t.Any] = req.view_args  # type: ignore[assignment]</pre>
+<pre class="line current"><span class="ws">        </span>return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self) -&gt; Response:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867087632">
+  <h4>File <cite class="filename">"D:\AIWork\AI_Budget\web-pcces\backend\main.py"</cite>,
+      line <em class="line">122</em>,
+      in <code class="function">register</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>if not data:</pre>
+<pre class="line before"><span class="ws">        </span>return jsonify({&#34;detail&#34;: &#34;請提供資料&#34;}), 400</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>db = next(get_db())</pre>
+<pre class="line before"><span class="ws">    </span>try:</pre>
+<pre class="line current"><span class="ws">        </span>existing = db.query(User).filter(User.username == data[&#34;username&#34;]).first()
+<span class="ws">        </span>           ^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>if existing:</pre>
+<pre class="line after"><span class="ws">            </span>return jsonify({&#34;detail&#34;: &#34;帳號已存在&#34;}), 400</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>user = User(</pre>
+<pre class="line after"><span class="ws">            </span>username=data[&#34;username&#34;],</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867091808">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\session.py"</cite>,
+      line <em class="line">2952</em>,
+      in <code class="function">query</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>:ref:`query_api_toplevel` - legacy API doc</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>return self._query_cls(entities, self, **kwargs)
+<span class="ws">        </span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _identity_lookup(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>mapper: Mapper[_O],</pre>
+<pre class="line after"><span class="ws">        </span>primary_key_identity: Union[Any, Tuple[Any, ...]],</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867540336">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\query.py"</cite>,
+      line <em class="line">275</em>,
+      in <code class="function">__init__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span># where it stores a Query without a Session and also there are tests</pre>
+<pre class="line before"><span class="ws">        </span># for the query(Entity).with_session(session) API which is likely in</pre>
+<pre class="line before"><span class="ws">        </span># some old recipes, however these are legacy as select() can now be</pre>
+<pre class="line before"><span class="ws">        </span># used.</pre>
+<pre class="line before"><span class="ws">        </span>self.session = session  # type: ignore</pre>
+<pre class="line current"><span class="ws">        </span>self._set_entities(entities)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _set_propagate_attrs(self, values: Mapping[str, Any]) -&gt; Self:</pre>
+<pre class="line after"><span class="ws">        </span>self._propagate_attrs = util.immutabledict(values)</pre>
+<pre class="line after"><span class="ws">        </span>return self</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867543504">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\query.py"</cite>,
+      line <em class="line">287</em>,
+      in <code class="function">_set_entities</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>self,</pre>
+<pre class="line before"><span class="ws">        </span>entities: Union[</pre>
+<pre class="line before"><span class="ws">            </span>_ColumnsClauseArgument[Any], Iterable[_ColumnsClauseArgument[Any]]</pre>
+<pre class="line before"><span class="ws">        </span>],</pre>
+<pre class="line before"><span class="ws">    </span>) -&gt; None:</pre>
+<pre class="line current"><span class="ws">        </span>self._raw_columns = [
+<span class="ws">        </span>                    </pre>
+<pre class="line after"><span class="ws">            </span>coercions.expect(</pre>
+<pre class="line after"><span class="ws">                </span>roles.ColumnsClauseRole,</pre>
+<pre class="line after"><span class="ws">                </span>ent,</pre>
+<pre class="line after"><span class="ws">                </span>apply_propagate_attrs=self,</pre>
+<pre class="line after"><span class="ws">                </span>post_inspect=True,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867543648">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\query.py"</cite>,
+      line <em class="line">288</em>,
+      in <code class="function">&lt;listcomp&gt;</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>entities: Union[</pre>
+<pre class="line before"><span class="ws">            </span>_ColumnsClauseArgument[Any], Iterable[_ColumnsClauseArgument[Any]]</pre>
+<pre class="line before"><span class="ws">        </span>],</pre>
+<pre class="line before"><span class="ws">    </span>) -&gt; None:</pre>
+<pre class="line before"><span class="ws">        </span>self._raw_columns = [</pre>
+<pre class="line current"><span class="ws">            </span>coercions.expect(
+<span class="ws">            </span>^</pre>
+<pre class="line after"><span class="ws">                </span>roles.ColumnsClauseRole,</pre>
+<pre class="line after"><span class="ws">                </span>ent,</pre>
+<pre class="line after"><span class="ws">                </span>apply_propagate_attrs=self,</pre>
+<pre class="line after"><span class="ws">                </span>post_inspect=True,</pre>
+<pre class="line after"><span class="ws">            </span>)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867543792">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\sql\coercions.py"</cite>,
+      line <em class="line">388</em>,
+      in <code class="function">expect</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>if not is_clause_element:</pre>
+<pre class="line before"><span class="ws">                </span>if impl._use_inspection and not disable_inspection:</pre>
+<pre class="line before"><span class="ws">                    </span>insp = inspection.inspect(element, raiseerr=False)</pre>
+<pre class="line before"><span class="ws">                    </span>if insp is not None:</pre>
+<pre class="line before"><span class="ws">                        </span>if post_inspect:</pre>
+<pre class="line current"><span class="ws">                            </span>insp._post_inspect
+<span class="ws">                            </span>^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                        </span>try:</pre>
+<pre class="line after"><span class="ws">                            </span>resolved = insp.__clause_element__()</pre>
+<pre class="line after"><span class="ws">                        </span>except AttributeError:</pre>
+<pre class="line after"><span class="ws">                            </span>impl._raise_for_expected(original_element, argname)</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867544800">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\util\langhelpers.py"</cite>,
+      line <em class="line">1253</em>,
+      in <code class="function">__get__</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>def __get__(self, obj: Any, cls: Any) -&gt; _T: ...</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>def __get__(self, obj, cls):</pre>
+<pre class="line before"><span class="ws">            </span>if obj is None:</pre>
+<pre class="line before"><span class="ws">                </span>return self</pre>
+<pre class="line current"><span class="ws">            </span>obj.__dict__[self.__name__] = result = self.fget(obj)
+<span class="ws">            </span>                                       ^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">            </span>obj._memoized_keys |= {self.__name__}</pre>
+<pre class="line after"><span class="ws">            </span>return result</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@classmethod</pre>
+<pre class="line after"><span class="ws">    </span>def memoized_instancemethod(cls, fn: _F) -&gt; _F:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867546096">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\mapper.py"</cite>,
+      line <em class="line">2722</em>,
+      in <code class="function">_post_inspect</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span>coercions.expect(roles.ColumnsClauseRole, ent, keep_inspect=True)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>This allows the inspection process run a configure mappers hook.</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>self._check_configure()
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@HasMemoized_ro_memoized_attribute</pre>
+<pre class="line after"><span class="ws">    </span>def _with_polymorphic_selectable(self) -&gt; FromClause:</pre>
+<pre class="line after"><span class="ws">        </span>if not self.with_polymorphic:</pre>
+<pre class="line after"><span class="ws">            </span>return self.persist_selectable</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867550128">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\mapper.py"</cite>,
+      line <em class="line">2399</em>,
+      in <code class="function">_check_configure</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>&#34;operation.&#34;,</pre>
+<pre class="line before"><span class="ws">        </span>sa_exc.SAWarning,</pre>
+<pre class="line before"><span class="ws">    </span>)</pre>
+<pre class="line before"><span class="ws">    </span>def _check_configure(self) -&gt; None:</pre>
+<pre class="line before"><span class="ws">        </span>if self.registry._new_mappers:</pre>
+<pre class="line current"><span class="ws">            </span>_configure_registries({self.registry}, cascade=True)
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _post_configure_properties(self) -&gt; None:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Call the ``init()`` method on all ``MapperProperties``</pre>
+<pre class="line after"><span class="ws">        </span>attached to this mapper.</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867550272">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\mapper.py"</cite>,
+      line <em class="line">4215</em>,
+      in <code class="function">_configure_registries</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">            </span># initialize properties on all mappers</pre>
+<pre class="line before"><span class="ws">            </span># note that _mapper_registry is unordered, which</pre>
+<pre class="line before"><span class="ws">            </span># may randomly conceal/reveal issues related to</pre>
+<pre class="line before"><span class="ws">            </span># the order of mapper compilation</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">            </span>_do_configure_registries(registries, cascade)
+<span class="ws">            </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre>
+<pre class="line after"><span class="ws">            </span>_already_compiling = False</pre>
+<pre class="line after"><span class="ws">    </span>Mapper.dispatch._for_class(Mapper).after_configured()  # type: ignore</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867550416">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\mapper.py"</cite>,
+      line <em class="line">4256</em>,
+      in <code class="function">_do_configure_registries</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">                </span>e._configure_failed = mapper._configure_failed  # type: ignore</pre>
+<pre class="line before"><span class="ws">                </span>raise e</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>if not mapper.configured:</pre>
+<pre class="line before"><span class="ws">                </span>try:</pre>
+<pre class="line current"><span class="ws">                    </span>mapper._post_configure_properties()
+<span class="ws">                    </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">                    </span>mapper._expire_memoizations()</pre>
+<pre class="line after"><span class="ws">                    </span>mapper.dispatch.mapper_configured(mapper, mapper.class_)</pre>
+<pre class="line after"><span class="ws">                </span>except Exception:</pre>
+<pre class="line after"><span class="ws">                    </span>exc = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                    </span>if not hasattr(exc, &#34;_configure_failed&#34;):</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867550560">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\mapper.py"</cite>,
+      line <em class="line">2416</em>,
+      in <code class="function">_post_configure_properties</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>l = [(key, prop) for key, prop in self._props.items()]</pre>
+<pre class="line before"><span class="ws">        </span>for key, prop in l:</pre>
+<pre class="line before"><span class="ws">            </span>self._log(&#34;initialize prop %s&#34;, key)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>if prop.parent is self and not prop._configure_started:</pre>
+<pre class="line current"><span class="ws">                </span>prop.init()
+<span class="ws">                </span>^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>if prop._configure_finished:</pre>
+<pre class="line after"><span class="ws">                </span>prop.post_instrument_class(self)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self._log(&#34;_post_configure_properties() complete&#34;)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867550704">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\interfaces.py"</cite>,
+      line <em class="line">589</em>,
+      in <code class="function">init</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>initialization steps.</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line before"><span class="ws">        </span>self._configure_started = True</pre>
+<pre class="line current"><span class="ws">        </span>self.do_init()
+<span class="ws">        </span>^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>self._configure_finished = True</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre>
+<pre class="line after"><span class="ws">    </span>def class_attribute(self) -&gt; InstrumentedAttribute[_T]:</pre>
+<pre class="line after"><span class="ws">        </span>&#34;&#34;&#34;Return the class-bound descriptor corresponding to this</pre></div>
+</div>
+
+<li><div class="frame" id="frame-2309867552144">
+  <h4>File <cite class="filename">"D:\dev\msys64\mingw64\lib\python3.11\site-packages\sqlalchemy\orm\relationships.py"</cite>,
+      line <em class="line">1645</em>,
+      in <code class="function">do_init</code></h4>
+  <div class="source library"><pre class="line before"><span class="ws">        </span>self._check_conflicts()</pre>
+<pre class="line before"><span class="ws">        </span>self._process_dependent_arguments()</pre>
+<pre class="line before"><span class="ws">        </span>self._setup_entity()</pre>
+<pre class="line before"><span class="ws">        </span>self._setup_registry_dependencies()</pre>
+<pre class="line before"><span class="ws">        </span>self._setup_join_conditions()</pre>
+<pre class="line current"><span class="ws">        </span>self._check_cascade_settings(self._cascade)
+<span class="ws">        </span>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</pre>
+<pre class="line after"><span class="ws">        </span>self._post_init()</pre>
+<pre class="line after"><span class="ws">        </span>self._generate_backref()</pre>
+<pre class="
+
+[… truncated 13702 chars …]

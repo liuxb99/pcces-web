@@ -1,0 +1,24 @@
+# 場景規則：PCCES 網頁版重建
+scene: web-development
+type: fullstack
+tech_stack:
+  frontend:
+    framework: React 18
+    language: TypeScript
+    ui_library: Ant Design 5
+    build_tool: Vite
+    state_management: Zustand
+    charts: ECharts
+  backend:
+    framework: FastAPI
+    language: Python 3.11+
+    orm: SQLAlchemy 2.0
+    database: SQLite (dev) / PostgreSQL (prod)
+    auth: JWT
+    reports: Openpyxl (Excel), WeasyPrint (PDF)
+rules:
+  - 所有程式註解與說明必須使用繁體中文
+  - 前端使用 TypeScript，嚴格模式
+  - API 回傳格式統一為 JSON
+  - 錯誤處理須有統一格式
+  - 資料庫遷移使用 Alembic

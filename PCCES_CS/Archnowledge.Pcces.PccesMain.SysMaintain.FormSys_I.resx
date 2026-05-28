@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="GridProjects.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;Margins:1, 1, 1, 1;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:LeftCenter;}	Focus{Font:細明體, 11pt;BackColor:102, 153, 255;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="appearance3.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAANgMAAAJCTTYDAAAAAAAA
+NgAAACgAAAAQAAAAEAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP/OYTH/AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP+lSSHGhkqlSSH/AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP+cMAD/ngD/ngDWeSGlSSH/AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP+cMAD//73/phD/phD/phDWeSGlSSH/AP//AP//AP//AP//AP//AP//AP//
+AP+cMAD//73/tjn/tjn/tjn/tjn/tjn/phClSSH/AP//AP//AP//AP//AP//AP+lSSH3////x1r/
+x1r/x1r/z2P/x1r/x1r/x1r/phClSSH/AP//AP//AP//AP+lSSH3////34T/34T/34T/34T/34T/
+34T/34T/34T/34T/phClSSH/AP//AP+cMAD3///3///3////76X/76X/76X/76X/76X/76X/54z/
+tjn/tjn/phClSSH/zzH/zzH/zzH/zzH/zzH3/////73//73//73//73/76X/tjn/YTH/YTH/YTH/
+nnP/AP//AP//AP//AP//AP//zzH3/////73//73//73/76WcMAD/AP//AP//AP//AP//AP//AP//
+AP//AP//AP//zzH3/////73//73//73/76WcMAD/AP//AP//AP//AP//AP//AP//AP//AP//AP//
+zzH/zzH/zzH/zzH/zzH/zzH/YTH/AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP8L</value></data><data name="GridUsers.ColumnInfo" xml:space="preserve"><value>5,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowDragging:False;AllowResizing:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:94;Name:"UserID";Caption:"使用者帳號";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	2{Width:200;Name:"UserName";Caption:"使用者名稱";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	3{Name:"Power";Caption:"身份別";AllowEditing:False;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	4{Name:"Password";Caption:"密碼";Visible:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	</value></data>
+  <data name="appearance8.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAA5gQAAAJCTeYEAAAAAAAA
+NgAAACgAAAAUAAAAFAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/////////////////
+///Y8NrV7dqs4MBRu350woxbuYNhsWOaz6fj+eLT8tn/////////////////////////////////
+///Y+eRqxHGEz5y048br39n74tXSy9/jyc6nw6B+r4hWt2bM8dT/////////////////////////
+///O9uqG2ZnT5tf/////6/DRybSdxJq7yZKixZnKzsu/w9HVuL1wqonH7Nb/////////////////
+///N9tmH57Tz7un///+3zahamFcfiyUUgxQQhAQigRtLjjlouGrNw77Bv7xnuYTB6tL/////////
+///W7d+B1KPv+/D7//98tWATgAsAdQAAfAAAfQAAfQEAfQAAeAAAeABJiTO7x7LkvshouYXG6tT/
+///Z7NRlz3XM+eb//fx5uH8AkRoAiCMMlSkIfiwAgAcAjhIBfQAEgQMAfgABeAAZhTTL2cbAy7dl
+t4TU8N/c+OqC4aP///+51LMgmygAnCgTnigWnCYgnicbqj43nFUAgw4BegEBfgAAfwIAewBro2D7
+399vx4nk8+y14brS6+3//P1Jun8Xkiw3qCw3nzw0p0IHkiGZ06D///9/y6QAhyIBhQEDewAAeQAT
+iRa80bPA3sSv4rRcvnL9///Q6dtIs1MKsE4YvUgAslAouVQAqT9PvWPH593//v5+1aEAhiABihgA
+gQEBfQWht4j35OlaunBr25P9/f2x4cpMt1gVwVI1vluE15Ny1Y9+2JWE04qm26/6/Pv8/fx9yqIB
+ixkCgAABeQJwp27/9PZz3JZr5ZH9/f3A8tASxF04ulJt3IL//v3//P///f7/+//1/fb7/Pv2+/n/
+//82mVEAeAIBdQBfsYD8+P9yyIxd1nv////A8dxMyIRQ1n1L4oKg9s/k8tyi98u237C178v7/Pv/
++/y7zZsRoDAAiScGfACTwoH///5k1n+d1aHj8vTx9ep24JZr3nJ22ZGD15p92YQ42Xh55p7R59L4
+//2a16MRmTEhnicCjiEJgQq/173s9fig1qTi+fGQ5LT///+v575t2Imu8bCz8b2k5rVV2YfD5s3/
+/v+k6J0KsFEYlzwjoCgAiB9IoVD//v6f5b3h+fDP79FkyGzp7ub6+fOZ3rWd5qmp/86w/aSn56Zw
+2Ypr4JInv1EwvFk1qDwFmB4CoCzl2s/t/v9g1XbO7M3////E7syG5Kr8/v/1+fex+LKd8qOf3aZ8
+4JBU23w4wXQav1I0sVgAmjIQoSvV2L7//v+h67mn6rr///////////+68dyT6Mf5/f//+/mm4rpm
+3aNM2nlCx3gWtkovvlEmtFtwtmfa8uL///+l7MWj7Lj///////////////////+48NqL5rfh//X/
+///39u2n5siS7bed15qS2q+37sD//f/1//+e7Lyn7NP////////////////////////////B8s1h
+1XeO5K3g8vn////////////////49/+b57xg1nep67v/////////////////////////////////
+///X7dPQ9N2337xl03t15pt14JdnxIGg2aXV9OPN68z///////////////////8L</value></data><data name="appearance11.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAANgMAAAJCTTYDAAAAAAAA
+NgAAACgAAAAQAAAAEAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP/OMADOMADOMADOMADOMADO
+MADOMAD/AP//AP//AP//AP//AP//AP//AP//AP//AP/OMAD/ngD/ngD/ngD/ngD/ngDOMAD/AP//
+AP//AP//AP//AP//AP//AP//AP//AP/OMAD/phD/phD/phD/phD/ngDOMAD/AP//AP//AP//AP//
+YTHOMADOMADOMADOMADOMAD/tjn/tjn/tjn/tjn/ngDOMADOMADOMADOMACcMAD/AP//zzH/z5z/
+z5z/z5z/z5z/x1r/x1r/x1r/x1r/ngD/ngD/ngD/ngD/ngCcMAD/AP//AP//zzH3////13P/13P/
+13P/13P/13P/13P/13P/13P/13P/13OcMAD/AP//AP//AP//AP//zzH3////54z/54z/54z/54z/
+54z/54z/54z/54ycMAD/AP//AP//AP//AP//AP//AP//zzH3////76X/76X/76X/76X/76X/76Wc
+MAD/AP//AP//AP//AP//AP//AP//AP//AP//zzH3/////73//73//73//72cMAD/AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//zzH3/////87//86cMAD/AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//zzH//86cMAD/AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//zzH/AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP8L</value></data><data name="gridBudget1.ColumnInfo" xml:space="preserve"><value>9,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:40;Name:"BUD";Caption:" 預";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	2{Width:40;Name:"BID";Caption:" 標";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	3{Width:112;Name:"ProjectCode";Caption:"工程代碼";AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	4{Width:250;Name:"CName";Caption:"工程名稱";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	5{Width:150;Name:"EName";Caption:"Project Name";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	6{Name:"Address";Caption:"工程地點";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	7{Name:"IsBud";Caption:"IsBud";Visible:False;DataType:System.Boolean;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	8{Name:"IsBid";Caption:"IsBid";Visible:False;DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	</value></data>
+  <data name="gridProjectUsr.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;Margins:1, 1, 1, 1;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;}	Focus{Font:細明體, 11pt;BackColor:102, 153, 255;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="gridBudget4.ColumnInfo" xml:space="preserve"><value>9,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:40;Name:"BUD";Caption:" 預";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	2{Width:40;Name:"BID";Caption:" 標";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	3{Width:112;Name:"ProjectCode";Caption:"工程代碼";AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	4{Width:250;Name:"CName";Caption:"工程名稱";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	5{Width:150;Name:"EName";Caption:"Project Name";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	6{Name:"Address";Caption:"工程地點";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	7{Name:"IsBud";Caption:"IsBud";Visible:False;DataType:System.Boolean;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	8{Name:"IsBid";Caption:"IsBid";Visible:False;DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	</value></data>
+  <data name="gridUserProject.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;TextAlign:GeneralCenter;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:GeneralCenter;ImageAlign:LeftCenter;Border:None,1,Black,Both;}	Focus{Font:細明體, 11pt, style=Bold;BackColor:102, 153, 255;Margins:1, 1, 1, 1;TextAlign:GeneralCenter;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:232, 232, 232;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="gridProjectAll.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;Margins:1, 1, 1, 1;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:LeftCenter;}	Focus{Font:細明體, 11pt;BackColor:102, 153, 255;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="gridBudget1.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;Margins:1, 1, 1, 1;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;}	Focus{Font:細明體, 11pt;BackColor:102, 153, 255;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="appearance12.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAANgMAAAJCTTYDAAAAAAAA
+NgAAACgAAAAQAAAAEAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP/OYTH/AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP+lSSHGhkqlSSH/AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP+cMAD/ngD/ngDWeSGlSSH/AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP+cMAD//73/phD/phD/phDWeSGlSSH/AP//AP//AP//AP//AP//AP//AP//
+AP+cMAD//73/tjn/tjn/tjn/tjn/tjn/phClSSH/AP//AP//AP//AP//AP//AP+lSSH3////x1r/
+x1r/x1r/z2P/x1r/x1r/x1r/phClSSH/AP//AP//AP//AP+lSSH3////34T/34T/34T/34T/34T/
+34T/34T/34T/34T/phClSSH/AP//AP+cMAD3///3///3////76X/76X/76X/76X/76X/76X/54z/
+tjn/tjn/phClSSH/zzH/zzH/zzH/zzH/zzH3/////73//73//73//73/76X/tjn/YTH/YTH/YTH/
+nnP/AP//AP//AP//AP//AP//zzH3/////73//73//73/76WcMAD/AP//AP//AP//AP//AP//AP//
+AP//AP//AP//zzH3/////73//73//73/76WcMAD/AP//AP//AP//AP//AP//AP//AP//AP//AP//
+zzH/zzH/zzH/zzH/zzH/zzH/YTH/AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP8L</value></data><data name="gridBudget4.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;Margins:1, 1, 1, 1;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;}	Focus{Font:細明體, 11pt;BackColor:102, 153, 255;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:AppWorkspace;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="gridProjectUsr.ColumnInfo" xml:space="preserve"><value>11,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowDragging:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Name:"BUD";Caption:" 預";Visible:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	2{Name:"BID";Caption:" 標";Visible:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	3{Width:112;Name:"ProjectCode";Caption:"工程代碼";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	4{Width:250;Name:"CName";Caption:"工程名稱";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	5{Width:80;Name:"BudEst";Caption:"預估成本";DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	6{Width:80;Name:"BudQuote";Caption:"業主報價";DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	7{Width:150;Name:"EName";Caption:"Project Name";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	8{Width:150;Name:"Address";Caption:"工程地點";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	9{Name:"IsBud";Caption:"IsBud";Visible:False;AllowEditing:False;DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	10{Name:"IsBid";Caption:"IsBid";Visible:False;AllowEditing:False;DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	</value></data>
+  <data name="GridProjects.ColumnInfo" xml:space="preserve"><value>9,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:40;Name:"BUD";Caption:" 預";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	2{Width:40;Name:"BID";Caption:" 標";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	3{Width:112;Name:"ProjectCode";Caption:"工程代碼";AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	4{Width:250;Name:"CName";Caption:"工程名稱";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	5{Width:150;Name:"EName";Caption:"Project Name";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	6{Name:"Address";Caption:"工程地點";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	7{Name:"IsBud";Caption:"IsBud";Visible:False;DataType:System.Boolean;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	8{Name:"IsBid";Caption:"IsBid";Visible:False;DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	</value></data>
+  <data name="appearance16.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAA5gQAAAJCTeYEAAAAAAAA
+NgAAACgAAAAUAAAAFAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/////////////////
+///Y8NrV7dqs4MBRu350woxbuYNhsWOaz6fj+eLT8tn/////////////////////////////////
+///Y+eRqxHGEz5y048br39n74tXSy9/jyc6nw6B+r4hWt2bM8dT/////////////////////////
+///O9uqG2ZnT5tf/////6/DRybSdxJq7yZKixZnKzsu/w9HVuL1wqonH7Nb/////////////////
+///N9tmH57Tz7un///+3zahamFcfiyUUgxQQhAQigRtLjjlouGrNw77Bv7xnuYTB6tL/////////
+///W7d+B1KPv+/D7//98tWATgAsAdQAAfAAAfQAAfQEAfQAAeAAAeABJiTO7x7LkvshouYXG6tT/
+///Z7NRlz3XM+eb//fx5uH8AkRoAiCMMlSkIfiwAgAcAjhIBfQAEgQMAfgABeAAZhTTL2cbAy7dl
+t4TU8N/c+OqC4aP///+51LMgmygAnCgTnigWnCYgnicbqj43nFUAgw4BegEBfgAAfwIAewBro2D7
+399vx4nk8+y14brS6+3//P1Jun8Xkiw3qCw3nzw0p0IHkiGZ06D///9/y6QAhyIBhQEDewAAeQAT
+iRa80bPA3sSv4rRcvnL9///Q6dtIs1MKsE4YvUgAslAouVQAqT9PvWPH593//v5+1aEAhiABihgA
+gQEBfQWht4j35OlaunBr25P9/f2x4cpMt1gVwVI1vluE15Ny1Y9+2JWE04qm26/6/Pv8/fx9yqIB
+ixkCgAABeQJwp27/9PZz3JZr5ZH9/f3A8tASxF04ulJt3IL//v3//P///f7/+//1/fb7/Pv2+/n/
+//82mVEAeAIBdQBfsYD8+P9yyIxd1nv////A8dxMyIRQ1n1L4oKg9s/k8tyi98u237C178v7/Pv/
++/y7zZsRoDAAiScGfACTwoH///5k1n+d1aHj8vTx9ep24JZr3nJ22ZGD15p92YQ42Xh55p7R59L4
+//2a16MRmTEhnicCjiEJgQq/173s9fig1qTi+fGQ5LT///+v575t2Imu8bCz8b2k5rVV2YfD5s3/
+/v+k6J0KsFEYlzwjoCgAiB9IoVD//v6f5b3h+fDP79FkyGzp7ub6+fOZ3rWd5qmp/86w/aSn56Zw
+2Ypr4JInv1EwvFk1qDwFmB4CoCzl2s/t/v9g1XbO7M3////E7syG5Kr8/v/1+fex+LKd8qOf3aZ8
+4JBU23w4wXQav1I0sVgAmjIQoSvV2L7//v+h67mn6rr///////////+68dyT6Mf5/f//+/mm4rpm
+3aNM2nlCx3gWtkovvlEmtFtwtmfa8uL///+l7MWj7Lj///////////////////+48NqL5rfh//X/
+///39u2n5siS7bed15qS2q+37sD//f/1//+e7Lyn7NP////////////////////////////B8s1h
+1XeO5K3g8vn////////////////49/+b57xg1nep67v/////////////////////////////////
+///X7dPQ9N2337xl03t15pt14JdnxIGg2aXV9OPN68z///////////////////8L</value></data><data name="appearance2.Image" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0
+ZW0uRHJhd2luZy5CaXRtYXABAAAABERhdGEHAgIAAAAJAwAAAA8DAAAANgMAAAJCTTYDAAAAAAAA
+NgAAACgAAAAQAAAAEAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAAAAD/AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP/OMADOMADOMADOMADOMADO
+MADOMAD/AP//AP//AP//AP//AP//AP//AP//AP//AP/OMAD/ngD/ngD/ngD/ngD/ngDOMAD/AP//
+AP//AP//AP//AP//AP//AP//AP//AP/OMAD/phD/phD/phD/phD/ngDOMAD/AP//AP//AP//AP//
+YTHOMADOMADOMADOMADOMAD/tjn/tjn/tjn/tjn/ngDOMADOMADOMADOMACcMAD/AP//zzH/z5z/
+z5z/z5z/z5z/x1r/x1r/x1r/x1r/ngD/ngD/ngD/ngD/ngCcMAD/AP//AP//zzH3////13P/13P/
+13P/13P/13P/13P/13P/13P/13P/13OcMAD/AP//AP//AP//AP//zzH3////54z/54z/54z/54z/
+54z/54z/54z/54ycMAD/AP//AP//AP//AP//AP//AP//zzH3////76X/76X/76X/76X/76X/76Wc
+MAD/AP//AP//AP//AP//AP//AP//AP//AP//zzH3/////73//73//73//72cMAD/AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//zzH3/////87//86cMAD/AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//zzH//86cMAD/AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//zzH/AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//AP//
+AP//AP//AP//AP//AP8L</value></data><data name="gridUserProject.ColumnInfo" xml:space="preserve"><value>5,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowDragging:False;AllowResizing:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:94;Name:"UserID";Caption:"使用者帳號";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	2{Width:200;Name:"UserName";Caption:"使用者名稱";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	3{Name:"Power";Caption:"身份別";AllowEditing:False;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	4{Name:"Password";Caption:"密碼";Visible:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	</value></data>
+  <data name="GridUsers.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;TextAlign:GeneralCenter;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:GeneralCenter;ImageAlign:LeftCenter;Border:None,1,Black,Both;}	Focus{Font:細明體, 11pt, style=Bold;BackColor:102, 153, 255;Margins:1, 1, 1, 1;TextAlign:GeneralCenter;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:232, 232, 232;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  <data name="gridProjectAll.ColumnInfo" xml:space="preserve"><value>9,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:40;Name:"BUD";Caption:" 預";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	2{Width:40;Name:"BID";Caption:" 標";Visible:False;AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	3{Width:112;Name:"ProjectCode";Caption:"工程代碼";AllowDragging:False;AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	4{Width:250;Name:"CName";Caption:"工程名稱";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	5{Width:150;Name:"EName";Caption:"Project Name";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	6{Name:"Address";Caption:"工程地點";AllowDragging:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	7{Name:"IsBud";Caption:"IsBud";Visible:False;DataType:System.Boolean;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	8{Name:"IsBid";Caption:"IsBid";Visible:False;DataType:System.Boolean;TextAlignFixed:GeneralTop;ImageAlign:CenterCenter;}	</value></data>
+  <data name="gridUserAll.ColumnInfo" xml:space="preserve"><value>5,1,0,0,0,110,Columns:0{Width:17;Name:"RowIndicator";AllowDragging:False;AllowResizing:False;AllowEditing:False;DataType:System.Int32;TextAlign:RightTop;TextAlignFixed:GeneralTop;}	1{Width:94;Name:"UserID";Caption:"使用者帳號";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	2{Width:200;Name:"UserName";Caption:"使用者名稱";AllowEditing:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	3{Name:"Power";Caption:"身份別";AllowEditing:False;TextAlign:GeneralBottom;TextAlignFixed:GeneralTop;}	4{Name:"Password";Caption:"密碼";Visible:False;DataType:System.String;TextAlign:LeftCenter;TextAlignFixed:GeneralTop;}	</value></data>
+  <data name="gridUserAll.Styles" xml:space="preserve"><value>Normal{Font:細明體, 11.25pt;BackColor:237, 243, 254;ForeColor:Black;TextAlign:GeneralCenter;Border:Flat,1,Silver,Both;}	Alternate{BackColor:White;}	Fixed{BackColor:225, 247, 223;TextAlign:GeneralTop;Border:Raised,1,Black,Both;}	Highlight{BackColor:102, 153, 255;TextAlign:GeneralCenter;ImageAlign:LeftCenter;Border:None,1,Black,Both;}	Focus{Font:細明體, 11pt, style=Bold;BackColor:102, 153, 255;Margins:1, 1, 1, 1;TextAlign:GeneralCenter;Border:None,1,Black,Both;}	Search{BackColor:Highlight;ForeColor:HighlightText;}	Frozen{BackColor:Beige;}	EmptyArea{BackColor:232, 232, 232;Border:Flat,1,ControlDarkDark,Both;}	GrandTotal{BackColor:Black;ForeColor:White;}	Subtotal0{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal1{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal2{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal3{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal4{BackColor:ControlDarkDark;ForeColor:White;}	Subtotal5{BackColor:ControlDarkDark;ForeColor:White;}	</value></data>
+  </root>

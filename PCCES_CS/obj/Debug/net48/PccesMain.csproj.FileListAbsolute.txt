@@ -1,0 +1,3 @@
+D:\Lcy_Drive\Work\PCCES_CS\obj\Debug\net48\PccesMain.csproj.AssemblyReference.cache
+D:\Lcy_Drive\Work\PCCES_CS\obj\Debug\net48\Interop.AcroPDFLib.dll
+D:\Lcy_Drive\Work\PCCES_CS\obj\Debug\net48\PccesMain.csproj.ResolveComReference.cache

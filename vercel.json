@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "cd web-pcces/frontend && npm ci && npm run build && rm -rf ../../api/static && cp -r dist ../../api/static",
+  "outputDirectory": "web-pcces/frontend/dist",
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" }
+  ],
+  "env": {
+    "PCCES_SECRET_KEY": "pcces-prod-secret-key-2026",
+    "PCCES_JWT_ALGORITHM": "HS256",
+    "PCCES_TOKEN_EXPIRE_MINUTES": "480"
+  }
+}

@@ -1,0 +1,135 @@
+/* 全域樣式 */
+
+/* 自定義變數 */
+:root {
+  --sidebar-width: 240px;
+  --header-height: 64px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: '微軟正黑體', 'Noto Sans TC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 登入頁面 */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-card {
+  width: 420px;
+  padding: 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.login-card h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.login-card .subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 32px;
+  font-size: 14px;
+}
+
+/* 儀表板 */
+.stats-card {
+  text-align: center;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.stats-card .stat-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1677ff;
+}
+
+.stats-card .stat-label {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* 預算編輯器 */
+.budget-editor {
+  height: calc(100vh - var(--header-height) - 48px);
+  display: flex;
+  gap: 16px;
+}
+
+.budget-tree-panel {
+  width: 320px;
+  min-width: 280px;
+  overflow-y: auto;
+  border-right: 1px solid #f0f0f0;
+  padding-right: 16px;
+}
+
+.budget-table-panel {
+  flex: 1;
+  overflow: auto;
+}
+
+/* 樹狀節點 */
+.budget-tree-node {
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.budget-tree-node:hover {
+  background: #f5f5f5;
+}
+
+.budget-tree-node.selected {
+  background: #e6f4ff;
+}
+
+/* 金額醒目 */
+.amount-positive {
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.amount-negative {
+  color: #ff4d4f;
+  font-weight: 600;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+  .login-card {
+    width: 90%;
+    padding: 24px;
+  }
+
+  .budget-editor {
+    flex-direction: column;
+  }
+
+  .budget-tree-panel {
+    width: 100%;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid #f0f0f0;
+    max-height: 300px;
+  }
+}

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="$this.Icon" mimetype="application/x-microsoft.net.object.binary.base64"><value>AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj0yLjAuMC4wLCBD
+dWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABNTeXN0
+ZW0uRHJhd2luZy5JY29uAgAAAAhJY29uRGF0YQhJY29uU2l6ZQcEAhNTeXN0ZW0uRHJhd2luZy5T
+aXplAgAAAAIAAAAJAwAAAAX8////E1N5c3RlbS5EcmF3aW5nLlNpemUCAAAABXdpZHRoBmhlaWdo
+dAAACAgCAAAAAAAAAAAAAAAPAwAAAL4MAAACAAABAAEAICAAAAAAAACoDAAAFgAAACgAAAAgAAAA
+QAAAAAEAGAAAAAAAgAwAAAAAAAAAAAAAAAAAAAAAAAD/////////////////////////////////
+///////////////////////////////////////////////////////39/f/////////////////
+//////////////////////////////82k7f/////////////////////////////////////////
+///////wxYbqvoHitHnZqXHOnGfFkV+9h1dJlh8lsvUltfUmuPYnvfcowfcpxvgqyfn/////////
+//////82k7c2k7c2k7f////////////////////////////////////////wxYbqvoHitHnZqXHO
+nGfFkV+9h1dKlSAlsvUltfUmuPYnvfcowfcpxvgqyfn///////////82k7c2k7f///////82k7f/
+///////////////////////////////////wxYbqvoHitHnZqXHOnGfFkV+9h1f///8lsvUltfUm
+uPYnvfcowfcpxvgqyfn///////////82k7c2k7f///////82k7c2k7c4kbP/////////////////
+///////////wxYbqvoHitHnZqXHOnGfFkV+9h1f///8lsvUltfUmuPYnvfcowfcpxvgqyfn/////
+//////////////82k7c2k7c2k7c2k7c2k7f////////////////////////////wxYbqvoHitHnZ
+qXHOnGfFkV+9h1f///8lsvUltfUmuPYnvfcowfcpxvgqyfn///////////////////////82k7c2
+k7c2k7c2k7c2k7f////////////////////////wxYbqvoHitHnZqXHOnGfFkV+9h1dPlCklsvUl
+tfUmuPYnvfcowfcpxvgqyfn///////////////////////////82k7c2k7c2k7c2k7c4kbX/////
+//////////9LliPwxYbqvoHitHnZqXHOnGfFkV+9h1f///8lsvUltfUmuPYnvfcowfcpxvgqyfn/
+//////////////////////////////82k7c2k7c2k7c2k7f///////////////9KlyBKlyBKlyBJ
+lh////9KlyBKlSD/////////////////////////////////////////////////////////////
+//////82k7c2k7c2k7c2k7f///////////9Jlh9Jlh81c/Qyb/Ivau8qY+smXOghVeQeUOH///8k
+iFMnjVcqk10vm2MzpGs4rHE7snf///////////////////////////////82k7c2k7c2k7c2k7f/
+//////////9KlyBJlh81c/Qyb/Ivau8qY+smXOghVeQeUOH///8kiFMnjVcqk10vm2MzpGs4rHE7
+snf///////////////////////////////////82k7c2k7c2k7c2k7f///9Jlh9KlyBJlh81c/Qy
+b/Ivau8qY+smXOghVeQeUOH///8kiFMnjVcqk10vm2MzpGs4rHE7snf/////////////////////
+//////////////82k7c2k7c2k7c2k7f///9KlyBKlyBJlh81c/Qyb/Ivau8qY+smXOghVeQeUOH/
+//8kiFMnjVcqk10vm2MzpGs4rHE7snf///////////////////////////////////82k7c2k7c2
+k7c2k7f///9KlyBKlyBJlh81c/Qyb/Ivau8qY+smXOghVeQeUOH///8kiFMnjVcqk10vm2MzpGs4
+rHE7snf///////////////////////////////////82k7c2k7c2k7c2k7f///9KlyBKlyBJlh81
+c/Qyb/Ivau8qY+smXOghVeQeUOH///8kiFMnjVcqk10vm2MzpGs4rHE7snf/////////////////
+//////////////81krY2k7c2k7c2k7c2k7f///9KlyBKlyBJlh81c/Qyb/Ivau8qY+smXOghVeQe
+UOH///8kiFMnjVcqk10vm2MzpGs4rHE7snf///////////////////////////////82k7c2k7c2
+k7c2k7f///////9KlyBKlyBJlh9Jlh9KlyD////////////////////////////////i4uKFhYV0
+dHSpqan+/v7///////////////////////////82k7c2k7c2k7c2k7c2k7f///////9KlyBKlyBK
+lyBKlyBKlyD////////////////////////////T09MPDw82NjZaWloWFhZSUlL/////////////
+//////////////82k7c2k7c2k7c2k7c1krb///////9KlyBKlyBKlyBKlyBKlyD/////////////
+//////////////9UVFRQUFD////////o6OgVFRWwsLD///////////////////82k7c2k7c2k7c2
+k7c2k7f///////////9KlyBKlyBKlyBKlyBKlyBKlyD////////////////////////BwcHa2tr/
+//////////9dXV1wcHD///////////////82k7c2k7c2k7c2k7c2k7f///////////////9KlyBK
+lyBKlyBKlyBKlyBKlyD///////////////////////////////////////////9TU1NycnL/////
+//////82k7c2k7c2k7c2k7c2k7c2k7f///////////////9KlyBKlyBKlyBKlyBKlyBKlyBKlSL/
+//////////////////+ZmZlCQkLV1dX9/f2vr68HBwe8vLz///////82k7c2k7c2k7c2k7c2k7c2
+k7f///////////////////////9KlyBKlyBKlyBKlyBKlyBKlyD///////////////////+ZmZkM
+DAweHh4AAAAFBQWDg4P///////////////82k7c2k7c2k7c2k7f/////////////////////////
+//9KlyBKlyBKlyBKlyBKlyBKlyBKlyD////////////////KysoEBATy8vLT09Pu7u7/////////
+//////////////82k7f///////////////////////////////////9MlCVKlyBKlyBKlyBKlyBK
+lyBKlyBKlyD////////////39/cEBATLy8v/////////////////////////////////////////
+//////8nkO4nkO4nkO7///////////////9Jlh9KlyBKlyBKlyBKlyBKlyBKlyBKlyD/////////
+//8sLCwsLCxAQEBAQEBAQED09PT///////////////////////////8nkO4nkO4nkO4nkO4nkO7/
+//////////////9KlyBKlyBKlyBKlyBKlyBKlyBKlyBKlyBKlSL///+pqamAgICAgICAgICAgID4
++Pj///////////////////////8nkO4nkO4nkO4nkO4nkO4nkO4nkO7///////////////9KlyBK
+lyBKlyBKlyBKlyBKlyBKlyBKlyBJlh//////////////////////////////////////////////
+//8nkO4nkO4nkO4nkO4nkO4nkO4nkO7///////////////////9KlyBKlyBKlyBKlyBKlyBKlyBK
+lyBKlyD///////////////////////////////////////////////8nkO4nkO4nkO4nkO4nkO4n
+kO4nkO7///////////////////////9KlyBKlyBKlyBKlyBKlyBKlyBKlyD/////////////////
+//////////////////////////////////8nkO4nkO4nkO4nkO4nkO7/////////////////////
+//////////9KlyBKlyBKlyBKlyBKlyD/////////////////////////////////////////////
+//////////////8nkO4nkO4nkO7///////////////////////////////////////////9Jlh9L
+liH///////////////////////////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAs=</value></data></root>

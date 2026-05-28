@@ -1,0 +1,187 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>PccesMain</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="PccesMain.exe.licenses" />
+    <EmbeddedResource Include="PccesMain.exe.licenses" LogicalName="PccesMain.exe.licenses" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="C1.Win.C1FlexGrid">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\C1.Win.C1FlexGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="Infragistics.Win.Misc.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.Misc.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="CommomClass">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\CommomClass.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinToolbars.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinToolbars.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.Threed">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\AxInterop.Threed.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinStatusBar.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinStatusBar.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinEditors.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinEditors.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Command">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\C1.Win.C1Command.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.C1Excel">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\C1.C1Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinTabControl.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinTabControl.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinGrid.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinGrid.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="budclass">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\budclass.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.BusinessLogical">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.BusinessLogical.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.LogicalBase">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.LogicalBase.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Sizer">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\C1.Win.C1Sizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.Budget">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.Budget.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Input">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\C1.Win.C1Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.CostStructure">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.CostStructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinTree.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinTree.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Cells" />
+    <Reference Include="Infragistics.Win.UltraWinSchedule.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinSchedule.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinTabbedMdi.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinTabbedMdi.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Common">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.General">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.General.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="AxInterop.PVMarqueeLib">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\AxInterop.PVMarqueeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.Bid">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.Bid.dll</HintPath>
+    </Reference>
+    <Reference Include="stdclass">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\stdclass.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.PVLINE3DLib">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\AxInterop.PVLINE3DLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.BudExe">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.BudExe.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Win.UltraWinChart.v4">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Win.UltraWinChart.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="ctrclass">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\ctrclass.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.Crp92Ocx">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\AxInterop.Crp92Ocx.dll</HintPath>
+    </Reference>
+    <Reference Include="TRAClass">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\TRAClass.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.DatabaseUpgrade">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.DatabaseUpgrade.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.Shared.v3.1">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.Shared.v3.1.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="Archnowledge.Pcces.DomainModule.Coms">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.Coms.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.MrsBase">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.MrsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.Sub">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.Sub.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="repclass">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\repclass.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DatabaseAccess">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DatabaseAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="PowerClass">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\PowerClass.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.DatabaseChange">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.DatabaseChange.dll</HintPath>
+    </Reference>
+    <Reference Include="XMLCLASS">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\XMLCLASS.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.XML">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.XML.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.ExportExcel">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.ExportExcel.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics.UltraChart.Resources.v4">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Infragistics.UltraChart.Resources.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.SubChg">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.SubChg.dll</HintPath>
+    </Reference>
+    <Reference Include="Archnowledge.Pcces.DomainModule.CostEstQuoation">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Pcces.DomainModule.CostEstQuoation.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ADOX">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Interop.ADOX.dll</HintPath>
+    </Reference>
+    <Reference Include="ADODB" />
+    <Reference Include="Archnowledge.Common.Compress">
+      <HintPath>C:\Program Files (x86)\PccesWin4.3\Archnowledge.Common.Compress.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.AcroPDFLib" />
+  </ItemGroup>
+</Project>
