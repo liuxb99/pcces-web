@@ -25,3 +25,5 @@ TIME_PENDING | [x] 啟動 REVIEWER 子代理進行第 2 次評分（全部修復
 2026-05-29T10:44:48.4782980+08:00 | [!] Vercel pull 失敗：VERCEL_TOKEN 無效，改檢查其他等效 token 或本機登入
 2026-05-29T10:48:18.7978564+08:00 | [!] Vercel production 部署阻塞：VERCEL_TOKEN 無效，未產生新部署 URL，報告 tasks/reports/deploy_vercel.md
 2026-05-29T10:49:41.1036466+08:00 | [!] Vercel 部署續作：未找到不同於 VERCEL_TOKEN 的非空候選 token，部署仍阻塞
+2026-05-29T21:24:47+08:00 | [x] ���� Vercel Git �۰ʳ��p��������
+2026-05-29T21:25:47+08:00 | [x] ���� GitHub/Vercel �۰ʳ��p�\���k�ݻ���

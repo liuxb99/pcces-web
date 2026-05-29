@@ -24,3 +24,5 @@ TIME_PENDING | MODE_SWITCH | 模式切換 -> 自動連續模式
 2026-05-29T10:44:48.4782980+08:00 | ERROR | Vercel pull 失敗：VERCEL_TOKEN 無效；後續檢查等效 token 名稱
 2026-05-29T10:48:18.7978564+08:00 | DEPLOY_BLOCKED | Vercel production 部署未成功；VERCEL_TOKEN 無效，本機非互動式登入不可用；報告 tasks/reports/deploy_vercel.md
 2026-05-29T10:49:41.1036466+08:00 | DEPLOY_BLOCKED | 續作檢查 token 候選：僅 VERCEL_TOKEN 非空，未找到其他可重試 token；部署仍阻塞
+2026-05-29T21:24:47+08:00 | INFO_ANSWER | �^�� Git �۰ʳ��p�� Vercel ���\�෧��
+2026-05-29T21:25:47+08:00 | INFO_ANSWER | �^�Ц۰ʳ��p�\��� Vercel ���Ѩóz�L GitHub Ĳ�o

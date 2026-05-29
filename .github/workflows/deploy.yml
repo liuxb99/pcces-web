@@ -1,0 +1,41 @@
+name: 部署到 Vercel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出原始碼
+        uses: actions/checkout@v4
+
+      - name: 安裝 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 安裝前端依賴
+        run: npm --prefix web-pcces/frontend ci
+
+      - name: 建置前端
+        run: npm --prefix web-pcces/frontend run build
+
+      - name: 複製前端到 api/static
+        run: |
+          python -c "
+          import shutil,os
+          s='web-pcces/frontend/dist';d='api/static'
+          for f in os.listdir(s):
+            p=os.path.join(s,f)
+            if os.path.isfile(p): shutil.copy2(p,d)
+            elif os.path.isdir(p): shutil.copytree(p,os.path.join(d,f),dirs_exist_ok=True)
+          "
+
+      - name: 安裝 Vercel CLI
+        run: npm install -g vercel
+
+      - name: 部署到 Vercel
+        run: vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
