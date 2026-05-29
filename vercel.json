@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "buildCommand": "npm --prefix web-pcces/frontend ci && npm --prefix web-pcces/frontend run build && python -c \"import shutil,os;s='web-pcces/frontend/dist';d='api/static';[shutil.copy2(os.path.join(s,f),d) for f in os.listdir(s) if os.path.isfile(os.path.join(s,f))];[shutil.copytree(os.path.join(s,sub),os.path.join(d,sub),dirs_exist_ok=1) for sub in os.listdir(s) if os.path.isdir(os.path.join(s,sub))]\"",
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.py" }
   ]
