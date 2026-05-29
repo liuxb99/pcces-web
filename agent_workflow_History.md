@@ -21,3 +21,7 @@ TIME_PENDING | [x] 調整 workflow 狀態
 TIME_PENDING | [x] 啟動 REVIEWER 子代理進行第 1 次評分（20 分，不合格）
 TIME_PENDING | [x] 返工第 1 次：修復 11 項問題（全部測試驗證通過）
 TIME_PENDING | [x] 啟動 REVIEWER 子代理進行第 2 次評分（全部修復確認）
+2026-05-29T10:43:09.9626241+08:00 | [x] �Ұ� Vercel ���p�l�N�z Russell
+2026-05-29T10:44:48.4782980+08:00 | [!] Vercel pull 失敗：VERCEL_TOKEN 無效，改檢查其他等效 token 或本機登入
+2026-05-29T10:48:18.7978564+08:00 | [!] Vercel production 部署阻塞：VERCEL_TOKEN 無效，未產生新部署 URL，報告 tasks/reports/deploy_vercel.md
+2026-05-29T10:49:41.1036466+08:00 | [!] Vercel 部署續作：未找到不同於 VERCEL_TOKEN 的非空候選 token，部署仍阻塞

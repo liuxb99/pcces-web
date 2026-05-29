@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "cd web-pcces/frontend && npm ci && npm run build && cp -r dist/* ../../api/static/",
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.py" }
   ]

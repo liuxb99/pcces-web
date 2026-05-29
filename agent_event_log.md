@@ -20,3 +20,7 @@ TIME_PENDING | TASK_007_DONE | 系統維護完成（95分）
 TIME_PENDING | TASK_008_DEV_DONE | 比較分析開發完成
 TIME_PENDING | TASK_008_REVIEW | 比較分析評分84分，不合格
 TIME_PENDING | MODE_SWITCH | 模式切換 -> 自動連續模式
+2026-05-29T10:43:09.9626241+08:00 | AGENT_INVOKE | �Ұ� Vercel ���p�l�N�z Russell�A���Ȭ� production ���p�P���G�ˬd
+2026-05-29T10:44:48.4782980+08:00 | ERROR | Vercel pull 失敗：VERCEL_TOKEN 無效；後續檢查等效 token 名稱
+2026-05-29T10:48:18.7978564+08:00 | DEPLOY_BLOCKED | Vercel production 部署未成功；VERCEL_TOKEN 無效，本機非互動式登入不可用；報告 tasks/reports/deploy_vercel.md
+2026-05-29T10:49:41.1036466+08:00 | DEPLOY_BLOCKED | 續作檢查 token 候選：僅 VERCEL_TOKEN 非空，未找到其他可重試 token；部署仍阻塞
