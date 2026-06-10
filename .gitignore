@@ -37,3 +37,7 @@ tmp/
 *.env
 **/config.yaml
 .vercel
+
+# Agent 內部流程文件（僅本地）
+agent_*.md
+AGENTS.md
