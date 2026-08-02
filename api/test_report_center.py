@@ -1,4 +1,6 @@
+import io
 import unittest
+import zipfile
 from sqlalchemy import create_engine
 from api.report_center import ReportCenterService
 
@@ -9,7 +11,12 @@ class ReportCenterTest(unittest.TestCase):
   done=self.s.render(job["id"],1,"u")
   self.assertEqual(done["status"],"COMPLETED");self.assertEqual(done["progress"],100)
   content,ctype,name=self.s.download(done["artifact"]["id"],"u")
-  self.assertTrue(content.startswith(b"%PDF"));self.assertEqual(ctype,"application/pdf");self.assertTrue(name.endswith(".pdf"))
+  self.assertTrue(content.startswith(b"%PDF"));self.assertIn(b"xref",content);self.assertEqual(ctype,"application/pdf");self.assertTrue(name.endswith(".pdf"))
+ def test_xlsx_is_real_ooxml(self):
+  job=self.s.create_job({"definition_code":"INVOICE","project_code":"P1","business_version_id":"I1","format":"XLSX","snapshot":{"title":"Invoice","rows":[{"item":"A","amount":"10"}]}},"u")
+  done=self.s.render(job["id"],1,"u");content,ctype,name=self.s.download(done["artifact"]["id"],"u")
+  self.assertTrue(zipfile.is_zipfile(io.BytesIO(content)));self.assertEqual(ctype,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");self.assertTrue(name.endswith(".xlsx"))
+  with zipfile.ZipFile(io.BytesIO(content)) as z:self.assertIn("xl/worksheets/sheet1.xml",z.namelist())
  def test_version_is_required(self):
   with self.assertRaises(ValueError):self.s.create_job({"definition_code":"CONTRACT","project_code":"P1","snapshot":{}},"u")
 
