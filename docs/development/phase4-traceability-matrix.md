@@ -1,6 +1,6 @@
 # Phase 4 Traceability Matrix
 
-Status legend: `VERIFIED` means Web/Python, Local Go and permanent tests exist. `OPEN` means required by the roadmap but not yet complete.
+Status legend: `VERIFIED` means Web/Python, Local Go and permanent tests exist.
 
 | ID | Capability | Legacy entry | Web/Python | Local Go | Permanent evidence | Status |
 |---|---|---|---|---|---|---|
@@ -25,20 +25,15 @@ Status legend: `VERIFIED` means Web/Python, Local Go and permanent tests exist. 
 | P4-19 | MDB adapter | formNewProjectWizard | api/legacy_exchange_adapters.py | legacy_exchange_adapters.go | CSV bridge adapter tests | VERIFIED |
 | P4-20 | PX adapter | formNewProjectWizard | api/legacy_exchange_adapters.py | legacy_exchange_adapters.go | XML adapter tests | VERIFIED |
 | P4-21 | Source attachment, filename and downloadable error catalogue | FormBudgetExp_Wzd | api/conversion_source_artifacts.py | conversion_source_artifacts.go | immutable source, SHA-256 and CSV catalogue tests | VERIFIED |
-| P4-22 | Long-running progress and cancellation | FormBudgetExp_Wzd | not implemented | not implemented | none | OPEN |
+| P4-22 | Long-running progress and cancellation | FormBudgetExp_Wzd | api/conversion_long_jobs.py | conversion_long_jobs.go | progress, optimistic locking and cancellation tests | VERIFIED |
 
-## Combine-bid conflict contract
+## Completion contracts
 
-The combine-bid engine never silently overwrites duplicate item codes. Every collision is recorded with an explicit strategy: `BLOCK`, `KEEP_FIRST`, `KEEP_LAST`, `SUM_QUANTITY`, or `RENAME`.
-
-## Legacy adapter contract
-
-ZMD JSON, MDB deterministic CSV bridge, and PX XML are normalized into one canonical item shape. Format/version, source filename, source project, validation report, and READY/BLOCKED session state are permanently retained.
-
-## Source evidence contract
-
-Every imported or exported source file can be retained as an immutable BLOB with original filename, media type, format/version, size and SHA-256. Validation errors and warnings are retained as an auditable catalogue and can be downloaded as UTF-8 CSV.
+- Duplicate combine-bid codes always use an explicit conflict strategy and are never silently overwritten.
+- ZMD, MDB bridge and PX inputs normalize into one canonical item model with retained format/version lineage.
+- Source files remain immutable and downloadable with original filename, media type, size and SHA-256.
+- Long-running jobs use `QUEUED`, `RUNNING`, `COMPLETED`, `FAILED` and `CANCELLED`; progress is monotonic, updates use Row Version, and cancellation clears partial result/error payloads.
 
 ## Gate decision
 
-Phase 4 is **not complete** while any row is `OPEN`. The only remaining ordered work is long-running job progress and cancellation.
+All Phase 4 roadmap capabilities are `VERIFIED`. Phase 4 is complete pending the repository's remote CI result; Phase 5 may begin only after the Phase 4 gate is green.
