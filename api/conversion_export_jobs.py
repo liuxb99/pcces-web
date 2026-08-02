@@ -10,6 +10,7 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 from flask import Blueprint, Response, jsonify, request
 from sqlalchemy import Column, DateTime, Integer, LargeBinary, MetaData, String, Table, Text, select
 
+from api.bid_budget_import_apply import BidBudgetImportApplyService
 from api.bid_budget_roundtrip import BidBudgetRoundTripService, detect_and_parse, import_preflight
 from api.conversion_export_lifecycle import ConversionExportLifecycleService, validate_xml
 
@@ -42,7 +43,11 @@ def serialize_xml(items, project_code, source_version, legacy):
 
 class ConversionExportJobService:
     def __init__(self, engine):
-        self.engine = engine; metadata.create_all(engine); self.lifecycle = ConversionExportLifecycleService(engine); self.roundtrip = BidBudgetRoundTripService(engine)
+        self.engine = engine
+        metadata.create_all(engine)
+        self.lifecycle = ConversionExportLifecycleService(engine)
+        self.roundtrip = BidBudgetRoundTripService(engine)
+        self.import_apply = BidBudgetImportApplyService(engine)
     def create(self, body, actor):
         wizard_id = str(body.get("wizard_session_id","")).strip(); source = str(body.get("source_budget_version_id","")).strip(); target = str(body.get("target_project_code","")).strip(); fmt = str(body.get("format","BID_JSON")).upper(); items = list(body.get("items") or [])
         if not wizard_id or not source or not target: raise ValueError("wizard_session_id, source_budget_version_id and target_project_code are required")
@@ -123,5 +128,18 @@ def build_conversion_export_job_blueprint(service, resolve_user_id):
     @bp.get("/import-sessions/<session_id>")
     def get_import_session(session_id):
         try: return jsonify(service.roundtrip.get(session_id))
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+    @bp.post("/import-sessions/<session_id>/apply")
+    def apply_import_session(session_id):
+        actor=resolve_user_id()
+        if actor is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        try: return jsonify(service.import_apply.apply(session_id,request.get_json(silent=True) or {},str(actor))),201
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+        except PermissionError as exc: return jsonify({"code":"READ_ONLY","detail":str(exc)}),409
+        except RuntimeError: return jsonify({"code":"CONFLICT","detail":"target budget project already contains items"}),409
+        except (ValueError,ArithmeticError) as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+    @bp.get("/import-apply-runs/<run_id>")
+    def get_import_apply_run(run_id):
+        try: return jsonify(service.import_apply.get(run_id))
         except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
     return bp
