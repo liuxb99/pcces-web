@@ -17,6 +17,11 @@ def _text(value) -> str:
     return format(Decimal(str(value)), "f")
 
 
+def _budget_id(value) -> str:
+    """Canonical identifier shared by the adapter and legacy route bridge."""
+    return f"legacy-{value}"
+
+
 class LegacyDecimalAdapter:
     def __init__(self, session_factory, budget_service: BudgetDecimalService, resource_service: ResourceDecimalService):
         self.session_factory = session_factory
@@ -28,9 +33,10 @@ class LegacyDecimalAdapter:
         db = self.session_factory()
         try:
             for item in db.query(BudgetItem).filter(BudgetItem.project_id == project_id).all():
-                result, status = self.budget_service.save(str(item.id), {
+                item_id = _budget_id(item.id)
+                result, status = self.budget_service.save(item_id, {
                     "project_code": project_code,
-                    "parent_id": str(item.parent_id) if item.parent_id is not None else None,
+                    "parent_id": _budget_id(item.parent_id) if item.parent_id is not None else None,
                     "item_no": item.item_no,
                     "name": item.c_name or item.item_no or str(item.id),
                     "kind": item.kind or "L",
@@ -39,9 +45,10 @@ class LegacyDecimalAdapter:
                     "quantity_scale": item.decimal_qty or 2,
                     "price_scale": item.decimal_price or 2,
                     "amount_scale": item.decimal_amount or 2,
-                    "row_version": self._budget_version(str(item.id)),
+                    "row_version": self._budget_version(item_id),
                 })
-                if status >= 400: raise RuntimeError(result)
+                if status >= 400:
+                    raise RuntimeError(result)
                 migrated["budget_items"] += 1
             for resource in db.query(Resource).all():
                 result, status = self.resource_service.save_resource(str(resource.id), {
@@ -52,7 +59,8 @@ class LegacyDecimalAdapter:
                     "price_scale": 4,
                     "row_version": self._resource_version(str(resource.id)),
                 })
-                if status >= 400: raise RuntimeError(result)
+                if status >= 400:
+                    raise RuntimeError(result)
                 migrated["resources"] += 1
             for row in db.query(ResourceBreakdownItem).all():
                 result, status = self.resource_service.save_breakdown(str(row.id), {
@@ -62,7 +70,8 @@ class LegacyDecimalAdapter:
                     "quantity_scale": 4, "price_scale": 4, "amount_scale": 2,
                     "row_version": self._breakdown_version(str(row.id)),
                 })
-                if status >= 400: raise RuntimeError(result)
+                if status >= 400:
+                    raise RuntimeError(result)
                 migrated["breakdowns"] += 1
             self.budget_service.recalculate_project(project_code)
             return migrated
