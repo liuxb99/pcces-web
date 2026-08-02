@@ -86,6 +86,7 @@ jobs:
           api.test_mrs_catalog
           api.test_mrs_code
           api.test_mrs_history_apply
+          api.test_mrs_rate_history_apply
           api.test_mrs_intelligence
           api.test_mrs_operations
           api.test_mrs_governance
