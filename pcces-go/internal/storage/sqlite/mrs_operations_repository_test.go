@@ -15,7 +15,7 @@ func TestMRSOperationsUsageVersionsLineageAndJobs(t *testing.T){
 	item,err:=catalog.GetItem(ctx,"M1");if err!=nil{t.Fatal(err)};item.CurrentPrice="120";if _,err=catalog.SaveItem(ctx,item,"7","");err!=nil{t.Fatal(err)}
 	v2,err:=repo.CreateRecipeVersion(ctx,"V2","R1","current","7");if err!=nil{t.Fatal(err)};if v2.UnitPrice!="340.00"{t.Fatalf("v2=%+v",v2)}
 	versions,err:=repo.ListRecipeVersions(ctx,"R1");if err!=nil||len(versions)!=2{t.Fatalf("versions=%+v err=%v",versions,err)}
-	intel:=NewMRSIntelligenceRepository(store);if _,err=intel.AddQuote(ctx,"Q1","M1","Vendor","115",2,nil,nil,"7");err!=nil{t.Fatal(err)}
+	intel:=NewMRSIntelligenceRepository(store);if _,err=intel.AddQuote(ctx,MRSQuote{ID:"Q1",CatalogItemID:"M1",Vendor:"Vendor",QuotedPrice:"115",PriceScale:2,CreatedBy:"7"});err!=nil{t.Fatal(err)}
 	lineage,err:=repo.PriceLineage(ctx,"M1");if err!=nil{t.Fatal(err)};events:=lineage["events"].([]map[string]any);if len(events)<3{t.Fatalf("events=%+v",events)}
 	job,err:=repo.CreateImportJob(ctx,"J1","JSON",`[{"id":"I1","code":"I-1","name":"Sand","category":"MATERIAL","current_price":"50","price_scale":2}]`,"7",false,1);if err!=nil{t.Fatal(err)};if job.Status!="PENDING"{t.Fatalf("job=%+v",job)}
 	done,err:=repo.RunImportJob(ctx,"J1");if err!=nil{t.Fatal(err)};if done.Status!="COMPLETED"||done.ImportedRows!=1{t.Fatalf("done=%+v",done)}
