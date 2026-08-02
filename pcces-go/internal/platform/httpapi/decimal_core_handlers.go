@@ -21,6 +21,10 @@ func (s *Server) decimalCoreRoutes() {
 	s.mux.HandleFunc("POST /api/decimal-resources/{id}/budget-links", s.linkResourceBudgetItem)
 	s.mux.HandleFunc("POST /api/decimal-resources/{id}/propagate", s.propagateResourcePrice)
 	s.mux.HandleFunc("GET /api/decimal-resources/projects/{projectCode}/lineage", s.listResourcePriceLineage)
+	s.mux.HandleFunc("POST /api/dependency-graph/projects/{projectCode}/recalculate", s.recalculateDependencyProject)
+	s.mux.HandleFunc("POST /api/dependency-graph/projects/{projectCode}/resources/{id}/recalculate", s.recalculateDependencyResource)
+	s.mux.HandleFunc("GET /api/dependency-graph/projects/{projectCode}/price-history", s.listDependencyPriceHistory)
+	s.mux.HandleFunc("GET /api/dependency-graph/projects/{projectCode}/runs", s.listDependencyRuns)
 }
 
 func (s *Server) getDecimalBudgetItem(w http.ResponseWriter, r *http.Request) { item,err:=sqlite.NewBudgetDecimalRepository(s.store).Get(r.Context(),r.PathValue("id"));respond(w,item,err) }
@@ -54,3 +58,8 @@ func (s *Server) propagateResourcePrice(w http.ResponseWriter,r *http.Request){
 	respond(w,map[string]any{"resource_id":r.PathValue("id"),"updated_items":len(rows),"lineage":rows},err)
 }
 func (s *Server) listResourcePriceLineage(w http.ResponseWriter,r *http.Request){rows,err:=sqlite.NewResourceBudgetLineageRepository(s.store).ListProject(r.Context(),r.PathValue("projectCode"));respond(w,rows,err)}
+
+func (s *Server) recalculateDependencyProject(w http.ResponseWriter,r *http.Request){run,err:=sqlite.NewDependencyGraphRepository(s.store).RecalculateProject(r.Context(),r.PathValue("projectCode"));respond(w,run,err)}
+func (s *Server) recalculateDependencyResource(w http.ResponseWriter,r *http.Request){run,err:=sqlite.NewDependencyGraphRepository(s.store).RecalculateResource(r.Context(),r.PathValue("projectCode"),r.PathValue("id"));respond(w,run,err)}
+func (s *Server) listDependencyPriceHistory(w http.ResponseWriter,r *http.Request){rows,err:=sqlite.NewDependencyGraphRepository(s.store).ListPriceHistory(r.Context(),r.PathValue("projectCode"));respond(w,rows,err)}
+func (s *Server) listDependencyRuns(w http.ResponseWriter,r *http.Request){rows,err:=sqlite.NewDependencyGraphRepository(s.store).ListRuns(r.Context(),r.PathValue("projectCode"));respond(w,rows,err)}
