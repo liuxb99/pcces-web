@@ -12,14 +12,16 @@ on:
       - "api/test_admin_console.py"
       - "api/app.py"
       - "pcces-go/internal/storage/sqlite/contract_*"
-      - "pcces-go/internal/storage/sqlite/report_admin.go"
+      - "pcces-go/internal/storage/sqlite/report_*.go"
+      - "pcces-go/internal/storage/sqlite/admin_operations.go"
       - "pcces-go/internal/storage/sqlite/migrations/004*.sql"
       - "pcces-go/internal/platform/httpapi/contract_*"
       - "pcces-go/internal/platform/httpapi/report_admin_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
       - "web-pcces/frontend/src/api/roadmapClient.ts"
       - "docs/development/phase5-9-traceability-matrix.md"
-      - "scripts/phase9_gate.py"
+      - "scripts/phase9_*.py"
+      - "scripts/production_readiness.py"
       - ".github/workflows/phase5-9-completion.yml"
   pull_request:
   workflow_dispatch:
@@ -49,9 +51,15 @@ jobs:
           api.test_contract_execution
           api.test_report_center
           api.test_admin_console
+      - run: python scripts/phase9_legacy_catalog.py --require-no-unknown
+      - run: python scripts/production_readiness.py
       - run: python scripts/phase9_gate.py
       - if: ${{ inputs.require_complete == true }}
         run: python scripts/phase9_gate.py --require-complete
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase9-legacy-catalog
+          path: build/phase9-legacy-catalog.json
 
   local-go:
     runs-on: ubuntu-latest
@@ -65,7 +73,7 @@ jobs:
           go-version: "1.24.x"
           cache-dependency-path: pcces-go/go.sum
       - name: Format check
-        run: test -z "$(gofmt -l internal/storage/sqlite/contract_*.go internal/storage/sqlite/report_admin.go internal/platform/httpapi/contract_*_handlers.go internal/platform/httpapi/report_admin_handlers.go internal/platform/httpapi/authorization_handlers.go)"
+        run: test -z "$(gofmt -l internal/storage/sqlite/contract_*.go internal/storage/sqlite/report_*.go internal/storage/sqlite/admin_operations.go internal/platform/httpapi/contract_*_handlers.go internal/platform/httpapi/report_admin_handlers.go internal/platform/httpapi/authorization_handlers.go)"
       - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
       - run: go vet ./...
 
