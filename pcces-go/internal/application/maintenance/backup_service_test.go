@@ -57,3 +57,31 @@ func TestRunOnceCreatesBackupAndPrunesOldFiles(t *testing.T) {
 		t.Fatalf("expected retention to keep 2 backups, got %d", count)
 	}
 }
+
+func TestNextBackupDelayRefreshesEnabledPolicyBeforeLongInterval(t *testing.T) {
+	got := nextBackupDelay(true, 24*time.Hour, 0, time.Minute)
+	if got != time.Minute {
+		t.Fatalf("expected policy refresh in one minute, got %s", got)
+	}
+}
+
+func TestNextBackupDelayUsesRemainingIntervalWhenSooner(t *testing.T) {
+	got := nextBackupDelay(true, time.Hour, 59*time.Minute+45*time.Second, time.Minute)
+	if got != 15*time.Second {
+		t.Fatalf("expected remaining interval, got %s", got)
+	}
+}
+
+func TestNextBackupDelayRefreshesDisabledPolicy(t *testing.T) {
+	got := nextBackupDelay(false, 24*time.Hour, 23*time.Hour, 30*time.Second)
+	if got != 30*time.Second {
+		t.Fatalf("expected disabled policy refresh, got %s", got)
+	}
+}
+
+func TestNextBackupDelayRunsImmediatelyWhenDue(t *testing.T) {
+	got := nextBackupDelay(true, time.Hour, time.Hour, time.Minute)
+	if got != 0 {
+		t.Fatalf("expected immediate execution when due, got %s", got)
+	}
+}
