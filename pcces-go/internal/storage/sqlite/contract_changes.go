@@ -74,9 +74,9 @@ func (r *ContractChangeRepository) Create(ctx context.Context, req ContractChang
 			return nil, err
 		}
 		if action == "DECREASE" || action == "DELETE" {
-			v = -abs(v)
+			v = -contractChangeAbs(v)
 		} else {
-			v = abs(v)
+			v = contractChangeAbs(v)
 		}
 		delta += v
 	}
@@ -113,11 +113,11 @@ func (r *ContractChangeRepository) Create(ctx context.Context, req ContractChang
 			return nil, err
 		}
 		if action == "DECREASE" || action == "DELETE" {
-			qty, amt = -abs(qty), -abs(amt)
+			qty, amt = -contractChangeAbs(qty), -contractChangeAbs(amt)
 		} else {
-			qty, amt = abs(qty), abs(amt)
+			qty, amt = contractChangeAbs(qty), contractChangeAbs(amt)
 		}
-		if _, err = tx.ExecContext(ctx, `INSERT INTO contract_change_items(id,change_order_id,action,contract_item_id,source_budget_item_id,item_no,name,unit,quantity_delta,unit_price,amount_delta,sort_order) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`, fmt.Sprintf("%s-%d", req.ID, i+1), req.ID, action, nullString(item.ContractItemID), nullString(item.SourceBudgetItemID), nullString(item.ItemNo), item.Name, nullString(item.Unit), fmt.Sprintf("%.8f", qty), fmt.Sprintf("%.8f", price), fmt.Sprintf("%.8f", amt), i+1); err != nil {
+		if _, err = tx.ExecContext(ctx, `INSERT INTO contract_change_items(id,change_order_id,action,contract_item_id,source_budget_item_id,item_no,name,unit,quantity_delta,unit_price,amount_delta,sort_order) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`, fmt.Sprintf("%s-%d", req.ID, i+1), req.ID, action, contractChangeNullable(item.ContractItemID), contractChangeNullable(item.SourceBudgetItemID), contractChangeNullable(item.ItemNo), item.Name, contractChangeNullable(item.Unit), fmt.Sprintf("%.8f", qty), fmt.Sprintf("%.8f", price), fmt.Sprintf("%.8f", amt), i+1); err != nil {
 			return nil, err
 		}
 	}
@@ -130,31 +130,56 @@ func (r *ContractChangeRepository) Create(ctx context.Context, req ContractChang
 	return r.Get(ctx, req.ID)
 }
 
-func abs(v float64) float64 { if v < 0 { return -v }; return v }
-func nullString(v string) any { if strings.TrimSpace(v) == "" { return nil }; return v }
+func contractChangeAbs(v float64) float64 {
+	if v < 0 {
+		return -v
+	}
+	return v
+}
+
+func contractChangeNullable(v string) any {
+	if strings.TrimSpace(v) == "" {
+		return nil
+	}
+	return v
+}
 
 func (r *ContractChangeRepository) contractItems(ctx context.Context, contractID string) ([]map[string]any, error) {
 	rows, err := r.store.db.QueryContext(ctx, `SELECT id,source_budget_item_id,COALESCE(item_no,''),name,COALESCE(unit,''),quantity,unit_price,amount FROM contract_items_v2 WHERE contract_id=? ORDER BY sort_order`, contractID)
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 	defer rows.Close()
 	result := []map[string]any{}
 	for rows.Next() {
 		var id, source, no, name, unit, qty, price, amount string
-		if err := rows.Scan(&id,&source,&no,&name,&unit,&qty,&price,&amount); err != nil { return nil, err }
-		result = append(result, map[string]any{"id":id,"source_budget_item_id":source,"item_no":no,"name":name,"unit":unit,"quantity":qty,"unit_price":price,"amount":amount})
+		if err := rows.Scan(&id, &source, &no, &name, &unit, &qty, &price, &amount); err != nil {
+			return nil, err
+		}
+		result = append(result, map[string]any{"id": id, "source_budget_item_id": source, "item_no": no, "name": name, "unit": unit, "quantity": qty, "unit_price": price, "amount": amount})
 	}
 	return result, rows.Err()
 }
 
 func (r *ContractChangeRepository) Get(ctx context.Context, id string) (map[string]any, error) {
 	var contractID, no, reason, status, before, delta, after string
-	if err := r.store.db.QueryRowContext(ctx, `SELECT contract_id,change_no,reason,status,before_amount,delta_amount,after_amount FROM contract_change_orders WHERE id=?`, id).Scan(&contractID,&no,&reason,&status,&before,&delta,&after); err == sql.ErrNoRows {
+	if err := r.store.db.QueryRowContext(ctx, `SELECT contract_id,change_no,reason,status,before_amount,delta_amount,after_amount FROM contract_change_orders WHERE id=?`, id).Scan(&contractID, &no, &reason, &status, &before, &delta, &after); err == sql.ErrNoRows {
 		return nil, errx.New(errx.CodeNotFound, "contract change not found", "P5-G-CHANGE")
-	} else if err != nil { return nil, err }
+	} else if err != nil {
+		return nil, err
+	}
 	rows, err := r.store.db.QueryContext(ctx, `SELECT action,COALESCE(contract_item_id,''),name,quantity_delta,unit_price,amount_delta FROM contract_change_items WHERE change_order_id=? ORDER BY sort_order`, id)
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 	defer rows.Close()
 	items := []map[string]any{}
-	for rows.Next() { var action,itemID,name,qty,price,amt string; if err:=rows.Scan(&action,&itemID,&name,&qty,&price,&amt);err!=nil{return nil,err}; items=append(items,map[string]any{"action":action,"contract_item_id":itemID,"name":name,"quantity_delta":qty,"unit_price":price,"amount_delta":amt}) }
-	return map[string]any{"id":id,"contract_id":contractID,"change_no":no,"reason":reason,"status":status,"before_amount":before,"delta_amount":delta,"after_amount":after,"items":items,"deep_link":"/app/contracts/"+contractID+"/changes/"+id}, rows.Err()
+	for rows.Next() {
+		var action, itemID, name, qty, price, amt string
+		if err := rows.Scan(&action, &itemID, &name, &qty, &price, &amt); err != nil {
+			return nil, err
+		}
+		items = append(items, map[string]any{"action": action, "contract_item_id": itemID, "name": name, "quantity_delta": qty, "unit_price": price, "amount_delta": amt})
+	}
+	return map[string]any{"id": id, "contract_id": contractID, "change_no": no, "reason": reason, "status": status, "before_amount": before, "delta_amount": delta, "after_amount": after, "items": items, "deep_link": "/app/contracts/" + contractID + "/changes/" + id}, rows.Err()
 }
