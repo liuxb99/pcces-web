@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "modules": [
+    {"code": "BUDGET", "name": "預算編製"},
+    {"code": "BID", "name": "投標單"},
+    {"code": "COMMON", "name": "共用資料"},
+    {"code": "INVOICE", "name": "契約履約"}
+  ],
+  "function_codes": [
+    {"code": "F001", "name": "系統維護"},
+    {"code": "F002", "name": "基本資料庫維護"},
+    {"code": "F003", "name": "預算書編製"},
+    {"code": "F004", "name": "投標單填寫"},
+    {"code": "F005", "name": "專案目錄"},
+    {"code": "F006", "name": "系統外掛"},
+    {"code": "F007", "name": "單價分析比對"},
+    {"code": "F008", "name": "歷史工程比對"},
+    {"code": "F009", "name": "契約編製"},
+    {"code": "F010", "name": "估驗記錄"},
+    {"code": "F011", "name": "契約變更"},
+    {"code": "F012", "name": "結算作業"}
+  ],
+  "actions": [
+    {"code": "BUD", "name": "預算編製", "module_code": "BUDGET", "function_code": "F003"},
+    {"code": "BID", "name": "投標單填寫", "module_code": "BID", "function_code": "F004"},
+    {"code": "PROJECT_CATALOG", "name": "專案目錄", "module_code": "COMMON", "function_code": "F005"},
+    {"code": "MRS", "name": "工料機與單價分析", "module_code": "COMMON", "function_code": "F007"},
+    {"code": "REPORT", "name": "報表與資料輸出", "module_code": "COMMON", "function_code": "F006"},
+    {"code": "SYSTEM_ADMIN", "name": "系統管理", "module_code": "COMMON", "function_code": "F001"},
+    {"code": "SPLIT_CONTRACT", "name": "契約編製", "module_code": "INVOICE", "function_code": "F009"},
+    {"code": "INVOICE", "name": "估驗記錄", "module_code": "INVOICE", "function_code": "F010"},
+    {"code": "BUDGET_CHANGE", "name": "契約變更", "module_code": "INVOICE", "function_code": "F011"},
+    {"code": "SUB_CLOSE", "name": "結算作業", "module_code": "INVOICE", "function_code": "F012"},
+    {"code": "SUB_FINAL", "name": "驗收作業", "module_code": "INVOICE", "function_code": null}
+  ]
+}
