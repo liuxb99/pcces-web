@@ -22,6 +22,7 @@ from api.legacy_resource_decimal_bridge import install_legacy_resource_bridge
 from api.migrations import run_migrations
 from api.models import Base, User
 from api.mrs_catalog import MRSCatalogService, build_mrs_catalog_blueprint
+from api.mrs_code import build_mrs_code_blueprint
 from api.mrs_exchange import MRSExchangeService, build_mrs_exchange_blueprint
 from api.mrs_governance_paging import MRSGovernanceService, build_mrs_governance_blueprint
 from api.mrs_intelligence import MRSIntelligenceService, build_mrs_intelligence_blueprint
@@ -117,6 +118,7 @@ if "budget_validation" not in app.blueprints: app.register_blueprint(build_budge
 if "budget_cross_project" not in app.blueprints: app.register_blueprint(build_budget_cross_project_blueprint(budget_cross_project_service, resolve_user_id))
 if "bid_lifecycle" not in app.blueprints: app.register_blueprint(build_bid_lifecycle_blueprint(bid_lifecycle_service, resolve_user_id))
 if "mrs_catalog" not in app.blueprints: app.register_blueprint(build_mrs_catalog_blueprint(mrs_catalog_service, resolve_user_id))
+if "mrs_code" not in app.blueprints: app.register_blueprint(build_mrs_code_blueprint(resolve_user_id))
 if "mrs_exchange" not in app.blueprints: app.register_blueprint(build_mrs_exchange_blueprint(mrs_exchange_service, resolve_user_id))
 if "mrs_intelligence" not in app.blueprints: app.register_blueprint(build_mrs_intelligence_blueprint(mrs_intelligence_service, resolve_user_id))
 if "mrs_operations" not in app.blueprints: app.register_blueprint(build_mrs_operations_blueprint(mrs_operations_service, resolve_user_id))
