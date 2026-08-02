@@ -85,6 +85,7 @@ jobs:
           api.test_mrs_intelligence
           api.test_mrs_operations
           api.test_mrs_governance
+          api.test_mrs_governance_frontend_contract
           api.test_resource_decimal
           api.test_resource_budget_lineage
           api.test_resource_dependency_graph
