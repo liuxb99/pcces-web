@@ -8,9 +8,12 @@ passes the same authentication and capability infrastructure.
 from __future__ import annotations
 
 from flask import jsonify, request
+from sqlalchemy import select
 
 from api.authorization import AuthorizationService, build_authorization_blueprint
 from api.index import app, decode_token, engine
+from api.models import User
+from api.route_policy import action_for_request, initialize_authorization
 
 _PUBLIC_ENDPOINTS = {
     "/api/health",
@@ -32,14 +35,19 @@ def resolve_user_id() -> int | None:
         return None
 
 
+authorization_service = AuthorizationService(engine)
+with engine.connect() as connection:
+    existing_user_ids = [row[0] for row in connection.execute(select(User.id))]
+initialize_authorization(authorization_service, existing_user_ids)
+
+
 @app.before_request
-def enforce_canonical_authentication():
-    """Reject guest fallback for every non-public API route.
+def enforce_canonical_authentication_and_capability():
+    """Enforce authentication and the shared route-to-action catalog.
 
     OPTIONS remains public so browser CORS preflight requests are not blocked.
-    Capability-specific authorization remains the responsibility of route
-    guards; this hook guarantees that a caller cannot become user 1 merely by
-    omitting or corrupting a token.
+    Every mapped business route is checked at this canonical boundary, which
+    prevents callers from bypassing Function Code guards through a direct URL.
     """
 
     if request.method == "OPTIONS":
@@ -48,17 +56,29 @@ def enforce_canonical_authentication():
         return None
     if request.path in _PUBLIC_ENDPOINTS:
         return None
-    if resolve_user_id() is None:
+
+    user_id = resolve_user_id()
+    if user_id is None:
         return jsonify({
             "code": "UNAUTHORIZED",
             "detail": "authentication required",
             "feature_id": "P0-S3",
         }), 401
+
+    action_code = action_for_request(request.path, request.method)
+    if action_code is None:
+        return None
+
+    decision = authorization_service.decide(user_id, action_code)
+    if not decision.allowed:
+        return jsonify({
+            "code": "FORBIDDEN",
+            "action_code": action_code,
+            "reason": decision.reason,
+            "feature_id": "P0-S3",
+        }), 403
     return None
 
-
-authorization_service = AuthorizationService(engine)
-authorization_service.create_schema()
 
 if "authorization" not in app.blueprints:
     app.register_blueprint(
