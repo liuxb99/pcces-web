@@ -26,6 +26,7 @@ class RoutePolicyTests(unittest.TestCase):
             "/api/bid/42": "BID",
             "/api/mrs/items": "MRS",
             "/api/resources/9": "MRS",
+            "/api/dependency-graph/projects/P1": "MRS",
             "/api/reports/budget": "REPORT",
             "/api/admin/users": "SYSTEM_ADMIN",
             "/api/contracts/3": "SPLIT_CONTRACT",
@@ -51,6 +52,13 @@ class RoutePolicyTests(unittest.TestCase):
     def test_revoked_function_blocks_direct_project_route(self):
         self.service.set_function_grant(7, "F005", False)
         action = action_for_request("/api/projects/", "GET")
+        decision = self.service.decide(7, action)
+        self.assertFalse(decision.allowed)
+        self.assertEqual(decision.reason, "FUNCTION_NOT_GRANTED")
+
+    def test_revoked_mrs_blocks_dependency_graph_direct_url(self):
+        self.service.set_function_grant(7, "F007", False)
+        action = action_for_request("/api/dependency-graph/projects/P1", "GET")
         decision = self.service.decide(7, action)
         self.assertFalse(decision.allowed)
         self.assertEqual(decision.reason, "FUNCTION_NOT_GRANTED")
