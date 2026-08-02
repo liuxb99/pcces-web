@@ -4,22 +4,39 @@ on:
   push:
     paths:
       - "api/budget_decimal.py"
+      - "api/budget_kind_engine.py"
+      - "api/budget_calculation_trace.py"
       - "api/test_budget_decimal.py"
+      - "api/test_budget_kind_engine.py"
+      - "api/test_budget_calculation_trace.py"
       - "api/decimal_math.py"
       - "api/app.py"
       - "pcces-go/internal/domain/money/**"
+      - "pcces-go/internal/storage/sqlite/budget_trace_repository*.go"
       - "pcces-go/internal/storage/sqlite/migrations/0007_budget_decimal_core.sql"
+      - "pcces-go/internal/storage/sqlite/migrations/0009_budget_calculation_traces.sql"
+      - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "specs/golden/budget-decimal-calculations.json"
+      - "specs/golden/budget-item-kind-calculations.json"
       - ".github/workflows/budget-decimal-core.yml"
   pull_request:
     paths:
       - "api/budget_decimal.py"
+      - "api/budget_kind_engine.py"
+      - "api/budget_calculation_trace.py"
       - "api/test_budget_decimal.py"
+      - "api/test_budget_kind_engine.py"
+      - "api/test_budget_calculation_trace.py"
       - "api/decimal_math.py"
       - "api/app.py"
       - "pcces-go/internal/domain/money/**"
+      - "pcces-go/internal/storage/sqlite/budget_trace_repository*.go"
       - "pcces-go/internal/storage/sqlite/migrations/0007_budget_decimal_core.sql"
+      - "pcces-go/internal/storage/sqlite/migrations/0009_budget_calculation_traces.sql"
+      - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "specs/golden/budget-decimal-calculations.json"
+      - "specs/golden/budget-item-kind-calculations.json"
+      - ".github/workflows/budget-decimal-core.yml"
 
 jobs:
   web-budget-decimal:
@@ -31,7 +48,12 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python -m unittest api.test_decimal_math api.test_budget_decimal
+      - run: >-
+          python -m unittest
+          api.test_decimal_math
+          api.test_budget_decimal
+          api.test_budget_kind_engine
+          api.test_budget_calculation_trace
 
   go-budget-decimal:
     runs-on: ubuntu-latest
@@ -44,6 +66,6 @@ jobs:
         with:
           go-version: "1.24.x"
           cache-dependency-path: pcces-go/go.sum
-      - run: test -z "$(gofmt -l internal/domain/money)"
-      - run: go test ./internal/domain/money/... ./internal/storage/sqlite/...
+      - run: test -z "$(gofmt -l internal/domain/money internal/storage/sqlite internal/platform/httpapi)"
+      - run: go test ./internal/domain/money/... ./internal/storage/sqlite/... ./internal/platform/httpapi/...
       - run: go vet ./...
