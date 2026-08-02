@@ -10,6 +10,7 @@ from api.budget_calculation_trace import BudgetTraceService, build_budget_trace_
 from api.budget_decimal import BudgetDecimalService, build_budget_decimal_blueprint
 from api.index import SessionLocal, app, decode_token, engine
 from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
+from api.legacy_resource_decimal_bridge import install_legacy_resource_bridge
 from api.migrations import run_migrations
 from api.models import Base, User
 from api.persistence_contract import PersistenceService
@@ -50,8 +51,8 @@ resource_decimal_service.create_schema()
 budget_trace_service = BudgetTraceService(engine)
 
 # Preserve existing URLs while routing legacy budget operations through exact
-# Decimal persistence.  The original decorator injected user_id; replacement
-# view functions therefore receive the canonical authenticated actor explicitly.
+# Decimal persistence. The original decorators injected user_id, so replacement
+# view functions receive the canonical authenticated actor explicitly.
 install_legacy_budget_bridge(app, engine, SessionLocal)
 for _endpoint in ("create_budget_item", "get_budget_list", "get_budget_tree", "recalc_budget"):
     _view = app.view_functions[_endpoint]
@@ -62,6 +63,29 @@ for _endpoint in ("update_budget_item", "delete_budget_item", "move_budget_item"
     _view = app.view_functions[_endpoint]
     app.view_functions[_endpoint] = (
         lambda project_id, item_id, _view=_view: _view(project_id, item_id, resolve_user_id())
+    )
+
+# Apply the same compatibility strategy to resource and unit-price-analysis
+# endpoints. Missing optional legacy endpoints are ignored safely.
+install_legacy_resource_bridge(app, engine, SessionLocal)
+for _endpoint in ("list_resources", "create_resource", "list_analysis_resources", "recalc_resource_analysis"):
+    if _endpoint in app.view_functions:
+        _view = app.view_functions[_endpoint]
+        app.view_functions[_endpoint] = (
+            lambda project_id, _view=_view: _view(project_id, resolve_user_id())
+        )
+for _endpoint in ("update_resource", "update_resource_price", "get_resource_breakdown", "create_resource_breakdown"):
+    if _endpoint in app.view_functions:
+        _view = app.view_functions[_endpoint]
+        app.view_functions[_endpoint] = (
+            lambda project_id, resource_id, _view=_view: _view(project_id, resource_id, resolve_user_id())
+        )
+if "delete_resource_breakdown" in app.view_functions:
+    _view = app.view_functions["delete_resource_breakdown"]
+    app.view_functions["delete_resource_breakdown"] = (
+        lambda project_id, resource_id, breakdown_id, _view=_view: _view(
+            project_id, resource_id, breakdown_id, resolve_user_id()
+        )
     )
 
 
