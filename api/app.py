@@ -18,6 +18,11 @@ from api.recovery import RecoveryService, build_recovery_blueprint
 from api.resource_budget_lineage import ResourceBudgetLineageService
 from api.resource_budget_lineage_api import build_resource_budget_lineage_blueprint
 from api.resource_decimal import ResourceDecimalService, build_resource_decimal_blueprint
+from api.resource_dependency_graph import (
+    ResourceDependencyGraphService,
+    build_resource_dependency_blueprint,
+    install_resource_automation,
+)
 from api.route_policy import action_for_request, initialize_authorization
 from api.work_context import WorkContextService, build_work_context_blueprint
 
@@ -51,6 +56,7 @@ budget_decimal_service.create_schema()
 resource_decimal_service = ResourceDecimalService(engine)
 resource_decimal_service.create_schema()
 resource_budget_lineage_service = ResourceBudgetLineageService(engine)
+resource_dependency_graph_service = ResourceDependencyGraphService(engine, SessionLocal)
 budget_trace_service = BudgetTraceService(engine)
 
 install_legacy_budget_bridge(app, engine, SessionLocal)
@@ -74,6 +80,10 @@ if "delete_resource_breakdown" in app.view_functions:
     _view = app.view_functions["delete_resource_breakdown"]
     app.view_functions["delete_resource_breakdown"] = lambda project_id, resource_id, breakdown_id, _view=_view: _view(project_id, resource_id, breakdown_id, resolve_user_id())
 
+# Automation wraps the already authenticated compatibility endpoints. Successful
+# writes auto-link exact code matches, append price versions and run local graph propagation.
+install_resource_automation(app, resource_dependency_graph_service)
+
 
 @app.before_request
 def enforce_canonical_authentication_and_capability():
@@ -96,6 +106,12 @@ if "recovery" not in app.blueprints: app.register_blueprint(build_recovery_bluep
 if "budget_decimal" not in app.blueprints: app.register_blueprint(build_budget_decimal_blueprint(budget_decimal_service, resolve_user_id))
 if "resource_decimal" not in app.blueprints: app.register_blueprint(build_resource_decimal_blueprint(resource_decimal_service, resolve_user_id))
 if "resource_budget_lineage" not in app.blueprints: app.register_blueprint(build_resource_budget_lineage_blueprint(resource_budget_lineage_service, resolve_user_id))
+if "resource_dependency" not in app.blueprints: app.register_blueprint(build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
 if "budget_trace" not in app.blueprints: app.register_blueprint(build_budget_trace_blueprint(budget_trace_service, resolve_user_id))
 
-__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "resource_decimal_service", "resource_budget_lineage_service", "budget_trace_service", "resolve_user_id"]
+__all__ = [
+    "app", "authorization_service", "work_context_service", "recovery_service",
+    "persistence_service", "budget_decimal_service", "resource_decimal_service",
+    "resource_budget_lineage_service", "resource_dependency_graph_service",
+    "budget_trace_service", "resolve_user_id",
+]
