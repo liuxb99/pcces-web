@@ -20,6 +20,7 @@ func (s *Server) authorizationRoutes() {
 	s.mux.HandleFunc("POST /api/work-contexts/{id}/save", s.authorizeWorkContext(s.saveWorkContext))
 	s.mux.HandleFunc("POST /api/work-contexts/{id}/discard", s.authorizeWorkContext(s.discardWorkContext))
 	s.mux.HandleFunc("POST /api/work-contexts/{id}/cancel", s.authorizeWorkContext(s.cancelWorkContext))
+	s.decimalCoreRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
