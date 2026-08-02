@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import ProjectsPage from './pages/ProjectsPage';
 import BudgetEditorPage from './pages/BudgetEditorPage';
 import BudgetVersionsPage from './pages/BudgetVersionsPage';
+import BudgetApprovalPage from './pages/BudgetApprovalPage';
 import ResourcesPage from './pages/ResourcesPage';
 import ReportsPage from './pages/ReportsPage';
 import InvoiceListPage from './pages/InvoiceListPage';
@@ -41,6 +42,7 @@ const App: React.FC = () => (
       <Route path="projects/:id/reports" element={<ReportsPage />} />
       <Route path="projects/by-code/:projectCode/traceability" element={<TraceabilityPage />} />
       <Route path="projects/by-code/:projectCode/budget-versions" element={<BudgetVersionsPage />} />
+      <Route path="projects/by-code/:projectCode/budget-approval" element={<BudgetApprovalPage />} />
       <Route path="projects/:id/invoices" element={<InvoiceListPage />} />
       <Route path="projects/:id/invoices/:invoiceId" element={<InvoiceDetailPage />} />
       <Route path="projects/:id/contracts" element={<ContractListPage />} />
