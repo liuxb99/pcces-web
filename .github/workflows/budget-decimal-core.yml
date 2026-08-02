@@ -6,9 +6,11 @@ on:
       - "api/budget_decimal.py"
       - "api/budget_kind_engine.py"
       - "api/budget_calculation_trace.py"
+      - "api/legacy_budget_decimal_bridge.py"
       - "api/test_budget_decimal.py"
       - "api/test_budget_kind_engine.py"
       - "api/test_budget_calculation_trace.py"
+      - "api/test_legacy_budget_decimal_bridge.py"
       - "api/decimal_math.py"
       - "api/app.py"
       - "pcces-go/internal/domain/money/**"
@@ -24,9 +26,11 @@ on:
       - "api/budget_decimal.py"
       - "api/budget_kind_engine.py"
       - "api/budget_calculation_trace.py"
+      - "api/legacy_budget_decimal_bridge.py"
       - "api/test_budget_decimal.py"
       - "api/test_budget_kind_engine.py"
       - "api/test_budget_calculation_trace.py"
+      - "api/test_legacy_budget_decimal_bridge.py"
       - "api/decimal_math.py"
       - "api/app.py"
       - "pcces-go/internal/domain/money/**"
@@ -54,6 +58,7 @@ jobs:
           api.test_budget_decimal
           api.test_budget_kind_engine
           api.test_budget_calculation_trace
+          api.test_legacy_budget_decimal_bridge
 
   go-budget-decimal:
     runs-on: ubuntu-latest
