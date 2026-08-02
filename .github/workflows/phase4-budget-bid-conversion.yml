@@ -7,16 +7,19 @@ on:
       - "api/budget_bid_conversion.py"
       - "api/conversion_wizard.py"
       - "api/conversion_export_jobs.py"
+      - "api/conversion_export_lifecycle.py"
       - "api/test_budget_bid_conversion.py"
       - "api/test_conversion_wizard.py"
       - "api/test_conversion_export_jobs.py"
+      - "api/test_conversion_export_lifecycle.py"
       - "api/app.py"
       - "pcces-go/internal/storage/sqlite/budget_bid_conversion*"
       - "pcces-go/internal/storage/sqlite/conversion_wizard*"
-      - "pcces-go/internal/storage/sqlite/conversion_export_jobs*"
+      - "pcces-go/internal/storage/sqlite/conversion_export*"
       - "pcces-go/internal/storage/sqlite/migrations/0028_budget_bid_conversion.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0029_conversion_wizard.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0030_conversion_export_jobs.sql"
+      - "pcces-go/internal/storage/sqlite/migrations/0031_conversion_export_artifact_versions.sql"
       - "pcces-go/internal/platform/httpapi/budget_bid_conversion_handlers.go"
       - "pcces-go/internal/platform/httpapi/conversion_wizard_handlers.go"
       - "pcces-go/internal/platform/httpapi/conversion_export_job_handlers.go"
@@ -27,16 +30,19 @@ on:
       - "api/budget_bid_conversion.py"
       - "api/conversion_wizard.py"
       - "api/conversion_export_jobs.py"
+      - "api/conversion_export_lifecycle.py"
       - "api/test_budget_bid_conversion.py"
       - "api/test_conversion_wizard.py"
       - "api/test_conversion_export_jobs.py"
+      - "api/test_conversion_export_lifecycle.py"
       - "api/app.py"
       - "pcces-go/internal/storage/sqlite/budget_bid_conversion*"
       - "pcces-go/internal/storage/sqlite/conversion_wizard*"
-      - "pcces-go/internal/storage/sqlite/conversion_export_jobs*"
+      - "pcces-go/internal/storage/sqlite/conversion_export*"
       - "pcces-go/internal/storage/sqlite/migrations/0028_budget_bid_conversion.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0029_conversion_wizard.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0030_conversion_export_jobs.sql"
+      - "pcces-go/internal/storage/sqlite/migrations/0031_conversion_export_artifact_versions.sql"
       - "pcces-go/internal/platform/httpapi/budget_bid_conversion_handlers.go"
       - "pcces-go/internal/platform/httpapi/conversion_wizard_handlers.go"
       - "pcces-go/internal/platform/httpapi/conversion_export_job_handlers.go"
@@ -58,6 +64,7 @@ jobs:
           api.test_budget_bid_conversion
           api.test_conversion_wizard
           api.test_conversion_export_jobs
+          api.test_conversion_export_lifecycle
 
   go-conversion:
     runs-on: ubuntu-latest
@@ -71,6 +78,6 @@ jobs:
           go-version: "1.24.x"
           cache-dependency-path: pcces-go/go.sum
       - name: Format check
-        run: test -z "$(gofmt -l internal/storage/sqlite/budget_bid_conversion*.go internal/storage/sqlite/conversion_wizard*.go internal/storage/sqlite/conversion_export_jobs*.go internal/platform/httpapi/budget_bid_conversion_handlers.go internal/platform/httpapi/conversion_wizard_handlers.go internal/platform/httpapi/conversion_export_job_handlers.go internal/platform/httpapi/authorization_handlers.go)"
+        run: test -z "$(gofmt -l internal/storage/sqlite/budget_bid_conversion*.go internal/storage/sqlite/conversion_wizard*.go internal/storage/sqlite/conversion_export*.go internal/platform/httpapi/budget_bid_conversion_handlers.go internal/platform/httpapi/conversion_wizard_handlers.go internal/platform/httpapi/conversion_export_job_handlers.go internal/platform/httpapi/authorization_handlers.go)"
       - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
       - run: go vet ./...
