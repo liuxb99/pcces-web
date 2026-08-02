@@ -22,6 +22,7 @@ func (s *Server) authorizationRoutes() {
 	s.mux.HandleFunc("POST /api/work-contexts/{id}/cancel", s.authorizeWorkContext(s.cancelWorkContext))
 	s.decimalCoreRoutes()
 	s.budgetApprovalRoutes()
+	s.budgetCrossProjectRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
