@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/liuxb99/pcces-web/pcces-go/internal/application/autosave"
 	"github.com/liuxb99/pcces-web/pcces-go/internal/platform/httpapi"
 	"github.com/liuxb99/pcces-web/pcces-go/internal/storage/sqlite"
 )
@@ -31,6 +32,17 @@ func main() {
 		os.Exit(1)
 	}
 	defer store.Close()
+
+	settings := sqlite.NewSettingsRepository(store)
+	if item, getErr := settings.Get(ctx, "sqlite.integrity_check_on_start"); getErr == nil && item.Value == "true" {
+		if checkErr := store.IntegrityCheck(ctx); checkErr != nil {
+			logger.Error("startup SQLite integrity check failed", "error", checkErr)
+			os.Exit(1)
+		}
+	}
+
+	autosaveService := autosave.New(logger, store)
+	go autosaveService.Run(ctx)
 
 	server := &http.Server{
 		Addr:              listenAddr,
