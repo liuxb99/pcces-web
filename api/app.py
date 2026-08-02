@@ -11,6 +11,7 @@ from api.budget_approval_guard import install_budget_approval_guard
 from api.budget_calculation_trace import BudgetTraceService, build_budget_trace_blueprint
 from api.budget_decimal import BudgetDecimalService, build_budget_decimal_blueprint
 from api.budget_lock_guard import install_budget_lock_guard
+from api.budget_validation import BudgetValidationService, build_budget_validation_blueprint
 from api.budget_versioning import BudgetVersionService, build_budget_version_blueprint
 from api.index import SessionLocal, app, decode_token, engine
 from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
@@ -28,7 +29,6 @@ from api.work_context import WorkContextService, build_work_context_blueprint
 
 _PUBLIC_ENDPOINTS = {"/api/health", "/api/auth/login", "/api/auth/register"}
 
-
 def resolve_user_id() -> int | None:
     auth = request.headers.get("Authorization", "")
     if not auth.startswith("Bearer "): return None
@@ -36,7 +36,6 @@ def resolve_user_id() -> int | None:
     if not payload: return None
     try: return int(payload["sub"])
     except (KeyError, TypeError, ValueError): return None
-
 
 Base.metadata.create_all(engine)
 run_migrations(engine)
@@ -50,6 +49,7 @@ persistence_service = PersistenceService(engine)
 budget_decimal_service = BudgetDecimalService(engine); budget_decimal_service.create_schema()
 budget_version_service = BudgetVersionService(engine)
 budget_approval_service = BudgetApprovalService(engine, SessionLocal, budget_version_service)
+budget_validation_service = BudgetValidationService(engine)
 resource_decimal_service = ResourceDecimalService(engine); resource_decimal_service.create_schema()
 resource_budget_lineage_service = ResourceBudgetLineageService(engine)
 resource_dependency_graph_service = ResourceDependencyGraphService(engine, SessionLocal)
@@ -80,7 +80,6 @@ install_resource_automation(app, resource_dependency_graph_service)
 install_budget_lock_guard(app, budget_version_service, SessionLocal)
 install_budget_approval_guard(app, budget_approval_service, SessionLocal)
 
-
 @app.before_request
 def enforce_canonical_authentication_and_capability():
     if request.method == "OPTIONS": return None
@@ -93,16 +92,16 @@ def enforce_canonical_authentication_and_capability():
     if not decision.allowed: return jsonify({"code":"FORBIDDEN","action_code":action_code,"reason":decision.reason,"feature_id":"P0-S3"}), 403
     return None
 
-
 if "authorization" not in app.blueprints: app.register_blueprint(build_authorization_blueprint(authorization_service, resolve_user_id))
 if "work_context" not in app.blueprints: app.register_blueprint(build_work_context_blueprint(work_context_service, resolve_user_id))
 if "recovery" not in app.blueprints: app.register_blueprint(build_recovery_blueprint(recovery_service, resolve_user_id))
 if "budget_decimal" not in app.blueprints: app.register_blueprint(build_budget_decimal_blueprint(budget_decimal_service, resolve_user_id))
 if "budget_versions" not in app.blueprints: app.register_blueprint(build_budget_version_blueprint(budget_version_service, resolve_user_id))
 if "budget_approval" not in app.blueprints: app.register_blueprint(build_budget_approval_blueprint(budget_approval_service, resolve_user_id))
+if "budget_validation" not in app.blueprints: app.register_blueprint(build_budget_validation_blueprint(budget_validation_service, resolve_user_id))
 if "resource_decimal" not in app.blueprints: app.register_blueprint(build_resource_decimal_blueprint(resource_decimal_service, resolve_user_id))
 if "resource_budget_lineage" not in app.blueprints: app.register_blueprint(build_resource_budget_lineage_blueprint(resource_budget_lineage_service, resolve_user_id))
 if "resource_dependency" not in app.blueprints: app.register_blueprint(build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
 if "budget_trace" not in app.blueprints: app.register_blueprint(build_budget_trace_blueprint(budget_trace_service, resolve_user_id))
 
-__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
+__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
