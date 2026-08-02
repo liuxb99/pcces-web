@@ -15,6 +15,8 @@ func (s *Server) mrsCatalogRoutes(){
 	s.mux.HandleFunc("GET /api/mrs/bookmarks",s.listMRSBookmarks)
 	s.mux.HandleFunc("PUT /api/mrs/analysis-recipes/{id}",s.putMRSRecipe)
 	s.mux.HandleFunc("GET /api/mrs/analysis-recipes/{id}/calculate",s.calculateMRSRecipe)
+	s.mux.HandleFunc("POST /api/mrs/code/validate",s.validateMRSCode)
+	s.mux.HandleFunc("POST /api/mrs/code/fit",s.fitMRSCode)
 }
 
 func (s *Server) getMRSCatalogItem(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewMRSCatalogRepository(s.store).GetItem(r.Context(),r.PathValue("id"));respond(w,item,err)}
@@ -29,3 +31,5 @@ func (s *Server) putMRSBookmark(w http.ResponseWriter,r *http.Request){var body 
 func (s *Server) listMRSBookmarks(w http.ResponseWriter,r *http.Request){q:=r.URL.Query();items,err:=sqlite.NewMRSCatalogRepository(s.store).ListBookmarks(r.Context(),q.Get("actor_id"),q.Get("q"),q.Get("category"));respond(w,items,err)}
 func (s *Server) putMRSRecipe(w http.ResponseWriter,r *http.Request){var body struct{Code string `json:"code"`;Name string `json:"name"`;Unit *string `json:"unit"`;PriceScale int `json:"price_scale"`;RowVersion int64 `json:"row_version"`;Components []sqlite.MRSAnalysisComponent `json:"components"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};item,err:=sqlite.NewMRSCatalogRepository(s.store).SaveRecipe(r.Context(),r.PathValue("id"),body.Code,body.Name,body.Unit,body.PriceScale,body.Components,body.RowVersion);respond(w,item,err)}
 func (s *Server) calculateMRSRecipe(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewMRSCatalogRepository(s.store).CalculateRecipe(r.Context(),r.PathValue("id"));respond(w,item,err)}
+func (s *Server) validateMRSCode(w http.ResponseWriter,r *http.Request){var body struct{Code string `json:"code"`;Unit string `json:"unit"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};respond(w,sqlite.ValidateMRSCode(body.Code,body.Unit),nil)}
+func (s *Server) fitMRSCode(w http.ResponseWriter,r *http.Request){var body sqlite.MRSCodeFitRequest;if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};respond(w,sqlite.FitMRSCode(body),nil)}
