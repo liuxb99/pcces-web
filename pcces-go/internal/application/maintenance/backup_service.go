@@ -11,6 +11,8 @@ import (
 	"github.com/liuxb99/pcces-web/pcces-go/internal/storage/sqlite"
 )
 
+const backupPolicyRefreshInterval = time.Minute
+
 // BackupService creates periodic SQLite backups and enforces retention.
 type BackupService struct {
 	logger   *slog.Logger
@@ -26,12 +28,20 @@ func NewBackupService(logger *slog.Logger, store *sqlite.Store) *BackupService {
 }
 
 func (s *BackupService) Run(ctx context.Context) {
+	lastRun := time.Now()
 	for {
 		enabled, interval, directory, keep := s.policy(ctx)
-		wait := interval
-		if !enabled {
-			wait = 30 * time.Minute
+		elapsed := time.Since(lastRun)
+		if enabled && elapsed >= interval {
+			if _, err := s.RunOnce(ctx, directory, keep); err != nil {
+				s.logger.Error("automatic SQLite backup failed", "error", err)
+			} else {
+				lastRun = time.Now()
+			}
+			continue
 		}
+
+		wait := nextBackupDelay(enabled, interval, elapsed, backupPolicyRefreshInterval)
 		timer := time.NewTimer(wait)
 		select {
 		case <-ctx.Done():
@@ -39,13 +49,24 @@ func (s *BackupService) Run(ctx context.Context) {
 			return
 		case <-timer.C:
 		}
-		if !enabled {
-			continue
-		}
-		if _, err := s.RunOnce(ctx, directory, keep); err != nil {
-			s.logger.Error("automatic SQLite backup failed", "error", err)
-		}
 	}
+}
+
+func nextBackupDelay(enabled bool, interval, elapsed, refreshInterval time.Duration) time.Duration {
+	if refreshInterval <= 0 {
+		refreshInterval = backupPolicyRefreshInterval
+	}
+	if !enabled {
+		return refreshInterval
+	}
+	remaining := interval - elapsed
+	if remaining <= 0 {
+		return 0
+	}
+	if remaining < refreshInterval {
+		return remaining
+	}
+	return refreshInterval
 }
 
 func (s *BackupService) RunOnce(ctx context.Context, directory string, keep int) (sqlite.BackupInfo, error) {
