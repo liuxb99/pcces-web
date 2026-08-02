@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
 from api.budget_decimal import BudgetDecimalService, budget_items_decimal
 from api.models import BudgetItem, Resource, ResourceBreakdownItem
@@ -49,6 +49,13 @@ class LegacyDecimalAdapter:
                 })
                 if status >= 400:
                     raise RuntimeError(result)
+                # Early Decimal adapters used the bare numeric ID.  Once the
+                # canonical prefixed row exists, retire that obsolete shadow so
+                # list/recalculation cannot see the same Legacy item twice.
+                with self.budget_service.engine.begin() as conn:
+                    conn.execute(delete(budget_items_decimal).where(
+                        budget_items_decimal.c.id == str(item.id)
+                    ))
                 migrated["budget_items"] += 1
             for resource in db.query(Resource).all():
                 result, status = self.resource_service.save_resource(str(resource.id), {
