@@ -23,6 +23,7 @@ func (s *Server) authorizationRoutes() {
 	s.decimalCoreRoutes()
 	s.budgetApprovalRoutes()
 	s.budgetCrossProjectRoutes()
+	s.bidLifecycleRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
