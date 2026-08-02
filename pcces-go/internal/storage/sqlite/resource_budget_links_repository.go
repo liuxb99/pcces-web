@@ -6,25 +6,15 @@ import (
 )
 
 type ProjectResourceReference struct {
-	LinkID string `json:"link_id"`
-	ProjectCode string `json:"project_code"`
-	ResourceID string `json:"resource_id"`
-	BudgetItemID string `json:"budget_item_id"`
-	ItemType string `json:"item_type"`
-	Quantity string `json:"quantity"`
-	UnitPrice string `json:"unit_price"`
-	Amount string `json:"amount"`
-	RowVersion int64 `json:"row_version"`
-	DeepLink string `json:"deep_link"`
+	LinkID, ProjectCode, ResourceID, BudgetItemID string
+	ItemType, Quantity, UnitPrice, Amount          string
+	RowVersion                                    int64
+	DeepLink                                      string
 }
 
 type ProjectResourceSummary struct {
-	ResourceID string `json:"resource_id"`
-	Code string `json:"code"`
-	Name string `json:"name"`
-	UnitPrice string `json:"unit_price"`
-	DeepLink string `json:"deep_link"`
-	ReferenceCount int64 `json:"reference_count"`
+	ResourceID, Code, Name, UnitPrice, DeepLink string
+	ReferenceCount                             int64
 }
 
 type ProjectResourcePage struct {
