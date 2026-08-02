@@ -18,6 +18,7 @@ from api.budget_submission_gate import install_budget_submission_gate
 from api.budget_validation import BudgetValidationService, build_budget_validation_blueprint
 from api.budget_versioning import BudgetVersionService, build_budget_version_blueprint
 from api.conversion_export_jobs import ConversionExportJobService, build_conversion_export_job_blueprint
+from api.conversion_long_jobs import ConversionLongJobService, build_conversion_long_job_blueprint
 from api.conversion_wizard import ConversionWizardService, build_conversion_wizard_blueprint
 from api.cost_structure import CostStructureService, build_cost_structure_blueprint
 from api.cost_structure_calculation import build_cost_structure_calculation_blueprint
@@ -82,6 +83,7 @@ bid_lifecycle_service = BidLifecycleService(engine)
 budget_bid_conversion_service = BudgetBidConversionService(engine)
 conversion_wizard_service = ConversionWizardService(engine)
 conversion_export_job_service = ConversionExportJobService(engine)
+conversion_long_job_service = ConversionLongJobService(engine)
 legacy_exchange_adapter_service = LegacyExchangeAdapterService(engine)
 mrs_catalog_service = MRSCatalogService(engine)
 mrs_code_service = MRSCodeService()
@@ -162,6 +164,7 @@ register("bid_lifecycle", build_bid_lifecycle_blueprint(bid_lifecycle_service, r
 register("budget_bid_conversion", build_budget_bid_conversion_blueprint(budget_bid_conversion_service, resolve_user_id))
 register("conversion_wizard", build_conversion_wizard_blueprint(conversion_wizard_service, resolve_user_id))
 register("conversion_export_jobs", build_conversion_export_job_blueprint(conversion_export_job_service, resolve_user_id))
+register("conversion_long_jobs", build_conversion_long_job_blueprint(conversion_long_job_service, resolve_user_id))
 register("legacy_exchange_adapters", build_legacy_exchange_adapter_blueprint(legacy_exchange_adapter_service, resolve_user_id))
 register("mrs_catalog", build_mrs_catalog_blueprint(mrs_catalog_service, resolve_user_id))
 register("mrs_code", build_mrs_code_blueprint(mrs_code_service, resolve_user_id))
@@ -187,10 +190,11 @@ __all__ = [
     "app", "authorization_service", "work_context_service", "recovery_service", "persistence_service",
     "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service",
     "budget_cross_project_service", "bid_lifecycle_service", "budget_bid_conversion_service",
-    "conversion_wizard_service", "conversion_export_job_service", "legacy_exchange_adapter_service",
-    "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service", "mrs_intelligence_service",
-    "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service", "resource_decimal_service",
-    "resource_budget_lineage_service", "resource_budget_link_service", "resource_dependency_graph_service",
-    "budget_trace_service", "cost_structure_service", "cost_structure_detail_service",
-    "project_cost_structure_run_service", "cost_structure_run_version_service", "resolve_user_id",
+    "conversion_wizard_service", "conversion_export_job_service", "conversion_long_job_service",
+    "legacy_exchange_adapter_service", "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service",
+    "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service",
+    "resource_decimal_service", "resource_budget_lineage_service", "resource_budget_link_service",
+    "resource_dependency_graph_service", "budget_trace_service", "cost_structure_service",
+    "cost_structure_detail_service", "project_cost_structure_run_service", "cost_structure_run_version_service",
+    "resolve_user_id",
 ]
