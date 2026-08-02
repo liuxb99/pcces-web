@@ -2,6 +2,7 @@ package sqlite
 
 import (
 	"context"
+	"database/sql"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -15,13 +16,13 @@ type authorizationGoldenFixture struct {
 }
 
 type authorizationGoldenCase struct {
-	Name              string `json:"name"`
-	ActionCode        string `json:"action_code"`
-	ModuleEnabled     bool   `json:"module_enabled"`
-	ModuleEntitled    bool   `json:"module_entitled"`
-	FunctionEnabled   bool   `json:"function_enabled"`
-	FunctionGranted   bool   `json:"function_granted"`
-	Expected          struct {
+	Name            string `json:"name"`
+	ActionCode      string `json:"action_code"`
+	ModuleEnabled   bool   `json:"module_enabled"`
+	ModuleEntitled  bool   `json:"module_entitled"`
+	FunctionEnabled bool   `json:"function_enabled"`
+	FunctionGranted bool   `json:"function_granted"`
+	Expected        struct {
 		Allowed      bool   `json:"allowed"`
 		Reason       string `json:"reason"`
 		ModuleCode   string `json:"module_code"`
@@ -100,18 +101,14 @@ func resetAuthorizationFixture(t *testing.T, ctx context.Context, store *Store, 
 	}
 
 	var moduleCode string
-	var functionCode *string
-	var nullableFunctionCode interface{}
+	var functionCode sql.NullString
 	err := store.DB().QueryRowContext(ctx, `SELECT module_code, function_code FROM actions WHERE code = ?`, testCase.ActionCode).
-		Scan(&moduleCode, &nullableFunctionCode)
-	if err != nil {
+		Scan(&moduleCode, &functionCode)
+	if err == sql.ErrNoRows {
 		return // Unknown actions are intentionally evaluated without setup.
 	}
-	if nullableFunctionCode != nil {
-		value, ok := nullableFunctionCode.(string)
-		if ok {
-			functionCode = &value
-		}
+	if err != nil {
+		t.Fatalf("load action %s: %v", testCase.ActionCode, err)
 	}
 
 	if _, err := store.DB().ExecContext(ctx, `UPDATE modules SET enabled = ? WHERE code = ?`, boolToInt(testCase.ModuleEnabled), moduleCode); err != nil {
@@ -123,15 +120,15 @@ func resetAuthorizationFixture(t *testing.T, ctx context.Context, store *Store, 
 	); err != nil {
 		t.Fatalf("set module entitlement: %v", err)
 	}
-	if functionCode == nil {
+	if !functionCode.Valid {
 		return
 	}
-	if _, err := store.DB().ExecContext(ctx, `UPDATE function_codes SET enabled = ? WHERE code = ?`, boolToInt(testCase.FunctionEnabled), *functionCode); err != nil {
+	if _, err := store.DB().ExecContext(ctx, `UPDATE function_codes SET enabled = ? WHERE code = ?`, boolToInt(testCase.FunctionEnabled), functionCode.String); err != nil {
 		t.Fatalf("set function state: %v", err)
 	}
 	if _, err := store.DB().ExecContext(ctx,
 		`INSERT INTO actor_function_codes(actor_id, function_code, granted) VALUES(?,?,?)`,
-		actorID, *functionCode, boolToInt(testCase.FunctionGranted),
+		actorID, functionCode.String, boolToInt(testCase.FunctionGranted),
 	); err != nil {
 		t.Fatalf("set function grant: %v", err)
 	}
