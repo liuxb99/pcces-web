@@ -20,6 +20,7 @@ func (s *Server) mrsCatalogRoutes(){
 	s.mux.HandleFunc("POST /api/mrs/code/validate",s.validateMRSCode)
 	s.mux.HandleFunc("POST /api/mrs/code/fit",s.fitMRSCode)
 	s.resourceOperationRoutes()
+	s.resourceProjectReferenceRoutes()
 }
 
 func (s *Server) getMRSCatalogItem(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewMRSCatalogRepository(s.store).GetItem(r.Context(),r.PathValue("id"));respond(w,item,err)}
