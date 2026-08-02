@@ -7,7 +7,9 @@ from sqlalchemy import select
 
 from api.authorization import AuthorizationService, build_authorization_blueprint
 from api.index import app, decode_token, engine
+from api.migrations import run_migrations
 from api.models import Base, User
+from api.persistence_contract import PersistenceService
 from api.recovery import RecoveryService, build_recovery_blueprint
 from api.route_policy import action_for_request, initialize_authorization
 from api.work_context import WorkContextService, build_work_context_blueprint
@@ -29,14 +31,14 @@ def resolve_user_id() -> int | None:
 
 
 Base.metadata.create_all(engine)
+run_migrations(engine)
 authorization_service = AuthorizationService(engine)
 with engine.connect() as connection:
     existing_user_ids = [row[0] for row in connection.execute(select(User.id))]
 initialize_authorization(authorization_service, existing_user_ids)
 work_context_service = WorkContextService(engine)
-work_context_service.create_schema()
 recovery_service = RecoveryService(engine, work_context_service)
-recovery_service.create_schema()
+persistence_service = PersistenceService(engine)
 
 
 @app.before_request
@@ -65,5 +67,6 @@ if "recovery" not in app.blueprints:
     app.register_blueprint(build_recovery_blueprint(recovery_service, resolve_user_id))
 
 __all__ = [
-    "app", "authorization_service", "work_context_service", "recovery_service", "resolve_user_id"
+    "app", "authorization_service", "work_context_service", "recovery_service",
+    "persistence_service", "resolve_user_id"
 ]
