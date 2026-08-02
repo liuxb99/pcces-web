@@ -3,9 +3,11 @@ name: Decimal Core Integration
 on:
   push:
     paths:
+      - "api/bid_*.py"
       - "api/budget_*.py"
       - "api/resource_*.py"
       - "api/legacy_*.py"
+      - "api/test_bid_*.py"
       - "api/test_budget_*.py"
       - "api/test_resource_*.py"
       - "api/test_legacy_*.py"
@@ -15,8 +17,10 @@ on:
       - "web-pcces/frontend/src/pages/BudgetVersionsPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetApprovalPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetValidationPage.tsx"
+      - "web-pcces/frontend/src/pages/BidLifecyclePage.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
+      - "pcces-go/internal/storage/sqlite/bid_*"
       - "pcces-go/internal/storage/sqlite/budget_*"
       - "pcces-go/internal/storage/sqlite/resource_*"
       - "pcces-go/internal/storage/sqlite/dependency_*"
@@ -28,15 +32,19 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0013_*"
       - "pcces-go/internal/storage/sqlite/migrations/0014_*"
       - "pcces-go/internal/storage/sqlite/migrations/0015_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0016_*"
+      - "pcces-go/internal/platform/httpapi/*bid*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
       - ".github/workflows/decimal-core-integration.yml"
   pull_request:
     paths:
+      - "api/bid_*.py"
       - "api/budget_*.py"
       - "api/resource_*.py"
       - "api/legacy_*.py"
+      - "api/test_bid_*.py"
       - "api/test_budget_*.py"
       - "api/test_resource_*.py"
       - "api/test_legacy_*.py"
@@ -46,8 +54,10 @@ on:
       - "web-pcces/frontend/src/pages/BudgetVersionsPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetApprovalPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetValidationPage.tsx"
+      - "web-pcces/frontend/src/pages/BidLifecyclePage.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
+      - "pcces-go/internal/storage/sqlite/bid_*"
       - "pcces-go/internal/storage/sqlite/budget_*"
       - "pcces-go/internal/storage/sqlite/resource_*"
       - "pcces-go/internal/storage/sqlite/dependency_*"
@@ -59,6 +69,8 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0013_*"
       - "pcces-go/internal/storage/sqlite/migrations/0014_*"
       - "pcces-go/internal/storage/sqlite/migrations/0015_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0016_*"
+      - "pcces-go/internal/platform/httpapi/*bid*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
@@ -78,6 +90,7 @@ jobs:
         run: >-
           python -m unittest
           api.test_decimal_math
+          api.test_bid_lifecycle
           api.test_budget_decimal
           api.test_budget_calculation_trace
           api.test_budget_versioning
