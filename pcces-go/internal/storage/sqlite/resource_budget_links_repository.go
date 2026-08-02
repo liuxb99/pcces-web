@@ -6,15 +6,25 @@ import (
 )
 
 type ProjectResourceReference struct {
-	LinkID, ProjectCode, ResourceID, BudgetItemID string
-	ItemType, Quantity, UnitPrice, Amount          string
-	RowVersion                                    int64
-	DeepLink                                      string
+	LinkID string `json:"link_id"`
+	ProjectCode string `json:"project_code"`
+	ResourceID string `json:"resource_id"`
+	BudgetItemID string `json:"budget_item_id"`
+	ItemType string `json:"item_type"`
+	Quantity string `json:"quantity"`
+	UnitPrice string `json:"unit_price"`
+	Amount string `json:"amount"`
+	RowVersion int64 `json:"row_version"`
+	DeepLink string `json:"deep_link"`
 }
 
 type ProjectResourceSummary struct {
-	ResourceID, Code, Name, UnitPrice, DeepLink string
-	ReferenceCount                             int64
+	ResourceID string `json:"resource_id"`
+	Code string `json:"code"`
+	Name string `json:"name"`
+	UnitPrice string `json:"unit_price"`
+	DeepLink string `json:"deep_link"`
+	ReferenceCount int64 `json:"reference_count"`
 }
 
 type ProjectResourcePage struct {
@@ -55,7 +65,7 @@ func (r *ResourceBudgetLineageRepository) ListResourceReferences(ctx context.Con
 	limit,offset=normalizeResourceLinkPage(limit,offset)
 	var total int64
 	if err:=r.store.db.QueryRowContext(ctx,`SELECT COUNT(*) FROM resource_budget_links WHERE project_code=? AND resource_id=?`,projectCode,resourceID).Scan(&total);err!=nil{return ProjectResourceReferencePage{},err}
-	rows,err:=r.store.db.QueryContext(ctx,`SELECT l.id,l.project_code,l.resource_id,l.budget_item_id,b.item_type,b.quantity,b.unit_price,b.amount,b.row_version FROM resource_budget_links l JOIN budget_items_decimal b ON b.id=l.budget_item_id WHERE l.project_code=? AND l.resource_id=? ORDER BY b.id LIMIT ? OFFSET ?`,projectCode,resourceID,limit,offset)
+	rows,err:=r.store.db.QueryContext(ctx,`SELECT l.id,l.project_code,l.resource_id,l.budget_item_id,b.kind,b.quantity,b.unit_price,b.amount,b.row_version FROM resource_budget_links l JOIN budget_items_decimal b ON b.id=l.budget_item_id WHERE l.project_code=? AND l.resource_id=? ORDER BY b.id LIMIT ? OFFSET ?`,projectCode,resourceID,limit,offset)
 	if err!=nil{return ProjectResourceReferencePage{},err};defer rows.Close();items:=make([]ProjectResourceReference,0)
 	for rows.Next(){var v ProjectResourceReference;if err=rows.Scan(&v.LinkID,&v.ProjectCode,&v.ResourceID,&v.BudgetItemID,&v.ItemType,&v.Quantity,&v.UnitPrice,&v.Amount,&v.RowVersion);err!=nil{return ProjectResourceReferencePage{},err};v.DeepLink="/app/budget/"+projectCode+"?item="+v.BudgetItemID;items=append(items,v)}
 	return ProjectResourceReferencePage{Items:items,Total:total,Limit:limit,Offset:offset},rows.Err()
