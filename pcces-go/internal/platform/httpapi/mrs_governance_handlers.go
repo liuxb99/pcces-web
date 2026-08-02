@@ -9,6 +9,7 @@ import (
 
 func (s *Server) mrsGovernanceRoutes(){
 	s.mux.HandleFunc("POST /api/mrs/catalog-releases",s.createMRSCatalogRelease)
+	s.mux.HandleFunc("GET /api/mrs/catalog-releases",s.listMRSCatalogReleases)
 	s.mux.HandleFunc("GET /api/mrs/catalog-releases/{id}",s.getMRSCatalogRelease)
 	s.mux.HandleFunc("POST /api/mrs/catalog-releases/{id}/{command}",s.transitionMRSCatalogRelease)
 	s.mux.HandleFunc("GET /api/mrs/catalog/{id}/validity",s.getMRSValidity)
@@ -16,8 +17,10 @@ func (s *Server) mrsGovernanceRoutes(){
 	s.mux.HandleFunc("GET /api/mrs/expiry-alerts",s.getMRSExpiryAlerts)
 	s.mux.HandleFunc("GET /api/mrs/analysis-recipes/{id}/freeze",s.getMRSRecipeFreeze)
 	s.mux.HandleFunc("PUT /api/mrs/analysis-recipes/{id}/freeze",s.putMRSRecipeFreeze)
+	s.mux.HandleFunc("GET /api/mrs/governance-audit",s.listMRSGovernanceAudit)
 }
 func (s *Server) createMRSCatalogRelease(w http.ResponseWriter,r *http.Request){var body struct{ID string `json:"id"`;Label string `json:"label"`;ActorID string `json:"actor_id"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};if body.ID==""{body.ID="mrsrel-"+time.Now().UTC().Format("20060102150405.000000000")};item,err:=sqlite.NewMRSGovernanceRepository(s.store).CreateRelease(r.Context(),body.ID,body.Label,body.ActorID);respond(w,item,err)}
+func (s *Server) listMRSCatalogReleases(w http.ResponseWriter,r *http.Request){items,err:=sqlite.NewMRSGovernanceRepository(s.store).ListReleases(r.Context());respond(w,items,err)}
 func (s *Server) getMRSCatalogRelease(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewMRSGovernanceRepository(s.store).GetRelease(r.Context(),r.PathValue("id"));respond(w,item,err)}
 func (s *Server) transitionMRSCatalogRelease(w http.ResponseWriter,r *http.Request){var body struct{ActorID string `json:"actor_id"`;Comment string `json:"comment"`;RowVersion int64 `json:"row_version"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};item,err:=sqlite.NewMRSGovernanceRepository(s.store).TransitionRelease(r.Context(),r.PathValue("id"),r.PathValue("command"),body.ActorID,body.Comment,body.RowVersion);respond(w,item,err)}
 func (s *Server) getMRSValidity(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewMRSGovernanceRepository(s.store).GetValidity(r.Context(),r.PathValue("id"));respond(w,item,err)}
@@ -25,3 +28,4 @@ func (s *Server) putMRSValidity(w http.ResponseWriter,r *http.Request){var body 
 func (s *Server) getMRSExpiryAlerts(w http.ResponseWriter,r *http.Request){items,err:=sqlite.NewMRSGovernanceRepository(s.store).ExpiryAlerts(r.Context(),r.URL.Query().Get("as_of"));respond(w,items,err)}
 func (s *Server) getMRSRecipeFreeze(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewMRSGovernanceRepository(s.store).GetRecipeFreeze(r.Context(),r.PathValue("id"));respond(w,item,err)}
 func (s *Server) putMRSRecipeFreeze(w http.ResponseWriter,r *http.Request){var body struct{VersionID string `json:"version_id"`;Frozen bool `json:"frozen"`;Reason *string `json:"reason"`;ActorID string `json:"actor_id"`;RowVersion int64 `json:"row_version"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};item,err:=sqlite.NewMRSGovernanceRepository(s.store).SetRecipeFreeze(r.Context(),r.PathValue("id"),body.VersionID,body.Frozen,body.Reason,body.ActorID,body.RowVersion);respond(w,item,err)}
+func (s *Server) listMRSGovernanceAudit(w http.ResponseWriter,r *http.Request){items,err:=sqlite.NewMRSGovernanceRepository(s.store).ListAudit(r.Context());respond(w,items,err)}
