@@ -31,6 +31,7 @@ func (s *Server) authorizationRoutes() {
 	s.costStructureRoutes()
 	s.costStructureDetailRoutes()
 	s.budgetBidConversionRoutes()
+	s.conversionWizardRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
