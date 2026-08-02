@@ -27,6 +27,7 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0012_*"
       - "pcces-go/internal/storage/sqlite/migrations/0013_*"
       - "pcces-go/internal/storage/sqlite/migrations/0014_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0015_*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
@@ -57,6 +58,7 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0012_*"
       - "pcces-go/internal/storage/sqlite/migrations/0013_*"
       - "pcces-go/internal/storage/sqlite/migrations/0014_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0015_*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
@@ -81,6 +83,7 @@ jobs:
           api.test_budget_versioning
           api.test_budget_approval
           api.test_budget_validation
+          api.test_budget_cross_project_sync
           api.test_resource_decimal
           api.test_resource_budget_lineage
           api.test_resource_dependency_graph
