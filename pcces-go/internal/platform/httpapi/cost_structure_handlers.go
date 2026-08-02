@@ -13,6 +13,8 @@ func (s *Server) costStructureRoutes() {
 	s.mux.HandleFunc("GET /api/cost-structures/projects/{projectCode}", s.getProjectCostStructure)
 	s.mux.HandleFunc("PUT /api/cost-structures/projects/{projectCode}", s.putProjectCostStructure)
 	s.mux.HandleFunc("POST /api/cost-structures/calculate", s.calculateCostStructure)
+	s.mux.HandleFunc("POST /api/cost-structures/projects/{projectCode}/recalculate", s.recalculateProjectCostStructure)
+	s.mux.HandleFunc("GET /api/cost-structures/runs/{runID}", s.getProjectCostStructureRun)
 }
 
 func (s *Server) listCostStructureTypes(w http.ResponseWriter, r *http.Request) {
