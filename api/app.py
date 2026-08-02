@@ -8,7 +8,8 @@ from sqlalchemy import select
 from api.authorization import AuthorizationService, build_authorization_blueprint
 from api.budget_calculation_trace import BudgetTraceService, build_budget_trace_blueprint
 from api.budget_decimal import BudgetDecimalService, build_budget_decimal_blueprint
-from api.index import app, decode_token, engine
+from api.index import SessionLocal, app, decode_token, engine
+from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
 from api.migrations import run_migrations
 from api.models import Base, User
 from api.persistence_contract import PersistenceService
@@ -47,6 +48,10 @@ budget_decimal_service.create_schema()
 resource_decimal_service = ResourceDecimalService(engine)
 resource_decimal_service.create_schema()
 budget_trace_service = BudgetTraceService(engine)
+
+# Preserve the existing public URLs and React client contract while routing all
+# legacy budget CRUD/recalculation through the exact Decimal shadow tables.
+install_legacy_budget_bridge(app, engine, SessionLocal)
 
 
 @app.before_request
