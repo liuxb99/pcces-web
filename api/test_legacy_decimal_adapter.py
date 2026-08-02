@@ -1,8 +1,8 @@
 import unittest
 from types import SimpleNamespace
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, select
 
-from api.budget_decimal import BudgetDecimalService
+from api.budget_decimal import BudgetDecimalService, budget_items_decimal
 from api.legacy_decimal_adapter import LegacyDecimalAdapter
 from api.models import BudgetItem, Resource, ResourceBreakdownItem
 from api.resource_decimal import ResourceDecimalService
@@ -34,8 +34,28 @@ class LegacyDecimalAdapterTests(unittest.TestCase):
         second = adapter.migrate_project(10, "P10")
         self.assertEqual(first, {"budget_items":1,"resources":1,"breakdowns":1})
         self.assertEqual(second, first)
-        self.assertEqual(len(budget.list_project("P10")), 1)
+        items = budget.list_project("P10")
+        self.assertEqual(1, len(items))
+        self.assertEqual("legacy-1", items[0]["id"])
         self.assertEqual(resource.get_resource("2")["unit_price"], "7.0000")
+
+    def test_adapter_retires_pre_bridge_numeric_shadow(self):
+        engine = create_engine("sqlite+pysqlite:///:memory:", future=True)
+        budget = BudgetDecimalService(engine); budget.create_schema()
+        resource = ResourceDecimalService(engine); resource.create_schema()
+        result, status = budget.save("1", {
+            "project_code":"P10", "name":"old", "kind":"L",
+            "quantity":"1", "unit_price":"2", "row_version":0,
+        })
+        self.assertEqual(200, status)
+        rows = {
+            BudgetItem: [SimpleNamespace(id=1, project_id=10, parent_id=None, item_no="001", c_name="工項", kind="L", quantity=1.0, unit_price=2.0, decimal_qty=2, decimal_price=2, decimal_amount=2)],
+            Resource: [], ResourceBreakdownItem: [],
+        }
+        LegacyDecimalAdapter(lambda: FakeSession(rows), budget, resource).migrate_project(10, "P10")
+        with engine.connect() as conn:
+            ids = [row[0] for row in conn.execute(select(budget_items_decimal.c.id)).all()]
+        self.assertEqual(["legacy-1"], ids)
 
 
 if __name__ == "__main__": unittest.main()
