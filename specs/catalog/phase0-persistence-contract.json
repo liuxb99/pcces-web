@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "feature_id": "P0-S2-P0-G2",
+  "decimal": {
+    "precision": 28,
+    "maximum_scale": 8,
+    "rounding_mode": "HALF_UP",
+    "transport": "canonical decimal string",
+    "web_storage": "NUMERIC(28,8)",
+    "go_sqlite_storage": "canonical decimal TEXT"
+  },
+  "required_columns": ["created_at", "updated_at", "row_version"],
+  "audit": {
+    "append_only": true,
+    "required_fields": ["actor_id", "feature_id", "action_code", "event_type", "resource_type", "resource_id", "payload", "created_at"]
+  },
+  "optimistic_locking": {
+    "initial_row_version": 1,
+    "successful_update_increment": 1,
+    "stale_update_result": "CONFLICT"
+  }
+}
