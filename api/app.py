@@ -23,7 +23,7 @@ from api.migrations import run_migrations
 from api.models import Base, User
 from api.mrs_catalog import MRSCatalogService, build_mrs_catalog_blueprint
 from api.mrs_exchange import MRSExchangeService, build_mrs_exchange_blueprint
-from api.mrs_governance import MRSGovernanceService, build_mrs_governance_blueprint
+from api.mrs_governance_paging import MRSGovernanceService, build_mrs_governance_blueprint
 from api.mrs_intelligence import MRSIntelligenceService, build_mrs_intelligence_blueprint
 from api.mrs_operations import MRSOperationsService, build_mrs_operations_blueprint
 from api.persistence_contract import PersistenceService
