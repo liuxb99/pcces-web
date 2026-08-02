@@ -1,0 +1,85 @@
+name: Phase 5-9 Completion
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "api/contract_*.py"
+      - "api/report_center.py"
+      - "api/admin_console.py"
+      - "api/test_contract_*.py"
+      - "api/test_report_center.py"
+      - "api/test_admin_console.py"
+      - "api/app.py"
+      - "pcces-go/internal/storage/sqlite/contract_*"
+      - "pcces-go/internal/storage/sqlite/report_admin.go"
+      - "pcces-go/internal/storage/sqlite/migrations/004*.sql"
+      - "pcces-go/internal/platform/httpapi/contract_*"
+      - "pcces-go/internal/platform/httpapi/report_admin_handlers.go"
+      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
+      - "web-pcces/frontend/src/api/roadmapClient.ts"
+      - "docs/development/phase5-9-traceability-matrix.md"
+      - "scripts/phase9_gate.py"
+      - ".github/workflows/phase5-9-completion.yml"
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      require_complete:
+        description: Fail unless every Phase 5-9 row is VERIFIED
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  web-domain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: >-
+          python -m unittest
+          api.test_contract_core
+          api.test_contract_allocation
+          api.test_contract_governance
+          api.test_contract_change_governance
+          api.test_contract_execution
+          api.test_report_center
+          api.test_admin_console
+      - run: python scripts/phase9_gate.py
+      - if: ${{ inputs.require_complete == true }}
+        run: python scripts/phase9_gate.py --require-complete
+
+  local-go:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pcces-go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache-dependency-path: pcces-go/go.sum
+      - name: Format check
+        run: test -z "$(gofmt -l internal/storage/sqlite/contract_*.go internal/storage/sqlite/report_admin.go internal/platform/httpapi/contract_*_handlers.go internal/platform/httpapi/report_admin_handlers.go internal/platform/httpapi/authorization_handlers.go)"
+      - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
+      - run: go vet ./...
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web-pcces/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web-pcces/frontend/package-lock.json
+      - run: npm ci
+      - run: npm run build
