@@ -49,9 +49,20 @@ resource_decimal_service = ResourceDecimalService(engine)
 resource_decimal_service.create_schema()
 budget_trace_service = BudgetTraceService(engine)
 
-# Preserve the existing public URLs and React client contract while routing all
-# legacy budget CRUD/recalculation through the exact Decimal shadow tables.
+# Preserve existing URLs while routing legacy budget operations through exact
+# Decimal persistence.  The original decorator injected user_id; replacement
+# view functions therefore receive the canonical authenticated actor explicitly.
 install_legacy_budget_bridge(app, engine, SessionLocal)
+for _endpoint in ("create_budget_item", "get_budget_list", "get_budget_tree", "recalc_budget"):
+    _view = app.view_functions[_endpoint]
+    app.view_functions[_endpoint] = (
+        lambda project_id, _view=_view: _view(project_id, resolve_user_id())
+    )
+for _endpoint in ("update_budget_item", "delete_budget_item", "move_budget_item"):
+    _view = app.view_functions[_endpoint]
+    app.view_functions[_endpoint] = (
+        lambda project_id, item_id, _view=_view: _view(project_id, item_id, resolve_user_id())
+    )
 
 
 @app.before_request
