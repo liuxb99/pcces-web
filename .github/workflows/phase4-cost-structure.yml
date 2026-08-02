@@ -4,10 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "api/cost_structure.py"
-      - "api/cost_structure_details.py"
-      - "api/test_cost_structure.py"
-      - "api/test_cost_structure_details.py"
+      - "api/cost_structure*.py"
+      - "api/test_cost_structure*.py"
       - "api/app.py"
       - "pcces-go/internal/storage/sqlite/cost_structure*"
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
@@ -17,10 +15,8 @@ on:
       - ".github/workflows/phase4-cost-structure.yml"
   pull_request:
     paths:
-      - "api/cost_structure.py"
-      - "api/cost_structure_details.py"
-      - "api/test_cost_structure.py"
-      - "api/test_cost_structure_details.py"
+      - "api/cost_structure*.py"
+      - "api/test_cost_structure*.py"
       - "api/app.py"
       - "pcces-go/internal/storage/sqlite/cost_structure*"
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
@@ -39,7 +35,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python -m unittest api.test_cost_structure api.test_cost_structure_details
+      - run: python -m unittest api.test_cost_structure api.test_cost_structure_details api.test_cost_structure_calculation
 
   go-cost-structure:
     runs-on: ubuntu-latest
