@@ -10,6 +10,7 @@ func (s *Server) mrsCatalogRoutes(){
 	s.mux.HandleFunc("GET /api/mrs/catalog/{id}",s.getMRSCatalogItem)
 	s.mux.HandleFunc("PUT /api/mrs/catalog/{id}",s.putMRSCatalogItem)
 	s.mux.HandleFunc("GET /api/mrs/catalog/{id}/price-history",s.listMRSPriceHistory)
+	s.mux.HandleFunc("POST /api/mrs/catalog/{id}/price-history/{historyID}/apply",s.applyMRSPriceHistory)
 	s.mux.HandleFunc("GET /api/mrs/catalog/{id}/bookmark",s.getMRSBookmark)
 	s.mux.HandleFunc("PUT /api/mrs/catalog/{id}/bookmark",s.putMRSBookmark)
 	s.mux.HandleFunc("GET /api/mrs/bookmarks",s.listMRSBookmarks)
@@ -27,6 +28,7 @@ func (s *Server) putMRSCatalogItem(w http.ResponseWriter,r *http.Request){
 	item,err:=sqlite.NewMRSCatalogRepository(s.store).SaveItem(r.Context(),body.MRSCatalogItem,body.ActorID,body.EffectiveDate);respond(w,item,err)
 }
 func (s *Server) listMRSPriceHistory(w http.ResponseWriter,r *http.Request){rows,err:=sqlite.NewMRSCatalogRepository(s.store).History(r.Context(),r.PathValue("id"));respond(w,rows,err)}
+func (s *Server) applyMRSPriceHistory(w http.ResponseWriter,r *http.Request){var body struct{ActorID string `json:"actor_id"`;RowVersion int64 `json:"row_version"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};item,err:=sqlite.NewMRSCatalogRepository(s.store).ApplyHistoricalPrice(r.Context(),r.PathValue("id"),r.PathValue("historyID"),body.ActorID,body.RowVersion);respond(w,item,err)}
 func (s *Server) getMRSBookmark(w http.ResponseWriter,r *http.Request){actor:=r.URL.Query().Get("actor_id");bookmarked,err:=sqlite.NewMRSCatalogRepository(s.store).IsBookmarked(r.Context(),actor,r.PathValue("id"));respond(w,map[string]any{"actor_id":actor,"catalog_item_id":r.PathValue("id"),"bookmarked":bookmarked},err)}
 func (s *Server) putMRSBookmark(w http.ResponseWriter,r *http.Request){var body struct{ActorID string `json:"actor_id"`;Bookmarked bool `json:"bookmarked"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};err:=sqlite.NewMRSCatalogRepository(s.store).SetBookmark(r.Context(),body.ActorID,r.PathValue("id"),body.Bookmarked);respond(w,map[string]any{"actor_id":body.ActorID,"catalog_item_id":r.PathValue("id"),"bookmarked":body.Bookmarked},err)}
 func (s *Server) listMRSBookmarks(w http.ResponseWriter,r *http.Request){q:=r.URL.Query();items,err:=sqlite.NewMRSCatalogRepository(s.store).ListBookmarks(r.Context(),q.Get("actor_id"),q.Get("q"),q.Get("category"));respond(w,items,err)}
