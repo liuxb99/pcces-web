@@ -20,6 +20,7 @@ import ContractListPage from './pages/ContractListPage';
 import MrsBasePage from './pages/MrsBasePage';
 import MrsCatalogPage from './pages/MrsCatalogPage';
 import MrsInsightsPage from './pages/MrsInsightsPage';
+import MrsOperationsPage from './pages/MrsOperationsPage';
 import ContractDetailPage from './pages/ContractDetailPage';
 import IssueListPage from './pages/IssueListPage';
 import IssueDetailPage from './pages/IssueDetailPage';
@@ -62,6 +63,7 @@ const App: React.FC = () => (
       <Route path="mrs-base" element={<MrsBasePage />} />
       <Route path="mrs-catalog" element={<MrsCatalogPage />} />
       <Route path="mrs-insights" element={<MrsInsightsPage />} />
+      <Route path="mrs-operations" element={<MrsOperationsPage />} />
       <Route path="compare/budget-items" element={<ComparePage />} />
       <Route path="compare/mrs-prices" element={<MrsBasePriceComparePage />} />
       <Route path="admin" element={<AdminPage />} />
