@@ -44,18 +44,12 @@ class RecoveryService:
         if not snapshot_id or payload in (None, "") or not reason:
             return {"code": "INVALID_ARGUMENT", "detail": "id, payload and reason are required"}, 400
         encoded = payload if isinstance(payload, str) else json.dumps(payload, ensure_ascii=False, sort_keys=True)
-        now = datetime.now(timezone.utc)
         values = {
-            "id": snapshot_id,
-            "user_id": user_id,
-            "context_id": body.get("context_id"),
-            "project_code": body.get("project_code"),
-            "action_code": body.get("action_code"),
-            "payload": encoded,
+            "id": snapshot_id, "user_id": user_id,
+            "context_id": body.get("context_id"), "project_code": body.get("project_code"),
+            "action_code": body.get("action_code"), "payload": encoded,
             "payload_hash": sha256(encoded.encode("utf-8")).hexdigest(),
-            "reason": reason,
-            "created_at": now,
-            "row_version": 1,
+            "reason": reason, "created_at": datetime.now(timezone.utc), "row_version": 1,
         }
         try:
             with self.engine.begin() as conn:
@@ -70,9 +64,7 @@ class RecoveryService:
                 recovery_snapshots.c.id == snapshot_id,
                 recovery_snapshots.c.user_id == user_id,
             ))).mappings().first()
-        if row is None:
-            return {"code": "NOT_FOUND"}, 404
-        return dict(row), 200
+        return (dict(row), 200) if row else ({"code": "NOT_FOUND"}, 404)
 
     def list_pending(self, user_id: int) -> list[dict]:
         with self.engine.connect() as conn:
@@ -84,34 +76,33 @@ class RecoveryService:
         return [dict(row) for row in rows]
 
     def resolve(self, snapshot_id: str, user_id: int, row_version: int, action: str) -> tuple[dict, int]:
+        current, status = self.get(snapshot_id, user_id)
+        if status == 404:
+            return current, status
+        if current["restored_at"] is not None or current["discarded_at"] is not None or current["row_version"] != row_version:
+            return {"code": "CONFLICT", "detail": "recovery snapshot state conflict"}, 409
+
+        if action == "restore" and current["context_id"]:
+            result, restore_status = self.work_context_service.apply(current["context_id"], user_id, "SAVE_DRAFT", {
+                "action_code": current["action_code"] or "PROJECT_CATALOG",
+                "project_code": current["project_code"],
+                "draft_payload": current["payload"],
+            })
+            if restore_status >= 400:
+                return result, restore_status
+
+        column = "restored_at" if action == "restore" else "discarded_at"
         now = datetime.now(timezone.utc)
         with self.engine.begin() as conn:
-            current = conn.execute(select(recovery_snapshots).where(and_(
-                recovery_snapshots.c.id == snapshot_id,
-                recovery_snapshots.c.user_id == user_id,
-            ))).mappings().first()
-            if current is None:
-                return {"code": "NOT_FOUND"}, 404
-            if current["restored_at"] is not None or current["discarded_at"] is not None or current["row_version"] != row_version:
-                return {"code": "CONFLICT", "detail": "recovery snapshot state conflict"}, 409
-            if action == "restore" and current["context_id"]:
-                try:
-                    draft = json.loads(current["payload"])
-                except json.JSONDecodeError:
-                    draft = current["payload"]
-                result, status = self.work_context_service.apply(current["context_id"], user_id, "SAVE_DRAFT", {
-                    "action_code": current["action_code"] or "PROJECT_CATALOG",
-                    "project_code": current["project_code"],
-                    "draft_payload": current["payload"] if isinstance(draft, str) else json.dumps(draft, ensure_ascii=False),
-                })
-                if status >= 400:
-                    return result, status
-            column = "restored_at" if action == "restore" else "discarded_at"
-            conn.execute(recovery_snapshots.update().where(and_(
+            result = conn.execute(recovery_snapshots.update().where(and_(
                 recovery_snapshots.c.id == snapshot_id,
                 recovery_snapshots.c.user_id == user_id,
                 recovery_snapshots.c.row_version == row_version,
+                recovery_snapshots.c.restored_at.is_(None),
+                recovery_snapshots.c.discarded_at.is_(None),
             )).values(**{column: now, "row_version": row_version + 1}))
+            if result.rowcount != 1:
+                return {"code": "CONFLICT", "detail": "recovery snapshot state conflict"}, 409
         return self.get(snapshot_id, user_id)
 
 
@@ -120,9 +111,7 @@ def build_recovery_blueprint(service: RecoveryService, resolve_user_id: Callable
 
     def current_user():
         user_id = resolve_user_id()
-        if user_id is None:
-            return None, (jsonify({"code": "UNAUTHORIZED"}), 401)
-        return user_id, None
+        return (None, (jsonify({"code": "UNAUTHORIZED"}), 401)) if user_id is None else (user_id, None)
 
     @blueprint.get("")
     def list_snapshots():
