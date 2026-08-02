@@ -26,6 +26,7 @@ from api.cost_structure_project_run import ProjectCostStructureRunService, build
 from api.cost_structure_run_versions import CostStructureRunVersionService, build_cost_structure_run_version_blueprint
 from api.index import SessionLocal, app, decode_token, engine
 from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
+from api.legacy_exchange_adapters import LegacyExchangeAdapterService, build_legacy_exchange_adapter_blueprint
 from api.legacy_resource_decimal_bridge import install_legacy_resource_bridge
 from api.migrations import run_migrations
 from api.models import Base, User
@@ -81,6 +82,7 @@ bid_lifecycle_service = BidLifecycleService(engine)
 budget_bid_conversion_service = BudgetBidConversionService(engine)
 conversion_wizard_service = ConversionWizardService(engine)
 conversion_export_job_service = ConversionExportJobService(engine)
+legacy_exchange_adapter_service = LegacyExchangeAdapterService(engine)
 mrs_catalog_service = MRSCatalogService(engine)
 mrs_code_service = MRSCodeService()
 mrs_exchange_service = MRSExchangeService(mrs_catalog_service)
@@ -160,6 +162,7 @@ register("bid_lifecycle", build_bid_lifecycle_blueprint(bid_lifecycle_service, r
 register("budget_bid_conversion", build_budget_bid_conversion_blueprint(budget_bid_conversion_service, resolve_user_id))
 register("conversion_wizard", build_conversion_wizard_blueprint(conversion_wizard_service, resolve_user_id))
 register("conversion_export_jobs", build_conversion_export_job_blueprint(conversion_export_job_service, resolve_user_id))
+register("legacy_exchange_adapters", build_legacy_exchange_adapter_blueprint(legacy_exchange_adapter_service, resolve_user_id))
 register("mrs_catalog", build_mrs_catalog_blueprint(mrs_catalog_service, resolve_user_id))
 register("mrs_code", build_mrs_code_blueprint(mrs_code_service, resolve_user_id))
 register("mrs_exchange", build_mrs_exchange_blueprint(mrs_exchange_service, resolve_user_id))
@@ -184,10 +187,10 @@ __all__ = [
     "app", "authorization_service", "work_context_service", "recovery_service", "persistence_service",
     "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service",
     "budget_cross_project_service", "bid_lifecycle_service", "budget_bid_conversion_service",
-    "conversion_wizard_service", "conversion_export_job_service", "mrs_catalog_service", "mrs_code_service",
-    "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service",
-    "mrs_history_apply_service", "resource_decimal_service", "resource_budget_lineage_service",
-    "resource_budget_link_service", "resource_dependency_graph_service", "budget_trace_service",
-    "cost_structure_service", "cost_structure_detail_service", "project_cost_structure_run_service",
-    "cost_structure_run_version_service", "resolve_user_id",
+    "conversion_wizard_service", "conversion_export_job_service", "legacy_exchange_adapter_service",
+    "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service", "mrs_intelligence_service",
+    "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service", "resource_decimal_service",
+    "resource_budget_lineage_service", "resource_budget_link_service", "resource_dependency_graph_service",
+    "budget_trace_service", "cost_structure_service", "cost_structure_detail_service",
+    "project_cost_structure_run_service", "cost_structure_run_version_service", "resolve_user_id",
 ]
