@@ -83,6 +83,7 @@ jobs:
           api.test_budget_cross_project_sync
           api.test_mrs_catalog
           api.test_mrs_intelligence
+          api.test_mrs_operations
           api.test_resource_decimal
           api.test_resource_budget_lineage
           api.test_resource_dependency_graph
