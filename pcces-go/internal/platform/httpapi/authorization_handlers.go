@@ -37,6 +37,7 @@ func (s *Server) authorizationRoutes() {
 	s.bidImportApplyRoutes()
 	s.combineBidRoutes()
 	s.legacyExchangeAdapterRoutes()
+	s.conversionSourceArtifactRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
