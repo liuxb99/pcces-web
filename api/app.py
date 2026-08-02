@@ -6,6 +6,7 @@ from flask import jsonify, request
 from sqlalchemy import select
 
 from api.authorization import AuthorizationService, build_authorization_blueprint
+from api.budget_decimal import BudgetDecimalService, build_budget_decimal_blueprint
 from api.index import app, decode_token, engine
 from api.migrations import run_migrations
 from api.models import Base, User
@@ -39,6 +40,8 @@ initialize_authorization(authorization_service, existing_user_ids)
 work_context_service = WorkContextService(engine)
 recovery_service = RecoveryService(engine, work_context_service)
 persistence_service = PersistenceService(engine)
+budget_decimal_service = BudgetDecimalService(engine)
+budget_decimal_service.create_schema()
 
 
 @app.before_request
@@ -65,8 +68,10 @@ if "work_context" not in app.blueprints:
     app.register_blueprint(build_work_context_blueprint(work_context_service, resolve_user_id))
 if "recovery" not in app.blueprints:
     app.register_blueprint(build_recovery_blueprint(recovery_service, resolve_user_id))
+if "budget_decimal" not in app.blueprints:
+    app.register_blueprint(build_budget_decimal_blueprint(budget_decimal_service, resolve_user_id))
 
 __all__ = [
     "app", "authorization_service", "work_context_service", "recovery_service",
-    "persistence_service", "resolve_user_id"
+    "persistence_service", "budget_decimal_service", "resolve_user_id"
 ]
