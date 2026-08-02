@@ -2,6 +2,7 @@ package httpapi
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"net/http"
 	"strings"
@@ -72,6 +73,10 @@ func (s *Server) putModuleEntitlement(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) authorizeWorkContext(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		if !strings.HasPrefix(r.Header.Get("Content-Type"), "application/json") {
+			writeError(w, errx.New(errx.CodeInvalidArgument, "Content-Type must be application/json", "P0-G1"))
+			return
+		}
 		body, err := io.ReadAll(io.LimitReader(r.Body, 2<<20))
 		if err != nil {
 			writeError(w, errx.Wrap(errx.CodeInvalidArgument, "read authorization request", "P0-G3", err))
@@ -83,12 +88,10 @@ func (s *Server) authorizeWorkContext(next http.HandlerFunc) http.HandlerFunc {
 			ActorID    string `json:"actor_id"`
 			ActionCode string `json:"action_code"`
 		}
-		if err := decodeJSON(r, &request); err != nil {
-			writeError(w, err)
+		if err := json.Unmarshal(body, &request); err != nil {
+			writeError(w, errx.Wrap(errx.CodeInvalidArgument, "invalid JSON request", "P0-G1", err))
 			return
 		}
-		r.Body = io.NopCloser(bytes.NewReader(body))
-
 		if strings.TrimSpace(request.ActorID) == "" || strings.TrimSpace(request.ActionCode) == "" {
 			writeError(w, errx.New(errx.CodeInvalidArgument, "actor_id and action_code are required", "P0-G3"))
 			return
