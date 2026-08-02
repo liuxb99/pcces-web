@@ -14,6 +14,7 @@ on:
       - "web-pcces/frontend/src/pages/TraceabilityPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetVersionsPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetApprovalPage.tsx"
+      - "web-pcces/frontend/src/pages/BudgetValidationPage.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
       - "pcces-go/internal/storage/sqlite/budget_*"
@@ -25,6 +26,7 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0011_*"
       - "pcces-go/internal/storage/sqlite/migrations/0012_*"
       - "pcces-go/internal/storage/sqlite/migrations/0013_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0014_*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
@@ -42,6 +44,7 @@ on:
       - "web-pcces/frontend/src/pages/TraceabilityPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetVersionsPage.tsx"
       - "web-pcces/frontend/src/pages/BudgetApprovalPage.tsx"
+      - "web-pcces/frontend/src/pages/BudgetValidationPage.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
       - "pcces-go/internal/storage/sqlite/budget_*"
@@ -53,6 +56,7 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0011_*"
       - "pcces-go/internal/storage/sqlite/migrations/0012_*"
       - "pcces-go/internal/storage/sqlite/migrations/0013_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0014_*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
@@ -76,6 +80,7 @@ jobs:
           api.test_budget_calculation_trace
           api.test_budget_versioning
           api.test_budget_approval
+          api.test_budget_validation
           api.test_resource_decimal
           api.test_resource_budget_lineage
           api.test_resource_dependency_graph
