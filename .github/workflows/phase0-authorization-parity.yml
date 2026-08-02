@@ -1,0 +1,66 @@
+name: Phase 0 Authorization Parity
+
+on:
+  push:
+    paths:
+      - "api/authorization.py"
+      - "api/route_policy.py"
+      - "api/app.py"
+      - "api/test_authorization*.py"
+      - "api/test_route_policy.py"
+      - "pcces-go/internal/domain/authorization/**"
+      - "pcces-go/internal/storage/sqlite/**"
+      - "pcces-go/internal/platform/httpapi/**"
+      - "specs/catalog/phase0-action-catalog.json"
+      - "specs/golden/authorization-decisions.json"
+      - ".github/workflows/phase0-authorization-parity.yml"
+  pull_request:
+    paths:
+      - "api/authorization.py"
+      - "api/route_policy.py"
+      - "api/app.py"
+      - "api/test_authorization*.py"
+      - "api/test_route_policy.py"
+      - "pcces-go/internal/domain/authorization/**"
+      - "pcces-go/internal/storage/sqlite/**"
+      - "pcces-go/internal/platform/httpapi/**"
+      - "specs/catalog/phase0-action-catalog.json"
+      - "specs/golden/authorization-decisions.json"
+      - ".github/workflows/phase0-authorization-parity.yml"
+
+jobs:
+  web-authorization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: pip install -r requirements.txt
+      - name: Run Web authorization tests
+        run: >-
+          python -m unittest
+          api.test_authorization
+          api.test_canonical_entrypoint
+          api.test_route_policy
+          api.test_authorization_golden
+
+  go-authorization:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pcces-go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache-dependency-path: pcces-go/go.sum
+      - name: Format check
+        run: test -z "$(gofmt -l internal/domain/authorization internal/storage/sqlite internal/platform/httpapi)"
+      - name: Run Go authorization and SQLite tests
+        run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
+      - name: Run Go vet
+        run: go vet ./...
