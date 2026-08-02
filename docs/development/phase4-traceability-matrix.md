@@ -20,13 +20,23 @@ Status legend: `VERIFIED` means Web/Python, Local Go and permanent tests exist. 
 | P4-14 | CREATE/REPLACE/APPEND atomic budget apply | formNewProjectWizard | bid_import_apply.py | bid_import_apply.go | apply and rollback tests | VERIFIED |
 | P4-15 | Approved/frozen/archived write protection | FormBudgetExp_Wzd | bid_import_apply.py | bid_import_apply.go | read-only tests | VERIFIED |
 | P4-16 | Post-import numeric and lineage consistency audit | Conversion.cs | phase4_roundtrip_audit.py | phase4_roundtrip_audit.go | round-trip audit tests | VERIFIED |
-| P4-17 | Budget combine-bid conflict strategy | FormBudgetCombineBid / ucBudgetCombineBid | not implemented | not implemented | none | OPEN |
+| P4-17 | Budget combine-bid conflict strategy | FormBudgetCombineBid / ucBudgetCombineBid | api/budget_combine_bid.py | combine_bid.go | strategy, persistence and canonical contract tests | VERIFIED |
 | P4-18 | ZMD adapter | formNewProjectWizard | not implemented | not implemented | none | OPEN |
 | P4-19 | MDB adapter | formNewProjectWizard | not implemented | not implemented | none | OPEN |
 | P4-20 | PX adapter | formNewProjectWizard | not implemented | not implemented | none | OPEN |
 | P4-21 | Source attachment, filename and downloadable error catalogue | FormBudgetExp_Wzd | partial metadata only | partial metadata only | partial | OPEN |
 | P4-22 | Long-running progress and cancellation | FormBudgetExp_Wzd | not implemented | not implemented | none | OPEN |
 
+## Combine-bid conflict contract
+
+The combine-bid engine never silently overwrites duplicate item codes. Every collision is recorded with the existing and incoming source project and one explicit strategy:
+
+- `BLOCK`: keep the first item and block the session.
+- `KEEP_FIRST`: retain the existing item and record the decision.
+- `KEEP_LAST`: replace with the incoming item and record the decision.
+- `SUM_QUANTITY`: combine only when name, unit and unit price are compatible; otherwise block.
+- `RENAME`: preserve both items by generating a deterministic suffix.
+
 ## Gate decision
 
-Phase 4 is **not complete** while any row is `OPEN`. The implemented conversion round trip is now auditable and deterministic; the next ordered batch is combine-bid conflict handling, followed by ZMD/MDB/PX adapters and job progress/cancellation.
+Phase 4 is **not complete** while any row is `OPEN`. The next ordered batch is ZMD adapter parity, followed by MDB/PX adapters, source attachment/error catalogue, and long-running progress/cancellation.
