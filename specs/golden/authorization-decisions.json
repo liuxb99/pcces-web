@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "actor": "fixture-user",
+  "cases": [
+    {
+      "name": "allowed_project_catalog",
+      "action_code": "PROJECT_CATALOG",
+      "module_enabled": true,
+      "module_entitled": true,
+      "function_enabled": true,
+      "function_granted": true,
+      "expected": {"allowed": true, "reason": "", "module_code": "COMMON", "function_code": "F005"}
+    },
+    {
+      "name": "module_catalog_disabled",
+      "action_code": "PROJECT_CATALOG",
+      "module_enabled": false,
+      "module_entitled": true,
+      "function_enabled": true,
+      "function_granted": true,
+      "expected": {"allowed": false, "reason": "MODULE_DISABLED", "module_code": "COMMON", "function_code": "F005"}
+    },
+    {
+      "name": "module_not_entitled",
+      "action_code": "PROJECT_CATALOG",
+      "module_enabled": true,
+      "module_entitled": false,
+      "function_enabled": true,
+      "function_granted": true,
+      "expected": {"allowed": false, "reason": "MODULE_NOT_ENTITLED", "module_code": "COMMON", "function_code": "F005"}
+    },
+    {
+      "name": "function_catalog_disabled",
+      "action_code": "PROJECT_CATALOG",
+      "module_enabled": true,
+      "module_entitled": true,
+      "function_enabled": false,
+      "function_granted": true,
+      "expected": {"allowed": false, "reason": "FUNCTION_DISABLED", "module_code": "COMMON", "function_code": "F005"}
+    },
+    {
+      "name": "function_not_granted",
+      "action_code": "PROJECT_CATALOG",
+      "module_enabled": true,
+      "module_entitled": true,
+      "function_enabled": true,
+      "function_granted": false,
+      "expected": {"allowed": false, "reason": "FUNCTION_NOT_GRANTED", "module_code": "COMMON", "function_code": "F005"}
+    },
+    {
+      "name": "action_without_function_code",
+      "action_code": "SUB_FINAL",
+      "module_enabled": true,
+      "module_entitled": true,
+      "function_enabled": true,
+      "function_granted": false,
+      "expected": {"allowed": true, "reason": "", "module_code": "INVOICE", "function_code": ""}
+    },
+    {
+      "name": "unknown_action",
+      "action_code": "UNKNOWN_ACTION",
+      "module_enabled": true,
+      "module_entitled": true,
+      "function_enabled": true,
+      "function_granted": true,
+      "expected": {"allowed": false, "reason": "ACTION_NOT_FOUND", "module_code": "", "function_code": ""}
+    }
+  ]
+}
