@@ -7,19 +7,24 @@ on:
       - "api/contract_core.py"
       - "api/contract_allocation.py"
       - "api/contract_governance.py"
+      - "api/contract_changes.py"
       - "api/test_contract_core.py"
       - "api/test_contract_allocation.py"
       - "api/test_contract_governance.py"
+      - "api/test_contract_changes.py"
       - "api/app.py"
       - "pcces-go/internal/storage/sqlite/contract_core*"
       - "pcces-go/internal/storage/sqlite/contract_allocation*"
       - "pcces-go/internal/storage/sqlite/contract_governance*"
+      - "pcces-go/internal/storage/sqlite/contract_changes*"
       - "pcces-go/internal/storage/sqlite/migrations/0038_contract_core.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0039_contract_allocations.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0040_contract_governance.sql"
+      - "pcces-go/internal/storage/sqlite/migrations/0041_contract_changes.sql"
       - "pcces-go/internal/platform/httpapi/contract_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/contract_allocation_handlers.go"
       - "pcces-go/internal/platform/httpapi/contract_governance_handlers.go"
+      - "pcces-go/internal/platform/httpapi/contract_change_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
       - ".github/workflows/phase5-contract-core.yml"
   pull_request:
@@ -27,15 +32,17 @@ on:
       - "api/contract_core.py"
       - "api/contract_allocation.py"
       - "api/contract_governance.py"
+      - "api/contract_changes.py"
       - "api/test_contract_core.py"
       - "api/test_contract_allocation.py"
       - "api/test_contract_governance.py"
-      - "api/app.py"
+      - "api/test_contract_changes.py"
       - "pcces-go/internal/storage/sqlite/contract_core*"
       - "pcces-go/internal/storage/sqlite/contract_allocation*"
       - "pcces-go/internal/storage/sqlite/contract_governance*"
-      - "pcces-go/internal/storage/sqlite/migrations/0040_contract_governance.sql"
-      - "pcces-go/internal/platform/httpapi/contract_governance_handlers.go"
+      - "pcces-go/internal/storage/sqlite/contract_changes*"
+      - "pcces-go/internal/storage/sqlite/migrations/0041_contract_changes.sql"
+      - "pcces-go/internal/platform/httpapi/contract_change_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
   workflow_dispatch:
 
@@ -49,7 +56,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python -m unittest api.test_contract_core api.test_contract_allocation api.test_contract_governance
+      - run: python -m unittest api.test_contract_core api.test_contract_allocation api.test_contract_governance api.test_contract_changes
 
   go-contract:
     runs-on: ubuntu-latest
@@ -63,6 +70,6 @@ jobs:
           go-version: "1.24.x"
           cache-dependency-path: pcces-go/go.sum
       - name: Format check
-        run: test -z "$(gofmt -l internal/storage/sqlite/contract_core*.go internal/storage/sqlite/contract_allocation*.go internal/storage/sqlite/contract_governance*.go internal/platform/httpapi/contract_core_handlers.go internal/platform/httpapi/contract_allocation_handlers.go internal/platform/httpapi/contract_governance_handlers.go internal/platform/httpapi/authorization_handlers.go)"
+        run: test -z "$(gofmt -l internal/storage/sqlite/contract_core*.go internal/storage/sqlite/contract_allocation*.go internal/storage/sqlite/contract_governance*.go internal/storage/sqlite/contract_changes*.go internal/platform/httpapi/contract_core_handlers.go internal/platform/httpapi/contract_allocation_handlers.go internal/platform/httpapi/contract_governance_handlers.go internal/platform/httpapi/contract_change_handlers.go internal/platform/httpapi/authorization_handlers.go)"
       - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
       - run: go vet ./...
