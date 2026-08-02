@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/liuxb99/pcces-web/pcces-go/internal/application/autosave"
+	"github.com/liuxb99/pcces-web/pcces-go/internal/application/maintenance"
 	"github.com/liuxb99/pcces-web/pcces-go/internal/platform/httpapi"
 	"github.com/liuxb99/pcces-web/pcces-go/internal/storage/sqlite"
 )
@@ -42,7 +43,9 @@ func main() {
 	}
 
 	autosaveService := autosave.New(logger, store)
+	backupService := maintenance.NewBackupService(logger, store)
 	go autosaveService.Run(ctx)
+	go backupService.Run(ctx)
 
 	server := &http.Server{
 		Addr:              listenAddr,
