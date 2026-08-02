@@ -56,6 +56,7 @@ ROUTE_RULES: tuple[RouteRule, ...] = (
     RouteRule("/api/settings", "SYSTEM_ADMIN"), RouteRule("/api/projects", "PROJECT_CATALOG"),
     RouteRule("/api/decimal-budget", "BUD"), RouteRule("/api/budget", "BUD"),
     RouteRule("/api/budgets", "BUD"), RouteRule("/api/bid", "BID"),
+    RouteRule("/api/dependency-graph", "MRS"),
     RouteRule("/api/decimal-resources", "MRS"), RouteRule("/api/mrs", "MRS"),
     RouteRule("/api/resources", "MRS"), RouteRule("/api/reports", "REPORT"),
     RouteRule("/api/contracts", "SPLIT_CONTRACT"), RouteRule("/api/invoices", "INVOICE"),
