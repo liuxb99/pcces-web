@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pcces.local/schemas/authorization-decision.schema.json",
+  "title": "PCCES Authorization Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "action_code",
+    "module_code",
+    "module_enabled",
+    "function_grant",
+    "allowed",
+    "reason"
+  ],
+  "properties": {
+    "actor_id": {"type": "string"},
+    "user_id": {"type": "integer"},
+    "action_code": {"type": "string", "minLength": 1},
+    "module_code": {"type": "string"},
+    "function_code": {"type": "string"},
+    "module_enabled": {"type": "boolean"},
+    "function_grant": {"type": "boolean"},
+    "allowed": {"type": "boolean"},
+    "reason": {
+      "type": "string",
+      "enum": [
+        "",
+        "ACTION_NOT_FOUND",
+        "ACTOR_DISABLED",
+        "MODULE_DISABLED",
+        "MODULE_NOT_ENTITLED",
+        "FUNCTION_DISABLED",
+        "FUNCTION_NOT_GRANTED"
+      ]
+    }
+  },
+  "anyOf": [
+    {"required": ["actor_id"]},
+    {"required": ["user_id"]}
+  ]
+}
