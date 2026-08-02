@@ -12,6 +12,7 @@ from sqlalchemy import Column, DateTime, Integer, LargeBinary, MetaData, String,
 
 from api.bid_budget_import_apply import BidBudgetImportApplyService
 from api.bid_budget_roundtrip import BidBudgetRoundTripService, detect_and_parse, import_preflight
+from api.budget_combine_bid import BudgetCombineBidService, combine_sources
 from api.conversion_export_lifecycle import ConversionExportLifecycleService, validate_xml
 
 metadata = MetaData()
@@ -48,6 +49,7 @@ class ConversionExportJobService:
         self.lifecycle = ConversionExportLifecycleService(engine)
         self.roundtrip = BidBudgetRoundTripService(engine)
         self.import_apply = BidBudgetImportApplyService(engine)
+        self.combine_bid = BudgetCombineBidService(engine)
     def create(self, body, actor):
         wizard_id = str(body.get("wizard_session_id","")).strip(); source = str(body.get("source_budget_version_id","")).strip(); target = str(body.get("target_project_code","")).strip(); fmt = str(body.get("format","BID_JSON")).upper(); items = list(body.get("items") or [])
         if not wizard_id or not source or not target: raise ValueError("wizard_session_id, source_budget_version_id and target_project_code are required")
@@ -141,5 +143,21 @@ def build_conversion_export_job_blueprint(service, resolve_user_id):
     @bp.get("/import-apply-runs/<run_id>")
     def get_import_apply_run(run_id):
         try: return jsonify(service.import_apply.get(run_id))
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+    @bp.post("/combine-bid/preflight")
+    def combine_bid_preflight():
+        if resolve_user_id() is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        body=request.get_json(silent=True) or {}
+        try: return jsonify(combine_sources(list(body.get("sources") or []),str(body.get("strategy","BLOCK"))))
+        except (ValueError,ArithmeticError) as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+    @bp.post("/combine-bid/sessions")
+    def create_combine_bid_session():
+        actor=resolve_user_id()
+        if actor is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        try: return jsonify(service.combine_bid.create(request.get_json(silent=True) or {},str(actor))),201
+        except (ValueError,ArithmeticError) as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+    @bp.get("/combine-bid/sessions/<session_id>")
+    def get_combine_bid_session(session_id):
+        try: return jsonify(service.combine_bid.get(session_id))
         except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
     return bp
