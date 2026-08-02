@@ -6,6 +6,11 @@
 
 `pcces-web` 的完成標準是：完整復刻 PCCES C# 桌面版的全部可用功能、業務規則、計算結果、資料交換格式、權限、狀態轉換與報表能力。介面可現代化，但不得任意省略舊版行為。
 
+正式 Phase 規劃與驗收標準：
+
+- `docs/development/00-web-parity-phase-roadmap.md`
+- `docs/development/01-phase-acceptance-matrix.md`
+
 ## 2. 調研策略：功能樹優先
 
 先完成全系統功能盤點，不再一開始逐方法撰寫完整規格。
@@ -64,7 +69,7 @@
 5. 每個 Web 頁面可反查到一個或多個 Legacy 功能節點。
 6. 已有詳細調研文件掛回對應節點，不刪除既有成果。
 
-## 4. 功能樹主模組
+## 4. Legacy 功能主模組
 
 - LEGACY-001：啟動、登入、主框架與系統生命週期
 - LEGACY-002：導航、功能代碼、模組授權與權限
@@ -77,7 +82,22 @@
 - LEGACY-009：報表、Excel、PDF、列印與匯入匯出
 - LEGACY-010：系統管理、代碼表、升級與外部服務
 
-## 5. 簡要功能節點模板
+## 5. Web 復刻 10 Phase
+
+- Phase 0：平台基礎與 API 收斂
+- Phase 1：專案管理與生命週期
+- Phase 2：預算書與投標單核心
+- Phase 3：MRS Base、工料機與單價分析
+- Phase 4：成本結構、轉換與資料交換
+- Phase 5：契約與分包管理
+- Phase 6：變更、估驗、結算與驗收
+- Phase 7：報表中心
+- Phase 8：系統管理、設定與維運
+- Phase 9：Legacy 收尾與 100% Traceability
+
+完整範圍、依賴、Legacy 入口、交付物與出口條件，以 `docs/development/00-web-parity-phase-roadmap.md` 為準。
+
+## 6. 簡要功能節點模板
 
 ```text
 Feature ID:
@@ -94,7 +114,7 @@ Web 現況:
 可信度:
 ```
 
-## 6. 詳細規格狀態
+## 7. 詳細規格狀態
 
 已完成的啟動、導航、專案生命週期與部分預算編輯器詳細文件保留，作為已深挖節點。後續功能樹完成前，不再要求所有節點先寫到事件級。
 
@@ -105,9 +125,9 @@ Web 現況:
 - `UNKNOWN`
 - `REQUIRES_RUNTIME_TEST`
 
-## 7. Web 復刻狀態
+## 8. Web 復刻狀態
 
-統一使用：
+功能級狀態：
 
 - `NOT_STARTED`
 - `UI_ONLY`
@@ -116,33 +136,37 @@ Web 現況:
 - `LEGACY_MATCHED`
 - `VERIFIED`
 
-頁面存在、API 可回傳或畫面可操作，不等於 Legacy 復刻完成。
+Phase 級狀態：
 
-## 8. 後續實作階段
+- `NOT_STARTED`
+- `LEGACY_DEEP_REVIEW`
+- `SPEC_READY`
+- `IMPLEMENTING`
+- `INTEGRATION_TESTING`
+- `LEGACY_MATCHING`
+- `VERIFIED`
 
-### WEB-PARITY-001：後端與 API 收斂
+頁面存在、API 可回傳或畫面可操作，不等於 Legacy 復刻完成。具體 Gate 以 `docs/development/01-phase-acceptance-matrix.md` 為準。
 
-- 合併雙後端
-- 統一 `/api` 路徑
-- 建立 OpenAPI
-- 抽出 routes / services / repositories / domain
-- API 對應 Legacy Feature ID
+## 9. 第一個正式開發階段
 
-### WEB-PARITY-002：Decimal 與計算追溯
+### Phase 0：平台基礎與 API 收斂
 
-- 盤點精度與取位
-- 使用 Decimal／Numeric
-- 保存輸入、公式、規則與結果
-- 建立版本、凍結、差異與重新計算
+第一批依序完成：
 
-### WEB-PARITY-003 起
+1. P0-S1：唯一 API 與路徑收斂。
+2. P0-S2：Migration 與 Decimal 基礎。
+3. P0-S3：Function Code、Module 與 Action。
+4. P0-S4：WorkContext 與 Dirty State。
 
-依功能樹挑選完整子系統；實作前深挖該節點，完成後加入永久回歸測試。
+Phase 0 完成前，不得直接大規模擴充後續業務頁面，避免雙後端、API 契約、權限與資料型別持續漂移。
 
-## 9. 不得回退的決策
+## 10. 不得回退的決策
 
 1. 先建立全系統功能地圖，再逐段實作。
 2. 詳細源碼調研改為實作前按需進行。
 3. 既有詳細文件保留並掛入功能樹。
 4. UI 可現代化，業務結果、資料格式、權限與狀態必須相容。
 5. 推測內容必須標記，不能冒充已確認行為。
+6. Web 開發依 10 Phase 推進，每個 Phase 必須通過明確 Gate。
+7. 文件完成、頁面存在或 Reviewer 分數，均不能取代 Legacy Matching 與永久回歸測試。
