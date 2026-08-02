@@ -42,6 +42,7 @@ func (s *Server) authorizationRoutes() {
 	s.contractCoreRoutes()
 	s.contractGovernanceRoutes()
 	s.contractChangeRoutes()
+	s.contractExecutionRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
