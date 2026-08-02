@@ -6,6 +6,8 @@ from flask import jsonify, request
 from sqlalchemy import select
 
 from api.authorization import AuthorizationService, build_authorization_blueprint
+from api.budget_approval import BudgetApprovalService, build_budget_approval_blueprint
+from api.budget_approval_guard import install_budget_approval_guard
 from api.budget_calculation_trace import BudgetTraceService, build_budget_trace_blueprint
 from api.budget_decimal import BudgetDecimalService, build_budget_decimal_blueprint
 from api.budget_lock_guard import install_budget_lock_guard
@@ -47,6 +49,7 @@ recovery_service = RecoveryService(engine, work_context_service)
 persistence_service = PersistenceService(engine)
 budget_decimal_service = BudgetDecimalService(engine); budget_decimal_service.create_schema()
 budget_version_service = BudgetVersionService(engine)
+budget_approval_service = BudgetApprovalService(engine, SessionLocal, budget_version_service)
 resource_decimal_service = ResourceDecimalService(engine); resource_decimal_service.create_schema()
 resource_budget_lineage_service = ResourceBudgetLineageService(engine)
 resource_dependency_graph_service = ResourceDependencyGraphService(engine, SessionLocal)
@@ -75,6 +78,7 @@ if "delete_resource_breakdown" in app.view_functions:
 
 install_resource_automation(app, resource_dependency_graph_service)
 install_budget_lock_guard(app, budget_version_service, SessionLocal)
+install_budget_approval_guard(app, budget_approval_service, SessionLocal)
 
 
 @app.before_request
@@ -95,9 +99,10 @@ if "work_context" not in app.blueprints: app.register_blueprint(build_work_conte
 if "recovery" not in app.blueprints: app.register_blueprint(build_recovery_blueprint(recovery_service, resolve_user_id))
 if "budget_decimal" not in app.blueprints: app.register_blueprint(build_budget_decimal_blueprint(budget_decimal_service, resolve_user_id))
 if "budget_versions" not in app.blueprints: app.register_blueprint(build_budget_version_blueprint(budget_version_service, resolve_user_id))
+if "budget_approval" not in app.blueprints: app.register_blueprint(build_budget_approval_blueprint(budget_approval_service, resolve_user_id))
 if "resource_decimal" not in app.blueprints: app.register_blueprint(build_resource_decimal_blueprint(resource_decimal_service, resolve_user_id))
 if "resource_budget_lineage" not in app.blueprints: app.register_blueprint(build_resource_budget_lineage_blueprint(resource_budget_lineage_service, resolve_user_id))
 if "resource_dependency" not in app.blueprints: app.register_blueprint(build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
 if "budget_trace" not in app.blueprints: app.register_blueprint(build_budget_trace_blueprint(budget_trace_service, resolve_user_id))
 
-__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
+__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
