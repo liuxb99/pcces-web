@@ -23,10 +23,7 @@ const MrsOperationsPage: React.FC = () => {
     await api.post(`/mrs/analysis-recipes/${recipeId}/versions`, { label: `版次 ${new Date().toLocaleString()}` }, { headers });
     await loadVersions();
   };
-  const createJob = async () => {
-    const created = (await api.post('/mrs/import-jobs', { format: 'json', payload, overwrite: false }, { headers })).data;
-    setJob(created);
-  };
+  const createJob = async () => setJob((await api.post('/mrs/import-jobs', { format: 'json', payload, overwrite: false }, { headers })).data);
   const runJob = async () => setJob((await api.post(`/mrs/import-jobs/${job.id}/run`, {}, { headers })).data);
   const cancelJob = async () => setJob((await api.post(`/mrs/import-jobs/${job.id}/cancel`, {}, { headers })).data);
 
@@ -45,7 +42,7 @@ const MrsOperationsPage: React.FC = () => {
     <section className="rounded border p-4 space-y-3">
       <h2 className="font-semibold">價格來源 Lineage</h2>
       <div className="flex gap-2"><input className="border p-2 flex-1" value={itemId} onChange={e=>setItemId(e.target.value)} placeholder="Catalog Item ID"/><button className="border px-3" onClick={loadLineage}>查詢</button></div>
-      {lineage?.events?.map((e:any)=><div className="border rounded p-2" key={e.id}>{e.type}｜{e.vendor || e.source || '-'}｜{e.price || e.new_price}</div>)}
+      {lineage?.events?.map((e:any)=><div className="border rounded p-2" key={e.id}>{e.type}｜{e.vendor || e.source || '-'}｜{e.quoted_price || e.new_price}</div>)}
     </section>
     <section className="rounded border p-4 space-y-3">
       <h2 className="font-semibold">批次匯入工作</h2>
