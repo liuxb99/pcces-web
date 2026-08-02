@@ -1,8 +1,10 @@
 package httpapi
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/liuxb99/pcces-web/pcces-go/internal/storage/sqlite"
 )
@@ -18,9 +20,16 @@ func (s *Server) budgetApprovalRoutes(){
 func (s *Server) getBudgetApproval(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewBudgetApprovalRepository(s.store).State(r.Context(),r.PathValue("projectCode"));respond(w,item,err)}
 
 func (s *Server) transitionBudgetApproval(w http.ResponseWriter,r *http.Request){
-	var body struct{ActorID string `json:"actor_id"`;Role string `json:"role"`;Comment string `json:"comment"`;RowVersion int64 `json:"row_version"`}
+	var body struct{ActorID string `json:"actor_id"`;Role string `json:"role"`;Comment string `json:"comment"`;RowVersion int64 `json:"row_version"`;SelfCheckID string `json:"self_check_id"`}
 	if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return}
-	item,err:=sqlite.NewBudgetApprovalRepository(s.store).Transition(r.Context(),r.PathValue("projectCode"),strings.ToUpper(r.PathValue("command")),body.ActorID,body.Role,body.Comment,body.RowVersion)
+	command:=strings.ToUpper(r.PathValue("command"));project:=r.PathValue("projectCode")
+	if command=="SUBMIT"||command=="APPROVE"{
+		checkID:=body.SelfCheckID;if checkID==""{checkID=fmt.Sprintf("approval-%d",time.Now().UTC().UnixNano())}
+		check,err:=sqlite.NewBudgetValidationRepository(s.store).Check(r.Context(),checkID,project,body.ActorID)
+		if err!=nil{writeError(w,err);return}
+		if !check.Passed{writeJSON(w,http.StatusUnprocessableEntity,map[string]any{"code":"SELF_CHECK_FAILED","detail":"budget self-check contains blocking issues","self_check":check});return}
+	}
+	item,err:=sqlite.NewBudgetApprovalRepository(s.store).Transition(r.Context(),project,command,body.ActorID,body.Role,body.Comment,body.RowVersion)
 	respond(w,item,err)
 }
 
