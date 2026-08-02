@@ -3,6 +3,7 @@ package httpapi
 import (
 	"encoding/json"
 	"errors"
+	"io"
 	"log/slog"
 	"net/http"
 	"strings"
@@ -80,14 +81,14 @@ func (s *Server) getWorkContext(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) putWorkContext(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		ActorID       string  `json:"actor_id"`
-		ActionCode    string  `json:"action_code"`
-		ProjectCode   *string `json:"project_code"`
-		ResourceType  *string `json:"resource_type"`
-		ResourceID    *string `json:"resource_id"`
-		Dirty         bool    `json:"dirty"`
-		DraftPayload  *string `json:"draft_payload"`
-		RowVersion    int64   `json:"row_version"`
+		ActorID      string  `json:"actor_id"`
+		ActionCode   string  `json:"action_code"`
+		ProjectCode  *string `json:"project_code"`
+		ResourceType *string `json:"resource_type"`
+		ResourceID   *string `json:"resource_id"`
+		Dirty        bool    `json:"dirty"`
+		DraftPayload *string `json:"draft_payload"`
+		RowVersion   int64   `json:"row_version"`
 	}
 	if err := decodeJSON(r, &body); err != nil {
 		writeError(w, err)
@@ -129,7 +130,7 @@ func decodeJSON(r *http.Request, destination any) error {
 	if !strings.HasPrefix(r.Header.Get("Content-Type"), "application/json") {
 		return errx.New(errx.CodeInvalidArgument, "Content-Type must be application/json", "P0-G1")
 	}
-	decoder := json.NewDecoder(http.MaxBytesReader(nil, r.Body, 2<<20))
+	decoder := json.NewDecoder(io.LimitReader(r.Body, 2<<20))
 	decoder.DisallowUnknownFields()
 	if err := decoder.Decode(destination); err != nil {
 		return errx.Wrap(errx.CodeInvalidArgument, "invalid JSON request", "P0-G1", err)
