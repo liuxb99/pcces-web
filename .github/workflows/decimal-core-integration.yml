@@ -1,0 +1,72 @@
+name: Decimal Core Integration
+
+on:
+  push:
+    paths:
+      - "api/budget_decimal.py"
+      - "api/resource_decimal.py"
+      - "api/legacy_decimal_adapter.py"
+      - "api/test_budget_decimal.py"
+      - "api/test_resource_decimal.py"
+      - "api/test_legacy_decimal_adapter.py"
+      - "api/route_policy.py"
+      - "api/app.py"
+      - "pcces-go/internal/domain/money/**"
+      - "pcces-go/internal/storage/sqlite/budget_decimal_repository*"
+      - "pcces-go/internal/storage/sqlite/migrations/0007_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0008_*"
+      - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
+      - ".github/workflows/decimal-core-integration.yml"
+  pull_request:
+    paths:
+      - "api/budget_decimal.py"
+      - "api/resource_decimal.py"
+      - "api/legacy_decimal_adapter.py"
+      - "api/test_budget_decimal.py"
+      - "api/test_resource_decimal.py"
+      - "api/test_legacy_decimal_adapter.py"
+      - "api/route_policy.py"
+      - "api/app.py"
+      - "pcces-go/internal/domain/money/**"
+      - "pcces-go/internal/storage/sqlite/budget_decimal_repository*"
+      - "pcces-go/internal/storage/sqlite/migrations/0007_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0008_*"
+      - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
+      - ".github/workflows/decimal-core-integration.yml"
+
+jobs:
+  web-decimal-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run Web decimal core tests
+        run: >-
+          python -m unittest
+          api.test_decimal_math
+          api.test_budget_decimal
+          api.test_resource_decimal
+          api.test_legacy_decimal_adapter
+          api.test_route_policy
+
+  go-decimal-core:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pcces-go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache-dependency-path: pcces-go/go.sum
+      - name: Format check
+        run: test -z "$(gofmt -l internal/domain/money internal/storage/sqlite internal/platform/httpapi)"
+      - name: Run Go decimal core tests
+        run: go test ./internal/domain/money/... ./internal/storage/sqlite/... ./internal/platform/httpapi/...
+      - name: Run Go vet
+        run: go vet ./...
