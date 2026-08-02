@@ -21,6 +21,7 @@ from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
 from api.legacy_resource_decimal_bridge import install_legacy_resource_bridge
 from api.migrations import run_migrations
 from api.models import Base, User
+from api.mrs_catalog import MRSCatalogService, build_mrs_catalog_blueprint
 from api.persistence_contract import PersistenceService
 from api.recovery import RecoveryService, build_recovery_blueprint
 from api.resource_budget_lineage import ResourceBudgetLineageService
@@ -31,6 +32,7 @@ from api.route_policy import action_for_request, initialize_authorization
 from api.work_context import WorkContextService, build_work_context_blueprint
 
 _PUBLIC_ENDPOINTS = {"/api/health", "/api/auth/login", "/api/auth/register"}
+
 def resolve_user_id() -> int | None:
     auth = request.headers.get("Authorization", "")
     if not auth.startswith("Bearer "): return None
@@ -53,7 +55,8 @@ budget_version_service = BudgetVersionService(engine)
 budget_approval_service = BudgetApprovalService(engine, SessionLocal, budget_version_service)
 budget_validation_service = BudgetValidationService(engine)
 budget_cross_project_service = BudgetCrossProjectSyncService(engine)
-bid_lifecycle_service = BidLifecycleService(engine, budget_validation_service)
+bid_lifecycle_service = BidLifecycleService(engine)
+mrs_catalog_service = MRSCatalogService(engine)
 resource_decimal_service = ResourceDecimalService(engine); resource_decimal_service.create_schema()
 resource_budget_lineage_service = ResourceBudgetLineageService(engine)
 resource_dependency_graph_service = ResourceDependencyGraphService(engine, SessionLocal)
@@ -105,6 +108,7 @@ if "budget_approval" not in app.blueprints: app.register_blueprint(build_budget_
 if "budget_validation" not in app.blueprints: app.register_blueprint(build_budget_validation_blueprint(budget_validation_service, resolve_user_id))
 if "budget_cross_project" not in app.blueprints: app.register_blueprint(build_budget_cross_project_blueprint(budget_cross_project_service, resolve_user_id))
 if "bid_lifecycle" not in app.blueprints: app.register_blueprint(build_bid_lifecycle_blueprint(bid_lifecycle_service, resolve_user_id))
+if "mrs_catalog" not in app.blueprints: app.register_blueprint(build_mrs_catalog_blueprint(mrs_catalog_service, resolve_user_id))
 if "resource_decimal" not in app.blueprints: app.register_blueprint(build_resource_decimal_blueprint(resource_decimal_service, resolve_user_id))
 if "resource_budget_lineage" not in app.blueprints: app.register_blueprint(build_resource_budget_lineage_blueprint(resource_budget_lineage_service, resolve_user_id))
 if "resource_dependency" not in app.blueprints: app.register_blueprint(build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
@@ -112,4 +116,4 @@ if "budget_trace" not in app.blueprints: app.register_blueprint(build_budget_tra
 
 install_budget_submission_gate(app, budget_validation_service, resolve_user_id)
 
-__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service", "budget_cross_project_service", "bid_lifecycle_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
+__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service", "budget_cross_project_service", "bid_lifecycle_service", "mrs_catalog_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
