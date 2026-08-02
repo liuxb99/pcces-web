@@ -1,0 +1,59 @@
+name: Phase 3 Parity Gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "api/mrs_*.py"
+      - "api/resource_*.py"
+      - "api/test_mrs_*.py"
+      - "api/test_resource_*.py"
+      - "pcces-go/internal/storage/sqlite/mrs_*"
+      - "pcces-go/internal/storage/sqlite/resource_*"
+      - "pcces-go/internal/platform/httpapi/*mrs*"
+      - "pcces-go/internal/platform/httpapi/*resource*"
+      - "docs/development/03-phase3-traceability-matrix.md"
+      - "scripts/verify_phase3_gate.py"
+      - ".github/workflows/phase3-parity-gate.yml"
+  pull_request:
+    paths:
+      - "api/mrs_*.py"
+      - "api/resource_*.py"
+      - "api/test_mrs_*.py"
+      - "api/test_resource_*.py"
+      - "pcces-go/internal/storage/sqlite/mrs_*"
+      - "pcces-go/internal/storage/sqlite/resource_*"
+      - "pcces-go/internal/platform/httpapi/*mrs*"
+      - "pcces-go/internal/platform/httpapi/*resource*"
+      - "docs/development/03-phase3-traceability-matrix.md"
+      - "scripts/verify_phase3_gate.py"
+      - ".github/workflows/phase3-parity-gate.yml"
+
+jobs:
+  phase3-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Static traceability gate
+        run: python scripts/verify_phase3_gate.py
+      - name: Python Phase 3 permanent tests
+        run: |
+          pip install -r requirements.txt
+          python -m unittest discover -s api -p 'test_mrs_*.py'
+          python -m unittest discover -s api -p 'test_resource_*.py'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache-dependency-path: pcces-go/go.sum
+      - name: Go Phase 3 permanent tests
+        working-directory: pcces-go
+        run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
+      - name: Go formatting and vet
+        working-directory: pcces-go
+        run: |
+          test -z "$(gofmt -l internal/storage/sqlite internal/platform/httpapi)"
+          go vet ./...
