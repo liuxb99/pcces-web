@@ -8,6 +8,7 @@ from sqlalchemy import select
 from api.authorization import AuthorizationService, build_authorization_blueprint
 from api.budget_calculation_trace import BudgetTraceService, build_budget_trace_blueprint
 from api.budget_decimal import BudgetDecimalService, build_budget_decimal_blueprint
+from api.budget_lock_guard import install_budget_lock_guard
 from api.budget_versioning import BudgetVersionService, build_budget_version_blueprint
 from api.index import SessionLocal, app, decode_token, engine
 from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
@@ -73,6 +74,7 @@ if "delete_resource_breakdown" in app.view_functions:
     app.view_functions["delete_resource_breakdown"] = lambda project_id, resource_id, breakdown_id, _view=_view: _view(project_id, resource_id, breakdown_id, resolve_user_id())
 
 install_resource_automation(app, resource_dependency_graph_service)
+install_budget_lock_guard(app, budget_version_service, SessionLocal)
 
 
 @app.before_request
