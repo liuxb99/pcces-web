@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "rounding": "HALF_UP",
+  "cases": [
+    {"name":"leaf_standard","kind":"L","quantity":"12.3456","unit_price":"98.7654","amount_scale":2,"expected_amount":"1219.32"},
+    {"name":"leaf_half_up","kind":"L","quantity":"1.00","unit_price":"1.005","amount_scale":2,"expected_amount":"1.01"},
+    {"name":"zero_quantity","kind":"L","quantity":"0","unit_price":"999.99","amount_scale":2,"expected_amount":"0.00"},
+    {"name":"negative_adjustment","kind":"L","quantity":"-2.5","unit_price":"100.00","amount_scale":2,"expected_amount":"-250.00"},
+    {"name":"parent_rollup","kind":"B","children":["100.01","200.02","-0.03"],"amount_scale":2,"expected_amount":"300.00"},
+    {"name":"resource_breakdown","kind":"RESOURCE","components":[{"quantity":"2.5","unit_price":"10.125"},{"quantity":"3","unit_price":"4.335"}],"amount_scale":2,"expected_amount":"38.32"}
+  ]
+}
