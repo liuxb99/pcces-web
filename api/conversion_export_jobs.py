@@ -10,6 +10,7 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 from flask import Blueprint, Response, jsonify, request
 from sqlalchemy import Column, DateTime, Integer, LargeBinary, MetaData, String, Table, Text, select
 
+from api.bid_budget_roundtrip import BidBudgetRoundTripService, detect_and_parse, import_preflight
 from api.conversion_export_lifecycle import ConversionExportLifecycleService, validate_xml
 
 metadata = MetaData()
@@ -41,7 +42,7 @@ def serialize_xml(items, project_code, source_version, legacy):
 
 class ConversionExportJobService:
     def __init__(self, engine):
-        self.engine = engine; metadata.create_all(engine); self.lifecycle = ConversionExportLifecycleService(engine)
+        self.engine = engine; metadata.create_all(engine); self.lifecycle = ConversionExportLifecycleService(engine); self.roundtrip = BidBudgetRoundTripService(engine)
     def create(self, body, actor):
         wizard_id = str(body.get("wizard_session_id","")).strip(); source = str(body.get("source_budget_version_id","")).strip(); target = str(body.get("target_project_code","")).strip(); fmt = str(body.get("format","BID_JSON")).upper(); items = list(body.get("items") or [])
         if not wizard_id or not source or not target: raise ValueError("wizard_session_id, source_budget_version_id and target_project_code are required")
@@ -105,4 +106,22 @@ def build_conversion_export_job_blueprint(service, resolve_user_id):
     @bp.post("/validate-xml")
     def validate():
         body=request.get_json(silent=True) or {}; return jsonify(validate_xml(str(body.get("xml","")).encode(),str(body.get("format","XML_NEW")).upper()))
+    @bp.post("/import-preflight")
+    def import_preflight_route():
+        if resolve_user_id() is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        body=request.get_json(silent=True) or {}
+        try:
+            fmt,version,project,items=detect_and_parse(str(body.get("payload","")),str(body.get("format","")))
+            return jsonify({"format":fmt,"format_version":version,"source_bid_project_code":project,"report":import_preflight(items),"items":items})
+        except Exception as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+    @bp.post("/import-sessions")
+    def create_import_session():
+        actor=resolve_user_id()
+        if actor is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        try: return jsonify(service.roundtrip.create(request.get_json(silent=True) or {},str(actor))),201
+        except Exception as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+    @bp.get("/import-sessions/<session_id>")
+    def get_import_session(session_id):
+        try: return jsonify(service.roundtrip.get(session_id))
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
     return bp
