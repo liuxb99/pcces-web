@@ -5,7 +5,7 @@ from sqlalchemy.pool import StaticPool
 from api.mrs_catalog import MRSCatalogService
 from api.mrs_operations import MRSOperationsService
 from api.mrs_exchange import MRSExchangeService
-from api.mrs_governance import MRSGovernanceService
+from api.mrs_governance_paging import MRSGovernanceService
 
 
 class MRSGovernanceTests(unittest.TestCase):
@@ -40,5 +40,32 @@ class MRSGovernanceTests(unittest.TestCase):
         with self.assertRaises(ValueError): self.gov.transition_release(release["id"],"APPROVE","8",release["row_version"])
         self.gov.set_validity("M1",{"status":"ACTIVE"},"7")
         with self.assertRaises(RuntimeError): self.gov.set_validity("M1",{"status":"SUSPENDED","row_version":0},"7")
+
+    def test_release_query_filters_paging_and_bounds(self):
+        first=self.gov.create_release("draft-1","7")
+        second=self.gov.create_release("draft-2","7")
+        second=self.gov.transition_release(second["id"],"submit","7",second["row_version"])
+        page=self.gov.query_releases(" draft ",1,0)
+        self.assertEqual(page["total"],1)
+        self.assertEqual(page["limit"],1)
+        self.assertEqual(page["items"][0]["id"],first["id"])
+        submitted=self.gov.query_releases("submitted",500,-10)
+        self.assertEqual(submitted["total"],1)
+        self.assertEqual(submitted["limit"],200)
+        self.assertEqual(submitted["offset"],0)
+        self.assertEqual(submitted["items"][0]["id"],second["id"])
+        with self.assertRaises(ValueError): self.gov.query_releases("unknown",50,0)
+
+    def test_audit_query_filters_and_paging(self):
+        release=self.gov.create_release("audit","7")
+        release=self.gov.transition_release(release["id"],"submit","7",release["row_version"])
+        page=self.gov.query_audit(" catalog_release ",release["id"]," release_submit ",50,0)
+        self.assertEqual(page["total"],1)
+        self.assertEqual(page["items"][0]["event_type"],"RELEASE_SUBMIT")
+        self.assertEqual(page["items"][0]["resource_id"],release["id"])
+        bounded=self.gov.query_audit(limit=999,offset=-5)
+        self.assertEqual(bounded["limit"],200)
+        self.assertEqual(bounded["offset"],0)
+        self.assertGreaterEqual(bounded["total"],2)
 
 if __name__=="__main__": unittest.main()
