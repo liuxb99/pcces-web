@@ -57,6 +57,7 @@ class BudgetTraceService:
             "kind": row["kind"], "input": json.loads(row["input_json"]),
             "steps": json.loads(row["steps_json"]), "result": row["result"],
             "created_at": row["created_at"].isoformat(),
+            "deep_link": f"/app/projects/by-code/{row['project_code']}/traceability?trace={row['id']}",
         }
 
     def list_project(self, project_code: str) -> list[dict]:
