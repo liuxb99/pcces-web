@@ -7,7 +7,7 @@
 PCCES 的復刻不再只有 Web 版，而是由同一套 Legacy 規格同步產出兩個正式實作：
 
 1. **PCCES Web**：瀏覽器使用的多人、集中式部署版本。
-2. **PCCES Local Go**：可在 Windows／Linux 本機執行的 Go 桌面或本地服務版本。
+2. **PCCES Local Go**：可在 Windows／Linux 本機執行的 Go 桌面或本地服務版本，正式資料庫固定使用 SQLite。
 
 兩個版本都必須以 PCCES C# 桌面版為行為基準，完整復刻功能、業務規則、計算、資料交換、權限、狀態轉換與報表能力。
 
@@ -17,8 +17,8 @@ PCCES C# Legacy
 Legacy Feature Tree／Source Index／Detailed Spec
       ↓
 Shared Domain Contract／Data Contract／Golden Fixtures
-      ├── PCCES Web
-      └── PCCES Local Go
+      ├── PCCES Web（PostgreSQL）
+      └── PCCES Local Go（SQLite）
 ```
 
 ## 2. 核心原則
@@ -52,21 +52,31 @@ Web 與 Go 可以有不同 UI、儲存方式與部署模式，但 Domain 結果�
 
 ### 2.3 Go 版不是 Web API 的簡化包裝
 
-Local Go 必須能在沒有 Web 伺服器的情況下完成主要工作：
+Local Go 必須能在沒有 Web 伺服器與 PostgreSQL 的情況下完成主要工作：
 
-- 本地專案資料庫。
+- 使用 SQLite 保存完整本地專案資料。
 - 預算、工料機、契約及履約計算。
 - Legacy 檔案匯入匯出。
 - 報表輸出。
 - 本地備份與復原。
 - 可選擇單機 UI、CLI 或 localhost UI。
 
-### 2.4 可共享資料，不能共享錯誤假設
+### 2.4 Local Go 資料庫固定為 SQLite
+
+這是不可回退的架構決策：
+
+- Local Go 正式執行時只依賴 SQLite。
+- 不要求安裝 PostgreSQL、SQL Server 或其他外部資料庫。
+- SQLite schema、migration、索引、外鍵、transaction、WAL、backup 與 integrity check 都是正式產品能力。
+- 可提供資料交換或同步工具與 Web PostgreSQL 對接，但不能把 PostgreSQL 當成本地 Go 執行依賴。
+- 所有 Local Go 測試必須在 SQLite 上執行，不得只用 mock repository 取代。
+
+### 2.5 可共享資料，不能共享錯誤假設
 
 Web 與 Go 應共用：
 
 - OpenAPI／JSON Schema 或等效資料契約。
-- SQLite／PostgreSQL 可對映 Schema。
+- SQLite／PostgreSQL 欄位與語意對映規格。
 - Legacy Code Catalog。
 - Calculation fixtures。
 - Import／export test files。
@@ -93,11 +103,11 @@ Web 與 Go 應共用：
   cmd/pcces-server
   internal/domain
   internal/application
-  internal/storage
+  internal/storage/sqlite
   internal/importexport
   internal/report
   internal/platform
-  migrations
+  migrations/sqlite
 ```
 
 ### Web 版
@@ -110,10 +120,12 @@ Web 與 Go 應共用：
 ### Local Go 版
 
 - Go Domain 與 Application Service。
-- SQLite 為預設本地資料庫，必要時可連 PostgreSQL。
+- SQLite 為唯一正式本地資料庫。
 - CLI＋本地 HTTP API 作為第一層穩定介面。
 - 桌面 UI 可採 Wails 或其他 Go-compatible shell，但 UI 技術不得反向綁死 Domain。
-- 可單檔或可攜式部署，支援離線工作。
+- 可單檔或可攜式部署，支援完全離線工作。
+- 預設啟用 SQLite foreign keys；正式模式採 WAL 或經驗證的等效 journal policy。
+- 金額、數量、單價與費率不得使用 SQLite binary float 作正式儲存；應使用可逆的定點整數、decimal string 或經 ADR 核准的 Numeric codec。
 
 ## 4. 每個 Phase 的雙軌交付物
 
@@ -128,18 +140,19 @@ Web 與 Go 應共用：
 
 ### Web Track
 
-- Migration。
+- PostgreSQL Migration。
 - Backend domain／service／repository／API。
 - React UI。
 - Web unit／integration／E2E tests。
 
 ### Go Track
 
-- Go domain／application／storage。
+- Go domain／application／SQLite storage。
 - SQLite migration。
 - CLI 或 local API。
 - Local UI（該 Phase 需要時）。
 - Go unit／integration／golden tests。
+- SQLite backup／restore／integrity tests。
 
 ### Cross-target Verification
 
@@ -147,8 +160,8 @@ Web 與 Go 應共用：
 
 ```text
 Legacy C# result
-Web result
-Local Go result
+Web/PostgreSQL result
+Local Go/SQLite result
 ```
 
 三者在允許差異外應完全一致。任何允許差異必須有 ADR。
@@ -165,12 +178,15 @@ Phase 0 必須同步建立 Go 基礎，不可等 Web 全部完成後才補：
 - `pcces-server` localhost API。
 - Windows／Linux build。
 
-### P0-G2：本地資料庫與 Migration
+### P0-G2：SQLite 本地資料庫與 Migration
 
-- SQLite schema。
-- Decimal 儲存政策。
-- row version、audit、transaction。
-- 與 Web PostgreSQL schema 的欄位對映測試。
+- 建立唯一正式 SQLite schema。
+- SQLite migration runner 與 schema version table。
+- Decimal／Numeric codec 與跨平台一致性測試。
+- foreign keys、unique constraints、indexes、row version、audit、transaction。
+- WAL、busy timeout、single-writer conflict 與 crash recovery policy。
+- online backup、restore、integrity check 與 damaged-file handling。
+- 與 Web PostgreSQL schema 的欄位和 Domain 語意對映測試。
 
 ### P0-G3：Function Code／Module／Action
 
@@ -214,18 +230,19 @@ CROSS_TARGET_STATUS
 1. Legacy Feature Tree 100% 可追溯。
 2. Web 版全部 P0 Feature 達到 `VERIFIED`。
 3. Local Go 版全部 P0 Feature 達到 `VERIFIED`。
-4. Web 與 Go 使用相同 Feature ID、規格、錯誤碼與 Golden Fixture。
-5. 計算、狀態、匯入匯出與報表通過 Legacy／Web／Go 三方對照。
-6. Web 可正式部署；Go 可離線安裝與執行。
-7. 不允許以「Web 已完成，所以 Go 可以之後再說」作為 Phase 完成判斷。
+4. Local Go 可只憑執行檔、SQLite 資料檔及必要資源完全離線運行。
+5. Web 與 Go 使用相同 Feature ID、規格、錯誤碼與 Golden Fixture。
+6. 計算、狀態、匯入匯出與報表通過 Legacy／Web／Go 三方對照。
+7. Web 可正式部署；Go 可離線安裝、備份、復原與執行。
+8. 不允許以「Web 已完成，所以 Go 可以之後再說」作為 Phase 完成判斷。
 
 ## 8. 開發順序
 
 ```text
 Legacy 局部深讀
 → Shared Contract
-→ Web Domain／API
-→ Go Domain／Local API
+→ Web Domain／PostgreSQL／API
+→ Go Domain／SQLite／Local API
 → Web UI／Go Local UI
 → Shared Golden Tests
 → Legacy 三方對照
