@@ -8,6 +8,7 @@ from uuid import uuid4
 from flask import Blueprint, jsonify, request
 from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, Text, and_, select, update
 
+from api.contract_changes import ContractChangeService
 from api.contract_core import contracts_v2, contract_items_v2
 
 metadata = MetaData()
@@ -39,6 +40,7 @@ class ContractGovernanceService:
     def __init__(self, engine):
         self.engine = engine
         metadata.create_all(engine)
+        self.changes = ContractChangeService(engine)
 
     def _snapshot(self, conn, contract_id):
         contract = conn.execute(select(contracts_v2).where(contracts_v2.c.id == contract_id)).mappings().first()
@@ -124,5 +126,20 @@ def build_contract_governance_blueprint(service, resolve_user_id):
         except LookupError as exc: return jsonify({"code": "NOT_FOUND", "detail": str(exc)}), 404
         except RuntimeError as exc: return jsonify({"code": "CONFLICT", "detail": str(exc)}), 409
         except ValueError as exc: return jsonify({"code": "INVALID_TRANSITION", "detail": str(exc)}), 400
+
+    @bp.post("/<contract_id>/changes")
+    def create_change(contract_id):
+        actor = resolve_user_id()
+        if actor is None: return jsonify({"code": "UNAUTHORIZED"}), 401
+        try: return jsonify(service.changes.create(contract_id, request.get_json(silent=True) or {}, str(actor))), 201
+        except LookupError as exc: return jsonify({"code": "NOT_FOUND", "detail": str(exc)}), 404
+        except PermissionError as exc: return jsonify({"code": "READ_ONLY", "detail": str(exc)}), 409
+        except RuntimeError as exc: return jsonify({"code": "CONFLICT", "detail": str(exc)}), 409
+        except ValueError as exc: return jsonify({"code": "INVALID_ARGUMENT", "detail": str(exc)}), 400
+
+    @bp.get("/changes/<change_id>")
+    def get_change(change_id):
+        try: return jsonify(service.changes.get(change_id))
+        except LookupError as exc: return jsonify({"code": "NOT_FOUND", "detail": str(exc)}), 404
 
     return bp
