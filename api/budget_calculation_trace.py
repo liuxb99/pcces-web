@@ -29,6 +29,8 @@ class BudgetTraceService:
         metadata.create_all(engine)
 
     def calculate(self, project_code: str, item_id: str | None, kind: str, scale: int, payload: dict) -> dict:
+        if not project_code:
+            raise ValueError("project_code is required")
         trace = calculate_budget_kind(kind, payload, scale)
         trace_id = str(uuid4())
         row = {
@@ -76,8 +78,6 @@ def build_budget_trace_blueprint(service: BudgetTraceService, resolve_user_id):
             result = service.calculate(str(body.get("project_code", "")), body.get("item_id"), str(body.get("kind", "")), int(body.get("scale", 2)), body.get("input", {}))
         except (ValueError, ArithmeticError) as exc:
             return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}), 400
-        if not body.get("project_code"):
-            return jsonify({"code":"INVALID_ARGUMENT","detail":"project_code is required"}), 400
         return jsonify(result), 201
 
     @bp.get("/traces/<trace_id>")
