@@ -4,7 +4,9 @@ import json
 from datetime import datetime, timezone
 from uuid import uuid4
 from flask import Blueprint, jsonify, request
-from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, Text, and_, select
+from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, Text, select
+
+from api.conversion_wizard import ALLOWED_MODES, ConversionWizardService, build_preflight_report
 
 metadata = MetaData()
 conversion_sessions = Table(
@@ -23,6 +25,7 @@ conversion_sessions = Table(
     Column("row_version", Integer, nullable=False, default=1),
 )
 
+
 class BudgetBidConversionService:
     def __init__(self, engine):
         self.engine = engine
@@ -35,15 +38,17 @@ class BudgetBidConversionService:
         mode = str(body.get("mode", "CREATE")).strip().upper()
         if not source_project or not source_version or not target_project:
             raise ValueError("source project, source version and target bid project are required")
-        if mode not in {"CREATE", "REPLACE", "APPEND"}:
+        if mode not in ALLOWED_MODES:
             raise ValueError("mode must be CREATE, REPLACE or APPEND")
         source_items = list(body.get("budget_items") or [])
-        if not source_items:
-            raise ValueError("budget_items are required")
+        options = dict(body.get("options") or {})
+        report = build_preflight_report(source_items, mode, options)
+        if not report["can_continue"]:
+            raise ValueError("conversion preflight contains blocking errors")
         converted = []
         seen = set()
         for index, raw in enumerate(source_items):
-            item_id = str(raw.get("id", "")).strip() or f"ROW-{index+1}"
+            item_id = str(raw.get("id", "")).strip()
             if item_id in seen:
                 raise ValueError("duplicate source budget item id")
             seen.add(item_id)
@@ -61,7 +66,6 @@ class BudgetBidConversionService:
         converted.sort(key=lambda item: (item["sort_order"], item["code"], item["source_budget_item_id"]))
         session_id = str(uuid4())
         now = datetime.now(timezone.utc)
-        options = dict(body.get("options") or {})
         with self.engine.begin() as conn:
             if mode == "CREATE" and conn.execute(select(conversion_sessions.c.id).where(
                 conversion_sessions.c.target_bid_project_code == target_project
@@ -100,6 +104,35 @@ class BudgetBidConversionService:
 
 def build_budget_bid_conversion_blueprint(service: BudgetBidConversionService, resolve_user_id):
     bp = Blueprint("budget_bid_conversion", __name__, url_prefix="/api/conversions")
+    wizard = ConversionWizardService(service.engine)
+
+    @bp.post("/preflight")
+    def preflight():
+        if resolve_user_id() is None:
+            return jsonify({"code": "UNAUTHORIZED"}), 401
+        body = request.get_json(silent=True) or {}
+        mode = str(body.get("mode", "CREATE")).upper()
+        if mode not in ALLOWED_MODES:
+            return jsonify({"code": "INVALID_ARGUMENT", "detail": "mode must be CREATE, REPLACE or APPEND"}), 400
+        return jsonify(build_preflight_report(list(body.get("budget_items") or []), mode, dict(body.get("options") or {})))
+
+    @bp.post("/wizard-sessions")
+    def create_wizard_session():
+        actor = resolve_user_id()
+        if actor is None:
+            return jsonify({"code": "UNAUTHORIZED"}), 401
+        try:
+            return jsonify(wizard.create(request.get_json(silent=True) or {}, str(actor))), 201
+        except ValueError as exc:
+            return jsonify({"code": "INVALID_ARGUMENT", "detail": str(exc)}), 400
+
+    @bp.get("/wizard-sessions/<session_id>")
+    def get_wizard_session(session_id: str):
+        try:
+            return jsonify(wizard.get(session_id))
+        except LookupError as exc:
+            return jsonify({"code": "NOT_FOUND", "detail": str(exc)}), 404
+
     @bp.post("/budget-to-bid")
     def convert():
         actor = resolve_user_id()
@@ -111,10 +144,12 @@ def build_budget_bid_conversion_blueprint(service: BudgetBidConversionService, r
             return jsonify({"code": "INVALID_ARGUMENT", "detail": str(exc)}), 400
         except RuntimeError:
             return jsonify({"code": "CONFLICT", "detail": "target bid project already has a conversion"}), 409
+
     @bp.get("/sessions/<session_id>")
     def get_session(session_id: str):
         try:
             return jsonify(service.get(session_id))
         except LookupError as exc:
             return jsonify({"code": "NOT_FOUND", "detail": str(exc)}), 404
+
     return bp
