@@ -8,6 +8,7 @@ from sqlalchemy import select
 from api.authorization import AuthorizationService, build_authorization_blueprint
 from api.index import app, decode_token, engine
 from api.models import Base, User
+from api.recovery import RecoveryService, build_recovery_blueprint
 from api.route_policy import action_for_request, initialize_authorization
 from api.work_context import WorkContextService, build_work_context_blueprint
 
@@ -34,6 +35,8 @@ with engine.connect() as connection:
 initialize_authorization(authorization_service, existing_user_ids)
 work_context_service = WorkContextService(engine)
 work_context_service.create_schema()
+recovery_service = RecoveryService(engine, work_context_service)
+recovery_service.create_schema()
 
 
 @app.before_request
@@ -58,5 +61,9 @@ if "authorization" not in app.blueprints:
     app.register_blueprint(build_authorization_blueprint(authorization_service, resolve_user_id))
 if "work_context" not in app.blueprints:
     app.register_blueprint(build_work_context_blueprint(work_context_service, resolve_user_id))
+if "recovery" not in app.blueprints:
+    app.register_blueprint(build_recovery_blueprint(recovery_service, resolve_user_id))
 
-__all__ = ["app", "authorization_service", "work_context_service", "resolve_user_id"]
+__all__ = [
+    "app", "authorization_service", "work_context_service", "recovery_service", "resolve_user_id"
+]
