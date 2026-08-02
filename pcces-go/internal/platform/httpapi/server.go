@@ -15,13 +15,13 @@ import (
 
 // Server exposes the Local Go application to a future desktop shell and CLI.
 type Server struct {
-	logger    *slog.Logger
-	store     *sqlite.Store
-	catalog   *sqlite.CatalogRepository
-	contexts  *sqlite.WorkContextRepository
-	settings  *sqlite.SettingsRepository
-	recovery  *sqlite.RecoveryRepository
-	mux       *http.ServeMux
+	logger   *slog.Logger
+	store    *sqlite.Store
+	catalog  *sqlite.CatalogRepository
+	contexts *sqlite.WorkContextRepository
+	settings *sqlite.SettingsRepository
+	recovery *sqlite.RecoveryRepository
+	mux      *http.ServeMux
 }
 
 func New(logger *slog.Logger, store *sqlite.Store) *Server {
@@ -51,8 +51,9 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("GET /api/catalog/function-codes", s.listFunctionCodes)
 	s.mux.HandleFunc("GET /api/catalog/actions", s.listActions)
 	s.mux.HandleFunc("GET /api/capabilities/{actionCode}", s.capability)
+	s.authorizationRoutes()
 	s.mux.HandleFunc("GET /api/work-contexts/{id}", s.getWorkContext)
-	s.mux.HandleFunc("PUT /api/work-contexts/{id}", s.putWorkContext)
+	s.mux.HandleFunc("PUT /api/work-contexts/{id}", s.authorizeWorkContext(s.putWorkContext))
 	s.mux.HandleFunc("DELETE /api/work-contexts/{id}", s.deleteWorkContext)
 
 	s.mux.HandleFunc("GET /api/settings", s.listSettings)
