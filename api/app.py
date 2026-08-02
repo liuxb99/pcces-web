@@ -9,6 +9,7 @@ from api.authorization import AuthorizationService, build_authorization_blueprin
 from api.bid_lifecycle import BidLifecycleService, build_bid_lifecycle_blueprint
 from api.budget_approval import BudgetApprovalService, build_budget_approval_blueprint
 from api.budget_approval_guard import install_budget_approval_guard
+from api.budget_bid_conversion import BudgetBidConversionService, build_budget_bid_conversion_blueprint
 from api.budget_calculation_trace import BudgetTraceService, build_budget_trace_blueprint
 from api.budget_cross_project_sync import BudgetCrossProjectSyncService, build_budget_cross_project_blueprint
 from api.budget_decimal import BudgetDecimalService, build_budget_decimal_blueprint
@@ -75,6 +76,7 @@ budget_approval_service = BudgetApprovalService(engine, SessionLocal, budget_ver
 budget_validation_service = BudgetValidationService(engine)
 budget_cross_project_service = BudgetCrossProjectSyncService(engine)
 bid_lifecycle_service = BidLifecycleService(engine)
+budget_bid_conversion_service = BudgetBidConversionService(engine)
 mrs_catalog_service = MRSCatalogService(engine)
 mrs_code_service = MRSCodeService()
 mrs_exchange_service = MRSExchangeService(mrs_catalog_service)
@@ -137,68 +139,47 @@ def enforce_canonical_authentication_and_capability():
     return None
 
 
-if "authorization" not in app.blueprints:
-    app.register_blueprint(build_authorization_blueprint(authorization_service, resolve_user_id))
-if "work_context" not in app.blueprints:
-    app.register_blueprint(build_work_context_blueprint(work_context_service, resolve_user_id))
-if "recovery" not in app.blueprints:
-    app.register_blueprint(build_recovery_blueprint(recovery_service, resolve_user_id))
-if "budget_decimal" not in app.blueprints:
-    app.register_blueprint(build_budget_decimal_blueprint(budget_decimal_service, resolve_user_id))
-if "budget_versions" not in app.blueprints:
-    app.register_blueprint(build_budget_version_blueprint(budget_version_service, resolve_user_id))
-if "budget_approval" not in app.blueprints:
-    app.register_blueprint(build_budget_approval_blueprint(budget_approval_service, resolve_user_id))
-if "budget_validation" not in app.blueprints:
-    app.register_blueprint(build_budget_validation_blueprint(budget_validation_service, resolve_user_id))
-if "budget_cross_project" not in app.blueprints:
-    app.register_blueprint(build_budget_cross_project_blueprint(budget_cross_project_service, resolve_user_id))
-if "bid_lifecycle" not in app.blueprints:
-    app.register_blueprint(build_bid_lifecycle_blueprint(bid_lifecycle_service, resolve_user_id))
-if "mrs_catalog" not in app.blueprints:
-    app.register_blueprint(build_mrs_catalog_blueprint(mrs_catalog_service, resolve_user_id))
-if "mrs_code" not in app.blueprints:
-    app.register_blueprint(build_mrs_code_blueprint(mrs_code_service, resolve_user_id))
-if "mrs_exchange" not in app.blueprints:
-    app.register_blueprint(build_mrs_exchange_blueprint(mrs_exchange_service, resolve_user_id))
-if "mrs_intelligence" not in app.blueprints:
-    app.register_blueprint(build_mrs_intelligence_blueprint(mrs_intelligence_service, resolve_user_id))
-if "mrs_operations" not in app.blueprints:
-    app.register_blueprint(build_mrs_operations_blueprint(mrs_operations_service, resolve_user_id))
-if "mrs_governance" not in app.blueprints:
-    app.register_blueprint(build_mrs_governance_blueprint(mrs_governance_service, resolve_user_id))
-if "mrs_history_apply" not in app.blueprints:
-    app.register_blueprint(build_mrs_history_apply_blueprint(mrs_history_apply_service, resolve_user_id))
-if "resource_decimal" not in app.blueprints:
-    app.register_blueprint(build_resource_decimal_blueprint(resource_decimal_service, resolve_user_id))
-if "resource_budget_lineage" not in app.blueprints:
-    app.register_blueprint(build_resource_budget_lineage_blueprint(resource_budget_lineage_service, resolve_user_id))
-if "resource_budget_links" not in app.blueprints:
-    app.register_blueprint(build_resource_budget_links_blueprint(resource_budget_link_service, resolve_user_id))
-if "resource_dependency" not in app.blueprints:
-    app.register_blueprint(build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
-if "budget_trace" not in app.blueprints:
-    app.register_blueprint(build_budget_trace_blueprint(budget_trace_service, resolve_user_id))
-if "cost_structure" not in app.blueprints:
-    app.register_blueprint(build_cost_structure_blueprint(cost_structure_service, resolve_user_id))
-if "cost_structure_details" not in app.blueprints:
-    app.register_blueprint(build_cost_structure_detail_blueprint(cost_structure_detail_service, resolve_user_id))
-if "cost_structure_calculation" not in app.blueprints:
-    app.register_blueprint(build_cost_structure_calculation_blueprint(resolve_user_id))
-if "project_cost_structure_run" not in app.blueprints:
-    app.register_blueprint(build_project_cost_structure_run_blueprint(project_cost_structure_run_service, resolve_user_id))
-if "cost_structure_run_versions" not in app.blueprints:
-    app.register_blueprint(build_cost_structure_run_version_blueprint(cost_structure_run_version_service, resolve_user_id))
+def register(name, blueprint):
+    if name not in app.blueprints:
+        app.register_blueprint(blueprint)
+
+register("authorization", build_authorization_blueprint(authorization_service, resolve_user_id))
+register("work_context", build_work_context_blueprint(work_context_service, resolve_user_id))
+register("recovery", build_recovery_blueprint(recovery_service, resolve_user_id))
+register("budget_decimal", build_budget_decimal_blueprint(budget_decimal_service, resolve_user_id))
+register("budget_versions", build_budget_version_blueprint(budget_version_service, resolve_user_id))
+register("budget_approval", build_budget_approval_blueprint(budget_approval_service, resolve_user_id))
+register("budget_validation", build_budget_validation_blueprint(budget_validation_service, resolve_user_id))
+register("budget_cross_project", build_budget_cross_project_blueprint(budget_cross_project_service, resolve_user_id))
+register("bid_lifecycle", build_bid_lifecycle_blueprint(bid_lifecycle_service, resolve_user_id))
+register("budget_bid_conversion", build_budget_bid_conversion_blueprint(budget_bid_conversion_service, resolve_user_id))
+register("mrs_catalog", build_mrs_catalog_blueprint(mrs_catalog_service, resolve_user_id))
+register("mrs_code", build_mrs_code_blueprint(mrs_code_service, resolve_user_id))
+register("mrs_exchange", build_mrs_exchange_blueprint(mrs_exchange_service, resolve_user_id))
+register("mrs_intelligence", build_mrs_intelligence_blueprint(mrs_intelligence_service, resolve_user_id))
+register("mrs_operations", build_mrs_operations_blueprint(mrs_operations_service, resolve_user_id))
+register("mrs_governance", build_mrs_governance_blueprint(mrs_governance_service, resolve_user_id))
+register("mrs_history_apply", build_mrs_history_apply_blueprint(mrs_history_apply_service, resolve_user_id))
+register("resource_decimal", build_resource_decimal_blueprint(resource_decimal_service, resolve_user_id))
+register("resource_budget_lineage", build_resource_budget_lineage_blueprint(resource_budget_lineage_service, resolve_user_id))
+register("resource_budget_links", build_resource_budget_links_blueprint(resource_budget_link_service, resolve_user_id))
+register("resource_dependency", build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
+register("budget_trace", build_budget_trace_blueprint(budget_trace_service, resolve_user_id))
+register("cost_structure", build_cost_structure_blueprint(cost_structure_service, resolve_user_id))
+register("cost_structure_details", build_cost_structure_detail_blueprint(cost_structure_detail_service, resolve_user_id))
+register("cost_structure_calculation", build_cost_structure_calculation_blueprint(resolve_user_id))
+register("project_cost_structure_run", build_project_cost_structure_run_blueprint(project_cost_structure_run_service, resolve_user_id))
+register("cost_structure_run_versions", build_cost_structure_run_version_blueprint(cost_structure_run_version_service, resolve_user_id))
 
 install_budget_submission_gate(app, budget_validation_service, resolve_user_id)
 
 __all__ = [
     "app", "authorization_service", "work_context_service", "recovery_service", "persistence_service",
     "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service",
-    "budget_cross_project_service", "bid_lifecycle_service", "mrs_catalog_service", "mrs_code_service",
-    "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service",
-    "mrs_history_apply_service", "resource_decimal_service", "resource_budget_lineage_service",
-    "resource_budget_link_service", "resource_dependency_graph_service", "budget_trace_service",
-    "cost_structure_service", "cost_structure_detail_service", "project_cost_structure_run_service",
-    "cost_structure_run_version_service", "resolve_user_id",
+    "budget_cross_project_service", "bid_lifecycle_service", "budget_bid_conversion_service",
+    "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service", "mrs_intelligence_service",
+    "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service", "resource_decimal_service",
+    "resource_budget_lineage_service", "resource_budget_link_service", "resource_dependency_graph_service",
+    "budget_trace_service", "cost_structure_service", "cost_structure_detail_service",
+    "project_cost_structure_run_service", "cost_structure_run_version_service", "resolve_user_id",
 ]
