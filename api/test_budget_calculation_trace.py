@@ -1,5 +1,5 @@
 import unittest
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, select
 
 from api.budget_calculation_trace import BudgetTraceService, budget_calculation_traces
 
@@ -18,10 +18,10 @@ class BudgetCalculationTraceTests(unittest.TestCase):
 
     def test_trace_is_append_only(self):
         trace = self.service.calculate("P1", None, "L", 2, {"quantity":"2", "unit_price":"3"})
-        with self.engine.begin() as conn:
-            count = conn.execute(budget_calculation_traces.count() if hasattr(budget_calculation_traces, "count") else budget_calculation_traces.select()).fetchall()
+        with self.engine.connect() as conn:
+            rows = conn.execute(select(budget_calculation_traces.c.id)).all()
         self.assertEqual("6.00", trace["result"])
-        self.assertEqual(1, len(count))
+        self.assertEqual(1, len(rows))
 
     def test_invalid_kind_does_not_persist(self):
         with self.assertRaises(ValueError):
