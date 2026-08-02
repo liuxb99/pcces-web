@@ -5,19 +5,27 @@ on:
     branches: [main]
     paths:
       - "api/cost_structure.py"
+      - "api/cost_structure_details.py"
       - "api/test_cost_structure.py"
+      - "api/test_cost_structure_details.py"
+      - "api/app.py"
       - "pcces-go/internal/storage/sqlite/cost_structure*"
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
-      - "pcces-go/internal/platform/httpapi/cost_structure_handlers.go"
+      - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
+      - "pcces-go/internal/platform/httpapi/cost_structure*"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
       - ".github/workflows/phase4-cost-structure.yml"
   pull_request:
     paths:
       - "api/cost_structure.py"
+      - "api/cost_structure_details.py"
       - "api/test_cost_structure.py"
+      - "api/test_cost_structure_details.py"
+      - "api/app.py"
       - "pcces-go/internal/storage/sqlite/cost_structure*"
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
-      - "pcces-go/internal/platform/httpapi/cost_structure_handlers.go"
+      - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
+      - "pcces-go/internal/platform/httpapi/cost_structure*"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
   workflow_dispatch:
 
@@ -31,7 +39,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python -m unittest api.test_cost_structure
+      - run: python -m unittest api.test_cost_structure api.test_cost_structure_details
 
   go-cost-structure:
     runs-on: ubuntu-latest
@@ -45,6 +53,6 @@ jobs:
           go-version: "1.24.x"
           cache-dependency-path: pcces-go/go.sum
       - name: Format check
-        run: test -z "$(gofmt -l internal/storage/sqlite/cost_structure.go internal/storage/sqlite/cost_structure_test.go internal/platform/httpapi/cost_structure_handlers.go internal/platform/httpapi/authorization_handlers.go)"
+        run: test -z "$(gofmt -l internal/storage/sqlite/cost_structure*.go internal/platform/httpapi/cost_structure*.go internal/platform/httpapi/authorization_handlers.go)"
       - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
       - run: go vet ./...
