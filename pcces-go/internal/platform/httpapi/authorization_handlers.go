@@ -26,6 +26,7 @@ func (s *Server) authorizationRoutes() {
 	s.bidLifecycleRoutes()
 	s.mrsCatalogRoutes()
 	s.mrsIntelligenceRoutes()
+	s.mrsOperationsRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
