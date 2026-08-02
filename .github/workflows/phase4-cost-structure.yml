@@ -7,6 +7,7 @@ on:
       - "api/cost_structure*.py"
       - "api/test_cost_structure*.py"
       - "api/app.py"
+      - "web-pcces/frontend/src/costStructureApi.ts"
       - "pcces-go/internal/storage/sqlite/cost_structure*"
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
@@ -20,6 +21,7 @@ on:
       - "api/cost_structure*.py"
       - "api/test_cost_structure*.py"
       - "api/app.py"
+      - "web-pcces/frontend/src/costStructureApi.ts"
       - "pcces-go/internal/storage/sqlite/cost_structure*"
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
@@ -46,6 +48,22 @@ jobs:
           api.test_cost_structure_calculation
           api.test_cost_structure_project_run
           api.test_cost_structure_run_versions
+          api.test_cost_structure_canonical_contract
+
+  frontend-cost-structure:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web-pcces/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web-pcces/frontend/package-lock.json
+      - run: npm ci
+      - run: npm run build
 
   go-cost-structure:
     runs-on: ubuntu-latest
