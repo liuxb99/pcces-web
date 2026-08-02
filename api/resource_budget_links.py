@@ -7,6 +7,7 @@ from sqlalchemy import and_, func, select
 from api.budget_decimal import budget_items_decimal
 from api.resource_budget_lineage import resource_budget_links
 from api.resource_decimal import resources_decimal
+from api.resource_operations import ResourceOperationsService
 
 
 class ResourceBudgetLinkService:
@@ -43,25 +44,15 @@ class ResourceBudgetLinkService:
     def list_resource_references(self, project_code: str, resource_id: str, limit: int = 50, offset: int = 0) -> dict:
         limit, offset = self._page(limit, offset)
         with self.engine.connect() as conn:
-            stmt = select(
-                resource_budget_links.c.id.label("link_id"),
-                resource_budget_links.c.project_code,
-                resource_budget_links.c.resource_id,
-                resource_budget_links.c.budget_item_id,
-                budget_items_decimal.c.kind,
-                budget_items_decimal.c.quantity,
-                budget_items_decimal.c.unit_price,
-                budget_items_decimal.c.amount,
-                budget_items_decimal.c.row_version,
-            ).join(budget_items_decimal, budget_items_decimal.c.id == resource_budget_links.c.budget_item_id).where(and_(
-                resource_budget_links.c.project_code == project_code,
-                resource_budget_links.c.resource_id == resource_id,
-            )).order_by(budget_items_decimal.c.id)
+            stmt = select(resource_budget_links, budget_items_decimal).join(
+                budget_items_decimal, budget_items_decimal.c.id == resource_budget_links.c.budget_item_id
+            ).where(and_(resource_budget_links.c.project_code == project_code,
+                         resource_budget_links.c.resource_id == resource_id)).order_by(budget_items_decimal.c.id)
             rows = conn.execute(stmt).mappings().all()
-        items = [{"link_id": row["link_id"], "project_code": row["project_code"], "resource_id": row["resource_id"],
-                  "budget_item_id": row["budget_item_id"], "item_type": row["kind"],
-                  "quantity": str(row["quantity"]), "unit_price": str(row["unit_price"]),
-                  "amount": str(row["amount"]), "row_version": row["row_version"],
+        items = [{"link_id": row["id"], "project_code": project_code, "resource_id": resource_id,
+                  "budget_item_id": row["budget_item_id"], "item_type": row.get("kind"),
+                  "quantity": str(row.get("quantity")), "unit_price": str(row.get("unit_price")),
+                  "amount": str(row.get("amount")), "row_version": row.get("row_version"),
                   "deep_link": f"/app/budget/{project_code}?item={row['budget_item_id']}"} for row in rows]
         return {"items": items[offset:offset + limit], "total": len(items), "limit": limit, "offset": offset}
 
@@ -77,6 +68,7 @@ class ResourceBudgetLinkService:
 
 def build_resource_budget_links_blueprint(service: ResourceBudgetLinkService, resolve_user_id):
     bp = Blueprint("resource_budget_links", __name__, url_prefix="/api/decimal-resources")
+    operations = ResourceOperationsService(service.engine)
 
     def authenticated():
         return resolve_user_id() is not None
@@ -99,5 +91,24 @@ def build_resource_budget_links_blueprint(service: ResourceBudgetLinkService, re
         if not service.unlink(project_code, resource_id, budget_item_id):
             return jsonify({"code": "NOT_FOUND", "detail": "resource reference not found"}), 404
         return "", 204
+
+    @bp.post("/projects/<project_code>/replace")
+    def replace(project_code: str):
+        if not authenticated(): return jsonify({"code":"UNAUTHORIZED"}),401
+        body=request.get_json(silent=True) or {}
+        try:
+            return jsonify(operations.replace(project_code,str(body.get("source_resource_id","")),
+                str(body.get("target_resource_id","")),str(resolve_user_id())))
+        except ValueError as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+
+    @bp.post("/batch-prices")
+    def batch_prices():
+        if not authenticated(): return jsonify({"code":"UNAUTHORIZED"}),401
+        body=request.get_json(silent=True) or {}
+        try: return jsonify(operations.batch_prices(body.get("updates") or [],str(body.get("trigger") or "BATCH_RESOURCE_PRICE_UPDATE")))
+        except ValueError as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+        except RuntimeError as exc: return jsonify({"code":"CONFLICT","detail":str(exc)}),409
 
     return bp
