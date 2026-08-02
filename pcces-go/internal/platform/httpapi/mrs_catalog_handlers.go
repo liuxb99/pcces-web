@@ -1,6 +1,7 @@
 package httpapi
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/liuxb99/pcces-web/pcces-go/internal/storage/sqlite"
@@ -17,6 +18,7 @@ func (s *Server) mrsCatalogRoutes(){
 	s.mux.HandleFunc("PUT /api/mrs/analysis-recipes/{id}",s.putMRSRecipe)
 	s.mux.HandleFunc("GET /api/mrs/analysis-recipes/{id}/calculate",s.calculateMRSRecipe)
 	s.mux.HandleFunc("POST /api/mrs/analysis-recipes/{id}/versions/{versionID}/apply-rates",s.applyMRSRateHistory)
+	s.mux.HandleFunc("GET /api/mrs/projects/{projectCode}/export.xlsx",s.exportMRSProjectExcel)
 	s.mux.HandleFunc("POST /api/mrs/code/validate",s.validateMRSCode)
 	s.mux.HandleFunc("POST /api/mrs/code/fit",s.fitMRSCode)
 	s.resourceOperationRoutes()
@@ -38,5 +40,6 @@ func (s *Server) listMRSBookmarks(w http.ResponseWriter,r *http.Request){q:=r.UR
 func (s *Server) putMRSRecipe(w http.ResponseWriter,r *http.Request){var body struct{Code string `json:"code"`;Name string `json:"name"`;Unit *string `json:"unit"`;PriceScale int `json:"price_scale"`;RowVersion int64 `json:"row_version"`;Components []sqlite.MRSAnalysisComponent `json:"components"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};item,err:=sqlite.NewMRSCatalogRepository(s.store).SaveRecipe(r.Context(),r.PathValue("id"),body.Code,body.Name,body.Unit,body.PriceScale,body.Components,body.RowVersion);respond(w,item,err)}
 func (s *Server) calculateMRSRecipe(w http.ResponseWriter,r *http.Request){item,err:=sqlite.NewMRSCatalogRepository(s.store).CalculateRecipe(r.Context(),r.PathValue("id"));respond(w,item,err)}
 func (s *Server) applyMRSRateHistory(w http.ResponseWriter,r *http.Request){var body struct{ActorID string `json:"actor_id"`;RowVersion int64 `json:"row_version"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};item,err:=sqlite.NewMRSCatalogRepository(s.store).ApplyHistoricalRates(r.Context(),r.PathValue("id"),r.PathValue("versionID"),body.RowVersion,body.ActorID);respond(w,item,err)}
+func (s *Server) exportMRSProjectExcel(w http.ResponseWriter,r *http.Request){payload,err:=sqlite.NewMRSExcelExporter(s.store).ExportProject(r.Context(),r.PathValue("projectCode"));if err!=nil{writeError(w,err);return};w.Header().Set("Content-Type","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");w.Header().Set("Content-Disposition",fmt.Sprintf("attachment; filename=\"mrs-%s.xlsx\"",r.PathValue("projectCode")));w.WriteHeader(http.StatusOK);_,_=w.Write(payload)}
 func (s *Server) validateMRSCode(w http.ResponseWriter,r *http.Request){var body struct{Code string `json:"code"`;Unit string `json:"unit"`};if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};respond(w,sqlite.ValidateMRSCode(body.Code,body.Unit),nil)}
 func (s *Server) fitMRSCode(w http.ResponseWriter,r *http.Request){var body sqlite.MRSCodeFitRequest;if err:=decodeJSON(r,&body);err!=nil{writeError(w,err);return};respond(w,sqlite.FitMRSCode(body),nil)}
