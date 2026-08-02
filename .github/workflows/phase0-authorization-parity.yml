@@ -1,4 +1,4 @@
-name: Phase 0 Authorization Parity
+name: Phase 0 Cross-Target Parity
 
 on:
   push:
@@ -6,30 +6,32 @@ on:
       - "api/authorization.py"
       - "api/route_policy.py"
       - "api/app.py"
+      - "api/work_context.py"
+      - "api/recovery.py"
       - "api/test_authorization*.py"
       - "api/test_route_policy.py"
+      - "api/test_work_context.py"
+      - "api/test_recovery.py"
       - "pcces-go/internal/domain/authorization/**"
+      - "pcces-go/internal/domain/workcontext/**"
       - "pcces-go/internal/storage/sqlite/**"
       - "pcces-go/internal/platform/httpapi/**"
       - "specs/catalog/phase0-action-catalog.json"
-      - "specs/golden/authorization-decisions.json"
+      - "specs/golden/**"
       - ".github/workflows/phase0-authorization-parity.yml"
   pull_request:
     paths:
-      - "api/authorization.py"
-      - "api/route_policy.py"
-      - "api/app.py"
-      - "api/test_authorization*.py"
-      - "api/test_route_policy.py"
+      - "api/**"
       - "pcces-go/internal/domain/authorization/**"
+      - "pcces-go/internal/domain/workcontext/**"
       - "pcces-go/internal/storage/sqlite/**"
       - "pcces-go/internal/platform/httpapi/**"
       - "specs/catalog/phase0-action-catalog.json"
-      - "specs/golden/authorization-decisions.json"
+      - "specs/golden/**"
       - ".github/workflows/phase0-authorization-parity.yml"
 
 jobs:
-  web-authorization:
+  web-phase0:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,15 +41,17 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: pip install -r requirements.txt
-      - name: Run Web authorization tests
+      - name: Run Web Phase 0 tests
         run: >-
           python -m unittest
           api.test_authorization
           api.test_canonical_entrypoint
           api.test_route_policy
           api.test_authorization_golden
+          api.test_work_context
+          api.test_recovery
 
-  go-authorization:
+  go-phase0:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -59,8 +63,8 @@ jobs:
           go-version: "1.24.x"
           cache-dependency-path: pcces-go/go.sum
       - name: Format check
-        run: test -z "$(gofmt -l internal/domain/authorization internal/storage/sqlite internal/platform/httpapi)"
-      - name: Run Go authorization and SQLite tests
-        run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
+        run: test -z "$(gofmt -l internal/domain/authorization internal/domain/workcontext internal/storage/sqlite internal/platform/httpapi)"
+      - name: Run Go Phase 0 tests
+        run: go test ./internal/domain/workcontext/... ./internal/storage/sqlite/... ./internal/platform/httpapi/...
       - name: Run Go vet
         run: go vet ./...
