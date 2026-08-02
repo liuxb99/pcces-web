@@ -13,8 +13,10 @@ on:
       - "api/test_mrs_*.py"
       - "api/test_resource_*.py"
       - "api/test_legacy_*.py"
+      - "api/test_phase3_traceability.py"
       - "api/route_policy.py"
       - "api/app.py"
+      - "docs/development/phase-3-mrs-traceability-matrix.md"
       - "web-pcces/frontend/src/pages/*.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
@@ -43,8 +45,10 @@ on:
       - "api/test_mrs_*.py"
       - "api/test_resource_*.py"
       - "api/test_legacy_*.py"
+      - "api/test_phase3_traceability.py"
       - "api/route_policy.py"
       - "api/app.py"
+      - "docs/development/phase-3-mrs-traceability-matrix.md"
       - "web-pcces/frontend/src/pages/*.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
@@ -102,6 +106,7 @@ jobs:
           api.test_legacy_resource_decimal_bridge
           api.test_legacy_decimal_adapter
           api.test_route_policy
+          api.test_phase3_traceability
 
   frontend-decimal-core:
     runs-on: ubuntu-latest
