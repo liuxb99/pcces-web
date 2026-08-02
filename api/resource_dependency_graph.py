@@ -6,10 +6,9 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from uuid import uuid4
 
-from flask import Blueprint, jsonify, request
-from sqlalchemy import Column, DateTime, MetaData, String, Table, Text, and_, select
+from flask import Blueprint, jsonify
+from sqlalchemy import Column, DateTime, MetaData, String, Table, Text, select
 
-from api.budget_decimal import budget_items_decimal
 from api.models import BudgetItem, Project, Resource
 from api.resource_budget_lineage import ResourceBudgetLineageService, resource_budget_links
 from api.resource_decimal import resources_decimal
@@ -66,8 +65,7 @@ class ResourceDependencyGraphService:
                 resource = resources.get(item.pcces_code)
                 if not resource:
                     continue
-                link = self.lineage.link(project.code, legacy_resource_id(resource.id), legacy_budget_id(item.id))
-                created.append(link)
+                created.append(self.lineage.link(project.code, legacy_resource_id(resource.id), legacy_budget_id(item.id)))
             return {"project_id": project_id, "project_code": project.code, "matched_links": len(created), "links": created}
         finally:
             db.close()
@@ -85,6 +83,10 @@ class ResourceDependencyGraphService:
             conn.execute(resource_price_history.insert().values(**row))
         return {**row, "created_at": row["created_at"].isoformat(),
                 "deep_link": f"/app/projects/by-code/{project_code}/traceability?resource={resource_id}&history={row['id']}"}
+
+    def record_completed_run(self, project_code: str, resource_id: str | None, result: dict, scope: str = "RESOURCE") -> dict:
+        """Record propagation already performed by the legacy bridge without running it twice."""
+        return self._save_run(project_code, scope, resource_id, result)
 
     def recalculate_resource(self, project_code: str, resource_id: str, trigger: str = "DEPENDENCY_GRAPH_LOCAL") -> dict:
         lineage = self.lineage.propagate(resource_id, trigger)
@@ -195,7 +197,6 @@ def install_resource_automation(app, service: ResourceDependencyGraphService) ->
             project_id = kwargs.get("project_id") or (args[0] if args else None)
             resource_id = kwargs.get("resource_id") or (args[1] if len(args) > 1 else None)
             decimal_id = legacy_resource_id(resource_id)
-            before = None
             with service.engine.connect() as conn:
                 before = conn.execute(select(resources_decimal.c.unit_price).where(resources_decimal.c.id == decimal_id)).first()
             response = _original(*args, **kwargs)
@@ -204,13 +205,16 @@ def install_resource_automation(app, service: ResourceDependencyGraphService) ->
                 db = service.session_factory()
                 try:
                     project = db.query(Project).filter(Project.id == int(project_id)).first()
-                    after = None
                     with service.engine.connect() as conn:
                         after = conn.execute(select(resources_decimal.c.unit_price).where(resources_decimal.c.id == decimal_id)).first()
                     if project and before and after:
                         service.record_price(project.code, decimal_id, str(before[0]), str(after[0]), _endpoint.upper())
                         service.auto_link_project(int(project_id))
-                        service.recalculate_resource(project.code, decimal_id, "RESOURCE_WRITE_AUTOMATION")
+                        payload = response[0].get_json() if isinstance(response, tuple) and hasattr(response[0], "get_json") else (response.get_json() if hasattr(response, "get_json") else {})
+                        service.record_completed_run(project.code, decimal_id, {
+                            "updated_items": int((payload or {}).get("propagated_items", 0)),
+                            "source": _endpoint.upper(),
+                        })
                 finally: db.close()
             return response
         app.view_functions[endpoint] = resource_wrapper
