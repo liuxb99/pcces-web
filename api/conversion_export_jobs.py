@@ -14,6 +14,7 @@ from api.bid_budget_import_apply import BidBudgetImportApplyService
 from api.bid_budget_roundtrip import BidBudgetRoundTripService, detect_and_parse, import_preflight
 from api.budget_combine_bid import BudgetCombineBidService, combine_sources
 from api.conversion_export_lifecycle import ConversionExportLifecycleService, validate_xml
+from api.conversion_source_artifacts import ConversionSourceArtifactService
 
 metadata = MetaData()
 conversion_export_jobs = Table(
@@ -50,6 +51,7 @@ class ConversionExportJobService:
         self.roundtrip = BidBudgetRoundTripService(engine)
         self.import_apply = BidBudgetImportApplyService(engine)
         self.combine_bid = BudgetCombineBidService(engine)
+        self.source_artifacts = ConversionSourceArtifactService(engine)
     def create(self, body, actor):
         wizard_id = str(body.get("wizard_session_id","")).strip(); source = str(body.get("source_budget_version_id","")).strip(); target = str(body.get("target_project_code","")).strip(); fmt = str(body.get("format","BID_JSON")).upper(); items = list(body.get("items") or [])
         if not wizard_id or not source or not target: raise ValueError("wizard_session_id, source_budget_version_id and target_project_code are required")
@@ -160,4 +162,34 @@ def build_conversion_export_job_blueprint(service, resolve_user_id):
     def get_combine_bid_session(session_id):
         try: return jsonify(service.combine_bid.get(session_id))
         except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+    @bp.post("/source-artifacts")
+    def create_source_artifact():
+        actor=resolve_user_id()
+        if actor is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        try: return jsonify(service.source_artifacts.create_source(request.get_json(silent=True) or {},str(actor))),201
+        except ValueError as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+    @bp.get("/source-artifacts/<artifact_id>")
+    def get_source_artifact(artifact_id):
+        try: return jsonify(service.source_artifacts.get_source(artifact_id))
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+    @bp.get("/source-artifacts/<artifact_id>/download")
+    def download_source_artifact(artifact_id):
+        try: content,ctype,filename=service.source_artifacts.source_content(artifact_id)
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+        return Response(content,content_type=ctype,headers={"Content-Disposition":f'attachment; filename="{filename}"'})
+    @bp.post("/error-catalogues")
+    def create_error_catalogue():
+        actor=resolve_user_id()
+        if actor is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        try: return jsonify(service.source_artifacts.create_catalogue(request.get_json(silent=True) or {},str(actor))),201
+        except ValueError as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+    @bp.get("/error-catalogues/<catalogue_id>")
+    def get_error_catalogue(catalogue_id):
+        try: return jsonify(service.source_artifacts.get_catalogue(catalogue_id))
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+    @bp.get("/error-catalogues/<catalogue_id>/download")
+    def download_error_catalogue(catalogue_id):
+        try: content,filename=service.source_artifacts.catalogue_csv(catalogue_id)
+        except LookupError as exc: return jsonify({"code":"NOT_FOUND","detail":str(exc)}),404
+        return Response(content,content_type="text/csv; charset=utf-8",headers={"Content-Disposition":f'attachment; filename="{filename}"'})
     return bp
