@@ -12,7 +12,7 @@ from sqlalchemy import select
 
 from api.authorization import AuthorizationService, build_authorization_blueprint
 from api.index import app, decode_token, engine
-from api.models import User
+from api.models import Base, User
 from api.route_policy import action_for_request, initialize_authorization
 
 _PUBLIC_ENDPOINTS = {
@@ -35,6 +35,9 @@ def resolve_user_id() -> int | None:
         return None
 
 
+# The legacy module historically initialized tables only in selected runtime
+# paths.  The canonical entrypoint must be import-safe for WSGI and tests.
+Base.metadata.create_all(engine)
 authorization_service = AuthorizationService(engine)
 with engine.connect() as connection:
     existing_user_ids = [row[0] for row in connection.execute(select(User.id))]
