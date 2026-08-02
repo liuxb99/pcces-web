@@ -1,0 +1,49 @@
+name: Phase 4 Round-trip Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "api/phase4_roundtrip_audit.py"
+      - "api/test_phase4_roundtrip_audit.py"
+      - "pcces-go/internal/storage/sqlite/phase4_roundtrip_audit*"
+      - "docs/development/phase4-traceability-matrix.md"
+      - ".github/workflows/phase4-roundtrip-audit.yml"
+  pull_request:
+    paths:
+      - "api/phase4_roundtrip_audit.py"
+      - "api/test_phase4_roundtrip_audit.py"
+      - "pcces-go/internal/storage/sqlite/phase4_roundtrip_audit*"
+      - "docs/development/phase4-traceability-matrix.md"
+  workflow_dispatch:
+
+jobs:
+  web-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest api.test_phase4_roundtrip_audit
+      - name: Verify matrix keeps remaining gaps explicit
+        run: |
+          grep -q "P4-16" docs/development/phase4-traceability-matrix.md
+          grep -q "P4-17" docs/development/phase4-traceability-matrix.md
+          grep -q "OPEN" docs/development/phase4-traceability-matrix.md
+
+  go-audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pcces-go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache-dependency-path: pcces-go/go.sum
+      - name: Format check
+        run: test -z "$(gofmt -l internal/storage/sqlite/phase4_roundtrip_audit*.go)"
+      - run: go test ./internal/storage/sqlite/... -run Phase4RoundTrip
+      - run: go vet ./...
