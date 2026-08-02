@@ -28,6 +28,7 @@ func (s *Server) authorizationRoutes() {
 	s.mrsIntelligenceRoutes()
 	s.mrsOperationsRoutes()
 	s.mrsGovernanceRoutes()
+	s.costStructureRoutes()
 }
 
 func (s *Server) actorCapability(w http.ResponseWriter, r *http.Request) {
