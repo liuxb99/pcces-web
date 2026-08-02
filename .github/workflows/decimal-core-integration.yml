@@ -88,6 +88,7 @@ jobs:
           api.test_mrs_history_apply
           api.test_mrs_rate_history_apply
           api.test_mrs_precision_policy
+          api.test_mrs_excel_export
           api.test_mrs_intelligence
           api.test_mrs_operations
           api.test_mrs_governance
