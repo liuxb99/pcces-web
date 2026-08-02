@@ -16,6 +16,8 @@ from api.budget_lock_guard import install_budget_lock_guard
 from api.budget_submission_gate import install_budget_submission_gate
 from api.budget_validation import BudgetValidationService, build_budget_validation_blueprint
 from api.budget_versioning import BudgetVersionService, build_budget_version_blueprint
+from api.cost_structure import CostStructureService, build_cost_structure_blueprint
+from api.cost_structure_details import CostStructureDetailService, build_cost_structure_detail_blueprint
 from api.index import SessionLocal, app, decode_token, engine
 from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
 from api.legacy_resource_decimal_bridge import install_legacy_resource_bridge
@@ -75,6 +77,8 @@ resource_budget_lineage_service = ResourceBudgetLineageService(engine)
 resource_budget_link_service = ResourceBudgetLinkService(engine)
 resource_dependency_graph_service = ResourceDependencyGraphService(engine, SessionLocal)
 budget_trace_service = BudgetTraceService(engine)
+cost_structure_service = CostStructureService(engine)
+cost_structure_detail_service = CostStructureDetailService(engine)
 
 install_legacy_budget_bridge(app, engine, SessionLocal)
 for _endpoint in ("create_budget_item", "get_budget_list", "get_budget_tree", "recalc_budget"):
@@ -134,7 +138,9 @@ if "resource_budget_lineage" not in app.blueprints: app.register_blueprint(build
 if "resource_budget_links" not in app.blueprints: app.register_blueprint(build_resource_budget_links_blueprint(resource_budget_link_service, resolve_user_id))
 if "resource_dependency" not in app.blueprints: app.register_blueprint(build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
 if "budget_trace" not in app.blueprints: app.register_blueprint(build_budget_trace_blueprint(budget_trace_service, resolve_user_id))
+if "cost_structure" not in app.blueprints: app.register_blueprint(build_cost_structure_blueprint(cost_structure_service, resolve_user_id))
+if "cost_structure_details" not in app.blueprints: app.register_blueprint(build_cost_structure_detail_blueprint(cost_structure_detail_service, resolve_user_id))
 
 install_budget_submission_gate(app, budget_validation_service, resolve_user_id)
 
-__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service", "budget_cross_project_service", "bid_lifecycle_service", "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_budget_link_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
+__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service", "budget_cross_project_service", "bid_lifecycle_service", "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_budget_link_service", "resource_dependency_graph_service", "budget_trace_service", "cost_structure_service", "cost_structure_detail_service", "resolve_user_id"]
