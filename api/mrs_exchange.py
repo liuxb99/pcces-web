@@ -1,4 +1,4 @@
-"""MRS JSON/CSV import and Legacy-compatible Excel export."""
+"""MRS exchange and Legacy project-state endpoints."""
 from __future__ import annotations
 
 import csv
@@ -7,12 +7,14 @@ import json
 from datetime import datetime, timezone
 from uuid import uuid4
 
-from flask import Blueprint, Response, jsonify, request
+from flask import Blueprint, jsonify, request
+from api.mrs_project_state import MRSProjectStateService
 
 
 class MRSExchangeService:
     def __init__(self, catalog_service):
         self.catalog = catalog_service
+        self.project_state = MRSProjectStateService(catalog_service.engine)
 
     def import_payload(self, payload: str, fmt: str, actor: str, overwrite: bool = False) -> dict:
         fmt = fmt.lower()
@@ -47,28 +49,33 @@ class MRSExchangeService:
                 result_json=json.dumps(result, ensure_ascii=False, sort_keys=True), created_by=actor, created_at=now))
         return result
 
-    def export_project_xlsx(self, project_code: str) -> bytes:
-        from api.mrs_excel_export import MRSExcelExportService
-        return MRSExcelExportService(self.catalog.engine).export_project(project_code)
-
 
 def build_mrs_exchange_blueprint(service: MRSExchangeService, resolve_user_id):
     bp = Blueprint("mrs_exchange", __name__, url_prefix="/api/mrs")
+
     @bp.post("/catalog/import")
     def import_catalog():
         actor = resolve_user_id()
         if actor is None: return jsonify({"code":"UNAUTHORIZED"}),401
         body = request.get_json(silent=True) or {}
+        project_code = str(body.get("project_code") or "")
         try:
+            if project_code: service.project_state.assert_writable(project_code)
             result = service.import_payload(str(body.get("payload", "")), str(body.get("format", "json")), str(actor), bool(body.get("overwrite", False)))
             return jsonify(result), 200 if not result["errors"] else 207
-        except (ValueError, json.JSONDecodeError) as exc:
-            return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+        except PermissionError as exc: return jsonify({"code":"READ_ONLY","detail":str(exc)}),423
+        except (ValueError, json.JSONDecodeError) as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
 
-    @bp.get("/projects/<project_code>/export.xlsx")
-    def export_project(project_code: str):
-        if resolve_user_id() is None: return jsonify({"code":"UNAUTHORIZED"}),401
-        payload = service.export_project_xlsx(project_code)
-        return Response(payload, mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        headers={"Content-Disposition": f'attachment; filename="mrs-{project_code}.xlsx"'})
+    @bp.get("/projects/<project_code>/state")
+    def get_project_state(project_code):
+        return jsonify(service.project_state.get(project_code))
+
+    @bp.put("/projects/<project_code>/state")
+    def put_project_state(project_code):
+        actor = resolve_user_id()
+        if actor is None: return jsonify({"code":"UNAUTHORIZED"}),401
+        try: return jsonify(service.project_state.save(project_code, request.get_json(silent=True) or {}, str(actor)))
+        except RuntimeError: return jsonify({"code":"CONFLICT","detail":"stale project state row_version"}),409
+        except ValueError as exc: return jsonify({"code":"INVALID_ARGUMENT","detail":str(exc)}),400
+
     return bp
