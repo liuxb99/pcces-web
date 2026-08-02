@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "cases": [
+    {"name":"restore_pending","initial":"PENDING","command":"RESTORE","row_version":1,"request_row_version":1,"expected":{"state":"RESTORED","row_version":2,"allowed":true}},
+    {"name":"discard_pending","initial":"PENDING","command":"DISCARD","row_version":1,"request_row_version":1,"expected":{"state":"DISCARDED","row_version":2,"allowed":true}},
+    {"name":"stale_restore","initial":"PENDING","command":"RESTORE","row_version":2,"request_row_version":1,"expected":{"state":"PENDING","row_version":2,"allowed":false,"reason":"CONFLICT"}},
+    {"name":"restore_twice","initial":"RESTORED","command":"RESTORE","row_version":2,"request_row_version":2,"expected":{"state":"RESTORED","row_version":2,"allowed":false,"reason":"CONFLICT"}},
+    {"name":"discard_after_restore","initial":"RESTORED","command":"DISCARD","row_version":2,"request_row_version":2,"expected":{"state":"RESTORED","row_version":2,"allowed":false,"reason":"CONFLICT"}}
+  ]
+}
