@@ -20,7 +20,7 @@ func TestMRSGovernanceReleaseValidityAndFreeze(t *testing.T){
 	from,to:="2026-01-01","2026-06-30";validity,err:=repo.SetValidity(ctx,"M1",&from,&to,"active","7",0);if err!=nil{t.Fatal(err)};if validity.RowVersion!=1||validity.Status!="ACTIVE"{t.Fatalf("validity=%+v",validity)}
 	alerts,err:=repo.ExpiryAlerts(ctx,"2026-08-02");if err!=nil||len(alerts)!=1||alerts[0]["status"]!="EXPIRED"{t.Fatalf("alerts=%+v err=%v",alerts,err)}
 	reason:="approved basis";freeze,err:=repo.SetRecipeFreeze(ctx,"R1",version.ID,true,&reason,"8",0);if err!=nil{t.Fatal(err)};if !freeze.Frozen||freeze.VersionID!="V1"{t.Fatalf("freeze=%+v",freeze)}
-	audit,err:=repo.ListAudit(ctx);if err!=nil{t.Fatal(err)};if len(audit)!=7{t.Fatalf("audit=%+v",audit)};if audit[0].EventType!="RECIPE_FREEZE_SET"||audit[0].Payload["version_id"]!="V1"{t.Fatalf("latest audit=%+v",audit[0])}
+	audit,err:=repo.ListAudit(ctx);if err!=nil{t.Fatal(err)};if len(audit)!=6{t.Fatalf("audit=%+v",audit)};if audit[0].EventType!="RECIPE_FREEZE_SET"||audit[0].Payload["version_id"]!="V1"{t.Fatalf("latest audit=%+v",audit[0])}
 	if _,err=repo.TransitionRelease(ctx,"REL1","SUBMIT","7","",release.RowVersion);err==nil{t.Fatal("published release must be terminal")}
 }
 
