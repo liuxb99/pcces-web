@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "rounding": "HALF_UP",
+  "cases": [
+    {"name":"L quantity price","kind":"L","scale":2,"quantity":"3.2500","unit_price":"12.3456","expected":"40.12","steps":["MULTIPLY"]},
+    {"name":"B child rollup","kind":"B","scale":2,"children":["10.10","20.205","-1.00"],"expected":"29.31","steps":["SUM_CHILDREN"]},
+    {"name":"Z subtotal","kind":"Z","scale":2,"children":["100.00","25.555"],"expected":"125.56","steps":["SUM_CHILDREN"]},
+    {"name":"F percentage","kind":"F","scale":2,"base":"1234.56","rate":"0.075","expected":"92.59","steps":["MULTIPLY_BASE_RATE"]},
+    {"name":"S tiered rate","kind":"S","scale":2,"base":"250","tiers":[{"up_to":"100","rate":"0.10"},{"up_to":"200","rate":"0.08"},{"rate":"0.05"}],"expected":"20.50","steps":["TIER","TIER","TIER"]},
+    {"name":"U signed references","kind":"U","scale":2,"terms":[{"sign":1,"amount":"100.005"},{"sign":-1,"amount":"20.00"},{"sign":1,"amount":"5.555"}],"expected":"85.56","steps":["SIGNED_SUM"]}
+  ]
+}
