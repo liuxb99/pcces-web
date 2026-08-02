@@ -1,0 +1,52 @@
+name: Phase 5 Contract Core
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "api/contract_core.py"
+      - "api/test_contract_core.py"
+      - "api/app.py"
+      - "pcces-go/internal/storage/sqlite/contract_core*"
+      - "pcces-go/internal/storage/sqlite/migrations/0038_contract_core.sql"
+      - "pcces-go/internal/platform/httpapi/contract_core_handlers.go"
+      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
+      - ".github/workflows/phase5-contract-core.yml"
+  pull_request:
+    paths:
+      - "api/contract_core.py"
+      - "api/test_contract_core.py"
+      - "api/app.py"
+      - "pcces-go/internal/storage/sqlite/contract_core*"
+      - "pcces-go/internal/storage/sqlite/migrations/0038_contract_core.sql"
+      - "pcces-go/internal/platform/httpapi/contract_core_handlers.go"
+      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
+  workflow_dispatch:
+
+jobs:
+  web-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m unittest api.test_contract_core
+
+  go-contract:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pcces-go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache-dependency-path: pcces-go/go.sum
+      - name: Format check
+        run: test -z "$(gofmt -l internal/storage/sqlite/contract_core*.go internal/platform/httpapi/contract_core_handlers.go internal/platform/httpapi/authorization_handlers.go)"
+      - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
+      - run: go vet ./...
