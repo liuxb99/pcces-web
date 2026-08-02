@@ -27,6 +27,7 @@ on:
       - "pcces-go/internal/platform/httpapi/*bid*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/*mrs*"
+      - "pcces-go/internal/platform/httpapi/*resource*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
       - ".github/workflows/decimal-core-integration.yml"
@@ -56,6 +57,7 @@ on:
       - "pcces-go/internal/platform/httpapi/*bid*"
       - "pcces-go/internal/platform/httpapi/*budget*"
       - "pcces-go/internal/platform/httpapi/*mrs*"
+      - "pcces-go/internal/platform/httpapi/*resource*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
       - ".github/workflows/decimal-core-integration.yml"
@@ -90,6 +92,7 @@ jobs:
           api.test_resource_decimal
           api.test_resource_budget_lineage
           api.test_resource_budget_links
+          api.test_resource_operations
           api.test_resource_dependency_graph
           api.test_legacy_resource_decimal_bridge
           api.test_legacy_decimal_adapter
