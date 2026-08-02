@@ -15,6 +15,8 @@ func (s *Server) costStructureRoutes() {
 	s.mux.HandleFunc("POST /api/cost-structures/calculate", s.calculateCostStructure)
 	s.mux.HandleFunc("POST /api/cost-structures/projects/{projectCode}/recalculate", s.recalculateProjectCostStructure)
 	s.mux.HandleFunc("GET /api/cost-structures/runs/{runID}", s.getProjectCostStructureRun)
+	s.mux.HandleFunc("POST /api/cost-structures/projects/{projectCode}/runs/{runID}/budget-version", s.linkCostStructureRunVersion)
+	s.mux.HandleFunc("GET /api/cost-structures/runs/compare", s.compareCostStructureRunVersions)
 }
 
 func (s *Server) listCostStructureTypes(w http.ResponseWriter, r *http.Request) {
