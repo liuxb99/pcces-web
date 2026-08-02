@@ -23,6 +23,7 @@ from api.migrations import run_migrations
 from api.models import Base, User
 from api.mrs_catalog import MRSCatalogService, build_mrs_catalog_blueprint
 from api.mrs_exchange import MRSExchangeService, build_mrs_exchange_blueprint
+from api.mrs_governance import MRSGovernanceService, build_mrs_governance_blueprint
 from api.mrs_intelligence import MRSIntelligenceService, build_mrs_intelligence_blueprint
 from api.mrs_operations import MRSOperationsService, build_mrs_operations_blueprint
 from api.persistence_contract import PersistenceService
@@ -63,6 +64,7 @@ mrs_catalog_service = MRSCatalogService(engine)
 mrs_exchange_service = MRSExchangeService(mrs_catalog_service)
 mrs_intelligence_service = MRSIntelligenceService(engine)
 mrs_operations_service = MRSOperationsService(engine, mrs_catalog_service, mrs_exchange_service)
+mrs_governance_service = MRSGovernanceService(engine)
 resource_decimal_service = ResourceDecimalService(engine); resource_decimal_service.create_schema()
 resource_budget_lineage_service = ResourceBudgetLineageService(engine)
 resource_dependency_graph_service = ResourceDependencyGraphService(engine, SessionLocal)
@@ -118,6 +120,7 @@ if "mrs_catalog" not in app.blueprints: app.register_blueprint(build_mrs_catalog
 if "mrs_exchange" not in app.blueprints: app.register_blueprint(build_mrs_exchange_blueprint(mrs_exchange_service, resolve_user_id))
 if "mrs_intelligence" not in app.blueprints: app.register_blueprint(build_mrs_intelligence_blueprint(mrs_intelligence_service, resolve_user_id))
 if "mrs_operations" not in app.blueprints: app.register_blueprint(build_mrs_operations_blueprint(mrs_operations_service, resolve_user_id))
+if "mrs_governance" not in app.blueprints: app.register_blueprint(build_mrs_governance_blueprint(mrs_governance_service, resolve_user_id))
 if "resource_decimal" not in app.blueprints: app.register_blueprint(build_resource_decimal_blueprint(resource_decimal_service, resolve_user_id))
 if "resource_budget_lineage" not in app.blueprints: app.register_blueprint(build_resource_budget_lineage_blueprint(resource_budget_lineage_service, resolve_user_id))
 if "resource_dependency" not in app.blueprints: app.register_blueprint(build_resource_dependency_blueprint(resource_dependency_graph_service, resolve_user_id))
@@ -125,4 +128,4 @@ if "budget_trace" not in app.blueprints: app.register_blueprint(build_budget_tra
 
 install_budget_submission_gate(app, budget_validation_service, resolve_user_id)
 
-__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service", "budget_cross_project_service", "bid_lifecycle_service", "mrs_catalog_service", "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
+__all__ = ["app", "authorization_service", "work_context_service", "recovery_service", "persistence_service", "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service", "budget_cross_project_service", "bid_lifecycle_service", "mrs_catalog_service", "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service", "resource_decimal_service", "resource_budget_lineage_service", "resource_dependency_graph_service", "budget_trace_service", "resolve_user_id"]
