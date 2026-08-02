@@ -30,7 +30,7 @@ class MRSOperationsTests(unittest.TestCase):
         diff=self.service.diff_recipe_versions(v1["id"],v2["id"])
         self.assertEqual(diff["difference"],"40.00")
         self.assertEqual(len(diff["changed"]),1)
-        self.intelligence.add_quote("M1",{"vendor":"供應商","price":"115","price_scale":2},"7")
+        self.intelligence.add_quote("M1",{"vendor":"供應商","quoted_price":"115","price_scale":2},"7")
         lineage=self.service.price_lineage("M1")
         self.assertGreaterEqual(len(lineage["events"]),3)
         self.assertIn("mrs-operations",lineage["deep_link"])
