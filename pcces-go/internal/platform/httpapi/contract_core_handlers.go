@@ -11,6 +11,7 @@ func (s *Server) contractCoreRoutes() {
 	s.mux.HandleFunc("GET /api/contracts/eligibility", s.contractEligibility)
 	s.mux.HandleFunc("POST /api/contracts", s.createContractCore)
 	s.mux.HandleFunc("GET /api/contracts/{contractID}", s.getContractCore)
+	s.contractAllocationRoutes()
 }
 
 func (s *Server) contractEligibility(w http.ResponseWriter, r *http.Request) {
@@ -20,14 +21,14 @@ func (s *Server) contractEligibility(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) createContractCore(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		ProjectCode     string                         `json:"project_code"`
-		BudgetVersionID string                         `json:"budget_version_id"`
-		ContractNo      string                         `json:"contract_no"`
-		Name            string                         `json:"name"`
-		Contractor      string                         `json:"contractor"`
-		ContractAmount  string                         `json:"contract_amount"`
-		Actor           string                         `json:"actor"`
-		Items           []sqlite.ContractItemInput     `json:"items"`
+		ProjectCode string `json:"project_code"`
+		BudgetVersionID string `json:"budget_version_id"`
+		ContractNo string `json:"contract_no"`
+		Name string `json:"name"`
+		Contractor string `json:"contractor"`
+		ContractAmount string `json:"contract_amount"`
+		Actor string `json:"actor"`
+		Items []sqlite.ContractItemInput `json:"items"`
 	}
 	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
 	if body.Actor == "" { body.Actor = "api" }
