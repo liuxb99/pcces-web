@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "feature_id": "P0-S4/P0-G4",
+  "cases": [
+    {"name":"new-clean","current":{"exists":false,"dirty":false,"row_version":0},"command":"SAVE","expected":{"exists":true,"dirty":false,"row_version":1,"outcome":"SAVED"}},
+    {"name":"new-dirty-draft","current":{"exists":false,"dirty":false,"row_version":0},"command":"SAVE_DRAFT","expected":{"exists":true,"dirty":true,"row_version":1,"outcome":"DRAFT_SAVED"}},
+    {"name":"update-draft","current":{"exists":true,"dirty":true,"row_version":1},"command":"SAVE_DRAFT","expected":{"exists":true,"dirty":true,"row_version":2,"outcome":"DRAFT_SAVED"}},
+    {"name":"commit-draft","current":{"exists":true,"dirty":true,"row_version":2},"command":"SAVE","expected":{"exists":true,"dirty":false,"row_version":3,"outcome":"SAVED"}},
+    {"name":"discard-draft","current":{"exists":true,"dirty":true,"row_version":3},"command":"DISCARD","expected":{"exists":true,"dirty":false,"row_version":4,"outcome":"DISCARDED"}},
+    {"name":"cancel-clean","current":{"exists":true,"dirty":false,"row_version":4},"command":"CANCEL","expected":{"exists":false,"dirty":false,"row_version":0,"outcome":"CANCELLED"}},
+    {"name":"cancel-dirty-needs-decision","current":{"exists":true,"dirty":true,"row_version":4},"command":"CANCEL","expected":{"exists":true,"dirty":true,"row_version":4,"outcome":"DECISION_REQUIRED"}},
+    {"name":"stale-write","current":{"exists":true,"dirty":true,"row_version":5},"command":"SAVE_DRAFT","request_row_version":4,"expected":{"exists":true,"dirty":true,"row_version":5,"outcome":"CONFLICT"}}
+  ]
+}
