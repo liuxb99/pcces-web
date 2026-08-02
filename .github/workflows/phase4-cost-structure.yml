@@ -11,6 +11,7 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0026_cost_structure_runs.sql"
+      - "pcces-go/internal/storage/sqlite/migrations/0027_cost_structure_run_versions.sql"
       - "pcces-go/internal/platform/httpapi/cost_structure*"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
       - ".github/workflows/phase4-cost-structure.yml"
@@ -23,6 +24,7 @@ on:
       - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
       - "pcces-go/internal/storage/sqlite/migrations/0026_cost_structure_runs.sql"
+      - "pcces-go/internal/storage/sqlite/migrations/0027_cost_structure_run_versions.sql"
       - "pcces-go/internal/platform/httpapi/cost_structure*"
       - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
   workflow_dispatch:
@@ -43,6 +45,7 @@ jobs:
           api.test_cost_structure_details
           api.test_cost_structure_calculation
           api.test_cost_structure_project_run
+          api.test_cost_structure_run_versions
 
   go-cost-structure:
     runs-on: ubuntu-latest
