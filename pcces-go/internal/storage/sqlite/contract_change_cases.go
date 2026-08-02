@@ -1,0 +1,49 @@
+package sqlite
+
+import (
+	"context"
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"strconv"
+	"strings"
+	"time"
+
+	errx "github.com/liuxb99/pcces-web/pcces-go/internal/platform/errors"
+)
+
+type ContractChangeCaseRequest struct{ ID,ContractID,ChangeNo,Reason,Responsibility,EffectiveDate,Actor string; Items []ContractChangeItemInput }
+type ContractChangeCaseRepository struct{ store *Store }
+func NewContractChangeCaseRepository(store *Store)*ContractChangeCaseRepository{return &ContractChangeCaseRepository{store:store}}
+
+func(r *ContractChangeCaseRepository)Create(ctx context.Context,req ContractChangeCaseRequest)(map[string]any,error){
+	if req.ID==""||req.ContractID==""||req.ChangeNo==""||req.Reason==""||req.Actor==""||len(req.Items)==0{return nil,errx.New(errx.CodeInvalidArgument,"required change case fields are missing","P5-G-CHANGE-CASE")}
+	var status,amount string;if e:=r.store.db.QueryRowContext(ctx,`SELECT status,contract_amount FROM contracts_v2 WHERE id=?`,req.ContractID).Scan(&status,&amount);e==sql.ErrNoRows{return nil,errx.New(errx.CodeNotFound,"contract not found","P5-G-CHANGE-CASE")}else if e!=nil{return nil,e};if status!="APPROVED"&&status!="LOCKED"{return nil,errx.New(errx.CodeConflict,"formal change requires approved or locked contract","P5-G-CHANGE-CASE")}
+	before,e:=strconv.ParseFloat(amount,64);if e!=nil{return nil,e};delta:=0.0
+	for _,item:=range req.Items{action:=strings.ToUpper(strings.TrimSpace(item.Action));if action!="ADD"&&action!="INCREASE"&&action!="DECREASE"&&action!="DELETE"&&action!="REPLACE"{return nil,errx.New(errx.CodeInvalidArgument,"invalid change action","P5-G-CHANGE-CASE")};if action!="ADD"&&item.ContractItemID==""{return nil,errx.New(errx.CodeInvalidArgument,"contract_item_id is required","P5-G-CHANGE-CASE")};value,e:=parseSigned(item.AmountDelta,"amount_delta");if e!=nil{return nil,e};if action=="DECREASE"||action=="DELETE"{value=-abs(value)}else{value=abs(value)};delta+=value}
+	after:=before+delta;if after<0{return nil,errx.New(errx.CodeInvalidArgument,"after amount cannot be negative","P5-G-CHANGE-CASE")}
+	items,e:=NewContractChangeRepository(r.store).contractItems(ctx,req.ContractID);if e!=nil{return nil,e};snapshot,_:=json.Marshal(map[string]any{"items":items,"contract_amount":amount});now:=time.Now().UTC().Format(time.RFC3339Nano)
+	tx,e:=r.store.db.BeginTx(ctx,nil);if e!=nil{return nil,e};defer func(){_ = tx.Rollback()}()
+	if _,e=tx.ExecContext(ctx,`INSERT INTO contract_change_cases(id,contract_id,change_no,reason,responsibility,effective_date,status,before_amount,delta_amount,after_amount,before_snapshot_json,after_snapshot_json,created_by,created_at,row_version) VALUES(?,?,?,?,?,?,'DRAFT',?,?,?,?, '{}',?,?,1)`,req.ID,req.ContractID,req.ChangeNo,req.Reason,nullString(req.Responsibility),nullString(req.EffectiveDate),fixed(before),fixed(delta),fixed(after),string(snapshot),req.Actor,now);e!=nil{return nil,e}
+	for i,item:=range req.Items{action:=strings.ToUpper(strings.TrimSpace(item.Action));qty,_:=parseSigned(defaultString(item.QuantityDelta,"0"),"quantity_delta");price,_:=parseSigned(defaultString(item.UnitPrice,"0"),"unit_price");amt,_:=parseSigned(defaultString(item.AmountDelta,"0"),"amount_delta");if action=="DECREASE"||action=="DELETE"{qty,amt=-abs(qty),-abs(amt)}else{qty,amt=abs(qty),abs(amt)};if _,e=tx.ExecContext(ctx,`INSERT INTO contract_change_case_lines(id,case_id,action,contract_item_id,source_budget_item_id,item_no,name,unit,quantity_delta,unit_price,amount_delta,sort_order) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`,fmt.Sprintf("%s-%d",req.ID,i+1),req.ID,action,nullString(item.ContractItemID),nullString(item.SourceBudgetItemID),nullString(item.ItemNo),nullString(item.Name),nullString(item.Unit),fixed(qty),fixed(price),fixed(amt),i+1);e!=nil{return nil,e}}
+	if e=tx.Commit();e!=nil{return nil,e};return r.Get(ctx,req.ID)
+}
+
+func(r *ContractChangeCaseRepository)Transition(ctx context.Context,id,target string,rowVersion int64,actor string)(map[string]any,error){
+	target=strings.ToUpper(target);var current,contract string;var rv int64;if e:=r.store.db.QueryRowContext(ctx,`SELECT contract_id,status,row_version FROM contract_change_cases WHERE id=?`,id).Scan(&contract,&current,&rv);e==sql.ErrNoRows{return nil,errx.New(errx.CodeNotFound,"change case not found","P5-G-CHANGE-CASE")}else if e!=nil{return nil,e};if rv!=rowVersion{return nil,errx.New(errx.CodeConflict,"row version conflict","P5-G-CHANGE-CASE")}
+	allowed:=map[string]map[string]bool{"DRAFT":{"SUBMITTED":true},"SUBMITTED":{"DRAFT":true,"APPROVED":true},"APPROVED":{"APPLIED":true}};if !allowed[current][target]{return nil,errx.New(errx.CodeInvalidArgument,"invalid change case transition","P5-G-CHANGE-CASE")}
+	now:=time.Now().UTC().Format(time.RFC3339Nano);tx,e:=r.store.db.BeginTx(ctx,nil);if e!=nil{return nil,e};defer func(){_ = tx.Rollback()}()
+	if target=="APPLIED"{if e=r.apply(ctx,tx,id,contract,actor,now);e!=nil{return nil,e}}
+	res,e:=tx.ExecContext(ctx,`UPDATE contract_change_cases SET status=?,approved_by=CASE WHEN ?='APPROVED' THEN ? ELSE approved_by END,approved_at=CASE WHEN ?='APPROVED' THEN ? ELSE approved_at END,applied_by=CASE WHEN ?='APPLIED' THEN ? ELSE applied_by END,applied_at=CASE WHEN ?='APPLIED' THEN ? ELSE applied_at END,row_version=row_version+1 WHERE id=? AND row_version=?`,target,target,actor,target,now,target,actor,target,now,id,rowVersion);if e!=nil{return nil,e};n,_:=res.RowsAffected();if n!=1{return nil,errx.New(errx.CodeConflict,"row version conflict","P5-G-CHANGE-CASE")};if e=tx.Commit();e!=nil{return nil,e};return r.Get(ctx,id)
+}
+
+func(r *ContractChangeCaseRepository)apply(ctx context.Context,tx *sql.Tx,caseID,contractID,actor,now string)error{
+	rows,e:=tx.QueryContext(ctx,`SELECT action,COALESCE(contract_item_id,''),COALESCE(source_budget_item_id,''),COALESCE(item_no,''),COALESCE(name,''),COALESCE(unit,''),quantity_delta,unit_price,amount_delta FROM contract_change_case_lines WHERE case_id=? ORDER BY sort_order`,caseID);if e!=nil{return e};defer rows.Close();type line struct{action,item,source,no,name,unit,qty,price,amt string};lines:=[]line{};for rows.Next(){var l line;if e=rows.Scan(&l.action,&l.item,&l.source,&l.no,&l.name,&l.unit,&l.qty,&l.price,&l.amt);e!=nil{return e};lines=append(lines,l)}
+	var next int;if e=tx.QueryRowContext(ctx,`SELECT COALESCE(MAX(sort_order),0)+1 FROM contract_items_v2 WHERE contract_id=?`,contractID).Scan(&next);e!=nil{return e}
+	for _,l:=range lines{qty,_:=strconv.ParseFloat(l.qty,64);price,_:=strconv.ParseFloat(l.price,64);amt,_:=strconv.ParseFloat(l.amt,64);switch l.action{case "ADD":source:=l.source;if source==""{source="CHANGE:"+caseID+":"+strconv.Itoa(next)};if _,e=tx.ExecContext(ctx,`INSERT INTO contract_items_v2(id,contract_id,source_budget_item_id,item_no,name,unit,quantity,unit_price,amount,sort_order,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)`,fmt.Sprintf("%s-%d",caseID,next),contractID,source,nullString(l.no),defaultString(l.name,"變更新增項"),nullString(l.unit),fixed(qty),fixed(price),fixed(amt),next,now);e!=nil{return e};next++
+		case "DELETE":if _,e=tx.ExecContext(ctx,`DELETE FROM contract_items_v2 WHERE id=? AND contract_id=?`,l.item,contractID);e!=nil{return e}
+		default:var oldQty,oldAmt string;if e=tx.QueryRowContext(ctx,`SELECT quantity,amount FROM contract_items_v2 WHERE id=? AND contract_id=?`,l.item,contractID).Scan(&oldQty,&oldAmt);e==sql.ErrNoRows{return errx.New(errx.CodeInvalidArgument,"target contract item no longer exists","P5-G-CHANGE-CASE")}else if e!=nil{return e};oq,_:=strconv.ParseFloat(oldQty,64);oa,_:=strconv.ParseFloat(oldAmt,64);nq,na:=oq+qty,oa+amt;if nq<0||na<0{return errx.New(errx.CodeInvalidArgument,"change would make item negative","P5-G-CHANGE-CASE")};if l.action=="REPLACE"{_,e=tx.ExecContext(ctx,`UPDATE contract_items_v2 SET name=COALESCE(NULLIF(?,''),name),unit=COALESCE(NULLIF(?,''),unit),quantity=?,unit_price=?,amount=? WHERE id=?`,l.name,l.unit,fixed(nq),fixed(price),fixed(na),l.item)}else{_,e=tx.ExecContext(ctx,`UPDATE contract_items_v2 SET quantity=?,amount=? WHERE id=?`,fixed(nq),fixed(na),l.item)};if e!=nil{return e}}}
+	var total float64;if e=tx.QueryRowContext(ctx,`SELECT COALESCE(SUM(CAST(amount AS REAL)),0) FROM contract_items_v2 WHERE contract_id=?`,contractID).Scan(&total);e!=nil{return e};var approved string;if e=tx.QueryRowContext(ctx,`SELECT after_amount FROM contract_change_cases WHERE id=?`,caseID).Scan(&approved);e!=nil{return e};expected,_:=strconv.ParseFloat(approved,64);if fixed(total)!=fixed(expected){return errx.New(errx.CodeConflict,"applied item total does not equal approved after amount","P5-G-CHANGE-CASE")};if _,e=tx.ExecContext(ctx,`UPDATE contracts_v2 SET contract_amount=?,status='APPROVED',updated_at=?,row_version=row_version+1 WHERE id=?`,fixed(total),now,contractID);e!=nil{return e};snapshot,_:=json.Marshal(map[string]any{"contract_amount":fixed(total),"applied_by":actor});_,e=tx.ExecContext(ctx,`UPDATE contract_change_cases SET after_snapshot_json=? WHERE id=?`,string(snapshot),caseID);return e
+}
+
+func(r *ContractChangeCaseRepository)Get(ctx context.Context,id string)(map[string]any,error){var contract,no,reason,status,before,delta,after string;var rv int64;var approvedBy,appliedBy sql.NullString;if e:=r.store.db.QueryRowContext(ctx,`SELECT contract_id,change_no,reason,status,before_amount,delta_amount,after_amount,row_version,approved_by,applied_by FROM contract_change_cases WHERE id=?`,id).Scan(&contract,&no,&reason,&status,&before,&delta,&after,&rv,&approvedBy,&appliedBy);e==sql.ErrNoRows{return nil,errx.New(errx.CodeNotFound,"change case not found","P5-G-CHANGE-CASE")}else if e!=nil{return nil,e};return map[string]any{"id":id,"contract_id":contract,"change_no":no,"reason":reason,"status":status,"before_amount":before,"delta_amount":delta,"after_amount":after,"row_version":rv,"approved_by":approvedBy.String,"applied_by":appliedBy.String,"deep_link":"/app/contracts/"+contract+"/changes/"+id},nil}
