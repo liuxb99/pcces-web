@@ -5,6 +5,7 @@ from __future__ import annotations
 from flask import jsonify, request
 from sqlalchemy import select
 
+from api.admin_console import AdminConsoleService, build_admin_console_blueprint
 from api.authorization import AuthorizationService, build_authorization_blueprint
 from api.bid_lifecycle import BidLifecycleService, build_bid_lifecycle_blueprint
 from api.budget_approval import BudgetApprovalService, build_budget_approval_blueprint
@@ -29,7 +30,7 @@ from api.cost_structure_calculation import build_cost_structure_calculation_blue
 from api.cost_structure_details import CostStructureDetailService, build_cost_structure_detail_blueprint
 from api.cost_structure_project_run import ProjectCostStructureRunService, build_project_cost_structure_run_blueprint
 from api.cost_structure_run_versions import CostStructureRunVersionService, build_cost_structure_run_version_blueprint
-from api.index import SessionLocal, app, decode_token, engine
+from api.index import DATABASE_URL, SessionLocal, app, decode_token, engine
 from api.legacy_budget_decimal_bridge import install_legacy_budget_bridge
 from api.legacy_exchange_adapters import LegacyExchangeAdapterService, build_legacy_exchange_adapter_blueprint
 from api.legacy_resource_decimal_bridge import install_legacy_resource_bridge
@@ -44,6 +45,7 @@ from api.mrs_intelligence import MRSIntelligenceService, build_mrs_intelligence_
 from api.mrs_operations import MRSOperationsService, build_mrs_operations_blueprint
 from api.persistence_contract import PersistenceService
 from api.recovery import RecoveryService, build_recovery_blueprint
+from api.report_center import ReportCenterService, build_report_center_blueprint
 from api.resource_budget_lineage import ResourceBudgetLineageService
 from api.resource_budget_lineage_api import build_resource_budget_lineage_blueprint
 from api.resource_budget_links import ResourceBudgetLinkService, build_resource_budget_links_blueprint
@@ -89,6 +91,8 @@ contract_core_service = ContractCoreService(engine)
 contract_allocation_service = ContractAllocationService(engine)
 contract_governance_service = ContractGovernanceService(engine)
 contract_execution_service = ContractExecutionService(engine)
+report_center_service = ReportCenterService(engine)
+admin_console_service = AdminConsoleService(engine, DATABASE_URL)
 conversion_wizard_service = ConversionWizardService(engine)
 conversion_export_job_service = ConversionExportJobService(engine)
 conversion_long_job_service = ConversionLongJobService(engine)
@@ -174,6 +178,8 @@ register("contract_core", build_contract_core_blueprint(contract_core_service, r
 register("contract_allocation", build_contract_allocation_blueprint(contract_allocation_service, resolve_user_id))
 register("contract_governance", build_contract_governance_blueprint(contract_governance_service, resolve_user_id))
 register("contract_execution", build_contract_execution_blueprint(contract_execution_service, resolve_user_id))
+register("report_center", build_report_center_blueprint(report_center_service, resolve_user_id))
+register("admin_console", build_admin_console_blueprint(admin_console_service, resolve_user_id))
 register("conversion_wizard", build_conversion_wizard_blueprint(conversion_wizard_service, resolve_user_id))
 register("conversion_export_jobs", build_conversion_export_job_blueprint(conversion_export_job_service, resolve_user_id))
 register("conversion_long_jobs", build_conversion_long_job_blueprint(conversion_long_job_service, resolve_user_id))
@@ -203,11 +209,11 @@ __all__ = [
     "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service",
     "budget_cross_project_service", "bid_lifecycle_service", "budget_bid_conversion_service", "contract_core_service",
     "contract_allocation_service", "contract_governance_service", "contract_execution_service",
-    "conversion_wizard_service", "conversion_export_job_service", "conversion_long_job_service",
-    "legacy_exchange_adapter_service", "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service",
-    "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service",
-    "resource_decimal_service", "resource_budget_lineage_service", "resource_budget_link_service",
-    "resource_dependency_graph_service", "budget_trace_service", "cost_structure_service",
-    "cost_structure_detail_service", "project_cost_structure_run_service", "cost_structure_run_version_service",
-    "resolve_user_id",
+    "report_center_service", "admin_console_service", "conversion_wizard_service", "conversion_export_job_service",
+    "conversion_long_job_service", "legacy_exchange_adapter_service", "mrs_catalog_service", "mrs_code_service",
+    "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service",
+    "mrs_history_apply_service", "resource_decimal_service", "resource_budget_lineage_service",
+    "resource_budget_link_service", "resource_dependency_graph_service", "budget_trace_service",
+    "cost_structure_service", "cost_structure_detail_service", "project_cost_structure_run_service",
+    "cost_structure_run_version_service", "resolve_user_id",
 ]
