@@ -43,15 +43,25 @@ class ResourceBudgetLinkService:
     def list_resource_references(self, project_code: str, resource_id: str, limit: int = 50, offset: int = 0) -> dict:
         limit, offset = self._page(limit, offset)
         with self.engine.connect() as conn:
-            stmt = select(resource_budget_links, budget_items_decimal).join(
-                budget_items_decimal, budget_items_decimal.c.id == resource_budget_links.c.budget_item_id
-            ).where(and_(resource_budget_links.c.project_code == project_code,
-                         resource_budget_links.c.resource_id == resource_id)).order_by(budget_items_decimal.c.id)
+            stmt = select(
+                resource_budget_links.c.id.label("link_id"),
+                resource_budget_links.c.project_code,
+                resource_budget_links.c.resource_id,
+                resource_budget_links.c.budget_item_id,
+                budget_items_decimal.c.kind,
+                budget_items_decimal.c.quantity,
+                budget_items_decimal.c.unit_price,
+                budget_items_decimal.c.amount,
+                budget_items_decimal.c.row_version,
+            ).join(budget_items_decimal, budget_items_decimal.c.id == resource_budget_links.c.budget_item_id).where(and_(
+                resource_budget_links.c.project_code == project_code,
+                resource_budget_links.c.resource_id == resource_id,
+            )).order_by(budget_items_decimal.c.id)
             rows = conn.execute(stmt).mappings().all()
-        items = [{"link_id": row["id"], "project_code": project_code, "resource_id": resource_id,
-                  "budget_item_id": row["budget_item_id"], "item_type": row.get("item_type"),
-                  "quantity": str(row.get("quantity")), "unit_price": str(row.get("unit_price")),
-                  "amount": str(row.get("amount")), "row_version": row.get("row_version"),
+        items = [{"link_id": row["link_id"], "project_code": row["project_code"], "resource_id": row["resource_id"],
+                  "budget_item_id": row["budget_item_id"], "item_type": row["kind"],
+                  "quantity": str(row["quantity"]), "unit_price": str(row["unit_price"]),
+                  "amount": str(row["amount"]), "row_version": row["row_version"],
                   "deep_link": f"/app/budget/{project_code}?item={row['budget_item_id']}"} for row in rows]
         return {"items": items[offset:offset + limit], "total": len(items), "limit": limit, "offset": offset}
 
