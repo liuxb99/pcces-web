@@ -25,6 +25,7 @@ import AdminPage from './pages/AdminPage';
 import ComparePage from './pages/ComparePage';
 import MrsBasePriceComparePage from './pages/MrsBasePriceComparePage';
 import VersionInfoPage from './pages/VersionInfoPage';
+import TraceabilityPage from './pages/TraceabilityPage';
 
 const App: React.FC = () => {
   return (
@@ -38,6 +39,7 @@ const App: React.FC = () => {
         <Route path="projects/:id/budget" element={<BudgetEditorPage />} />
         <Route path="projects/:id/resources" element={<ResourcesPage />} />
         <Route path="projects/:id/reports" element={<ReportsPage />} />
+        <Route path="projects/by-code/:projectCode/traceability" element={<TraceabilityPage />} />
         <Route path="projects/:id/invoices" element={<InvoiceListPage />} />
         <Route path="projects/:id/invoices/:invoiceId" element={<InvoiceDetailPage />} />
         <Route path="projects/:id/contracts" element={<ContractListPage />} />
