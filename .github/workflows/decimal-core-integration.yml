@@ -5,32 +5,44 @@ on:
     paths:
       - "api/budget_decimal.py"
       - "api/resource_decimal.py"
+      - "api/resource_budget_lineage*.py"
+      - "api/legacy_resource_decimal_bridge.py"
       - "api/legacy_decimal_adapter.py"
       - "api/test_budget_decimal.py"
       - "api/test_resource_decimal.py"
+      - "api/test_resource_budget_lineage.py"
+      - "api/test_legacy_resource_decimal_bridge.py"
       - "api/test_legacy_decimal_adapter.py"
       - "api/route_policy.py"
       - "api/app.py"
       - "pcces-go/internal/domain/money/**"
       - "pcces-go/internal/storage/sqlite/budget_decimal_repository*"
+      - "pcces-go/internal/storage/sqlite/resource_budget_lineage_repository*"
       - "pcces-go/internal/storage/sqlite/migrations/0007_*"
       - "pcces-go/internal/storage/sqlite/migrations/0008_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0010_*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - ".github/workflows/decimal-core-integration.yml"
   pull_request:
     paths:
       - "api/budget_decimal.py"
       - "api/resource_decimal.py"
+      - "api/resource_budget_lineage*.py"
+      - "api/legacy_resource_decimal_bridge.py"
       - "api/legacy_decimal_adapter.py"
       - "api/test_budget_decimal.py"
       - "api/test_resource_decimal.py"
+      - "api/test_resource_budget_lineage.py"
+      - "api/test_legacy_resource_decimal_bridge.py"
       - "api/test_legacy_decimal_adapter.py"
       - "api/route_policy.py"
       - "api/app.py"
       - "pcces-go/internal/domain/money/**"
       - "pcces-go/internal/storage/sqlite/budget_decimal_repository*"
+      - "pcces-go/internal/storage/sqlite/resource_budget_lineage_repository*"
       - "pcces-go/internal/storage/sqlite/migrations/0007_*"
       - "pcces-go/internal/storage/sqlite/migrations/0008_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0010_*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - ".github/workflows/decimal-core-integration.yml"
 
@@ -50,6 +62,8 @@ jobs:
           api.test_decimal_math
           api.test_budget_decimal
           api.test_resource_decimal
+          api.test_resource_budget_lineage
+          api.test_legacy_resource_decimal_bridge
           api.test_legacy_decimal_adapter
           api.test_route_policy
 
