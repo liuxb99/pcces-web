@@ -5,6 +5,8 @@ on:
     paths:
       - "api/budget_decimal.py"
       - "api/budget_calculation_trace.py"
+      - "api/budget_versioning.py"
+      - "api/budget_lock_guard.py"
       - "api/resource_decimal.py"
       - "api/resource_budget_lineage*.py"
       - "api/resource_dependency_graph.py"
@@ -12,6 +14,7 @@ on:
       - "api/legacy_decimal_adapter.py"
       - "api/test_budget_decimal.py"
       - "api/test_budget_calculation_trace.py"
+      - "api/test_budget_versioning.py"
       - "api/test_resource_decimal.py"
       - "api/test_resource_budget_lineage.py"
       - "api/test_resource_dependency_graph.py"
@@ -20,21 +23,26 @@ on:
       - "api/route_policy.py"
       - "api/app.py"
       - "web-pcces/frontend/src/pages/TraceabilityPage.tsx"
+      - "web-pcces/frontend/src/pages/BudgetVersionsPage.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
       - "pcces-go/internal/storage/sqlite/budget_decimal_repository*"
+      - "pcces-go/internal/storage/sqlite/budget_version_repository*"
       - "pcces-go/internal/storage/sqlite/resource_budget_lineage_repository*"
       - "pcces-go/internal/storage/sqlite/dependency_graph_repository*"
       - "pcces-go/internal/storage/sqlite/migrations/0007_*"
       - "pcces-go/internal/storage/sqlite/migrations/0008_*"
       - "pcces-go/internal/storage/sqlite/migrations/0010_*"
       - "pcces-go/internal/storage/sqlite/migrations/0011_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0012_*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - ".github/workflows/decimal-core-integration.yml"
   pull_request:
     paths:
       - "api/budget_decimal.py"
       - "api/budget_calculation_trace.py"
+      - "api/budget_versioning.py"
+      - "api/budget_lock_guard.py"
       - "api/resource_decimal.py"
       - "api/resource_budget_lineage*.py"
       - "api/resource_dependency_graph.py"
@@ -42,6 +50,7 @@ on:
       - "api/legacy_decimal_adapter.py"
       - "api/test_budget_decimal.py"
       - "api/test_budget_calculation_trace.py"
+      - "api/test_budget_versioning.py"
       - "api/test_resource_decimal.py"
       - "api/test_resource_budget_lineage.py"
       - "api/test_resource_dependency_graph.py"
@@ -50,15 +59,18 @@ on:
       - "api/route_policy.py"
       - "api/app.py"
       - "web-pcces/frontend/src/pages/TraceabilityPage.tsx"
+      - "web-pcces/frontend/src/pages/BudgetVersionsPage.tsx"
       - "web-pcces/frontend/src/App.tsx"
       - "pcces-go/internal/domain/money/**"
       - "pcces-go/internal/storage/sqlite/budget_decimal_repository*"
+      - "pcces-go/internal/storage/sqlite/budget_version_repository*"
       - "pcces-go/internal/storage/sqlite/resource_budget_lineage_repository*"
       - "pcces-go/internal/storage/sqlite/dependency_graph_repository*"
       - "pcces-go/internal/storage/sqlite/migrations/0007_*"
       - "pcces-go/internal/storage/sqlite/migrations/0008_*"
       - "pcces-go/internal/storage/sqlite/migrations/0010_*"
       - "pcces-go/internal/storage/sqlite/migrations/0011_*"
+      - "pcces-go/internal/storage/sqlite/migrations/0012_*"
       - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
       - ".github/workflows/decimal-core-integration.yml"
 
@@ -78,6 +90,7 @@ jobs:
           api.test_decimal_math
           api.test_budget_decimal
           api.test_budget_calculation_trace
+          api.test_budget_versioning
           api.test_resource_decimal
           api.test_resource_budget_lineage
           api.test_resource_dependency_graph
@@ -85,7 +98,7 @@ jobs:
           api.test_legacy_decimal_adapter
           api.test_route_policy
 
-  frontend-traceability:
+  frontend-decimal-core:
     runs-on: ubuntu-latest
     defaults:
       run:
