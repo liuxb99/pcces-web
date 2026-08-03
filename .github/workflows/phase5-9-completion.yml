@@ -6,9 +6,11 @@ on:
     paths:
       - "api/contract_*.py"
       - "api/report_center.py"
+      - "api/report_job_lifecycle.py"
       - "api/admin_console.py"
       - "api/test_contract_*.py"
       - "api/test_report_center.py"
+      - "api/test_report_job_lifecycle.py"
       - "api/test_admin_console.py"
       - "api/app.py"
       - "pcces-go/internal/storage/sqlite/contract_*"
@@ -50,6 +52,7 @@ jobs:
           api.test_contract_change_governance
           api.test_contract_execution
           api.test_report_center
+          api.test_report_job_lifecycle
           api.test_admin_console
       - run: python scripts/phase9_legacy_catalog.py --require-no-unknown
       - run: python scripts/production_readiness.py
