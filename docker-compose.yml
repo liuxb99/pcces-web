@@ -23,6 +23,7 @@ services:
       - "5000:5000"
     environment:
       DATABASE_URL: postgresql://pcces:pcces123@postgres:5432/pcces
+      PCCES_DATABASE_URL: postgresql://pcces:pcces123@postgres:5432/pcces
       FLASK_APP: api.app
       PYTHONPATH: /app
     depends_on:
