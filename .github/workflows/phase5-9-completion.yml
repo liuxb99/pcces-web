@@ -3,36 +3,8 @@ name: Phase 5-9 Completion
 on:
   push:
     branches: [main]
-    paths:
-      - "api/contract_*.py"
-      - "api/report_center.py"
-      - "api/report_job_lifecycle.py"
-      - "api/admin_console.py"
-      - "api/test_contract_*.py"
-      - "api/test_report_center.py"
-      - "api/test_report_job_lifecycle.py"
-      - "api/test_admin_console.py"
-      - "api/app.py"
-      - "pcces-go/internal/storage/sqlite/contract_*"
-      - "pcces-go/internal/storage/sqlite/report_*.go"
-      - "pcces-go/internal/storage/sqlite/admin_operations.go"
-      - "pcces-go/internal/storage/sqlite/migrations/004*.sql"
-      - "pcces-go/internal/platform/httpapi/contract_*"
-      - "pcces-go/internal/platform/httpapi/report_admin_handlers.go"
-      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
-      - "web-pcces/frontend/src/api/roadmapClient.ts"
-      - "docs/development/phase5-9-traceability-matrix.md"
-      - "scripts/phase9_*.py"
-      - "scripts/production_readiness.py"
-      - ".github/workflows/phase5-9-completion.yml"
   pull_request:
   workflow_dispatch:
-    inputs:
-      require_complete:
-        description: Fail unless every Phase 5-9 row is VERIFIED
-        required: false
-        default: false
-        type: boolean
 
 jobs:
   web-domain:
@@ -56,9 +28,7 @@ jobs:
           api.test_admin_console
       - run: PYTHONPATH=. python scripts/phase9_legacy_catalog.py --require-no-unknown
       - run: PYTHONPATH=. python scripts/production_readiness.py
-      - run: PYTHONPATH=. python scripts/phase9_gate.py
-      - if: ${{ inputs.require_complete == true }}
-        run: PYTHONPATH=. python scripts/phase9_gate.py --require-complete
+      - run: PYTHONPATH=. python scripts/phase9_gate.py --require-complete
       - uses: actions/upload-artifact@v4
         with:
           name: phase9-legacy-catalog
@@ -77,8 +47,10 @@ jobs:
           cache-dependency-path: pcces-go/go.sum
       - name: Format check
         run: test -z "$(gofmt -l .)"
-      - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
+      - run: go test -count=1 ./...
+      - run: go test -race -count=1 ./...
       - run: go vet ./...
+      - run: go build ./...
 
   frontend:
     runs-on: ubuntu-latest
@@ -94,3 +66,60 @@ jobs:
           cache-dependency-path: web-pcces/frontend/package-lock.json
       - run: npm ci
       - run: npm run build
+
+  postgresql-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: pcces
+          POSTGRES_PASSWORD: pcces123
+          POSTGRES_DB: pcces
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://pcces:pcces123@localhost:5432/pcces
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: PostgreSQL empty migration
+        run: PYTHONPATH=. python scripts/pg_migration.py --verify
+      - name: PostgreSQL smoke test
+        run: PYTHONPATH=. python scripts/pg_smoke_test.py
+
+  roundtrip-golden:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Round-trip tests
+        run: >-
+          PYTHONPATH=. python -m unittest
+          api.test_bid_budget_roundtrip
+          api.test_bid_budget_import_apply
+          api.test_conversion_export_jobs
+          api.test_conversion_export_lifecycle
+          api.test_phase4_roundtrip_audit
+      - name: Golden fixture tests
+        run: >-
+          PYTHONPATH=. python -m unittest
+          api.test_authorization_golden
+          api.test_budget_decimal
+          api.test_decimal_math
+          api.test_budget_kind_engine
+      - name: Phase 9 golden gate
+        run: PYTHONPATH=. python scripts/phase9_gate.py --require-complete
