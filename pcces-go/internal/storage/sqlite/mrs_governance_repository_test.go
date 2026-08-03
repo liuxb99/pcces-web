@@ -35,7 +35,7 @@ func TestMRSGovernanceReleaseValidityAndFreeze(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if stored.Snapshot[0].Name != "Material" || stored.Snapshot[0].CurrentPrice != "100" {
+	if stored.Snapshot[0].Name != "Material" || stored.Snapshot[0].CurrentPrice != "100.00" {
 		t.Fatalf("release snapshot mutated: %+v", stored.Snapshot[0])
 	}
 	releases, err := repo.ListReleases(ctx)

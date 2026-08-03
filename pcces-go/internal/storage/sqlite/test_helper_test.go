@@ -14,10 +14,12 @@ type testStore struct {
 
 func newTestStore(t *testing.T) *Store {
 	t.Helper()
-	db, err := sql.Open("sqlite", ":memory:")
+	db, err := sql.Open("sqlite", "file:"+t.Name()+"?mode=memory&cache=shared")
 	if err != nil {
 		t.Fatal(err)
 	}
+	db.SetMaxOpenConns(4)
+	db.SetMaxIdleConns(2)
 	t.Cleanup(func() { db.Close() })
 	store := &Store{db: db}
 	if err := store.Migrate(context.Background()); err != nil {

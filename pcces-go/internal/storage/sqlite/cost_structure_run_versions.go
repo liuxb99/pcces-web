@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"strings"
 	"time"
 
@@ -63,7 +62,7 @@ func (r *CostStructureRunVersionRepository) Link(ctx context.Context, item CostS
 		return item, err
 	}
 	if item.ID == "" {
-		item.ID = fmt.Sprintf("CSRV-%d", time.Now().UTC().UnixNano())
+		item.ID = uniqueID("CSRV")
 	}
 	item.CreatedAt = time.Now().UTC().Format(time.RFC3339Nano)
 	_, err = r.store.db.ExecContext(ctx, `INSERT INTO cost_structure_run_versions(id,project_code,run_id,budget_version_id,budget_status,direct_cost,total_cost,trace_json,created_by,created_at,row_version) VALUES(?,?,?,?,?,?,?,?,?,?,1)`, item.ID, item.ProjectCode, item.RunID, item.BudgetVersionID, item.BudgetStatus, item.DirectCost, item.TotalCost, string(trace), item.CreatedBy, item.CreatedAt)

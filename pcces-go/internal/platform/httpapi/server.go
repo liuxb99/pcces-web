@@ -77,54 +77,162 @@ func (s *Server) routes() {
 func (s *Server) contractsDispatcher(w http.ResponseWriter, r *http.Request) {
 	path := strings.TrimPrefix(r.URL.Path, "/api/contracts")
 	path = strings.TrimPrefix(path, "/")
+	seg := strings.Split(path, "/")
 
-	switch {
-	case path == "eligibility" && r.Method == http.MethodGet:
-		s.contractEligibility(w, r)
-	case strings.HasPrefix(path, "versions/") && r.Method == http.MethodGet:
-		// GET /api/contracts/versions/{versionID} → extract versionID and call getContractVersion
-		versionID := strings.TrimPrefix(path, "versions/")
-		r.SetPathValue("versionID", versionID)
-		s.getContractVersion(w, r)
-	case strings.HasPrefix(path, "change-cases/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
-		caseID := strings.TrimPrefix(path, "change-cases/")
-		caseID = strings.TrimSuffix(caseID, "/transition")
-		r.SetPathValue("caseID", caseID)
-		s.transitionContractChangeCase(w, r)
-	case strings.HasPrefix(path, "changes/") && r.Method == http.MethodGet:
-		changeID := strings.TrimPrefix(path, "changes/")
-		r.SetPathValue("changeID", changeID)
-		s.getContractChange(w, r)
-	case strings.HasPrefix(path, "invoice-periods/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
-		periodID := strings.TrimPrefix(path, "invoice-periods/")
-		periodID = strings.TrimSuffix(periodID, "/transition")
-		r.SetPathValue("periodID", periodID)
-		s.transitionExecutionInvoice(w, r)
-	case strings.HasPrefix(path, "invoice-periods/") && r.Method == http.MethodGet:
-		periodID := strings.TrimPrefix(path, "invoice-periods/")
-		r.SetPathValue("periodID", periodID)
-		s.getExecutionInvoice(w, r)
-	case strings.HasPrefix(path, "settlements/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
-		id := strings.TrimPrefix(path, "settlements/")
-		id = strings.TrimSuffix(id, "/transition")
-		r.SetPathValue("settlementID", id)
-		s.transitionExecutionSettlement(w, r)
-	case strings.HasPrefix(path, "settlements/") && r.Method == http.MethodGet:
-		id := strings.TrimPrefix(path, "settlements/")
-		r.SetPathValue("settlementID", id)
-		s.getExecutionSettlement(w, r)
-	case strings.HasPrefix(path, "acceptances/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
-		id := strings.TrimPrefix(path, "acceptances/")
-		id = strings.TrimSuffix(id, "/transition")
-		r.SetPathValue("acceptanceID", id)
-		s.transitionExecutionAcceptance(w, r)
-	case strings.HasPrefix(path, "acceptances/") && r.Method == http.MethodGet:
-		id := strings.TrimPrefix(path, "acceptances/")
-		r.SetPathValue("acceptanceID", id)
-		s.getExecutionAcceptance(w, r)
-	default:
-		http.NotFound(w, r)
+	// POST /api/contracts  (no trailing segments)
+	if len(seg) == 1 && seg[0] == "" && r.Method == http.MethodPost {
+		s.createContractCore(w, r)
+		return
 	}
+	// Path has at least one real segment
+	if len(seg) == 0 || (len(seg) == 1 && seg[0] == "") {
+		http.NotFound(w, r)
+		return
+	}
+	first := seg[0]
+	if first == "" {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Static resource-type prefixes (no contractID)
+	switch first {
+	case "eligibility":
+		if len(seg) == 1 && r.Method == http.MethodGet {
+			s.contractEligibility(w, r)
+			return
+		}
+	case "versions":
+		if len(seg) == 2 && seg[1] != "" && r.Method == http.MethodGet {
+			r.SetPathValue("versionID", seg[1])
+			s.getContractVersion(w, r)
+			return
+		}
+		if len(seg) == 3 && seg[1] != "" && seg[2] == "transition" && r.Method == http.MethodPost {
+			r.SetPathValue("versionID", seg[1])
+			s.transitionContractVersion(w, r)
+			return
+		}
+	case "changes":
+		if len(seg) == 2 && seg[1] != "" && r.Method == http.MethodGet {
+			r.SetPathValue("changeID", seg[1])
+			s.getContractChange(w, r)
+			return
+		}
+	case "change-cases":
+		if len(seg) == 2 && seg[1] != "" && r.Method == http.MethodGet {
+			r.SetPathValue("caseID", seg[1])
+			s.getContractChangeCase(w, r)
+			return
+		}
+		if len(seg) == 3 && seg[1] != "" && seg[2] == "transition" && r.Method == http.MethodPost {
+			r.SetPathValue("caseID", seg[1])
+			s.transitionContractChangeCase(w, r)
+			return
+		}
+	case "invoice-periods":
+		if len(seg) == 2 && seg[1] != "" && r.Method == http.MethodGet {
+			r.SetPathValue("periodID", seg[1])
+			s.getExecutionInvoice(w, r)
+			return
+		}
+		if len(seg) == 3 && seg[1] != "" && seg[2] == "transition" && r.Method == http.MethodPost {
+			r.SetPathValue("periodID", seg[1])
+			s.transitionExecutionInvoice(w, r)
+			return
+		}
+	case "settlements":
+		if len(seg) == 2 && seg[1] != "" && r.Method == http.MethodGet {
+			r.SetPathValue("settlementID", seg[1])
+			s.getExecutionSettlement(w, r)
+			return
+		}
+		if len(seg) == 3 && seg[1] != "" && seg[2] == "transition" && r.Method == http.MethodPost {
+			r.SetPathValue("settlementID", seg[1])
+			s.transitionExecutionSettlement(w, r)
+			return
+		}
+	case "acceptances":
+		if len(seg) == 2 && seg[1] != "" && r.Method == http.MethodGet {
+			r.SetPathValue("acceptanceID", seg[1])
+			s.getExecutionAcceptance(w, r)
+			return
+		}
+		if len(seg) == 3 && seg[1] != "" && seg[2] == "transition" && r.Method == http.MethodPost {
+			r.SetPathValue("acceptanceID", seg[1])
+			s.transitionExecutionAcceptance(w, r)
+			return
+		}
+	default:
+		// {contractID} sub-resource routes
+		contractID := first
+		if contractID == "" {
+			http.NotFound(w, r)
+			return
+		}
+		r.SetPathValue("contractID", contractID)
+
+		if len(seg) == 1 {
+			// GET /api/contracts/{contractID}
+			if r.Method == http.MethodGet {
+				s.getContractCore(w, r)
+				return
+			}
+		}
+		if len(seg) == 2 {
+			switch seg[1] {
+			case "allocation-basis":
+				if r.Method == http.MethodGet {
+					s.getContractAllocationBasis(w, r)
+					return
+				}
+			case "items":
+				if r.Method == http.MethodPost {
+					s.addContractAllocationItems(w, r)
+					return
+				}
+			case "versions":
+				if r.Method == http.MethodPost {
+					s.createContractVersion(w, r)
+					return
+				}
+			case "changes":
+				if r.Method == http.MethodPost {
+					s.createContractChange(w, r)
+					return
+				}
+			case "change-cases":
+				if r.Method == http.MethodPost {
+					s.createContractChangeCase(w, r)
+					return
+				}
+			case "invoice-periods":
+				if r.Method == http.MethodPost {
+					s.createExecutionInvoice(w, r)
+					return
+				}
+			case "settlements":
+				if r.Method == http.MethodPost {
+					s.createExecutionSettlement(w, r)
+					return
+				}
+			case "acceptances":
+				if r.Method == http.MethodPost {
+					s.createExecutionAcceptance(w, r)
+					return
+				}
+			}
+		}
+		if len(seg) == 3 {
+			if seg[1] == "subcontracts" && seg[2] != "" && r.Method == http.MethodPost {
+				r.SetPathValue("parentID", contractID)
+				r.SetPathValue("childID", seg[2])
+				s.linkSubcontract(w, r)
+				return
+			}
+		}
+	}
+	http.NotFound(w, r)
 }
 
 func (s *Server) health(w http.ResponseWriter, _ *http.Request) {

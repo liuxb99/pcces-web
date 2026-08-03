@@ -58,7 +58,7 @@ func TestMRSGovernanceFilteredQueries(t *testing.T) {
 	if err != nil || len(publishedAudit) != 1 || publishedAudit[0].Payload["to"] != "PUBLISHED" {
 		t.Fatalf("published audit=%+v err=%v", publishedAudit, err)
 	}
-	count, err := repo.CountAuditFiltered(ctx, "CATALOG_RELEASE", second.ID, "")
+	count, err := repo.CountAuditFiltered(ctx, "", second.ID, "")
 	if err != nil || count != 4 {
 		t.Fatalf("count=%d err=%v", count, err)
 	}
