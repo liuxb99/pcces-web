@@ -135,3 +135,35 @@ jobs:
           api.test_budget_kind_engine
       - name: Phase 9 golden gate
         run: PYTHONPATH=. python scripts/phase9_gate.py --require-complete
+
+  full-stack-compose-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build full stack
+        run: docker compose build
+      - name: Start full stack
+        run: docker compose up -d
+      - name: Wait for services
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsS http://localhost:5000/api/health >/tmp/flask-health.json \
+              && curl -fsS http://localhost:8080/api/health >/tmp/go-health.json \
+              && curl -fsS http://localhost:4173/ >/tmp/frontend.html; then
+              cat /tmp/flask-health.json
+              cat /tmp/go-health.json
+              grep -q '<div id="root"' /tmp/frontend.html
+              exit 0
+            fi
+            sleep 5
+          done
+          docker compose ps
+          docker compose logs --no-color
+          exit 1
+      - name: Frontend API proxy smoke
+        run: curl -fsS http://localhost:4173/api/health
+      - name: Container status
+        run: docker compose ps
+      - name: Stop full stack
+        if: always()
+        run: docker compose down -v
