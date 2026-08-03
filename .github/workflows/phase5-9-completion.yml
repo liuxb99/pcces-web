@@ -119,6 +119,7 @@ jobs:
       - name: Round-trip tests
         run: >-
           PYTHONPATH=. python -m unittest
+          api.test_exchange_roundtrip_contract
           api.test_bid_budget_roundtrip
           api.test_bid_budget_import_apply
           api.test_conversion_export_jobs
