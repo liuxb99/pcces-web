@@ -10,10 +10,10 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pcces"]
+      test: ["CMD-SHELL", "pg_isready -U pcces -d pcces"]
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   flask-api:
     build:
@@ -24,9 +24,15 @@ services:
     environment:
       DATABASE_URL: postgresql://pcces:pcces123@postgres:5432/pcces
       FLASK_APP: api.app
+      PYTHONPATH: /app
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/api/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   go-api:
     build:
@@ -34,9 +40,19 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    volumes:
+      - go-data:/data
+
+  frontend:
+    build:
+      context: ./web-pcces/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4173:80"
     depends_on:
-      postgres:
+      flask-api:
         condition: service_healthy
 
 volumes:
   pgdata:
+  go-data:
