@@ -68,6 +68,63 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("POST /api/recovery-snapshots", s.createRecoverySnapshot)
 	s.mux.HandleFunc("POST /api/recovery-snapshots/{id}/restore", s.restoreRecoverySnapshot)
 	s.mux.HandleFunc("POST /api/recovery-snapshots/{id}/discard", s.discardRecoverySnapshot)
+
+	// Contracts dispatcher: all /api/contracts/... routes handled by single handler to avoid ServeMux ambiguity
+	s.mux.HandleFunc("/api/contracts/", s.contractsDispatcher)
+}
+
+// contractsDispatcher routes /api/contracts/* paths to the correct sub-handler.
+func (s *Server) contractsDispatcher(w http.ResponseWriter, r *http.Request) {
+	path := strings.TrimPrefix(r.URL.Path, "/api/contracts")
+	path = strings.TrimPrefix(path, "/")
+
+	switch {
+	case path == "eligibility" && r.Method == http.MethodGet:
+		s.contractEligibility(w, r)
+	case strings.HasPrefix(path, "versions/") && r.Method == http.MethodGet:
+		// GET /api/contracts/versions/{versionID} → extract versionID and call getContractVersion
+		versionID := strings.TrimPrefix(path, "versions/")
+		r.SetPathValue("versionID", versionID)
+		s.getContractVersion(w, r)
+	case strings.HasPrefix(path, "change-cases/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
+		caseID := strings.TrimPrefix(path, "change-cases/")
+		caseID = strings.TrimSuffix(caseID, "/transition")
+		r.SetPathValue("caseID", caseID)
+		s.transitionContractChangeCase(w, r)
+	case strings.HasPrefix(path, "changes/") && r.Method == http.MethodGet:
+		changeID := strings.TrimPrefix(path, "changes/")
+		r.SetPathValue("changeID", changeID)
+		s.getContractChange(w, r)
+	case strings.HasPrefix(path, "invoice-periods/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
+		periodID := strings.TrimPrefix(path, "invoice-periods/")
+		periodID = strings.TrimSuffix(periodID, "/transition")
+		r.SetPathValue("periodID", periodID)
+		s.transitionExecutionInvoice(w, r)
+	case strings.HasPrefix(path, "invoice-periods/") && r.Method == http.MethodGet:
+		periodID := strings.TrimPrefix(path, "invoice-periods/")
+		r.SetPathValue("periodID", periodID)
+		s.getExecutionInvoice(w, r)
+	case strings.HasPrefix(path, "settlements/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
+		id := strings.TrimPrefix(path, "settlements/")
+		id = strings.TrimSuffix(id, "/transition")
+		r.SetPathValue("settlementID", id)
+		s.transitionExecutionSettlement(w, r)
+	case strings.HasPrefix(path, "settlements/") && r.Method == http.MethodGet:
+		id := strings.TrimPrefix(path, "settlements/")
+		r.SetPathValue("settlementID", id)
+		s.getExecutionSettlement(w, r)
+	case strings.HasPrefix(path, "acceptances/") && strings.Contains(path, "/transition") && r.Method == http.MethodPost:
+		id := strings.TrimPrefix(path, "acceptances/")
+		id = strings.TrimSuffix(id, "/transition")
+		r.SetPathValue("acceptanceID", id)
+		s.transitionExecutionAcceptance(w, r)
+	case strings.HasPrefix(path, "acceptances/") && r.Method == http.MethodGet:
+		id := strings.TrimPrefix(path, "acceptances/")
+		r.SetPathValue("acceptanceID", id)
+		s.getExecutionAcceptance(w, r)
+	default:
+		http.NotFound(w, r)
+	}
 }
 
 func (s *Server) health(w http.ResponseWriter, _ *http.Request) {

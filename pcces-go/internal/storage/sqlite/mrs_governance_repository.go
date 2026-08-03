@@ -342,7 +342,7 @@ func (r *MRSGovernanceRepository) audit(ctx context.Context, tx *sql.Tx, event, 
 	if err != nil {
 		return err
 	}
-	_, err = tx.ExecContext(ctx, `INSERT INTO mrs_governance_audit(id,event_type,resource_type,resource_id,actor_id,payload_json,created_at) VALUES(?,?,?,?,?,?,?)`, fmt.Sprintf("mrsa-%d", time.Now().UnixNano()), event, resourceType, resourceID, actor, string(b), time.Now().UTC().Format(time.RFC3339Nano))
+	_, err = tx.ExecContext(ctx, `INSERT INTO mrs_governance_audit(id,event_type,resource_type,resource_id,actor_id,payload_json,created_at) VALUES(?,?,?,?,?,?,?)`, uniqueID("mrsa"), event, resourceType, resourceID, actor, string(b), time.Now().UTC().Format(time.RFC3339Nano))
 	return err
 }
 func nullable(s string) any {

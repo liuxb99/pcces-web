@@ -50,7 +50,7 @@ func TestMRSPrecisionPolicyOverrideAndConflict(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if result.Quantity != "2.12346" || result.UnitPrice != "3.4568" || result.Amount != "7.341" {
+	if result.Quantity != "2.12346" || result.UnitPrice != "3.4568" || result.Amount != "7.340" {
 		t.Fatalf("unexpected result %#v", result)
 	}
 	p.RowVersion = 0

@@ -6,6 +6,7 @@ import (
 	"embed"
 	"fmt"
 	"path/filepath"
+	"strings"
 	"sync/atomic"
 	"time"
 
@@ -79,8 +80,14 @@ func (s *Store) Migrate(ctx context.Context) error {
 		if err != nil {
 			return errx.Wrap(errx.CodeInternal, "read migration "+entry.Name(), "P0-G2", err)
 		}
-		if _, err := s.db.ExecContext(ctx, string(body)); err != nil {
-			return errx.Wrap(errx.CodeDatabase, "apply migration "+entry.Name(), "P0-G2", err)
+		for _, stmt := range strings.Split(string(body), ";") {
+			stmt = strings.TrimSpace(stmt)
+			if stmt == "" || strings.HasPrefix(stmt, "--") {
+				continue
+			}
+			if _, err := s.db.ExecContext(ctx, stmt); err != nil {
+				return errx.Wrap(errx.CodeDatabase, "apply migration "+entry.Name(), "P0-G2", err)
+			}
 		}
 	}
 	return nil

@@ -35,7 +35,7 @@ func TestLocalOperationsAPI(t *testing.T) {
 	resp.Body.Close()
 
 	settingBody := `{"value":"45","value_type":"int","description":"autosave seconds","row_version":1}`
-	req, _ := http.NewRequest(http.MethodPut, ts.URL+"/api/settings/autosave_interval_seconds", strings.NewReader(settingBody))
+	req, _ := http.NewRequest(http.MethodPut, ts.URL+"/api/settings/autosave.interval_seconds", strings.NewReader(settingBody))
 	req.Header.Set("Content-Type", "application/json")
 	resp, err = http.DefaultClient.Do(req)
 	if err != nil {

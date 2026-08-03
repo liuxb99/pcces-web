@@ -28,7 +28,7 @@ func TestMRSGovernanceReleaseValidityAndFreeze(t *testing.T) {
 	if release.Status != "DRAFT" || len(release.Snapshot) != 1 {
 		t.Fatalf("release=%+v", release)
 	}
-	if _, err = catalog.SaveItem(ctx, MRSCatalogItem{ID: "M1", Code: "M-1", Name: "Material updated", Category: "MATERIAL", CurrentPrice: "120", PriceScale: 2, Enabled: true}, "7", "1"); err != nil {
+	if _, err = catalog.SaveItem(ctx, MRSCatalogItem{ID: "M1", Code: "M-1", Name: "Material updated", Category: "MATERIAL", CurrentPrice: "120", PriceScale: 2, Enabled: true, RowVersion: 1}, "7", ""); err != nil {
 		t.Fatal(err)
 	}
 	stored, err := repo.GetRelease(ctx, "REL1")

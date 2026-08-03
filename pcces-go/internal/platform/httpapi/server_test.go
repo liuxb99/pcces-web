@@ -48,6 +48,18 @@ func TestPhase0LocalAPI(t *testing.T) {
 		t.Fatal("expected seeded actions")
 	}
 
+	// Seed actor for work-context test
+	if _, err := store.DB().ExecContext(ctx, `INSERT OR IGNORE INTO local_actors(actor_id, display_name) VALUES('local-user','Local User')`); err != nil {
+		t.Fatalf("seed actor: %v", err)
+	}
+	// Grant all function codes and modules to local-user
+	if _, err := store.DB().ExecContext(ctx, `INSERT OR IGNORE INTO actor_function_codes(actor_id, function_code) SELECT 'local-user', code FROM function_codes`); err != nil {
+		t.Fatalf("seed function grants: %v", err)
+	}
+	if _, err := store.DB().ExecContext(ctx, `INSERT OR IGNORE INTO actor_module_entitlements(actor_id, module_code) SELECT 'local-user', code FROM modules`); err != nil {
+		t.Fatalf("seed module entitlements: %v", err)
+	}
+
 	body := `{"actor_id":"local-user","action_code":"BUD","project_code":"P-001","dirty":true,"row_version":0}`
 	req, err := http.NewRequest(http.MethodPut, ts.URL+"/api/work-contexts/ctx-1", strings.NewReader(body))
 	if err != nil {
