@@ -2,7 +2,7 @@
 """Verify an additive PostgreSQL upgrade preserves existing business data.
 
 The fixture represents an earlier deployed schema: core user/project/budget data
-exists while later contract/report/admin tables are absent.  The current schema
+exists while later contract/report/admin tables are absent. The current schema
 provisioner must recreate every missing domain table without changing the legacy
 rows, and a second run must be idempotent.
 """
@@ -50,7 +50,16 @@ def seed_legacy_rows(engine) -> dict[str, int]:
             session.flush()
         item = session.execute(select(BudgetItem).where(BudgetItem.project_id == project.id)).scalar_one_or_none()
         if item is None:
-            item = BudgetItem(project_id=project.id, item_no="LEG-001", name="Legacy Concrete", unit="m3", quantity=2, unit_price=125, amount=250)
+            item = BudgetItem(
+                project_id=project.id,
+                item_no="LEG-001",
+                c_name="Legacy Concrete",
+                c_unit="m3",
+                quantity=2,
+                unit_price=125,
+                amount=250,
+                kind="L",
+            )
             session.add(item)
         session.commit()
         return {"user_id": user.id, "project_id": project.id}
@@ -108,7 +117,6 @@ def main() -> int:
     marker = seed_legacy_rows(engine)
     dropped = remove_later_schema(engine)
 
-    # First run performs the upgrade; second run proves idempotency.
     provision_schema(engine)
     first = verify_schema(engine)
     assert_legacy_rows(engine, marker)
