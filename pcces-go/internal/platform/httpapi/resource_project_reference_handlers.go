@@ -19,12 +19,18 @@ func (s *Server) createResourceProjectReference(w http.ResponseWriter, r *http.R
 		ReferenceType     string `json:"reference_type"`
 		ActorID           string `json:"actor_id"`
 	}
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	item, err := sqlite.NewResourceProjectReferenceRepository(s.store).Import(
 		r.Context(), r.PathValue("projectCode"), body.SourceProjectCode,
 		body.SourceResourceID, body.TargetResourceID, body.ReferenceType, body.ActorID,
 	)
-	if err != nil { writeError(w, err); return }
+	if err != nil {
+		writeError(w, err)
+		return
+	}
 	writeJSON(w, http.StatusCreated, item)
 }
 

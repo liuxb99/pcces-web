@@ -20,18 +20,28 @@ func (s *Server) getContractAllocationBasis(w http.ResponseWriter, r *http.Reque
 
 func (s *Server) addContractAllocationItems(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		RowVersion int64 `json:"row_version"`
-		Items []sqlite.ContractAllocationItem `json:"items"`
+		RowVersion int64                           `json:"row_version"`
+		Items      []sqlite.ContractAllocationItem `json:"items"`
 	}
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	item, err := sqlite.NewContractAllocationRepository(s.store).AddItems(r.Context(), r.PathValue("contractID"), body.RowVersion, body.Items)
 	respondStatus(w, http.StatusCreated, item, err)
 }
 
 func (s *Server) linkSubcontract(w http.ResponseWriter, r *http.Request) {
-	var body struct { Actor string `json:"actor"` }
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
-	if body.Actor == "" { body.Actor = "api" }
+	var body struct {
+		Actor string `json:"actor"`
+	}
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
+	if body.Actor == "" {
+		body.Actor = "api"
+	}
 	item, err := sqlite.NewContractAllocationRepository(s.store).LinkSubcontract(r.Context(), uuid.NewString(), r.PathValue("parentID"), r.PathValue("childID"), body.Actor)
 	respondStatus(w, http.StatusCreated, item, err)
 }

@@ -55,7 +55,7 @@ func Open(ctx context.Context, path string) (*Store, error) {
 	return store, nil
 }
 
-func (s *Store) DB() *sql.DB { return s.db }
+func (s *Store) DB() *sql.DB  { return s.db }
 func (s *Store) Path() string { return s.path }
 func (s *Store) Close() error { return s.db.Close() }
 

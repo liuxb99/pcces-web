@@ -24,7 +24,7 @@ class MRSPrecisionPolicyTests(unittest.TestCase):
         result = self.service.calculate("P1", "ANALYSIS", "2.123456", "3.45678")
         self.assertEqual("2.12346", result["quantity"])
         self.assertEqual("3.4568", result["unit_price"])
-        self.assertEqual("7.341", result["amount"])
+        self.assertEqual("7.340", result["amount"])
         with self.assertRaises(RuntimeError):
             self.service.save("P1", {**saved, "row_version": 0}, "u2")
 

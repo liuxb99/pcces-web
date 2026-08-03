@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
 
 from api.budget_versioning import metadata as budget_metadata, budget_versions
@@ -11,7 +12,7 @@ class ContractChangeGovernanceTest(unittest.TestCase):
         self.engine=create_engine("sqlite:///:memory:")
         budget_metadata.create_all(self.engine)
         with self.engine.begin() as conn:
-            conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="Approved",status="APPROVED",snapshot_json='[{"id":"B1","quantity":"10","amount":"100"}]',created_by="u"))
+            conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="Approved",status="APPROVED",snapshot_json='[{"id":"B1","quantity":"10","amount":"100"}]',created_by="u",created_at=datetime(2026, 8, 2, tzinfo=timezone.utc)))
         self.core=ContractCoreService(self.engine)
         self.gov=ContractGovernanceService(self.engine)
         self.contract=self.core.create({"project_code":"P1","budget_version_id":"V1","contract_no":"C1","name":"Main","contract_amount":"100","items":[{"source_budget_item_id":"B1","name":"Concrete","quantity":"10","unit_price":"10","amount":"100"}]},"u")

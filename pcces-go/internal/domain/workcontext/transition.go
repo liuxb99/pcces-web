@@ -17,17 +17,27 @@ func Transition(exists, dirty bool, rowVersion int64, command string, requestRow
 	}
 	switch strings.ToUpper(command) {
 	case "SAVE_DRAFT":
-		if !exists { rowVersion = 0 }
+		if !exists {
+			rowVersion = 0
+		}
 		return TransitionResult{true, true, rowVersion + 1, "DRAFT_SAVED"}
 	case "SAVE":
-		if !exists { rowVersion = 0 }
+		if !exists {
+			rowVersion = 0
+		}
 		return TransitionResult{true, false, rowVersion + 1, "SAVED"}
 	case "DISCARD":
-		if !exists { return TransitionResult{false, false, 0, "NOT_FOUND"} }
+		if !exists {
+			return TransitionResult{false, false, 0, "NOT_FOUND"}
+		}
 		return TransitionResult{true, false, rowVersion + 1, "DISCARDED"}
 	case "CANCEL":
-		if !exists { return TransitionResult{false, false, 0, "CANCELLED"} }
-		if dirty { return TransitionResult{true, true, rowVersion, "DECISION_REQUIRED"} }
+		if !exists {
+			return TransitionResult{false, false, 0, "CANCELLED"}
+		}
+		if dirty {
+			return TransitionResult{true, true, rowVersion, "DECISION_REQUIRED"}
+		}
 		return TransitionResult{false, false, 0, "CANCELLED"}
 	default:
 		return TransitionResult{exists, dirty, rowVersion, "INVALID_COMMAND"}

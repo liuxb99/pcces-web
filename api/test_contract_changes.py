@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
 
 from api.budget_versioning import metadata as budget_metadata, budget_versions
@@ -11,7 +12,7 @@ class ContractChangeTests(unittest.TestCase):
         self.engine=create_engine("sqlite:///:memory:")
         budget_metadata.create_all(self.engine); contract_metadata.create_all(self.engine)
         with self.engine.begin() as conn:
-            conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="approved",status="APPROVED",snapshot_json='[{"id":"B1","quantity":"10","amount":"100"}]',created_by="u",created_at="2026-08-02T00:00:00Z"))
+            conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="approved",status="APPROVED",snapshot_json='[{"id":"B1","quantity":"10","amount":"100"}]',created_by="u",created_at=datetime(2026, 8, 2, tzinfo=timezone.utc)))
         self.core=ContractCoreService(self.engine)
         self.contract=self.core.create({"project_code":"P1","budget_version_id":"V1","contract_no":"C-1","name":"Main","contract_amount":"100","items":[{"source_budget_item_id":"B1","name":"Concrete","quantity":"10","unit_price":"10","amount":"100"}]},"u")
         with self.engine.begin() as conn: conn.execute(contracts_v2.update().where(contracts_v2.c.id==self.contract["id"]).values(status="APPROVED"))

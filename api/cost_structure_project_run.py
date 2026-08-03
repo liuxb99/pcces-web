@@ -12,6 +12,7 @@ from sqlalchemy import Column, DateTime, Integer, MetaData, Numeric, String, Tab
 from api.cost_structure_calculation import calculate_cost_structure
 from api.cost_structure_details import cost_structure_categories
 from api.cost_structure import project_cost_structures
+from api.decimal_math import quantize
 
 metadata = MetaData()
 project_cost_structure_runs = Table(
@@ -59,12 +60,12 @@ class ProjectCostStructureRunService:
             rows = conn.execute(select(cost_structure_categories).where(and_(
                 cost_structure_categories.c.cost_structure_type_id == assignment["cost_structure_type_id"],
                 cost_structure_categories.c.enabled.is_(True),
-            )).order_by(cost_structure_categories.c.sort_order, cost_structure_categories.c.code)).mappings().all()
+            )).order_by(cost_structure_categories.c.sequence, cost_structure_categories.c.code)).mappings().all()
             if not rows:
                 raise ValueError("assigned cost structure has no enabled categories")
             lines = [{
                 "code": row["code"], "kind": row["kind"], "base_kind": "SUBTOTAL",
-                "rate": str(row["rate"]), "sign": 1, "sort_order": row["sort_order"],
+                "rate": str(row["rate"]), "sign": 1, "sort_order": row["sequence"],
             } for row in rows]
             direct = self._direct_cost(budget_items)
             result = calculate_cost_structure(lines, str(direct), scale)
@@ -88,7 +89,7 @@ class ProjectCostStructureRunService:
         return {
             "id": row["id"], "project_code": row["project_code"],
             "cost_structure_type_id": row["cost_structure_type_id"],
-            "direct_cost": format(row["direct_cost"], "f"), "total": format(row["total"], "f"),
+            "direct_cost": quantize(str(row["direct_cost"]), row["scale"]), "total": quantize(str(row["total"]), row["scale"]),
             "scale": row["scale"], "budget_snapshot": json.loads(row["budget_snapshot_json"]),
             "result": json.loads(row["result_json"]), "created_by": row["created_by"],
             "created_at": row["created_at"].isoformat(), "row_version": row["row_version"],

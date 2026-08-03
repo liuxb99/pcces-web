@@ -25,7 +25,7 @@ class MRSRateHistoryApplyTests(unittest.TestCase):
 
     def test_apply_restores_historical_analysis_quantities(self):
         current = self.catalog.calculate_recipe("recipe-1")
-        result = self.history.apply_rates("recipe-1", self.version["id"], current["row_version"], "tester")
+        result = self.history.apply_recipe_version("recipe-1", self.version["id"], current["row_version"], "tester")
         self.assertEqual(2, result["component_count"])
         self.assertEqual("2.5000", result["applied_components"][0]["quantity"])
         restored = self.catalog.calculate_recipe("recipe-1")
@@ -35,7 +35,7 @@ class MRSRateHistoryApplyTests(unittest.TestCase):
     def test_stale_version_rolls_back_without_partial_components(self):
         current = self.catalog.calculate_recipe("recipe-1")
         with self.assertRaises(RuntimeError):
-            self.history.apply_rates("recipe-1", self.version["id"], current["row_version"] - 1, "tester")
+            self.history.apply_recipe_version("recipe-1", self.version["id"], current["row_version"] - 1, "tester")
         unchanged = self.catalog.calculate_recipe("recipe-1")
         self.assertEqual(1, len(unchanged["components"]))
         self.assertEqual("9.0000", unchanged["components"][0]["quantity"])
@@ -43,7 +43,7 @@ class MRSRateHistoryApplyTests(unittest.TestCase):
     def test_version_must_belong_to_recipe(self):
         current = self.catalog.calculate_recipe("recipe-1")
         with self.assertRaises(LookupError):
-            self.history.apply_rates("recipe-1", "missing", current["row_version"], "tester")
+            self.history.apply_recipe_version("recipe-1", "missing", current["row_version"], "tester")
 
 
 if __name__ == "__main__":

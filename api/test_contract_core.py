@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.pool import StaticPool
 
@@ -12,8 +13,8 @@ class ContractCoreTest(unittest.TestCase):
         version_metadata.create_all(self.engine)
         self.service = ContractCoreService(self.engine)
         with self.engine.begin() as conn:
-            conn.execute(budget_versions.insert().values(id="V1", project_code="P1", label="Approved", status="APPROVED", snapshot_json="[]", created_by="u", created_at="2026-08-02T00:00:00Z"))
-            conn.execute(budget_versions.insert().values(id="V2", project_code="P1", label="Draft", status="DRAFT", snapshot_json="[]", created_by="u", created_at="2026-08-02T00:00:00Z"))
+            conn.execute(budget_versions.insert().values(id="V1", project_code="P1", label="Approved", status="APPROVED", snapshot_json="[]", created_by="u", created_at=datetime(2026, 8, 2, tzinfo=timezone.utc)))
+            conn.execute(budget_versions.insert().values(id="V2", project_code="P1", label="Draft", status="DRAFT", snapshot_json="[]", created_by="u", created_at=datetime(2026, 8, 2, tzinfo=timezone.utc)))
 
     def test_approved_version_is_eligible(self):
         self.assertTrue(self.service.eligibility("P1", "V1")["eligible"])

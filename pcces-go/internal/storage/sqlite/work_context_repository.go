@@ -119,17 +119,17 @@ func scanWorkContext(row rowScanner) (*workcontext.Context, error) {
 	); err != nil {
 		return nil, err
 	}
-	item.ProjectCode = nullableString(projectCode)
-	item.ResourceType = nullableString(resourceType)
-	item.ResourceID = nullableString(resourceID)
-	item.DraftPayload = nullableString(draft)
+	item.ProjectCode = nullStringFromSQL(projectCode)
+	item.ResourceType = nullStringFromSQL(resourceType)
+	item.ResourceID = nullStringFromSQL(resourceID)
+	item.DraftPayload = nullStringFromSQL(draft)
 	item.Dirty = dirty == 1
 	item.CreatedAt, _ = time.Parse(time.RFC3339Nano, createdAt)
 	item.UpdatedAt, _ = time.Parse(time.RFC3339Nano, updatedAt)
 	return &item, nil
 }
 
-func nullableString(value sql.NullString) *string {
+func nullStringFromSQL(value sql.NullString) *string {
 	if !value.Valid {
 		return nil
 	}

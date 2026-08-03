@@ -15,12 +15,14 @@ RULES = [
     ("Report.WebDownload", "P7-REPORT"), ("ExportExcel", "P7-REPORT"), ("Crystal", "P7-REPORT"), ("Report", "P7-REPORT"), ("ShellLib", "P7-REPORT"),
     ("SysMaintain", "P8-ADMIN"), ("DatabaseUpgrade", "P8-ADMIN"), ("SysUser", "P8-ADMIN"),
     ("AddOnDownLoad", "P8-INTEGRATION"), ("AddOn", "P8-INTEGRATION"), ("Proxy", "P8-INTEGRATION"), ("Registration", "P8-INTEGRATION"), ("Update", "P8-INTEGRATION"),
+    ("CODECHECK", "P3-MRS"),
     ("MrsBase", "P3-MRS"), ("CostStructure", "P4-COST"), ("Conversion", "P4-CONVERSION"), ("XMLClass", "P4-CONVERSION"), ("/XML/", "P4-CONVERSION"),
     ("BUDClass", "P2-BUDGET"), ("Budget", "P2-BUDGET"), ("Project", "P1-PROJECT"),
     ("ArchControls", "P0-PLATFORM"), ("PccesMain", "P0-PLATFORM"), ("CommonMethods", "P0-PLATFORM"),
     ("DBClass", "P0-PLATFORM"), ("PubTools", "P0-PLATFORM"), ("ModuleManager", "P0-PLATFORM"),
     ("PccesFormAction", "P0-PLATFORM"), ("ModifyDB", "P0-PLATFORM"), ("Common", "P0-PLATFORM"),
     ("DomainModule", "P0-PLATFORM"), ("Archnowledge.Pcces", "P0-PLATFORM"),
+    ("AssemblyInfo", "P0-PLATFORM"), ("obj/", "P0-PLATFORM"), ("Class1.cs", "P0-PLATFORM"), ("Class2.cs", "P0-PLATFORM"), ("COM.cs", "P8-INTEGRATION"),
 ]
 CLASS_RE = re.compile(r"\b(?:class|struct|enum|interface)\s+([A-Za-z_][A-Za-z0-9_]*)")
 

@@ -13,7 +13,10 @@ func (s *Server) budgetBidConversionRoutes() {
 
 func (s *Server) convertBudgetToBid(w http.ResponseWriter, r *http.Request) {
 	var body sqlite.BudgetBidConversionRequest
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	item, err := sqlite.NewBudgetBidConversionRepository(s.store).Convert(r.Context(), body)
 	respond(w, item, err)
 }

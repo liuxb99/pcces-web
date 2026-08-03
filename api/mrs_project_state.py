@@ -59,8 +59,8 @@ class MRSProjectStateService:
                 raise ValueError(f"invalid state transition {current_state} -> {state}")
             template = bool(body.get("template", current["template"] if current else False))
             readonly = bool(body.get("readonly", current["readonly"] if current else False))
-            if template and state == "APPROVED":
-                raise ValueError("template project cannot be approved")
+            if template and state in ("SUBMITTED", "APPROVED"):
+                raise ValueError("template project cannot be submitted or approved")
             values = dict(state=state, template=int(template), readonly=int(readonly),
                           reason=str(body.get("reason") or "") or None, updated_by=actor,
                           updated_at=now, row_version=(int(current["row_version"]) + 1 if current else 1))

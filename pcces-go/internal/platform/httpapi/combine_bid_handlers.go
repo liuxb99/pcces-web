@@ -21,14 +21,20 @@ func (s *Server) combineBidRoutes() {
 
 func (s *Server) combineBidPreflight(w http.ResponseWriter, r *http.Request) {
 	var body combineBidRequest
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	result, err := sqlite.CombineBidSources(body.Sources, body.Strategy)
 	respond(w, result, err)
 }
 
 func (s *Server) createCombineBidSession(w http.ResponseWriter, r *http.Request) {
 	var body combineBidRequest
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	item, err := sqlite.NewCombineBidRepository(s.store).Create(r.Context(), body.TargetProjectCode, body.Strategy, body.ActorID, body.Sources)
 	respond(w, item, err)
 }

@@ -12,20 +12,20 @@ import (
 )
 
 type BidImportSession struct {
-	ID                        string               `json:"id"`
-	SourceFormat              string               `json:"source_format"`
-	FormatVersion             string               `json:"format_version"`
-	SourceBidProjectCode      string               `json:"source_bid_project_code"`
-	TargetBudgetProjectCode   string               `json:"target_budget_project_code"`
-	SourceConversionSessionID string               `json:"source_conversion_session_id,omitempty"`
-	Status                    string               `json:"status"`
-	Report                    BidImportReport      `json:"report"`
-	Items                     []BidImportItem      `json:"items"`
-	CreatedBy                 string               `json:"created_by"`
-	CreatedAt                 string               `json:"created_at"`
-	RowVersion                int64                `json:"row_version"`
-	RoundTripLineage          map[string]any       `json:"round_trip_lineage"`
-	DeepLink                  string               `json:"deep_link"`
+	ID                        string          `json:"id"`
+	SourceFormat              string          `json:"source_format"`
+	FormatVersion             string          `json:"format_version"`
+	SourceBidProjectCode      string          `json:"source_bid_project_code"`
+	TargetBudgetProjectCode   string          `json:"target_budget_project_code"`
+	SourceConversionSessionID string          `json:"source_conversion_session_id,omitempty"`
+	Status                    string          `json:"status"`
+	Report                    BidImportReport `json:"report"`
+	Items                     []BidImportItem `json:"items"`
+	CreatedBy                 string          `json:"created_by"`
+	CreatedAt                 string          `json:"created_at"`
+	RowVersion                int64           `json:"row_version"`
+	RoundTripLineage          map[string]any  `json:"round_trip_lineage"`
+	DeepLink                  string          `json:"deep_link"`
 }
 
 type BidImportSessionRequest struct {
@@ -92,9 +92,9 @@ func (r *BidImportSessionRepository) Get(ctx context.Context, id string) (BidImp
 	}
 	item.RoundTripLineage = map[string]any{
 		"source_conversion_session_id": item.SourceConversionSessionID,
-		"source_bid_project_code": item.SourceBidProjectCode,
-		"target_budget_project_code": item.TargetBudgetProjectCode,
-		"item_links": links,
+		"source_bid_project_code":      item.SourceBidProjectCode,
+		"target_budget_project_code":   item.TargetBudgetProjectCode,
+		"item_links":                   links,
 	}
 	item.DeepLink = "/app/conversions/import?session=" + item.ID
 	return item, nil

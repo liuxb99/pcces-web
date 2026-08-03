@@ -26,12 +26,12 @@ type ConversionExportItem struct {
 }
 
 type ConversionExportRequest struct {
-	WizardSessionID      string                 `json:"wizard_session_id"`
-	SourceBudgetVersionID string                `json:"source_budget_version_id"`
-	TargetProjectCode    string                 `json:"target_project_code"`
-	Format               string                 `json:"format"`
-	Items                []ConversionExportItem `json:"items"`
-	ActorID              string                 `json:"actor_id"`
+	WizardSessionID       string                 `json:"wizard_session_id"`
+	SourceBudgetVersionID string                 `json:"source_budget_version_id"`
+	TargetProjectCode     string                 `json:"target_project_code"`
+	Format                string                 `json:"format"`
+	Items                 []ConversionExportItem `json:"items"`
+	ActorID               string                 `json:"actor_id"`
 }
 
 type ConversionExportJob struct {
@@ -70,15 +70,15 @@ type exportXMLItems struct {
 }
 
 type exportXMLRow struct {
-	XMLName     xml.Name
-	Sequence    int    `xml:"sequence,attr"`
-	SourceID    string `xml:"SourceItemId"`
-	Code        string `xml:"Code"`
-	Name        string `xml:"Name"`
-	Unit        string `xml:"Unit"`
-	Quantity    string `xml:"Quantity"`
-	UnitPrice   string `xml:"UnitPrice"`
-	Amount      string `xml:"Amount"`
+	XMLName   xml.Name
+	Sequence  int    `xml:"sequence,attr"`
+	SourceID  string `xml:"SourceItemId"`
+	Code      string `xml:"Code"`
+	Name      string `xml:"Name"`
+	Unit      string `xml:"Unit"`
+	Quantity  string `xml:"Quantity"`
+	UnitPrice string `xml:"UnitPrice"`
+	Amount    string `xml:"Amount"`
 }
 
 type ConversionExportJobRepository struct{ store *Store }
@@ -111,7 +111,7 @@ func serializeConversionXML(items []ConversionExportItem, projectCode, sourceVer
 	doc := exportXMLDocument{
 		XMLName: xml.Name{Local: rootName}, Version: version,
 		Header: exportXMLHeader{ProjectCode: projectCode, SourceBudgetVersion: sourceVersion},
-		Items: exportXMLItems{XMLName: xml.Name{Local: collectionName}, Rows: rows},
+		Items:  exportXMLItems{XMLName: xml.Name{Local: collectionName}, Rows: rows},
 	}
 	payload, err := xml.MarshalIndent(doc, "", "  ")
 	if err != nil {

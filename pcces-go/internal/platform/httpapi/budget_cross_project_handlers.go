@@ -13,12 +13,15 @@ func (s *Server) budgetCrossProjectRoutes() {
 
 func (s *Server) propagateCrossProjectBudget(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		ID string `json:"id"`
+		ID                string `json:"id"`
 		SourceProjectCode string `json:"source_project_code"`
 		TargetProjectCode string `json:"target_project_code"`
-		Actor string `json:"actor"`
+		Actor             string `json:"actor"`
 	}
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	result, err := sqlite.NewBudgetCrossProjectSyncRepository(s.store).Propagate(
 		r.Context(), body.ID, body.SourceProjectCode, body.TargetProjectCode, body.Actor,
 	)
@@ -26,8 +29,14 @@ func (s *Server) propagateCrossProjectBudget(w http.ResponseWriter, r *http.Requ
 }
 
 func (s *Server) diffCrossProjectBudget(w http.ResponseWriter, r *http.Request) {
-	var body struct { ID string `json:"id"`; Actor string `json:"actor"` }
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	var body struct {
+		ID    string `json:"id"`
+		Actor string `json:"actor"`
+	}
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	result, err := sqlite.NewBudgetCrossProjectSyncRepository(s.store).Diff(
 		r.Context(), body.ID, r.PathValue("leftProject"), r.PathValue("rightProject"), body.Actor,
 	)

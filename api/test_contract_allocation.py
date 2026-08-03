@@ -1,5 +1,6 @@
 import json
 import unittest
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
 
 from api.budget_versioning import budget_versions, metadata as version_metadata
@@ -15,7 +16,7 @@ class ContractAllocationTests(unittest.TestCase):
         self.alloc = ContractAllocationService(self.engine)
         snapshot = [{"id":"B1","item_no":"001","name":"Concrete","unit":"m3","quantity":"10","unit_price":"100","amount":"1000"}]
         with self.engine.begin() as conn:
-            conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="approved",status="APPROVED",snapshot_json=json.dumps(snapshot),created_by="u",created_at="2026-01-01T00:00:00Z"))
+            conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="approved",status="APPROVED",snapshot_json=json.dumps(snapshot),created_by="u",created_at=datetime(2026, 1, 1, tzinfo=timezone.utc)))
 
     def _contract(self, no, qty="4", amount="400"):
         return self.core.create({"project_code":"P1","budget_version_id":"V1","contract_no":no,"name":no,"contract_amount":amount,"items":[{"source_budget_item_id":"B1","name":"Concrete","unit":"m3","quantity":qty,"unit_price":"100","amount":amount}]}, "u")

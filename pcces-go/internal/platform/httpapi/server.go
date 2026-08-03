@@ -245,12 +245,28 @@ func (s *Server) discardRecoverySnapshot(w http.ResponseWriter, r *http.Request)
 	respond(w, item, err)
 }
 
+func respondCreated(w http.ResponseWriter, payload any, err error) {
+	if err != nil {
+		writeError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusCreated, payload)
+}
+
 func respond(w http.ResponseWriter, payload any, err error) {
 	if err != nil {
 		writeError(w, err)
 		return
 	}
 	writeJSON(w, http.StatusOK, payload)
+}
+
+func respondStatus(w http.ResponseWriter, status int, payload any, err error) {
+	if err != nil {
+		writeError(w, err)
+		return
+	}
+	writeJSON(w, status, payload)
 }
 
 func decodeJSON(r *http.Request, destination any) error {

@@ -126,7 +126,7 @@ func (r *CostStructureDetailRepository) ImportDefinition(ctx context.Context, ty
 	}
 	for _, item := range normalized {
 		if _, err = tx.ExecContext(ctx, `INSERT INTO cost_structure_categories(id,cost_structure_type_id,code,name,kind,sequence,rate,enabled,row_version) VALUES(?,?,?,?,?,?,?,?,1)`,
-			item.ID, typeID, item.Code, item.Name, item.Kind, item.Sequence, item.Rate, boolInt(item.Enabled)); err != nil {
+			item.ID, typeID, item.Code, item.Name, item.Kind, item.Sequence, item.Rate, boolToInt(item.Enabled)); err != nil {
 			return CostStructureImportResult{}, err
 		}
 	}
@@ -134,7 +134,7 @@ func (r *CostStructureDetailRepository) ImportDefinition(ctx context.Context, ty
 	runID := fmt.Sprintf("CSI-%d", time.Now().UTC().UnixNano())
 	errorsJSON, _ := json.Marshal([]any{})
 	if _, err = tx.ExecContext(ctx, `INSERT INTO cost_structure_import_runs(id,cost_structure_type_id,only_structure,status,total_rows,imported_rows,errors_json,created_by,created_at) VALUES(?,?,?,?,?,?,?,?,?)`,
-		runID, typeID, boolInt(req.OnlyStructure), "COMPLETED", len(normalized), len(normalized), string(errorsJSON), req.ActorID, now); err != nil {
+		runID, typeID, boolToInt(req.OnlyStructure), "COMPLETED", len(normalized), len(normalized), string(errorsJSON), req.ActorID, now); err != nil {
 		return CostStructureImportResult{}, err
 	}
 	if err = tx.Commit(); err != nil {

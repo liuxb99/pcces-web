@@ -27,9 +27,9 @@ type ConversionWizardReport struct {
 }
 
 type ConversionWizardItem struct {
-	ID        string `json:"id"`
-	Code      string `json:"code"`
-	Name      string `json:"name"`
+	ID        string  `json:"id"`
+	Code      string  `json:"code"`
+	Name      string  `json:"name"`
 	Quantity  *string `json:"quantity"`
 	UnitPrice *string `json:"unit_price"`
 }
@@ -122,28 +122,44 @@ func (r *ConversionWizardRepository) Create(ctx context.Context, req ConversionW
 	req.SourceBudgetVersionID = strings.TrimSpace(req.SourceBudgetVersionID)
 	req.TargetProjectCode = strings.TrimSpace(req.TargetProjectCode)
 	req.Mode = strings.ToUpper(strings.TrimSpace(req.Mode))
-	if req.Mode == "" { req.Mode = "CREATE" }
+	if req.Mode == "" {
+		req.Mode = "CREATE"
+	}
 	if req.SourceProjectCode == "" || req.SourceBudgetVersionID == "" || req.TargetProjectCode == "" {
 		return ConversionWizardSession{}, errx.New(errx.CodeInvalidArgument, "source project, source version and target project are required", "P4-CONV-002")
 	}
 	if req.Mode != "CREATE" && req.Mode != "REPLACE" && req.Mode != "APPEND" {
 		return ConversionWizardSession{}, errx.New(errx.CodeInvalidArgument, "mode must be CREATE, REPLACE or APPEND", "P4-CONV-003")
 	}
-	if req.Options == nil { req.Options = map[string]any{} }
-	if _, ok := req.Options["format"]; !ok { req.Options["format"] = "BID_JSON" }
-	if _, ok := req.Options["include_resources"]; !ok { req.Options["include_resources"] = true }
-	if _, ok := req.Options["include_analysis"]; !ok { req.Options["include_analysis"] = true }
-	if _, ok := req.Options["deduplicate_by_code"]; !ok { req.Options["deduplicate_by_code"] = true }
+	if req.Options == nil {
+		req.Options = map[string]any{}
+	}
+	if _, ok := req.Options["format"]; !ok {
+		req.Options["format"] = "BID_JSON"
+	}
+	if _, ok := req.Options["include_resources"]; !ok {
+		req.Options["include_resources"] = true
+	}
+	if _, ok := req.Options["include_analysis"]; !ok {
+		req.Options["include_analysis"] = true
+	}
+	if _, ok := req.Options["deduplicate_by_code"]; !ok {
+		req.Options["deduplicate_by_code"] = true
+	}
 	report := BuildConversionPreflight(req.BudgetItems, req.Mode, req.Options)
 	optionsJSON, _ := json.Marshal(req.Options)
 	reportJSON, _ := json.Marshal(report)
 	id := fmt.Sprintf("CW-%d", time.Now().UTC().UnixNano())
 	status := "BLOCKED"
-	if report.CanContinue { status = "READY" }
+	if report.CanContinue {
+		status = "READY"
+	}
 	now := time.Now().UTC().Format(time.RFC3339Nano)
 	_, err := r.store.db.ExecContext(ctx, `INSERT INTO conversion_wizard_sessions(id,source_project_code,source_budget_version_id,target_project_code,mode,status,options_json,report_json,can_continue,created_by,created_at,row_version) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)`,
-		id, req.SourceProjectCode, req.SourceBudgetVersionID, req.TargetProjectCode, req.Mode, status, string(optionsJSON), string(reportJSON), boolInt(report.CanContinue), req.ActorID, now)
-	if err != nil { return ConversionWizardSession{}, err }
+		id, req.SourceProjectCode, req.SourceBudgetVersionID, req.TargetProjectCode, req.Mode, status, string(optionsJSON), string(reportJSON), boolToInt(report.CanContinue), req.ActorID, now)
+	if err != nil {
+		return ConversionWizardSession{}, err
+	}
 	return r.Get(ctx, id)
 }
 
@@ -153,8 +169,12 @@ func (r *ConversionWizardRepository) Get(ctx context.Context, id string) (Conver
 	var canContinue int
 	err := r.store.db.QueryRowContext(ctx, `SELECT id,source_project_code,source_budget_version_id,target_project_code,mode,status,options_json,report_json,can_continue,created_by,created_at,row_version FROM conversion_wizard_sessions WHERE id=?`, id).Scan(
 		&item.ID, &item.SourceProjectCode, &item.SourceBudgetVersionID, &item.TargetProjectCode, &item.Mode, &item.Status, &optionsJSON, &reportJSON, &canContinue, &item.CreatedBy, &item.CreatedAt, &item.RowVersion)
-	if err == sql.ErrNoRows { return item, errx.New(errx.CodeNotFound, "conversion wizard session not found", "P4-CONV-001") }
-	if err != nil { return item, err }
+	if err == sql.ErrNoRows {
+		return item, errx.New(errx.CodeNotFound, "conversion wizard session not found", "P4-CONV-001")
+	}
+	if err != nil {
+		return item, err
+	}
 	_ = json.Unmarshal([]byte(optionsJSON), &item.Options)
 	_ = json.Unmarshal([]byte(reportJSON), &item.Report)
 	item.CanContinue = canContinue != 0

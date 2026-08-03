@@ -11,18 +11,18 @@ import (
 )
 
 type RecoverySnapshot struct {
-	ID           string  `json:"id"`
-	ActorID      string  `json:"actor_id"`
-	ContextID    *string `json:"context_id,omitempty"`
-	ProjectCode  *string `json:"project_code,omitempty"`
-	ActionCode   *string `json:"action_code,omitempty"`
-	Payload      string  `json:"payload"`
-	PayloadHash  string  `json:"payload_hash"`
-	Reason       string  `json:"reason"`
-	CreatedAt    string  `json:"created_at"`
-	RestoredAt   *string `json:"restored_at,omitempty"`
-	DiscardedAt  *string `json:"discarded_at,omitempty"`
-	RowVersion   int64   `json:"row_version"`
+	ID          string  `json:"id"`
+	ActorID     string  `json:"actor_id"`
+	ContextID   *string `json:"context_id,omitempty"`
+	ProjectCode *string `json:"project_code,omitempty"`
+	ActionCode  *string `json:"action_code,omitempty"`
+	Payload     string  `json:"payload"`
+	PayloadHash string  `json:"payload_hash"`
+	Reason      string  `json:"reason"`
+	CreatedAt   string  `json:"created_at"`
+	RestoredAt  *string `json:"restored_at,omitempty"`
+	DiscardedAt *string `json:"discarded_at,omitempty"`
+	RowVersion  int64   `json:"row_version"`
 }
 
 type RecoveryRepository struct{ store *Store }

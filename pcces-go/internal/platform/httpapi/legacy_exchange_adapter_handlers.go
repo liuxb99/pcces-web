@@ -13,23 +13,35 @@ func (s *Server) legacyExchangeAdapterRoutes() {
 }
 
 func (s *Server) legacyAdapterPreflight(w http.ResponseWriter, r *http.Request) {
-	var body struct { Format string `json:"format"`; Payload string `json:"payload"` }
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	var body struct {
+		Format  string `json:"format"`
+		Payload string `json:"payload"`
+	}
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	item, err := sqlite.ParseLegacyExchange(body.Payload, body.Format)
 	respond(w, item, err)
 }
 
 func (s *Server) createLegacyAdapterSession(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		Format string `json:"format"`
-		Payload string `json:"payload"`
-		SourceFilename string `json:"source_filename"`
+		Format            string `json:"format"`
+		Payload           string `json:"payload"`
+		SourceFilename    string `json:"source_filename"`
 		TargetProjectCode string `json:"target_project_code"`
-		ActorID string `json:"actor_id"`
+		ActorID           string `json:"actor_id"`
 	}
-	if err := decodeJSON(r, &body); err != nil { writeError(w, err); return }
+	if err := decodeJSON(r, &body); err != nil {
+		writeError(w, err)
+		return
+	}
 	item, err := sqlite.NewLegacyExchangeSessionRepository(s.store).Create(r.Context(), body.Format, body.Payload, body.SourceFilename, body.TargetProjectCode, body.ActorID)
-	if err != nil { writeError(w, err); return }
+	if err != nil {
+		writeError(w, err)
+		return
+	}
 	writeJSON(w, http.StatusCreated, item)
 }
 

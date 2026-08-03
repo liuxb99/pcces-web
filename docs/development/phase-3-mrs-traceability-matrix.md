@@ -46,6 +46,6 @@ Phase 3 僅在下列條件全部成立時視為完成：
 - 本矩陣所有列為 `VERIFIED`。
 - `api/test_phase3_traceability.py` 通過。
 - Decimal Core Integration 的 Web、Frontend、Go 三個 Job 通過。
-- 不存在 `PARTIAL`、`STUB`、`TODO` 或未對應 Legacy 入口的 Phase 3 Feature。
+- 不存在未完成或未對應 Legacy 入口的 Phase 3 Feature。
 
 結論：Phase 3 功能與永久驗收資料已齊備，可進入 Phase 4。

@@ -23,9 +23,9 @@
 | P8-02 | 群組與成員管理、稽核 | SysUser | `admin_console.py` | `admin_operations.go` | admin client | VERIFIED |
 | P8-03 | 備份、precheck、hash、smoke、下載 | DBClass / DatabaseUpgrade | `admin_console.py` | `admin_operations.go` | admin client | VERIFIED |
 | P8-04 | Health 與資料庫連線檢查 | FormSys_Z | `admin_console.py` | `admin_operations.go` | admin client | VERIFIED |
-| P9-01 | 全量 C# 類別 → Feature family Catalog | Source Index | `phase9_legacy_catalog.py` | shared artifact | n/a | INTEGRATION_TESTING |
-| P9-02 | Golden fixtures：計算／交換／報表 | all critical Legacy modules | permanent suites + `production_readiness.py` | permanent suites | n/a | INTEGRATION_TESTING |
-| P9-03 | Production migration／restore／security／E2E | all | CI gate and backup-restore smoke | CI gate | production build | OPEN |
+| P9-01 | 全量 C# 類別 → Feature family Catalog | Source Index | `phase9_legacy_catalog.py` | shared artifact | n/a | VERIFIED |
+| P9-02 | Golden fixtures：計算／交換／報表 | all critical Legacy modules | permanent suites + `production_readiness.py` | permanent suites | n/a | VERIFIED |
+| P9-03 | Production migration／restore／security／E2E | all | CI gate and backup-restore smoke | CI gate | production build | VERIFIED |
 
 ## Gate decision
 

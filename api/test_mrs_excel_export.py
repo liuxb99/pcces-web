@@ -37,7 +37,7 @@ class MRSExcelExportTests(unittest.TestCase):
         current = self.precision.get("P1")
         self.precision.save("P1", {"main_quantity_scale":3,"main_price_scale":2,"main_amount_scale":1,
             "analysis_quantity_scale":5,"analysis_price_scale":4,"analysis_amount_scale":3,
-            "row_version":current["row_version"]})
+            "row_version":current["row_version"]}, "u1")
         wb = load_workbook(BytesIO(MRSExcelExportService(self.engine).export_project("P1")))
         self.assertEqual("0.0000", wb["專案資源"]["D2"].number_format)
         self.assertEqual("0.000", wb["引用工項"]["D2"].number_format)

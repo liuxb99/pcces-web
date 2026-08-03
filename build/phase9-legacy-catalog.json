@@ -1,0 +1,2296 @@
+{
+  "count": 325,
+  "by_family": {
+    "P0-PLATFORM": 69,
+    "P4-CONVERSION": 1,
+    "P8-INTEGRATION": 48,
+    "P2-BUDGET": 69,
+    "P3-MRS": 33,
+    "P1-PROJECT": 14,
+    "P4-COST": 1,
+    "P6-CHANGE": 14,
+    "P6-INVOICE": 11,
+    "P7-REPORT": 30,
+    "P6-SETTLEMENT": 4,
+    "P6-ACCEPTANCE": 4,
+    "P5-CONTRACT": 5,
+    "P8-ADMIN": 22
+  },
+  "entries": [
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/Class1.cs",
+      "node": "Class1",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/Conversion.cs",
+      "node": "Conversion",
+      "feature_family": "P4-CONVERSION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/DBClass.cs",
+      "node": "DBClass",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/Form1.cs",
+      "node": "Form1",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormLogin.cs",
+      "node": "FormLogin",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormMessage.cs",
+      "node": "FormMessage",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormModuleFlowMap.cs",
+      "node": "FormModuleFlowMap",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormModuleSetup.cs",
+      "node": "FormModuleSetup",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormNews.cs",
+      "node": "FormNews",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormPanel.cs",
+      "node": "FormPanel",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormPanel2.cs",
+      "node": "FormPanel2",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormPanel3.cs",
+      "node": "FormPanel3",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormPanelPick.cs",
+      "node": "FormPanelPick",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormPccesUpdate.cs",
+      "node": "FormPccesUpdate",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormRegister.cs",
+      "node": "FormRegister",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormSplash.cs",
+      "node": "FormSplash",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormSymbol.cs",
+      "node": "FormSymbol",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/FormUpdateInfo.cs",
+      "node": "FormUpdateInfo",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/frmPccesMain.cs",
+      "node": "frmPccesMain",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/PccesHelp.cs",
+      "node": "PccesHelp",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/PDFErrorForm.cs",
+      "node": "PDFErrorForm",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain/PDFForm.cs",
+      "node": "PDFForm",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain._Customize.Z14AC1100/FormSynchronize.cs",
+      "node": "FormSynchronize",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.About/FormAbout.cs",
+      "node": "FormAbout",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/ArchFlexGrid.cs",
+      "node": "ArchFlexGrid",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/c1GridExportType.cs",
+      "node": "c1GridExportType",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/FormChangeUserInfo.cs",
+      "node": "FormChangeUserInfo",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/FunctionButtons.cs",
+      "node": "FunctionButtons",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/GridBudget.cs",
+      "node": "GridBudget",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/GridMrsBase.cs",
+      "node": "GridMrsBase",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/LevelSwitchButton.cs",
+      "node": "LevelSwitchButton",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls/OnlineList.cs",
+      "node": "OnlineList",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls.ProjectInfoSummaryControls/Bridge.cs",
+      "node": "Bridge",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls.ProjectInfoSummaryControls/Construction.cs",
+      "node": "Construction",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls.ProjectInfoSummaryControls/Highway.cs",
+      "node": "Highway",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls.ProjectInfoSummaryControls/SummaryControlBase.cs",
+      "node": "SummaryControlBase",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ArchControls.ProjectInfoSummaryControls/Tunnel.cs",
+      "node": "Tunnel",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/ConfirmExpandDialog.cs",
+      "node": "ConfirmExpandDialog",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormAskLines.cs",
+      "node": "FormAskLines",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormAskQuestion.cs",
+      "node": "FormAskQuestion",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudget_DIY.cs",
+      "node": "FormBudget_DIY",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetAutoInsertSubtotalItem.cs",
+      "node": "FormBudgetAutoInsertSubtotalItem",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetBidSet.cs",
+      "node": "FormBudgetBidSet",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetCheckIn_Wzd.cs",
+      "node": "FormBudgetCheckIn_Wzd",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetCheckOut_Wzd.cs",
+      "node": "FormBudgetCheckOut_Wzd",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetCombine.cs",
+      "node": "FormBudgetCombine",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetCombineBid.cs",
+      "node": "FormBudgetCombineBid",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetCombineQuote.cs",
+      "node": "FormBudgetCombineQuote",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetCostProperty.cs",
+      "node": "FormBudgetCostProperty",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetCostStructurePicker.cs",
+      "node": "FormBudgetCostStructurePicker",
+      "feature_family": "P4-COST",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetDBChkRslt.cs",
+      "node": "FormBudgetDBChkRslt",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetDecimal.cs",
+      "node": "FormBudgetDecimal",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetDept_Pick.cs",
+      "node": "FormBudgetDept_Pick",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetEditMain.cs",
+      "node": "FormBudgetEditMain",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetExp_PxfItems.cs",
+      "node": "FormBudgetExp_PxfItems",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetExp_Wzd.cs",
+      "node": "FormBudgetExp_Wzd",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetExp_Wzd_Help1.cs",
+      "node": "FormBudgetExp_Wzd_Help1",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetExp_Wzd_SelfExamDiaglog.cs",
+      "node": "FormBudgetExp_Wzd_SelfExamDiaglog",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetExp_WzdOption.cs",
+      "node": "FormBudgetExp_WzdOption",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetItemNo.cs",
+      "node": "FormBudgetItemNo",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetItemNo_New.cs",
+      "node": "FormBudgetItemNo_New",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetPageBreak.cs",
+      "node": "FormBudgetPageBreak",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetPCalsCustomEdit.cs",
+      "node": "FormBudgetPCalsCustomEdit",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetPCalsCustomVar.cs",
+      "node": "FormBudgetPCalsCustomVar",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetPickProjRes.cs",
+      "node": "FormBudgetPickProjRes",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetProjectInfo.cs",
+      "node": "FormBudgetProjectInfo",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetProjectPick.cs",
+      "node": "FormBudgetProjectPick",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetRes.cs",
+      "node": "FormBudgetRes",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetRes_CNameCorrect.cs",
+      "node": "FormBudgetRes_CNameCorrect",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetResDial1.cs",
+      "node": "FormBudgetResDial1",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetResetCost.cs",
+      "node": "FormBudgetResetCost",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetResFillRate.cs",
+      "node": "FormBudgetResFillRate",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetSelfExam.cs",
+      "node": "FormBudgetSelfExam",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetSetSurName.cs",
+      "node": "FormBudgetSetSurName",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetSplit.cs",
+      "node": "FormBudgetSplit",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormBudgetThirdParty.cs",
+      "node": "FormBudgetThirdParty",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormChangeToCompanyCode.cs",
+      "node": "FormChangeToCompanyCode",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormCostEst2BudgetChange.cs",
+      "node": "FormCostEst2BudgetChange",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormDEBUG.cs",
+      "node": "FormDEBUG",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormDownloadDoc.cs",
+      "node": "FormDownloadDoc",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormDownloadDoc.cs",
+      "node": "FileOverWriteOptions",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormDownloadDocDialog.cs",
+      "node": "FormDownloadDocDialog",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormMemo.cs",
+      "node": "FormMemo",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormMrsCodeChange_ImpWizard.cs",
+      "node": "FormMrsCodeChange_ImpWizard",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormOpenExcel.cs",
+      "node": "FormOpenExcel",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/FormPickProjWkItem_Wzd.cs",
+      "node": "FormPickProjWkItem_Wzd",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/frmBudget.cs",
+      "node": "frmBudget",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/ucBudgetCombineBid.cs",
+      "node": "ucBudgetCombineBid",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget/WRAPickUpChapterDialog.cs",
+      "node": "WRAPickUpChapterDialog",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/B_Form.cs",
+      "node": "B_Form",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/F_Form.cs",
+      "node": "F_Form",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/Form_FItem_Pick.cs",
+      "node": "Form_FItem_Pick",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/L_Form.cs",
+      "node": "L_Form",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/S_Form.cs",
+      "node": "S_Form",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/S_Form2.cs",
+      "node": "S_Form2",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/U_Form.cs",
+      "node": "U_Form",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BDGT_Component/Z_Form.cs",
+      "node": "Z_Form",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/EstApplyDetail.cs",
+      "node": "EstApplyDetail",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormBudgetChangeHistory.cs",
+      "node": "FormBudgetChangeHistory",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormBudgetChangeInfo.cs",
+      "node": "FormBudgetChangeInfo",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormBudgetChangeInfo.cs",
+      "node": "Mode",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormBudgetChangeInfoPicker.cs",
+      "node": "FormBudgetChangeInfoPicker",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormBudgetChangeResponsibility.cs",
+      "node": "FormBudgetChangeResponsibility",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormBudgetWorkItemChangeHistory.cs",
+      "node": "FormBudgetWorkItemChangeHistory",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormComsApplyDetailList.cs",
+      "node": "FormComsApplyDetailList",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormCostEstProjectList.cs",
+      "node": "FormCostEstProjectList",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.BudgetChange/FormDataExport_Wzd.cs",
+      "node": "FormDataExport_Wzd",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.ItemNoset/FormBDGT_ItemClass.cs",
+      "node": "FormBDGT_ItemClass",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.ItemNoset/FormBDGT_ItemSetCheck.cs",
+      "node": "FormBDGT_ItemSetCheck",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.ItemNoset/FormBDGT_ItemSetGPS.cs",
+      "node": "FormBDGT_ItemSetGPS",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.ItemNoset/FormBDGT_ItemSetMaintain.cs",
+      "node": "FormBDGT_ItemSetMaintain",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.ItemNoset/FormBDGT_ItemSetNewName.cs",
+      "node": "FormBDGT_ItemSetNewName",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.ItemNoset/FormBDGT_TemplateClass.cs",
+      "node": "FormBDGT_TemplateClass",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.Option/FormBDGT_OptionMain.cs",
+      "node": "FormBDGT_OptionMain",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.Option/FormBDGT_OptionMain_Help1.cs",
+      "node": "FormBDGT_OptionMain_Help1",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Budget.Option/FormBDGT_SetMain.cs",
+      "node": "FormBDGT_SetMain",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.BudgetChange/FormBudgetChange.cs",
+      "node": "FormBudgetChange",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.BudgetChange/FormBudgetChange_Addnew.cs",
+      "node": "FormBudgetChange_Addnew",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.BudgetChange/FormBudgetEditItem.cs",
+      "node": "FormBudgetEditItem",
+      "feature_family": "P6-CHANGE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.com.archnowledge.bisc/GetCostKindCompletedEventArgs.cs",
+      "node": "GetCostKindCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.com.archnowledge.bisc/GetCostKindCompletedEventHandler.cs",
+      "node": "GetCostKindCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.com.archnowledge.bisc/GetCostListCompletedEventArgs.cs",
+      "node": "GetCostListCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.com.archnowledge.bisc/GetCostListCompletedEventHandler.cs",
+      "node": "GetCostListCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.com.archnowledge.bisc/Service1.cs",
+      "node": "Service1",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Compare/FormCompareItm.cs",
+      "node": "FormCompareItm",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Compare/FormCompareItm_Scope.cs",
+      "node": "FormCompareItm_Scope",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Compare/FormCompareMrs.cs",
+      "node": "FormCompareMrs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Compare/FormCompareMrsAna.cs",
+      "node": "FormCompareMrsAna",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoice.cs",
+      "node": "FormInvoice",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceDec2.cs",
+      "node": "FormInvoiceDec2",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceExport.cs",
+      "node": "FormInvoiceExport",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceGraphic.cs",
+      "node": "FormInvoiceGraphic",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceImport.cs",
+      "node": "FormInvoiceImport",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceIndexNumber.cs",
+      "node": "FormInvoiceIndexNumber",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceProgress.cs",
+      "node": "FormInvoiceProgress",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceSubAcInfo.cs",
+      "node": "FormInvoiceSubAcInfo",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormInvoiceSummary.cs",
+      "node": "FormInvoiceSummary",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Invoice/FormSplitCnt_NewIssue.cs",
+      "node": "FormSplitCnt_NewIssue",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/ComsExpandBudget.cs",
+      "node": "ComsExpandBudget",
+      "feature_family": "P2-BUDGET",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/ComsWebService.cs",
+      "node": "ComsWebService",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/DatabaseBackupRestore.cs",
+      "node": "DatabaseBackupRestore",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/DownloadCompleteHandler.cs",
+      "node": "DownloadCompleteHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/DownloadFailHandler.cs",
+      "node": "DownloadFailHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/DownloadProgressHandler.cs",
+      "node": "DownloadProgressHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/DownloadThread.cs",
+      "node": "DownloadThread",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/DownloadThread.cs",
+      "node": "RequestState",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/GridPropertySetting.cs",
+      "node": "GridPropertySetting",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/ItemNoSettingManager.cs",
+      "node": "ItemNoSettingManager",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/ModuleFlowMapButtonID.cs",
+      "node": "ModuleFlowMapButtonID",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Library/ModuleManager.cs",
+      "node": "ModuleManager",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/AutoNumA_ExtFlag.cs",
+      "node": "AutoNumA_ExtFlag",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormAutoNum.cs",
+      "node": "FormAutoNum",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormAutoNum_LiveUpdate.cs",
+      "node": "FormAutoNum_LiveUpdate",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormAutoNumCreateChapterCode.cs",
+      "node": "FormAutoNumCreateChapterCode",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormAutoNumCustomEdit.cs",
+      "node": "FormAutoNumCustomEdit",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormAutoNumFind.cs",
+      "node": "FormAutoNumFind",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormAutosurName.cs",
+      "node": "FormAutosurName",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormCommMrsImport.cs",
+      "node": "FormCommMrsImport",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormConCost.cs",
+      "node": "FormConCost",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormConCost_Upd.cs",
+      "node": "FormConCost_Upd",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBase_DeleteMessage.cs",
+      "node": "FormMrsBase_DeleteMessage",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBase_ExpWizard.cs",
+      "node": "FormMrsBase_ExpWizard",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBase_ImpWizard.cs",
+      "node": "FormMrsBase_ImpWizard",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseApprove.cs",
+      "node": "FormMrsBaseApprove",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseBreakdown.cs",
+      "node": "FormMrsBaseBreakdown",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseBreakdown_Addnew.cs",
+      "node": "FormMrsBaseBreakdown_Addnew",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseBreakdownIR.cs",
+      "node": "FormMrsBaseBreakdownIR",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseChgCode.cs",
+      "node": "FormMrsBaseChgCode",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseDecimal.cs",
+      "node": "FormMrsBaseDecimal",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseEdit.cs",
+      "node": "FormMrsBaseEdit",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsBaseFind.cs",
+      "node": "FormMrsBaseFind",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormMrsParentFind.cs",
+      "node": "FormMrsParentFind",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormProgress.cs",
+      "node": "FormProgress",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/FormSendtoMrsBase.cs",
+      "node": "FormSendtoMrsBase",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase/frmMrsBase.cs",
+      "node": "frmMrsBase",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase.Bookmark/FormMrsBase_BookmarkRemove.cs",
+      "node": "FormMrsBase_BookmarkRemove",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase.PickFromOther/ClsPickFromOtherDB.cs",
+      "node": "ClsPickFromOtherDB",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.MrsBase.PickFromOther/FormMrsBase_PickFromOtherDB.cs",
+      "node": "FormMrsBase_PickFromOtherDB",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/AddNewspaperVisitorCountCompletedEventHandler.cs",
+      "node": "AddNewspaperVisitorCountCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/AutoNumCCompletedEventArgs.cs",
+      "node": "AutoNumCCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/AutoNumCCompletedEventHandler.cs",
+      "node": "AutoNumCCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/AutoNumUpd2CompletedEventArgs.cs",
+      "node": "AutoNumUpd2CompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/AutoNumUpd2CompletedEventHandler.cs",
+      "node": "AutoNumUpd2CompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/AutoNumUpdCompletedEventArgs.cs",
+      "node": "AutoNumUpdCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/AutoNumUpdCompletedEventHandler.cs",
+      "node": "AutoNumUpdCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetAutoNumAB_12CompletedEventArgs.cs",
+      "node": "GetAutoNumAB_12CompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetAutoNumAB_12CompletedEventHandler.cs",
+      "node": "GetAutoNumAB_12CompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetAutoNumABCompletedEventArgs.cs",
+      "node": "GetAutoNumABCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetAutoNumABCompletedEventHandler.cs",
+      "node": "GetAutoNumABCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetAutoNumACompletedEventArgs.cs",
+      "node": "GetAutoNumACompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetAutoNumACompletedEventHandler.cs",
+      "node": "GetAutoNumACompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetDownloadRouteCompletedEventArgs.cs",
+      "node": "GetDownloadRouteCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetDownloadRouteCompletedEventHandler.cs",
+      "node": "GetDownloadRouteCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPasswordCompletedEventArgs.cs",
+      "node": "GetPasswordCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPasswordCompletedEventHandler.cs",
+      "node": "GetPasswordCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPccesVersionCompletedEventArgs.cs",
+      "node": "GetPccesVersionCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPccesVersionCompletedEventHandler.cs",
+      "node": "GetPccesVersionCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPubPriceDatasetCompletedEventArgs.cs",
+      "node": "GetPubPriceDatasetCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPubPriceDatasetCompletedEventHandler.cs",
+      "node": "GetPubPriceDatasetCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPubPriceVolumesCompletedEventArgs.cs",
+      "node": "GetPubPriceVolumesCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetPubPriceVolumesCompletedEventHandler.cs",
+      "node": "GetPubPriceVolumesCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetUpdateFileAddressCompletedEventArgs.cs",
+      "node": "GetUpdateFileAddressCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetUpdateFileAddressCompletedEventHandler.cs",
+      "node": "GetUpdateFileAddressCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetUpdateFileAddressWithCurrentVersionCompletedEventArgs.cs",
+      "node": "GetUpdateFileAddressWithCurrentVersionCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetUpdateFileAddressWithCurrentVersionCompletedEventHandler.cs",
+      "node": "GetUpdateFileAddressWithCurrentVersionCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetVersionCompletedEventArgs.cs",
+      "node": "GetVersionCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/GetVersionCompletedEventHandler.cs",
+      "node": "GetVersionCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/HelloWorldCompletedEventArgs.cs",
+      "node": "HelloWorldCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/HelloWorldCompletedEventHandler.cs",
+      "node": "HelloWorldCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/InvReportListCompletedEventArgs.cs",
+      "node": "InvReportListCompletedEventArgs",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/InvReportListCompletedEventHandler.cs",
+      "node": "InvReportListCompletedEventHandler",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/IsApprovedCompletedEventArgs.cs",
+      "node": "IsApprovedCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/IsApprovedCompletedEventHandler.cs",
+      "node": "IsApprovedCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/IsOK_forUpdate_ByRandomCompletedEventArgs.cs",
+      "node": "IsOK_forUpdate_ByRandomCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/IsOK_forUpdate_ByRandomCompletedEventHandler.cs",
+      "node": "IsOK_forUpdate_ByRandomCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/IsStillValidCompletedEventArgs.cs",
+      "node": "IsStillValidCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/IsStillValidCompletedEventHandler.cs",
+      "node": "IsStillValidCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/RegisterCompletedEventArgs.cs",
+      "node": "RegisterCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/RegisterCompletedEventHandler.cs",
+      "node": "RegisterCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/RegisterWithVersionCompletedEventArgs.cs",
+      "node": "RegisterWithVersionCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/RegisterWithVersionCompletedEventHandler.cs",
+      "node": "RegisterWithVersionCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/TimeCompletedEventArgs.cs",
+      "node": "TimeCompletedEventArgs",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/TimeCompletedEventHandler.cs",
+      "node": "TimeCompletedEventHandler",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.PccesUpdateServices/Update.cs",
+      "node": "Update",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Project/formNewProjectWizard.cs",
+      "node": "formNewProjectWizard",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Project/FormProject.cs",
+      "node": "FormProject",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Project/FormProject.cs",
+      "node": "ProjectFilterEnum",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Project/FormProjectBidToBud.cs",
+      "node": "FormProjectBidToBud",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Project/FormProjectClone.cs",
+      "node": "FormProjectClone",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Project/FormProjectEdit.cs",
+      "node": "FormProjectEdit",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Project/uccShowProject.cs",
+      "node": "uccShowProject",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Properties/Resources.cs",
+      "node": "Resources",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Properties/Settings.cs",
+      "node": "Settings",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Railway1/GetProjectCodeCompletedEventArgs.cs",
+      "node": "GetProjectCodeCompletedEventArgs",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Railway1/GetProjectCodeCompletedEventHandler.cs",
+      "node": "GetProjectCodeCompletedEventHandler",
+      "feature_family": "P1-PROJECT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Railway1/InputMrsCompletedEventArgs.cs",
+      "node": "InputMrsCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Railway1/InputMrsCompletedEventHandler.cs",
+      "node": "InputMrsCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Railway1/OutputMrsCompletedEventArgs.cs",
+      "node": "OutputMrsCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Railway1/OutputMrsCompletedEventHandler.cs",
+      "node": "OutputMrsCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Railway1/TRA_Service.cs",
+      "node": "TRA_Service",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/FormInvoiceReport.cs",
+      "node": "FormInvoiceReport",
+      "feature_family": "P6-INVOICE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/FormInvReportCheck.cs",
+      "node": "FormInvReportCheck",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/FormReportViewer.cs",
+      "node": "FormReportViewer",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/ucCrystalViewer.cs",
+      "node": "ucCrystalViewer",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/ucSubAcc.cs",
+      "node": "ucSubAcc",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/ucSubChg.cs",
+      "node": "ucSubChg",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/ucSubClose.cs",
+      "node": "ucSubClose",
+      "feature_family": "P6-SETTLEMENT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/ucSubCtr.cs",
+      "node": "ucSubCtr",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report/ucSubFinal.cs",
+      "node": "ucSubFinal",
+      "feature_family": "P6-ACCEPTANCE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report.WebDownload/DownloadCompleteHandler.cs",
+      "node": "DownloadCompleteHandler",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report.WebDownload/DownloadFailHandler.cs",
+      "node": "DownloadFailHandler",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report.WebDownload/DownloadProgressHandler.cs",
+      "node": "DownloadProgressHandler",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report.WebDownload/DownloadThread.cs",
+      "node": "DownloadThread",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.Report.WebDownload/RequestState.cs",
+      "node": "RequestState",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "ShellApi",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "BROWSEINFO",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "STRRET",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "SHELLEXECUTEINFO",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "SHFILEOPSTRUCT",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "CSIDL",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "SHGFP_TYPE",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "SFGAO",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "SHCONTF",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "SHCIDS",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "SHGNO",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "STRRET_TYPE",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellApi.cs",
+      "node": "PrinterActions",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellExecute.cs",
+      "node": "ShellExecute",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellExecute.cs",
+      "node": "ShowWindowCommands",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellExecute.cs",
+      "node": "ShellExecuteReturnCodes",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.ShellLib/ShellExecute.cs",
+      "node": "ShellExecuteFlags",
+      "feature_family": "P7-REPORT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SplitContract/FormSplitCnt_Basic.cs",
+      "node": "FormSplitCnt_Basic",
+      "feature_family": "P5-CONTRACT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SplitContract/FormSplitCnt_EdtIssue.cs",
+      "node": "FormSplitCnt_EdtIssue",
+      "feature_family": "P5-CONTRACT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SplitContract/FormSplitCnt_ItemPick.cs",
+      "node": "FormSplitCnt_ItemPick",
+      "feature_family": "P5-CONTRACT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SplitContract/FormSplitCnt_ResetCost.cs",
+      "node": "FormSplitCnt_ResetCost",
+      "feature_family": "P5-CONTRACT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SplitContract/FormSplitContract.cs",
+      "node": "FormSplitContract",
+      "feature_family": "P5-CONTRACT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SubClose/FormSubClose.cs",
+      "node": "FormSubClose",
+      "feature_family": "P6-SETTLEMENT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SubClose/FormSubCloseInfo.cs",
+      "node": "FormSubCloseInfo",
+      "feature_family": "P6-SETTLEMENT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SubClose/FormSubCloseInput.cs",
+      "node": "FormSubCloseInput",
+      "feature_family": "P6-SETTLEMENT",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SubFinal/FormSubFinal.cs",
+      "node": "FormSubFinal",
+      "feature_family": "P6-ACCEPTANCE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SubFinal/FormSubFinal_ItemPick.cs",
+      "node": "FormSubFinal_ItemPick",
+      "feature_family": "P6-ACCEPTANCE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SubFinal/FormSubFinalInput.cs",
+      "node": "FormSubFinalInput",
+      "feature_family": "P6-ACCEPTANCE",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/CostStructureImport.cs",
+      "node": "CostStructureImport",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/CostStructureTypePicker.cs",
+      "node": "CostStructureTypePicker",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/DatabaseNamingDialog.cs",
+      "node": "DatabaseNamingDialog",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_A.cs",
+      "node": "FormSys_A",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_A_Edit.cs",
+      "node": "FormSys_A_Edit",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_A_GrpMember.cs",
+      "node": "FormSys_A_GrpMember",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_A_UsrGroup.cs",
+      "node": "FormSys_A_UsrGroup",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_B.cs",
+      "node": "FormSys_B",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_C.cs",
+      "node": "FormSys_C",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_C_Edit.cs",
+      "node": "FormSys_C_Edit",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_D.cs",
+      "node": "FormSys_D",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_D_Pick.cs",
+      "node": "FormSys_D_Pick",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_E.cs",
+      "node": "FormSys_E",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_F.cs",
+      "node": "FormSys_F",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_G.cs",
+      "node": "FormSys_G",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_G1.cs",
+      "node": "FormSys_G1",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_G_Info1.cs",
+      "node": "FormSys_G_Info1",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_I.cs",
+      "node": "FormSys_I",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_J.cs",
+      "node": "FormSys_J",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/FormSys_Z.cs",
+      "node": "FormSys_Z",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/frmSysMaintain.cs",
+      "node": "frmSysMaintain",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysMaintain/OrganizationPicker.cs",
+      "node": "OrganizationPicker",
+      "feature_family": "P8-ADMIN",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.SysPlugin/FormSysPlugin.cs",
+      "node": "FormSysPlugin",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/GetChapterInfoCompletedEventArgs.cs",
+      "node": "GetChapterInfoCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/GetChapterInfoCompletedEventHandler.cs",
+      "node": "GetChapterInfoCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/ReDataDocCompletedEventArgs.cs",
+      "node": "ReDataDocCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/ReDataDocCompletedEventHandler.cs",
+      "node": "ReDataDocCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/ReEditionCompletedEventArgs.cs",
+      "node": "ReEditionCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/ReEditionCompletedEventHandler.cs",
+      "node": "ReEditionCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/ReEditionNameCompletedEventArgs.cs",
+      "node": "ReEditionNameCompletedEventArgs",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/ReEditionNameCompletedEventHandler.cs",
+      "node": "ReEditionNameCompletedEventHandler",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Archnowledge.Pcces.PccesMain.WSCode/WSCode.cs",
+      "node": "WSCode",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Class1.cs",
+      "node": "Class1",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Class2.cs",
+      "node": "Class2",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/COM.cs",
+      "node": "COM",
+      "feature_family": "P8-INTEGRATION",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/obj/Debug/net48/.NETFramework,Version=v4.8.AssemblyAttributes.cs",
+      "node": ".NETFramework,Version=v4.8.AssemblyAttributes",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/obj/Release/net48/.NETFramework,Version=v4.8.AssemblyAttributes.cs",
+      "node": ".NETFramework,Version=v4.8.AssemblyAttributes",
+      "feature_family": "P0-PLATFORM",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/PCCES.CODECHECK/CodeFitter.cs",
+      "node": "CodeFitter",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/PCCES.CODECHECK/CodeFitter.cs",
+      "node": "MrsBaseCls",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/PCCES.CODECHECK/CodeValidator.cs",
+      "node": "CodeValidator",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/PCCES.CODECHECK/CommonWorkItems.cs",
+      "node": "CommonWorkItems",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/PCCES.CODECHECK/MrsBaseData.cs",
+      "node": "MrsBaseData",
+      "feature_family": "P3-MRS",
+      "decision": "REPLICATE",
+      "status": "MAPPED"
+    },
+    {
+      "source": "PCCES_CS/Properties/AssemblyInfo.cs",
+      "node": "AssemblyInfo",
+      "feature_family": "P0-PLATFORM",
+      "decision": "GENERATED_SUPPORT",
+      "status": "MAPPED"
+    }
+  ]
+}

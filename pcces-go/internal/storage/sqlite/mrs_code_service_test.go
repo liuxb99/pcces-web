@@ -4,8 +4,8 @@ import "testing"
 
 func TestValidateMRSCodeLegacyPrefixesAndLengths(t *testing.T) {
 	cases := []struct {
-		code, unit, kind string
-		valid            bool
+		code, unit, kind   string
+		valid              bool
 		chapter, canonical string
 	}{
 		{"1234567890", "平方公尺", "WORK_ITEM", true, "12345", "M2"},

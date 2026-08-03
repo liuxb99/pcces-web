@@ -15,7 +15,7 @@ from typing import Any
 from flask import jsonify, request
 from sqlalchemy import and_, delete, select
 
-from api.budget_decimal import budget_items_decimal
+from api.budget_decimal import budget_items_decimal, _decimal_text
 from api.budget_kind_engine import calculate_budget_kind
 from api.models import BudgetItem, BudgetItemKind, Project, User, UserRole
 
@@ -84,7 +84,7 @@ def _legacy_dict(item: BudgetItem, decimal_row=None) -> dict[str, Any]:
     if decimal_row is not None:
         result["quantity"] = str(decimal_row["quantity"])
         result["unit_price"] = str(decimal_row["unit_price"])
-        result["amount"] = str(decimal_row["amount"])
+        result["amount"] = _decimal_text(decimal_row["amount"], int(decimal_row.get("amount_scale", 2)))
         result["row_version"] = int(decimal_row["row_version"])
         result["decimal_core"] = True
     return result

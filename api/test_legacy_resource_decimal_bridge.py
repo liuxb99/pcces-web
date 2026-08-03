@@ -12,6 +12,7 @@ class LegacyResourceDecimalBridgeTests(unittest.TestCase):
     def setUp(self):
         self.engine=create_engine("sqlite+pysqlite:///:memory:",future=True)
         Base.metadata.create_all(self.engine)
+        ResourceDecimalService(self.engine).create_schema()
         self.sessions=sessionmaker(bind=self.engine)
         db=self.sessions();db.add(Project(id=1,code="P1",name="專案",owner_id=1));db.commit();db.close()
         self.app=Flask(__name__)

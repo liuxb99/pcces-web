@@ -19,9 +19,9 @@ class BudgetBidConversionTests(unittest.TestCase):
         self.assertIn("session=", item["deep_link"])
 
     def test_create_conflict_and_atomic_validation(self):
-        body={"source_project_code":"B","source_budget_version_id":"V1","target_bid_project_code":"X","budget_items":[{"id":"1"}]}
+        body={"source_project_code":"B","source_budget_version_id":"V1","target_bid_project_code":"X","budget_items":[{"id":"1","code":"A01","name":"Test Item","quantity":"1","unit_price":"10","amount":"10"}]}
         self.service.convert(body,"u")
         with self.assertRaises(RuntimeError): self.service.convert(body,"u")
-        with self.assertRaises(ValueError): self.service.convert({**body,"target_bid_project_code":"Y","budget_items":[{"id":"1"},{"id":"1"}]},"u")
+        with self.assertRaises(ValueError): self.service.convert({**body,"target_bid_project_code":"Y","budget_items":[{"id":"1","code":"A02","name":"Item2","quantity":"1","unit_price":"10","amount":"10"},{"id":"1","code":"A03","name":"Item3","quantity":"1","unit_price":"10","amount":"10"}]},"u")
 
 if __name__ == "__main__": unittest.main()

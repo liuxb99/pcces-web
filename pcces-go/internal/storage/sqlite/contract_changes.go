@@ -31,7 +31,9 @@ type ContractChangeRequest struct {
 
 type ContractChangeRepository struct{ store *Store }
 
-func NewContractChangeRepository(store *Store) *ContractChangeRepository { return &ContractChangeRepository{store: store} }
+func NewContractChangeRepository(store *Store) *ContractChangeRepository {
+	return &ContractChangeRepository{store: store}
+}
 
 func parseSigned(value, field string) (float64, error) {
 	v, err := strconv.ParseFloat(strings.TrimSpace(value), 64)

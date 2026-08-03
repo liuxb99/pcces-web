@@ -5,16 +5,68 @@ from datetime import datetime, timezone
 from uuid import uuid4
 
 from flask import Blueprint, jsonify, request
-from sqlalchemy import and_, select
+from sqlalchemy import and_, delete, select
 
 from api.decimal_math import quantize
-from api.mrs_catalog import mrs_catalog_items, mrs_price_history
+from api.mrs_catalog import mrs_analysis_components, mrs_analysis_recipes, mrs_catalog_items, mrs_price_history
+from api.mrs_operations import mrs_recipe_versions
 from api.mrs_precision_policy import MRSPrecisionPolicyService
 
 
 class MRSHistoryApplyService:
     def __init__(self, engine):
         self.engine = engine
+
+    def apply_recipe_version(self, recipe_id: str, version_id: str, row_version: int, actor: str) -> dict:
+        """Restore recipe components from a historical version snapshot."""
+        import json
+        from api.mrs_catalog import MRSCatalogService
+        catalog = MRSCatalogService(self.engine)
+        with self.engine.begin() as conn:
+            version = conn.execute(select(mrs_recipe_versions).where(and_(
+                mrs_recipe_versions.c.id == version_id,
+                mrs_recipe_versions.c.recipe_id == recipe_id,
+            ))).mappings().first()
+            if not version:
+                raise LookupError("recipe version not found or does not belong to recipe")
+            current_recipe = conn.execute(select(mrs_analysis_recipes).where(
+                mrs_analysis_recipes.c.id == recipe_id
+            )).mappings().first()
+            if not current_recipe:
+                raise LookupError("recipe not found")
+            if int(current_recipe["row_version"]) != int(row_version):
+                raise RuntimeError("CONFLICT")
+            snapshot = json.loads(version["snapshot_json"])
+            components = snapshot.get("components", [])
+            # Delete existing components
+            conn.execute(delete(mrs_analysis_components).where(
+                mrs_analysis_components.c.recipe_id == recipe_id
+            ))
+            # Insert snapshot components
+            for idx, comp in enumerate(components):
+                conn.execute(mrs_analysis_components.insert().values(
+                    id=str(uuid4()), recipe_id=recipe_id,
+                    catalog_item_id=comp["catalog_item_id"],
+                    quantity=comp["quantity"],
+                    quantity_scale=int(comp.get("quantity_scale", 4)),
+                    sequence=idx + 1,
+                ))
+            # Update recipe row_version
+            result = conn.execute(mrs_analysis_recipes.update().where(and_(
+                mrs_analysis_recipes.c.id == recipe_id,
+                mrs_analysis_recipes.c.row_version == row_version,
+            )).values(updated_at=datetime.now(timezone.utc), row_version=row_version + 1))
+            if result.rowcount != 1:
+                raise RuntimeError("CONFLICT")
+        # Recalculate after commit
+        recalculated = catalog.calculate_recipe(recipe_id)
+        return {
+            "recipe_id": recipe_id, "version_id": version_id,
+            "component_count": len(components),
+            "applied_components": components,
+            "row_version": recalculated["row_version"],
+            "deep_link": f"/app/mrs-operations?recipe={recipe_id}&version={version_id}",
+        }
 
     def apply_price(self, item_id: str, history_id: str, row_version: int, actor: str) -> dict:
         now = datetime.now(timezone.utc)

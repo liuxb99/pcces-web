@@ -10,10 +10,10 @@ import (
 // MRSBookmark preserves the Legacy bookmark owner, source item identity and
 // creation time while returning the current catalog projection.
 type MRSBookmark struct {
-	ActorID      string         `json:"actor_id"`
-	CatalogItem  MRSCatalogItem `json:"catalog_item"`
-	CreatedAt    string         `json:"created_at"`
-	DeepLink     string         `json:"deep_link"`
+	ActorID     string         `json:"actor_id"`
+	CatalogItem MRSCatalogItem `json:"catalog_item"`
+	CreatedAt   string         `json:"created_at"`
+	DeepLink    string         `json:"deep_link"`
 }
 
 // ListBookmarks returns the actor's bookmarks in stable catalog-code order.

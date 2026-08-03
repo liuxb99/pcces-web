@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
 
 from api.budget_versioning import metadata as budget_metadata, budget_versions
@@ -10,7 +11,7 @@ class ContractExecutionTest(unittest.TestCase):
     def setUp(self):
         self.engine=create_engine("sqlite:///:memory:")
         budget_metadata.create_all(self.engine)
-        with self.engine.begin() as conn: conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="A",status="APPROVED",snapshot_json='[{"id":"B1"}]',created_by="u"))
+        with self.engine.begin() as conn: conn.execute(budget_versions.insert().values(id="V1",project_code="P1",label="A",status="APPROVED",snapshot_json='[{"id":"B1"}]',created_by="u",created_at=datetime(2026, 8, 2, tzinfo=timezone.utc)))
         core=ContractCoreService(self.engine);gov=ContractGovernanceService(self.engine)
         self.contract=core.create({"project_code":"P1","budget_version_id":"V1","contract_no":"C1","name":"Main","contract_amount":"100","items":[{"source_budget_item_id":"B1","name":"Concrete","quantity":"10","unit_price":"10","amount":"100"}]},"u")
         v=gov.create_version(self.contract["id"],{"row_version":1},"u");v=gov.transition(v["id"],{"status":"SUBMITTED","row_version":1},"u");gov.transition(v["id"],{"status":"APPROVED","row_version":2},"a")

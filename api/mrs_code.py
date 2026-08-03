@@ -96,3 +96,9 @@ def build_mrs_code_blueprint(resolve_user_id):
         return jsonify(fit_code(body.get("code"), body.get("unit"), body.get("name")))
 
     return bp
+
+
+class MRSCodeService:
+    """Thin service wrapper for stateless PCCES code operations."""
+    def __init__(self, engine=None):
+        pass
