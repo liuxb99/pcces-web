@@ -132,12 +132,12 @@ func TestContractsDispatcherRejectsEmptyID(t *testing.T) {
 	defer ts.Close()
 
 	emptyIDPaths := []string{
-		"/api/contracts/versions/",          // empty versionID
-		"/api/contracts/changes/",           // empty changeID
-		"/api/contracts/change-cases/",      // empty caseID
-		"/api/contracts/invoice-periods/",   // empty periodID
-		"/api/contracts/settlements/",       // empty settlementID
-		"/api/contracts/acceptances/",       // empty acceptanceID
+		"/api/contracts/versions/",        // empty versionID
+		"/api/contracts/changes/",         // empty changeID
+		"/api/contracts/change-cases/",    // empty caseID
+		"/api/contracts/invoice-periods/", // empty periodID
+		"/api/contracts/settlements/",     // empty settlementID
+		"/api/contracts/acceptances/",     // empty acceptanceID
 	}
 
 	for _, p := range emptyIDPaths {

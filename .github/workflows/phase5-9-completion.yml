@@ -45,7 +45,7 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: >-
-          python -m unittest
+          PYTHONPATH=. python -m unittest
           api.test_contract_core
           api.test_contract_allocation
           api.test_contract_governance
@@ -54,11 +54,11 @@ jobs:
           api.test_report_center
           api.test_report_job_lifecycle
           api.test_admin_console
-      - run: python scripts/phase9_legacy_catalog.py --require-no-unknown
-      - run: python scripts/production_readiness.py
-      - run: python scripts/phase9_gate.py
+      - run: PYTHONPATH=. python scripts/phase9_legacy_catalog.py --require-no-unknown
+      - run: PYTHONPATH=. python scripts/production_readiness.py
+      - run: PYTHONPATH=. python scripts/phase9_gate.py
       - if: ${{ inputs.require_complete == true }}
-        run: python scripts/phase9_gate.py --require-complete
+        run: PYTHONPATH=. python scripts/phase9_gate.py --require-complete
       - uses: actions/upload-artifact@v4
         with:
           name: phase9-legacy-catalog
@@ -76,7 +76,7 @@ jobs:
           go-version: "1.24.x"
           cache-dependency-path: pcces-go/go.sum
       - name: Format check
-        run: test -z "$(gofmt -l internal/storage/sqlite/contract_*.go internal/storage/sqlite/report_*.go internal/storage/sqlite/admin_operations.go internal/platform/httpapi/contract_*_handlers.go internal/platform/httpapi/report_admin_handlers.go internal/platform/httpapi/authorization_handlers.go)"
+        run: test -z "$(gofmt -l .)"
       - run: go test ./internal/storage/sqlite/... ./internal/platform/httpapi/...
       - run: go vet ./...
 

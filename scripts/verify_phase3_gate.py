@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MATRIX = ROOT / "docs/development/03-phase3-traceability-matrix.md"
+MATRIX = ROOT / "docs/development/phase-3-mrs-traceability-matrix.md"
 REQUIRED_FILES = [
     "api/mrs_catalog.py",
     "api/mrs_operations.py",

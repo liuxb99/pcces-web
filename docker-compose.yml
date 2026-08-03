@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   postgres:
     image: postgres:16-alpine
@@ -15,6 +14,29 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  flask-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://pcces:pcces123@postgres:5432/pcces
+      FLASK_APP: api.app
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  go-api:
+    build:
+      context: ./pcces-go
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   pgdata:
