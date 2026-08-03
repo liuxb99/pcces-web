@@ -3,7 +3,7 @@
 
 The fixture represents an earlier deployed schema: core user/project/budget data
 exists while later contract/report/admin tables are absent. The current schema
-provisioner must recreate every missing domain table without changing the legacy
+provisioner must recreate every missing domain table without changing legacy
 rows, and a second run must be idempotent.
 """
 from __future__ import annotations
@@ -22,6 +22,7 @@ from scripts.pg_schema_contract import expected_tables, provision_schema, verify
 
 MARKER_USER = "legacy_upgrade_user"
 MARKER_PROJECT = "LEGACY-UPGRADE-P1"
+MARKER_ITEM_NO = "LEG-001"
 
 
 def engine_from_env():
@@ -43,16 +44,23 @@ def seed_legacy_rows(engine) -> dict[str, int]:
             )
             session.add(user)
             session.flush()
+
         project = session.execute(select(Project).where(Project.code == MARKER_PROJECT)).scalar_one_or_none()
         if project is None:
             project = Project(code=MARKER_PROJECT, name="Legacy Upgrade Project", owner_id=user.id)
             session.add(project)
             session.flush()
-        item = session.execute(select(BudgetItem).where(BudgetItem.project_id == project.id)).scalar_one_or_none()
+
+        item = session.execute(
+            select(BudgetItem).where(
+                BudgetItem.project_id == project.id,
+                BudgetItem.item_no == MARKER_ITEM_NO,
+            )
+        ).scalar_one_or_none()
         if item is None:
             item = BudgetItem(
                 project_id=project.id,
-                item_no="LEG-001",
+                item_no=MARKER_ITEM_NO,
                 c_name="Legacy Concrete",
                 c_unit="m3",
                 quantity=2,
@@ -62,7 +70,7 @@ def seed_legacy_rows(engine) -> dict[str, int]:
             )
             session.add(item)
         session.commit()
-        return {"user_id": user.id, "project_id": project.id}
+        return {"user_id": int(user.id), "project_id": int(project.id), "item_id": int(item.id)}
 
 
 def remove_later_schema(engine) -> list[str]:
@@ -102,13 +110,20 @@ def assert_legacy_rows(engine, marker: dict[str, int]) -> None:
     with Session(engine) as session:
         user = session.get(User, marker["user_id"])
         project = session.get(Project, marker["project_id"])
+        item = session.get(BudgetItem, marker["item_id"])
         if user is None or user.username != MARKER_USER:
             raise RuntimeError("legacy user was lost or changed during upgrade")
         if project is None or project.code != MARKER_PROJECT:
             raise RuntimeError("legacy project was lost or changed during upgrade")
-        item = session.execute(select(BudgetItem).where(BudgetItem.project_id == project.id)).scalar_one()
-        if float(item.amount) != 250:
-            raise RuntimeError(f"legacy budget amount changed: {item.amount}")
+        if item is None or item.item_no != MARKER_ITEM_NO:
+            raise RuntimeError("legacy budget item was lost or changed during upgrade")
+        if item.c_name != "Legacy Concrete" or item.c_unit != "m3":
+            raise RuntimeError("legacy budget descriptive fields changed during upgrade")
+        if float(item.quantity) != 2 or float(item.unit_price) != 125 or float(item.amount) != 250:
+            raise RuntimeError(
+                "legacy budget values changed during upgrade: "
+                f"quantity={item.quantity}, unit_price={item.unit_price}, amount={item.amount}"
+            )
 
 
 def main() -> int:
