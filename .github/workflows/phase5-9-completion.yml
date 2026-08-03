@@ -140,6 +140,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Build full stack
         run: docker compose build
       - name: Start full stack
@@ -162,8 +165,32 @@ jobs:
           exit 1
       - name: Frontend API proxy smoke
         run: curl -fsS http://localhost:4173/api/health
-      - name: Container status
-        run: docker compose ps
+      - name: Install Playwright E2E dependencies
+        working-directory: e2e
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+      - name: Run browser full-stack E2E
+        working-directory: e2e
+        env:
+          PCCES_E2E_BASE_URL: http://127.0.0.1:4173
+          PCCES_GO_BASE_URL: http://127.0.0.1:8080
+        run: npm test
+      - name: Upload Playwright evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-full-stack-evidence
+          path: |
+            e2e/playwright-report
+            e2e/test-results
+          if-no-files-found: ignore
+      - name: Container status and logs
+        if: always()
+        run: |
+          docker compose ps
+          docker compose logs --no-color > /tmp/pcces-compose.log
+          tail -n 400 /tmp/pcces-compose.log
       - name: Stop full stack
         if: always()
         run: docker compose down -v
