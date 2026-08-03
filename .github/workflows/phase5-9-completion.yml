@@ -16,16 +16,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: >-
-          PYTHONPATH=. python -m unittest
-          api.test_contract_core
-          api.test_contract_allocation
-          api.test_contract_governance
-          api.test_contract_change_governance
-          api.test_contract_execution
-          api.test_report_center
-          api.test_report_job_lifecycle
-          api.test_admin_console
+      - run: PYTHONPATH=. python -m unittest discover -s api -p "test_*.py"
       - run: PYTHONPATH=. python scripts/phase9_legacy_catalog.py --require-no-unknown
       - run: PYTHONPATH=. python scripts/production_readiness.py
       - run: PYTHONPATH=. python scripts/phase9_gate.py --require-complete
@@ -79,12 +70,15 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U pcces -d pcces"
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries 10
     env:
+      PGPASSWORD: pcces123
       DATABASE_URL: postgresql://pcces:pcces123@localhost:5432/pcces
+      RESTORE_DATABASE_URL: postgresql://pcces:pcces123@localhost:5432/pcces_restore
+      PG_DUMP_FILE: /tmp/pcces.dump
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -92,10 +86,26 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: PostgreSQL empty migration
-        run: PYTHONPATH=. python scripts/pg_migration.py --verify
-      - name: PostgreSQL smoke test
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: PostgreSQL empty migration (fail closed)
+        run: PYTHONPATH=. python scripts/pg_migration.py --verify --expect-empty
+      - name: PostgreSQL domain smoke test
         run: PYTHONPATH=. python scripts/pg_smoke_test.py
+      - name: PostgreSQL upgrade and idempotency
+        run: PYTHONPATH=. python scripts/pg_upgrade_verify.py
+      - name: PostgreSQL pg_dump
+        run: |
+          pg_dump "$DATABASE_URL" --format=custom --no-owner --no-privileges --file="$PG_DUMP_FILE"
+          test -s "$PG_DUMP_FILE"
+          sha256sum "$PG_DUMP_FILE"
+      - name: PostgreSQL restore into clean database
+        run: |
+          dropdb --if-exists -h localhost -U pcces pcces_restore
+          createdb -h localhost -U pcces pcces_restore
+          pg_restore -h localhost -U pcces -d pcces_restore --no-owner --no-privileges "$PG_DUMP_FILE"
+      - name: PostgreSQL restored database verification
+        run: PYTHONPATH=. python scripts/pg_restore_verify.py
 
   roundtrip-golden:
     runs-on: ubuntu-latest
