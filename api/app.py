@@ -46,6 +46,7 @@ from api.mrs_operations import MRSOperationsService, build_mrs_operations_bluepr
 from api.persistence_contract import PersistenceService
 from api.recovery import RecoveryService, build_recovery_blueprint
 from api.report_center import ReportCenterService, build_report_center_blueprint
+from api.report_job_lifecycle import ReportJobLifecycleService, build_report_job_lifecycle_blueprint
 from api.resource_budget_lineage import ResourceBudgetLineageService
 from api.resource_budget_lineage_api import build_resource_budget_lineage_blueprint
 from api.resource_budget_links import ResourceBudgetLinkService, build_resource_budget_links_blueprint
@@ -92,6 +93,7 @@ contract_allocation_service = ContractAllocationService(engine)
 contract_governance_service = ContractGovernanceService(engine)
 contract_execution_service = ContractExecutionService(engine)
 report_center_service = ReportCenterService(engine)
+report_job_lifecycle_service = ReportJobLifecycleService(engine)
 admin_console_service = AdminConsoleService(engine, DATABASE_URL)
 conversion_wizard_service = ConversionWizardService(engine)
 conversion_export_job_service = ConversionExportJobService(engine)
@@ -179,6 +181,7 @@ register("contract_allocation", build_contract_allocation_blueprint(contract_all
 register("contract_governance", build_contract_governance_blueprint(contract_governance_service, resolve_user_id))
 register("contract_execution", build_contract_execution_blueprint(contract_execution_service, resolve_user_id))
 register("report_center", build_report_center_blueprint(report_center_service, resolve_user_id))
+register("report_job_lifecycle", build_report_job_lifecycle_blueprint(report_job_lifecycle_service, resolve_user_id))
 register("admin_console", build_admin_console_blueprint(admin_console_service, resolve_user_id))
 register("conversion_wizard", build_conversion_wizard_blueprint(conversion_wizard_service, resolve_user_id))
 register("conversion_export_jobs", build_conversion_export_job_blueprint(conversion_export_job_service, resolve_user_id))
@@ -209,11 +212,11 @@ __all__ = [
     "budget_decimal_service", "budget_version_service", "budget_approval_service", "budget_validation_service",
     "budget_cross_project_service", "bid_lifecycle_service", "budget_bid_conversion_service", "contract_core_service",
     "contract_allocation_service", "contract_governance_service", "contract_execution_service",
-    "report_center_service", "admin_console_service", "conversion_wizard_service", "conversion_export_job_service",
-    "conversion_long_job_service", "legacy_exchange_adapter_service", "mrs_catalog_service", "mrs_code_service",
-    "mrs_exchange_service", "mrs_intelligence_service", "mrs_operations_service", "mrs_governance_service",
-    "mrs_history_apply_service", "resource_decimal_service", "resource_budget_lineage_service",
-    "resource_budget_link_service", "resource_dependency_graph_service", "budget_trace_service",
-    "cost_structure_service", "cost_structure_detail_service", "project_cost_structure_run_service",
-    "cost_structure_run_version_service", "resolve_user_id",
+    "report_center_service", "report_job_lifecycle_service", "admin_console_service", "conversion_wizard_service",
+    "conversion_export_job_service", "conversion_long_job_service", "legacy_exchange_adapter_service",
+    "mrs_catalog_service", "mrs_code_service", "mrs_exchange_service", "mrs_intelligence_service",
+    "mrs_operations_service", "mrs_governance_service", "mrs_history_apply_service", "resource_decimal_service",
+    "resource_budget_lineage_service", "resource_budget_link_service", "resource_dependency_graph_service",
+    "budget_trace_service", "cost_structure_service", "cost_structure_detail_service",
+    "project_cost_structure_run_service", "cost_structure_run_version_service", "resolve_user_id",
 ]
