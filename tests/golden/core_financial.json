@@ -1,0 +1,46 @@
+{
+  "evidence_type": "SOURCE_DERIVED_GOLDEN",
+  "legacy_sources": [
+    "PCCES_CS/Archnowledge.Pcces.PccesMain/Budget/BDGT_Component/L_Form.cs",
+    "PCCES_CS/Archnowledge.Pcces.PccesMain/Budget/BDGT_Component/F_Form.cs",
+    "PCCES_CS/Archnowledge.Pcces.PccesMain/Budget/BDGT_Component/S_Form.cs",
+    "PCCES_CS/Archnowledge.Pcces.PccesMain/Budget/BDGT_Component/U_Form.cs"
+  ],
+  "cases": [
+    {
+      "id": "L-multiply-half-up",
+      "kind": "L",
+      "scale": 2,
+      "input": {"quantity": "2.555", "unit_price": "10.00"},
+      "expected": "25.55"
+    },
+    {
+      "id": "B-child-sum",
+      "kind": "B",
+      "scale": 2,
+      "input": {"children": ["100.10", "20.20", "0.005"]},
+      "expected": "120.31"
+    },
+    {
+      "id": "F-base-rate",
+      "kind": "F",
+      "scale": 2,
+      "input": {"base": "1250.00", "rate": "0.035"},
+      "expected": "43.75"
+    },
+    {
+      "id": "U-signed-sum",
+      "kind": "U",
+      "scale": 2,
+      "input": {"terms": [{"sign": 1, "amount": "100"}, {"sign": -1, "amount": "12.345"}, {"sign": 1, "amount": "0.005"}]},
+      "expected": "87.66"
+    },
+    {
+      "id": "S-tiered",
+      "kind": "S",
+      "scale": 2,
+      "input": {"base": "150", "tiers": [{"up_to": "100", "rate": "1.00"}, {"up_to": null, "rate": "1.50"}]},
+      "expected": "175.00"
+    }
+  ]
+}
