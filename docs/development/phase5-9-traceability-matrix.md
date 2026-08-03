@@ -1,6 +1,6 @@
 # Phase 5～9 Traceability Matrix
 
-更新日期：2026-08-02
+更新日期：2026-08-03
 
 狀態定義：`VERIFIED` 表示 Web/Python、Local Go、永久測試與正式路由均有證據；`INTEGRATION_TESTING` 表示主程式已完成但仍等待全量 CI／Legacy golden fixture；`OPEN` 表示不得宣稱完成。
 
@@ -17,7 +17,7 @@
 | P6-04 | 結算狀態鏈與契約封鎖 | FormSubClose | `contract_execution.py` | `contract_execution_acceptance.go` | execution client | VERIFIED |
 | P6-05 | 驗收、缺失、改善、完成與封存 | FormSubFinal | `contract_execution.py` | `contract_execution_acceptance.go` | execution client | VERIFIED |
 | P7-01 | 報表定義目錄與 Legacy entry | FormReportViewer / ucCrystalViewer | `report_center.py` | `report_admin.go` | report client | VERIFIED |
-| P7-02 | 版本快照報表 Job、進度、失敗、重試 | Report.WebDownload | `report_center.py` + `report_job_lifecycle.py` | report job repository | report client | INTEGRATION_TESTING |
+| P7-02 | 版本快照報表 Job、進度、失敗、重試 | Report.WebDownload | `report_center.py` + `report_job_lifecycle.py` | `report_job_lifecycle.go` | report client | VERIFIED |
 | P7-03 | 有效 PDF／CSV／OOXML XLSX／JSON 與下載稽核 | ExportExcel | `report_center.py` | `report_render.go` | report client | VERIFIED |
 | P8-01 | 型別化設定、範圍、預設與 row version | FormSys_A～J | `admin_console.py` | `report_admin.go` | admin client | VERIFIED |
 | P8-02 | 群組與成員管理、稽核 | SysUser | `admin_console.py` | `admin_operations.go` | admin client | VERIFIED |
@@ -29,4 +29,4 @@
 
 ## Gate decision
 
-Phase 5、Phase 6 與 Phase 8 的主要 Domain 閉環已落地。Phase 7 的失敗／重試 Blueprint 尚待 Canonical 註冊驗收；Phase 9 必須取得全量掃描、Golden、migration／restore、security、frontend 與 E2E 的實際 CI 通過證據後，才能把整個 Roadmap 標記為完成。
+Phase 5～8 的主要 Domain、API、Local Go 與永久測試閉環已落地。Phase 9 仍必須取得全量 Legacy Catalog 零 UNKNOWN、Golden Fixtures、migration／restore、security、frontend build 與 E2E 的實際 CI 通過證據後，才能把整個 Roadmap 標記為完成。
