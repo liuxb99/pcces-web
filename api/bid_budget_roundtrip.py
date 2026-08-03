@@ -1,12 +1,15 @@
 """Phase 4 electronic bid reverse import, preflight and round-trip lineage."""
 from __future__ import annotations
 
+import base64
+import io
 import json
 from datetime import datetime, timezone
 from uuid import uuid4
 from xml.etree import ElementTree as ET
 
 from flask import Blueprint, jsonify, request
+from openpyxl import load_workbook
 from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, Text, select
 
 metadata = MetaData()
@@ -26,9 +29,70 @@ bid_import_sessions = Table(
     Column("row_version", Integer, nullable=False, default=1),
 )
 
+XLSX_HEADERS = ("來源工項ID", "工項編碼", "名稱", "單位", "數量", "單價", "金額")
 
-def detect_and_parse(payload: str, hinted_format: str = "") -> tuple[str, str, str, list[dict]]:
+
+def _xlsx_bytes(payload: str | bytes) -> bytes:
+    if isinstance(payload, bytes):
+        return payload
+    text = payload.strip()
+    if text.startswith("data:"):
+        text = text.split(",", 1)[1]
+    try:
+        return base64.b64decode(text, validate=True)
+    except Exception as exc:
+        raise ValueError("XLSX payload must be base64 encoded") from exc
+
+
+def parse_xlsx(payload: str | bytes) -> tuple[str, str, str, list[dict]]:
+    binary = _xlsx_bytes(payload)
+    try:
+        workbook = load_workbook(io.BytesIO(binary), read_only=True, data_only=True)
+    except Exception as exc:
+        raise ValueError("invalid XLSX payload") from exc
+    if "電子標單" not in workbook.sheetnames:
+        raise ValueError("XLSX must contain 電子標單 worksheet")
+    sheet = workbook["電子標單"]
+    rows = list(sheet.iter_rows(values_only=True))
+    if not rows or tuple(str(value or "").strip() for value in rows[0][:7]) != XLSX_HEADERS:
+        raise ValueError("XLSX electronic bid headers do not match canonical contract")
+
+    project = ""
+    source_version = ""
+    for defined_name in workbook.defined_names.values():
+        value = str(defined_name.attr_text or "").strip('"')
+        if defined_name.name == "ProjectCode":
+            project = value
+        elif defined_name.name == "SourceVersion":
+            source_version = value
+
+    items: list[dict] = []
+    for index, row in enumerate(rows[1:], start=1):
+        values = list(row[:7]) + [None] * max(0, 7 - len(row))
+        if not any(value not in (None, "") for value in values):
+            continue
+        lineage, code, name, unit, quantity, unit_price, amount = values[:7]
+        lineage_text = str(lineage or f"ROW-{index}")
+        items.append({
+            "source_budget_item_id": lineage_text,
+            "id": lineage_text,
+            "code": str(code or "").strip().upper(),
+            "name": str(name or "").strip(),
+            "unit": str(unit or "").strip(),
+            "quantity": str(quantity if quantity is not None else "0"),
+            "unit_price": str(unit_price if unit_price is not None else "0"),
+            "amount": str(amount if amount is not None else "0"),
+        })
+    # SourceVersion is retained in the workbook for audit; the existing tuple
+    # contract returns format/version/project/items, so the exchange version is 1.0.
+    _ = source_version
+    return "XLSX", "1.0", project, items
+
+
+def detect_and_parse(payload: str | bytes, hinted_format: str = "") -> tuple[str, str, str, list[dict]]:
     hinted = hinted_format.strip().upper()
+    if hinted == "XLSX" or isinstance(payload, bytes):
+        return parse_xlsx(payload)
     text = payload.strip()
     if hinted == "BID_JSON" or text.startswith("{"):
         data = json.loads(text)
@@ -85,7 +149,8 @@ class BidBudgetRoundTripService:
         target = str(body.get("target_budget_project_code", "")).strip()
         if not target:
             raise ValueError("target_budget_project_code is required")
-        fmt, version, source_project, items = detect_and_parse(str(body.get("payload", "")), str(body.get("format", "")))
+        payload = body.get("payload", "")
+        fmt, version, source_project, items = detect_and_parse(payload, str(body.get("format", "")))
         report = import_preflight(items)
         session_id = str(uuid4())
         now = datetime.now(timezone.utc)
@@ -127,8 +192,9 @@ def build_bid_budget_roundtrip_blueprint(service: BidBudgetRoundTripService, res
     def preflight():
         if resolve_user_id() is None:
             return jsonify({"code": "UNAUTHORIZED"}), 401
+        body = request.get_json(silent=True) or {}
         try:
-            fmt, version, project, items = detect_and_parse(str((request.get_json(silent=True) or {}).get("payload", "")), str((request.get_json(silent=True) or {}).get("format", "")))
+            fmt, version, project, items = detect_and_parse(body.get("payload", ""), str(body.get("format", "")))
             return jsonify({"format": fmt, "format_version": version, "source_bid_project_code": project, "report": import_preflight(items), "items": items})
         except (ValueError, ET.ParseError, json.JSONDecodeError) as exc:
             return jsonify({"code": "INVALID_ARGUMENT", "detail": str(exc)}), 400
