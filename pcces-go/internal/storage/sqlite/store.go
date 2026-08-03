@@ -6,12 +6,19 @@ import (
 	"embed"
 	"fmt"
 	"path/filepath"
+	"sync/atomic"
 	"time"
 
 	_ "modernc.org/sqlite"
 
 	errx "github.com/liuxb99/pcces-web/pcces-go/internal/platform/errors"
 )
+
+var idSeq atomic.Int64
+
+func uniqueID(prefix string) string {
+	return fmt.Sprintf("%s-%d-%d", prefix, time.Now().UnixNano(), idSeq.Add(1))
+}
 
 //go:embed migrations/*.sql
 var migrationFS embed.FS

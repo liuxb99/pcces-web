@@ -9,8 +9,8 @@ import (
 
 func (s *Server) contractGovernanceRoutes() {
 	s.mux.HandleFunc("POST /api/contracts/{contractID}/versions", s.createContractVersion)
-	s.mux.HandleFunc("GET /api/contracts/versions/{versionID}", s.getContractVersion)
-	s.mux.HandleFunc("POST /api/contracts/versions/{versionID}/transition", s.transitionContractVersion)
+	s.mux.HandleFunc("GET /api/contract-versions/{versionID}", s.getContractVersion)
+	s.mux.HandleFunc("POST /api/contract-versions/{versionID}/transition", s.transitionContractVersion)
 }
 
 func (s *Server) createContractVersion(w http.ResponseWriter, r *http.Request) {

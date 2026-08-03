@@ -70,7 +70,10 @@ func (r *AuthorizationRepository) Decide(ctx context.Context, actorID, actionCod
 		&actorActive, &moduleCatalogEnabled, &moduleEntitled, &functionCatalogEnabled, &functionGranted,
 	)
 	if err == sql.ErrNoRows {
-		return authorization.Decision{}, errx.New(errx.CodeNotFound, "actor or action not found", "P0-G3")
+		return authorization.Decision{
+			ActorID: actorID, ActionCode: actionCode,
+			Allowed: false, Reason: "ACTION_NOT_FOUND",
+		}, nil
 	}
 	if err != nil {
 		return authorization.Decision{}, errx.Wrap(errx.CodeDatabase, "evaluate local capability", "P0-G3", err)

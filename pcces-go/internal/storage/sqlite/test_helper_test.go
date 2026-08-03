@@ -1,6 +1,7 @@
 package sqlite
 
 import (
+	"context"
 	"database/sql"
 	"testing"
 
@@ -18,7 +19,11 @@ func newTestStore(t *testing.T) *Store {
 		t.Fatal(err)
 	}
 	t.Cleanup(func() { db.Close() })
-	return &Store{db: db}
+	store := &Store{db: db}
+	if err := store.Migrate(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	return store
 }
 
 func strPtr(s string) *string { return &s }

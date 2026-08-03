@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"strings"
 	"time"
 
@@ -149,7 +148,7 @@ func (r *ConversionWizardRepository) Create(ctx context.Context, req ConversionW
 	report := BuildConversionPreflight(req.BudgetItems, req.Mode, req.Options)
 	optionsJSON, _ := json.Marshal(req.Options)
 	reportJSON, _ := json.Marshal(report)
-	id := fmt.Sprintf("CW-%d", time.Now().UTC().UnixNano())
+	id := uniqueID("CW")
 	status := "BLOCKED"
 	if report.CanContinue {
 		status = "READY"

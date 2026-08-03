@@ -5,10 +5,13 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"sync/atomic"
 	"time"
 
 	errx "github.com/liuxb99/pcces-web/pcces-go/internal/platform/errors"
 )
+
+var auditSeq atomic.Int64
 
 type BudgetApprovalState struct {
 	ProjectCode string `json:"project_code"`
@@ -117,7 +120,7 @@ func (r *BudgetApprovalRepository) Transition(ctx context.Context, projectCode, 
 		return BudgetApprovalState{}, err
 	}
 	payload, _ := json.Marshal(map[string]string{"comment": comment})
-	_, err = tx.ExecContext(ctx, `INSERT INTO budget_workflow_audit(id,project_code,event_type,actor_id,from_status,to_status,payload_json,created_at) VALUES(?,?,?,?,?,?,?,?)`, fmt.Sprintf("%d", time.Now().UnixNano()), projectCode, command, actorID, current.Status, next, string(payload), now)
+	_, err = tx.ExecContext(ctx, `INSERT INTO budget_workflow_audit(id,project_code,event_type,actor_id,from_status,to_status,payload_json,created_at) VALUES(?,?,?,?,?,?,?,?)`, fmt.Sprintf("%d-%d", time.Now().UnixNano(), auditSeq.Add(1)), projectCode, command, actorID, current.Status, next, string(payload), now)
 	if err != nil {
 		return BudgetApprovalState{}, err
 	}
@@ -157,7 +160,7 @@ func (r *BudgetApprovalRepository) SetItemLock(ctx context.Context, projectCode,
 	if locked {
 		event = "ITEM_LOCK"
 	}
-	_, err = r.store.db.ExecContext(ctx, `INSERT INTO budget_workflow_audit(id,project_code,item_id,event_type,actor_id,payload_json,created_at) VALUES(?,?,?,?,?,?,?)`, fmt.Sprintf("%d", time.Now().UnixNano()), projectCode, itemID, event, actorID, string(payload), now)
+	_, err = r.store.db.ExecContext(ctx, `INSERT INTO budget_workflow_audit(id,project_code,item_id,event_type,actor_id,payload_json,created_at) VALUES(?,?,?,?,?,?,?)`, fmt.Sprintf("%d-%d", time.Now().UnixNano(), auditSeq.Add(1)), projectCode, itemID, event, actorID, string(payload), now)
 	return BudgetItemLock{ProjectCode: projectCode, ItemID: itemID, Locked: locked, Reason: reason, LockedBy: actorID, UpdatedAt: now}, err
 }
 

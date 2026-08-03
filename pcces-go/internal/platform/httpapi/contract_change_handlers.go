@@ -9,10 +9,10 @@ import (
 
 func (s *Server) contractChangeRoutes() {
 	s.mux.HandleFunc("POST /api/contracts/{contractID}/changes", s.createContractChange)
-	s.mux.HandleFunc("GET /api/contracts/changes/{changeID}", s.getContractChange)
+	s.mux.HandleFunc("GET /api/contract-changes/{changeID}", s.getContractChange)
 	s.mux.HandleFunc("POST /api/contracts/{contractID}/change-cases", s.createContractChangeCase)
-	s.mux.HandleFunc("GET /api/contracts/change-cases/{caseID}", s.getContractChangeCase)
-	s.mux.HandleFunc("POST /api/contracts/change-cases/{caseID}/transition", s.transitionContractChangeCase)
+	s.mux.HandleFunc("GET /api/contract-change-cases/{caseID}", s.getContractChangeCase)
+	s.mux.HandleFunc("POST /api/contract-change-cases/{caseID}/transition", s.transitionContractChangeCase)
 }
 
 func (s *Server) createContractChange(w http.ResponseWriter, r *http.Request) {

@@ -71,17 +71,24 @@ func (r *BudgetTraceRepository) ListProject(ctx context.Context, projectCode str
 		return nil, err
 	}
 	defer rows.Close()
-	out := []BudgetTraceRecord{}
+	ids := []string{}
 	for rows.Next() {
 		var id string
 		if err = rows.Scan(&id); err != nil {
 			return nil, err
 		}
+		ids = append(ids, id)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+	out := []BudgetTraceRecord{}
+	for _, id := range ids {
 		rec, e := r.Get(ctx, id)
 		if e != nil {
 			return nil, e
 		}
 		out = append(out, rec)
 	}
-	return out, rows.Err()
+	return out, nil
 }

@@ -38,11 +38,12 @@ func (r *BudgetVersionRepository) Create(ctx context.Context, id, projectCode, l
 	}
 	defer rows.Close()
 	type item struct {
-		ID, ProjectCode                                 string
-		ParentID                                        sql.NullString
-		ItemNo, Name, Kind, Quantity, UnitPrice, Amount string
-		QuantityScale, PriceScale, AmountScale          int
-		RowVersion                                      int64
+		ID, ProjectCode                         string
+		ParentID                                sql.NullString
+		ItemNo                                  sql.NullString
+		Name, Kind, Quantity, UnitPrice, Amount string
+		QuantityScale, PriceScale, AmountScale  int
+		RowVersion                              int64
 	}
 	var snapshot []map[string]any
 	for rows.Next() {
@@ -50,9 +51,12 @@ func (r *BudgetVersionRepository) Create(ctx context.Context, id, projectCode, l
 		if err = rows.Scan(&v.ID, &v.ProjectCode, &v.ParentID, &v.ItemNo, &v.Name, &v.Kind, &v.Quantity, &v.UnitPrice, &v.Amount, &v.QuantityScale, &v.PriceScale, &v.AmountScale, &v.RowVersion); err != nil {
 			return BudgetVersion{}, err
 		}
-		m := map[string]any{"id": v.ID, "project_code": v.ProjectCode, "parent_id": nil, "item_no": v.ItemNo, "name": v.Name, "kind": v.Kind, "quantity": v.Quantity, "unit_price": v.UnitPrice, "amount": v.Amount, "quantity_scale": v.QuantityScale, "price_scale": v.PriceScale, "amount_scale": v.AmountScale, "row_version": v.RowVersion}
+		m := map[string]any{"id": v.ID, "project_code": v.ProjectCode, "parent_id": nil, "item_no": nil, "name": v.Name, "kind": v.Kind, "quantity": v.Quantity, "unit_price": v.UnitPrice, "amount": v.Amount, "quantity_scale": v.QuantityScale, "price_scale": v.PriceScale, "amount_scale": v.AmountScale, "row_version": v.RowVersion}
 		if v.ParentID.Valid {
 			m["parent_id"] = v.ParentID.String
+		}
+		if v.ItemNo.Valid {
+			m["item_no"] = v.ItemNo.String
 		}
 		snapshot = append(snapshot, m)
 	}

@@ -9,14 +9,14 @@ import (
 
 func (s *Server) contractExecutionRoutes() {
 	s.mux.HandleFunc("POST /api/contracts/{contractID}/invoice-periods", s.createExecutionInvoice)
-	s.mux.HandleFunc("GET /api/contracts/invoice-periods/{periodID}", s.getExecutionInvoice)
-	s.mux.HandleFunc("POST /api/contracts/invoice-periods/{periodID}/transition", s.transitionExecutionInvoice)
+	s.mux.HandleFunc("GET /api/invoice-periods/{periodID}", s.getExecutionInvoice)
+	s.mux.HandleFunc("POST /api/invoice-periods/{periodID}/transition", s.transitionExecutionInvoice)
 	s.mux.HandleFunc("POST /api/contracts/{contractID}/settlements", s.createExecutionSettlement)
-	s.mux.HandleFunc("GET /api/contracts/settlements/{settlementID}", s.getExecutionSettlement)
-	s.mux.HandleFunc("POST /api/contracts/settlements/{settlementID}/transition", s.transitionExecutionSettlement)
+	s.mux.HandleFunc("GET /api/settlements/{settlementID}", s.getExecutionSettlement)
+	s.mux.HandleFunc("POST /api/settlements/{settlementID}/transition", s.transitionExecutionSettlement)
 	s.mux.HandleFunc("POST /api/contracts/{contractID}/acceptances", s.createExecutionAcceptance)
-	s.mux.HandleFunc("GET /api/contracts/acceptances/{acceptanceID}", s.getExecutionAcceptance)
-	s.mux.HandleFunc("POST /api/contracts/acceptances/{acceptanceID}/transition", s.transitionExecutionAcceptance)
+	s.mux.HandleFunc("GET /api/acceptances/{acceptanceID}", s.getExecutionAcceptance)
+	s.mux.HandleFunc("POST /api/acceptances/{acceptanceID}/transition", s.transitionExecutionAcceptance)
 }
 func (s *Server) createExecutionInvoice(w http.ResponseWriter, r *http.Request) {
 	var b struct {

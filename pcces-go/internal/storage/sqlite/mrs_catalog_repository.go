@@ -103,9 +103,11 @@ func (r *MRSCatalogRepository) History(ctx context.Context, id string) ([]MRSPri
 	var out []MRSPriceHistory
 	for rows.Next() {
 		var v MRSPriceHistory
-		if err = rows.Scan(&v.ID, &v.CatalogItemID, &v.OldPrice, &v.NewPrice, &v.Source, &v.EffectiveDate, &v.CreatedBy, &v.CreatedAt); err != nil {
+		var oldPrice sql.NullString
+		if err = rows.Scan(&v.ID, &v.CatalogItemID, &oldPrice, &v.NewPrice, &v.Source, &v.EffectiveDate, &v.CreatedBy, &v.CreatedAt); err != nil {
 			return nil, err
 		}
+		v.OldPrice = oldPrice.String
 		out = append(out, v)
 	}
 	return out, rows.Err()
