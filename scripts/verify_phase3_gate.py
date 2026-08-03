@@ -17,8 +17,8 @@ REQUIRED_FILES = [
     "api/mrs_project_state.py",
     "api/resource_budget_lineage.py",
     "pcces-go/internal/storage/sqlite/mrs_catalog_repository.go",
-    "pcces-go/internal/storage/sqlite/mrs_precision_policy.go",
-    "pcces-go/internal/storage/sqlite/mrs_project_state.go",
+    "pcces-go/internal/storage/sqlite/mrs_precision_policy_repository.go",
+    "pcces-go/internal/storage/sqlite/mrs_project_state_repository.go",
     "pcces-go/internal/platform/httpapi/mrs_catalog_handlers.go",
 ]
 FORBIDDEN = ("PARTIAL", "STUB", "TODO", "NOT_STARTED")
