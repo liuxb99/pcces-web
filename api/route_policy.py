@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable
 
-from sqlalchemy import event, select
+from sqlalchemy import event, inspect, select
 
 from api.authorization import (
     AuthorizationService,
@@ -96,12 +96,11 @@ def initialize_authorization(service: AuthorizationService, user_ids: Iterable[i
 
 @event.listens_for(User, "after_insert")
 def provision_new_user_authorization(_mapper, connection, target: User) -> None:
-    """Grant the default PCCES capability set in the same registration transaction.
-
-    Existing users are provisioned during canonical app startup. This listener closes
-    the lifecycle gap for users registered after startup, so their first authorized
-    request cannot race against a separate grant transaction.
-    """
+    """Grant default capabilities in the same transaction as registration."""
+    schema = inspect(connection)
+    required = ("modules", "function_codes", "user_module_entitlements", "user_function_grants")
+    if not all(schema.has_table(name) for name in required):
+        return
     module_codes = [row[0] for row in connection.execute(select(modules.c.code))]
     function_code_values = [row[0] for row in connection.execute(select(function_codes.c.code))]
     for module_code in module_codes:
