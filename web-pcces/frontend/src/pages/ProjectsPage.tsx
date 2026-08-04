@@ -94,7 +94,7 @@ const ProjectsPage: React.FC = () => {
         <Space>
           <Tooltip title="編輯預算">
             <Button type="primary" size="small" icon={<FolderOpenOutlined />}
-              onClick={() => navigate(`/projects/${record.id}/budget`)}>
+              onClick={() => navigate(`/app/projects/${record.id}/budget`)}>
               預算
             </Button>
           </Tooltip>
