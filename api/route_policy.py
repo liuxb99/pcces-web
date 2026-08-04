@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable
 
-from sqlalchemy import select
+from sqlalchemy import event, select
 
 from api.authorization import (
     AuthorizationService,
@@ -15,6 +15,7 @@ from api.authorization import (
     user_function_grants,
     user_module_entitlements,
 )
+from api.models import User
 
 MODULE_ROWS = (
     {"code": "BUDGET", "name": "預算編製", "enabled": True},
@@ -91,3 +92,23 @@ def initialize_authorization(service: AuthorizationService, user_ids: Iterable[i
                 )).first()
                 if exists is None:
                     conn.execute(user_function_grants.insert().values(user_id=user_id,function_code=function_code,granted=True))
+
+
+@event.listens_for(User, "after_insert")
+def provision_new_user_authorization(_mapper, connection, target: User) -> None:
+    """Grant the default PCCES capability set in the same registration transaction.
+
+    Existing users are provisioned during canonical app startup. This listener closes
+    the lifecycle gap for users registered after startup, so their first authorized
+    request cannot race against a separate grant transaction.
+    """
+    module_codes = [row[0] for row in connection.execute(select(modules.c.code))]
+    function_code_values = [row[0] for row in connection.execute(select(function_codes.c.code))]
+    for module_code in module_codes:
+        connection.execute(user_module_entitlements.insert().values(
+            user_id=target.id, module_code=module_code, enabled=True,
+        ))
+    for function_code in function_code_values:
+        connection.execute(user_function_grants.insert().values(
+            user_id=target.id, function_code=function_code, granted=True,
+        ))
