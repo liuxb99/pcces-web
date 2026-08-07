@@ -1,34 +1,6 @@
 name: Phase 4 Cost Structure
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "api/cost_structure*.py"
-      - "api/test_cost_structure*.py"
-      - "api/app.py"
-      - "web-pcces/frontend/src/costStructureApi.ts"
-      - "pcces-go/internal/storage/sqlite/cost_structure*"
-      - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0026_cost_structure_runs.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0027_cost_structure_run_versions.sql"
-      - "pcces-go/internal/platform/httpapi/cost_structure*"
-      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
-      - ".github/workflows/phase4-cost-structure.yml"
-  pull_request:
-    paths:
-      - "api/cost_structure*.py"
-      - "api/test_cost_structure*.py"
-      - "api/app.py"
-      - "web-pcces/frontend/src/costStructureApi.ts"
-      - "pcces-go/internal/storage/sqlite/cost_structure*"
-      - "pcces-go/internal/storage/sqlite/migrations/0024_cost_structure.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0025_cost_structure_details.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0026_cost_structure_runs.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0027_cost_structure_run_versions.sql"
-      - "pcces-go/internal/platform/httpapi/cost_structure*"
-      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
   workflow_dispatch:
 
 jobs:
