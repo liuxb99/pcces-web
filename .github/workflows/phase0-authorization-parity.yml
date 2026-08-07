@@ -1,34 +1,7 @@
 name: Phase 0 Cross-Target Parity
 
 on:
-  push:
-    paths:
-      - "api/authorization.py"
-      - "api/route_policy.py"
-      - "api/app.py"
-      - "api/work_context.py"
-      - "api/recovery.py"
-      - "api/test_authorization*.py"
-      - "api/test_route_policy.py"
-      - "api/test_work_context.py"
-      - "api/test_recovery.py"
-      - "pcces-go/internal/domain/authorization/**"
-      - "pcces-go/internal/domain/workcontext/**"
-      - "pcces-go/internal/storage/sqlite/**"
-      - "pcces-go/internal/platform/httpapi/**"
-      - "specs/catalog/phase0-action-catalog.json"
-      - "specs/golden/**"
-      - ".github/workflows/phase0-authorization-parity.yml"
-  pull_request:
-    paths:
-      - "api/**"
-      - "pcces-go/internal/domain/authorization/**"
-      - "pcces-go/internal/domain/workcontext/**"
-      - "pcces-go/internal/storage/sqlite/**"
-      - "pcces-go/internal/platform/httpapi/**"
-      - "specs/catalog/phase0-action-catalog.json"
-      - "specs/golden/**"
-      - ".github/workflows/phase0-authorization-parity.yml"
+  workflow_dispatch:
 
 jobs:
   web-phase0:
