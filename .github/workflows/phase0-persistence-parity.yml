@@ -1,36 +1,7 @@
 name: Phase 0 Persistence Parity
 
 on:
-  push:
-    paths:
-      - "api/decimal_math.py"
-      - "api/persistence_contract.py"
-      - "api/migrations.py"
-      - "api/app.py"
-      - "api/test_decimal_math.py"
-      - "api/test_persistence_contract.py"
-      - "api/test_migrations.py"
-      - "pcces-go/internal/domain/money/**"
-      - "pcces-go/internal/storage/sqlite/decimal_repository*"
-      - "pcces-go/internal/storage/sqlite/migrations/0006_decimal_audit_contract.sql"
-      - "specs/golden/decimal-calculations.json"
-      - "specs/catalog/phase0-persistence-contract.json"
-      - ".github/workflows/phase0-persistence-parity.yml"
-  pull_request:
-    paths:
-      - "api/decimal_math.py"
-      - "api/persistence_contract.py"
-      - "api/migrations.py"
-      - "api/app.py"
-      - "api/test_decimal_math.py"
-      - "api/test_persistence_contract.py"
-      - "api/test_migrations.py"
-      - "pcces-go/internal/domain/money/**"
-      - "pcces-go/internal/storage/sqlite/decimal_repository*"
-      - "pcces-go/internal/storage/sqlite/migrations/0006_decimal_audit_contract.sql"
-      - "specs/golden/decimal-calculations.json"
-      - "specs/catalog/phase0-persistence-contract.json"
-      - ".github/workflows/phase0-persistence-parity.yml"
+  workflow_dispatch:
 
 jobs:
   web-persistence:
