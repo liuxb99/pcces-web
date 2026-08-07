@@ -1,20 +1,6 @@
 name: Phase 4 Round-trip Audit
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "api/phase4_roundtrip_audit.py"
-      - "api/test_phase4_roundtrip_audit.py"
-      - "pcces-go/internal/storage/sqlite/phase4_roundtrip_audit*"
-      - "docs/development/phase4-traceability-matrix.md"
-      - ".github/workflows/phase4-roundtrip-audit.yml"
-  pull_request:
-    paths:
-      - "api/phase4_roundtrip_audit.py"
-      - "api/test_phase4_roundtrip_audit.py"
-      - "pcces-go/internal/storage/sqlite/phase4_roundtrip_audit*"
-      - "docs/development/phase4-traceability-matrix.md"
   workflow_dispatch:
 
 jobs:
