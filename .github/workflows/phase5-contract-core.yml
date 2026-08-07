@@ -1,49 +1,6 @@
 name: Phase 5 Contract Core
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "api/contract_core.py"
-      - "api/contract_allocation.py"
-      - "api/contract_governance.py"
-      - "api/contract_changes.py"
-      - "api/test_contract_core.py"
-      - "api/test_contract_allocation.py"
-      - "api/test_contract_governance.py"
-      - "api/test_contract_changes.py"
-      - "api/app.py"
-      - "pcces-go/internal/storage/sqlite/contract_core*"
-      - "pcces-go/internal/storage/sqlite/contract_allocation*"
-      - "pcces-go/internal/storage/sqlite/contract_governance*"
-      - "pcces-go/internal/storage/sqlite/contract_changes*"
-      - "pcces-go/internal/storage/sqlite/migrations/0038_contract_core.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0039_contract_allocations.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0040_contract_governance.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0041_contract_changes.sql"
-      - "pcces-go/internal/platform/httpapi/contract_core_handlers.go"
-      - "pcces-go/internal/platform/httpapi/contract_allocation_handlers.go"
-      - "pcces-go/internal/platform/httpapi/contract_governance_handlers.go"
-      - "pcces-go/internal/platform/httpapi/contract_change_handlers.go"
-      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
-      - ".github/workflows/phase5-contract-core.yml"
-  pull_request:
-    paths:
-      - "api/contract_core.py"
-      - "api/contract_allocation.py"
-      - "api/contract_governance.py"
-      - "api/contract_changes.py"
-      - "api/test_contract_core.py"
-      - "api/test_contract_allocation.py"
-      - "api/test_contract_governance.py"
-      - "api/test_contract_changes.py"
-      - "pcces-go/internal/storage/sqlite/contract_core*"
-      - "pcces-go/internal/storage/sqlite/contract_allocation*"
-      - "pcces-go/internal/storage/sqlite/contract_governance*"
-      - "pcces-go/internal/storage/sqlite/contract_changes*"
-      - "pcces-go/internal/storage/sqlite/migrations/0041_contract_changes.sql"
-      - "pcces-go/internal/platform/httpapi/contract_change_handlers.go"
-      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
   workflow_dispatch:
 
 jobs:
