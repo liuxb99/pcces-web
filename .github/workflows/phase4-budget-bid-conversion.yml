@@ -1,56 +1,6 @@
 name: Phase 4 Budget Bid Conversion
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "api/budget_bid_conversion.py"
-      - "api/conversion_wizard.py"
-      - "api/conversion_export_jobs.py"
-      - "api/conversion_export_lifecycle.py"
-      - "api/conversion_source_artifacts.py"
-      - "api/conversion_long_jobs.py"
-      - "api/bid_budget_roundtrip.py"
-      - "api/bid_budget_import_apply.py"
-      - "api/budget_combine_bid.py"
-      - "api/legacy_exchange_adapters.py"
-      - "api/test_budget_bid_conversion.py"
-      - "api/test_conversion_wizard.py"
-      - "api/test_conversion_export_jobs.py"
-      - "api/test_conversion_export_lifecycle.py"
-      - "api/test_conversion_source_artifacts.py"
-      - "api/test_conversion_long_jobs.py"
-      - "api/test_bid_budget_roundtrip.py"
-      - "api/test_bid_import_canonical_contract.py"
-      - "api/test_bid_budget_import_apply.py"
-      - "api/test_bid_import_apply_canonical_contract.py"
-      - "api/test_budget_combine_bid.py"
-      - "api/test_budget_combine_bid_contract.py"
-      - "api/test_legacy_exchange_adapters.py"
-      - "api/app.py"
-      - "docs/development/phase4-traceability-matrix.md"
-      - "pcces-go/internal/storage/sqlite/*conversion*"
-      - "pcces-go/internal/storage/sqlite/bid_import*"
-      - "pcces-go/internal/storage/sqlite/combine_bid*"
-      - "pcces-go/internal/storage/sqlite/legacy_exchange*"
-      - "pcces-go/internal/storage/sqlite/migrations/0037_conversion_long_jobs.sql"
-      - "pcces-go/internal/platform/httpapi/*conversion*"
-      - "pcces-go/internal/platform/httpapi/bid_import*"
-      - "pcces-go/internal/platform/httpapi/combine_bid_handlers.go"
-      - "pcces-go/internal/platform/httpapi/legacy_exchange_adapter_handlers.go"
-      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
-      - ".github/workflows/phase4-budget-bid-conversion.yml"
-  pull_request:
-    paths:
-      - "api/conversion_long_jobs.py"
-      - "api/test_conversion_long_jobs.py"
-      - "api/app.py"
-      - "docs/development/phase4-traceability-matrix.md"
-      - "pcces-go/internal/storage/sqlite/conversion_long_jobs*"
-      - "pcces-go/internal/storage/sqlite/migrations/0037_conversion_long_jobs.sql"
-      - "pcces-go/internal/platform/httpapi/conversion_long_job_handlers.go"
-      - "pcces-go/internal/platform/httpapi/authorization_handlers.go"
-      - ".github/workflows/phase4-budget-bid-conversion.yml"
   workflow_dispatch:
 
 jobs:
