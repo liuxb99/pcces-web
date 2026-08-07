@@ -1,50 +1,7 @@
 name: Budget Decimal Core
 
 on:
-  push:
-    paths:
-      - "api/budget_decimal.py"
-      - "api/budget_kind_engine.py"
-      - "api/budget_calculation_trace.py"
-      - "api/legacy_budget_decimal_bridge.py"
-      - "api/legacy_decimal_adapter.py"
-      - "api/test_budget_decimal.py"
-      - "api/test_budget_kind_engine.py"
-      - "api/test_budget_calculation_trace.py"
-      - "api/test_legacy_budget_decimal_bridge.py"
-      - "api/test_legacy_decimal_adapter.py"
-      - "api/decimal_math.py"
-      - "api/app.py"
-      - "pcces-go/internal/domain/money/**"
-      - "pcces-go/internal/storage/sqlite/budget_trace_repository*.go"
-      - "pcces-go/internal/storage/sqlite/migrations/0007_budget_decimal_core.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0009_budget_calculation_traces.sql"
-      - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
-      - "specs/golden/budget-decimal-calculations.json"
-      - "specs/golden/budget-item-kind-calculations.json"
-      - ".github/workflows/budget-decimal-core.yml"
-  pull_request:
-    paths:
-      - "api/budget_decimal.py"
-      - "api/budget_kind_engine.py"
-      - "api/budget_calculation_trace.py"
-      - "api/legacy_budget_decimal_bridge.py"
-      - "api/legacy_decimal_adapter.py"
-      - "api/test_budget_decimal.py"
-      - "api/test_budget_kind_engine.py"
-      - "api/test_budget_calculation_trace.py"
-      - "api/test_legacy_budget_decimal_bridge.py"
-      - "api/test_legacy_decimal_adapter.py"
-      - "api/decimal_math.py"
-      - "api/app.py"
-      - "pcces-go/internal/domain/money/**"
-      - "pcces-go/internal/storage/sqlite/budget_trace_repository*.go"
-      - "pcces-go/internal/storage/sqlite/migrations/0007_budget_decimal_core.sql"
-      - "pcces-go/internal/storage/sqlite/migrations/0009_budget_calculation_traces.sql"
-      - "pcces-go/internal/platform/httpapi/decimal_core_handlers.go"
-      - "specs/golden/budget-decimal-calculations.json"
-      - "specs/golden/budget-item-kind-calculations.json"
-      - ".github/workflows/budget-decimal-core.yml"
+  workflow_dispatch:
 
 jobs:
   web-budget-decimal:
