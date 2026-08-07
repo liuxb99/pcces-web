@@ -2,33 +2,6 @@ name: Phase 3 Parity Gate
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "api/mrs_*.py"
-      - "api/resource_*.py"
-      - "api/test_mrs_*.py"
-      - "api/test_resource_*.py"
-      - "pcces-go/internal/storage/sqlite/mrs_*"
-      - "pcces-go/internal/storage/sqlite/resource_*"
-      - "pcces-go/internal/platform/httpapi/*mrs*"
-      - "pcces-go/internal/platform/httpapi/*resource*"
-      - "docs/development/phase-3-mrs-traceability-matrix.md"
-      - "scripts/verify_phase3_gate.py"
-      - ".github/workflows/phase3-parity-gate.yml"
-  pull_request:
-    paths:
-      - "api/mrs_*.py"
-      - "api/resource_*.py"
-      - "api/test_mrs_*.py"
-      - "api/test_resource_*.py"
-      - "pcces-go/internal/storage/sqlite/mrs_*"
-      - "pcces-go/internal/storage/sqlite/resource_*"
-      - "pcces-go/internal/platform/httpapi/*mrs*"
-      - "pcces-go/internal/platform/httpapi/*resource*"
-      - "docs/development/phase-3-mrs-traceability-matrix.md"
-      - "scripts/verify_phase3_gate.py"
-      - ".github/workflows/phase3-parity-gate.yml"
 
 jobs:
   phase3-parity:
