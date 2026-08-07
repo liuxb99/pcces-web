@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PCCES 公共工程經費估算系統</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg-primary:#0a0e1a;--bg-secondary:#111827;--bg-tertiary:#1a2332;--bg-surface:#1e293b;--border:#2d3a50;--accent-teal:#14b8a6;--accent-emerald:#10b981;--accent-amber:#f59e0b;--gradient-primary:linear-gradient(135deg,#14b8a6,#10b981);--gradient-accent:linear-gradient(135deg,#14b8a6,#f59e0b);--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-tertiary:#64748b;--text-link:#5eead4;--success:#22c55e;--warning:#f59e0b;--error:#ef4444;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;--space-20:80px;--space-24:96px;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:24px;--shadow-sm:0 1px 3px rgba(0,0,0,0.3);--shadow-md:0 4px 12px rgba(0,0,0,0.4);--shadow-lg:0 8px 30px rgba(0,0,0,0.5);--shadow-glow:0 0 20px rgba(20,184,166,0.3);--font-sans:'Inter','Noto Sans TC','Segoe UI',system-ui,-apple-system,sans-serif}
+body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--text-link);text-decoration:none;transition:color .15s}a:hover{color:var(--accent-teal)}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:var(--space-4)var(--space-8);background:rgba(10,14,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.navbar-brand{display:flex;align-items:center;gap:var(--space-3);font-size:18px;font-weight:700;color:var(--text-primary)}
+.navbar-links{display:flex;align-items:center;gap:var(--space-6);font-size:14px;font-weight:500}
+.navbar-links a{color:var(--text-secondary)}.navbar-links a:hover{color:var(--text-primary)}
+.btn-ghost{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2)var(--space-4);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--text-secondary);background:transparent;cursor:pointer;transition:all .15s}
+.btn-ghost:hover{border-color:var(--accent-teal);color:var(--text-primary);background:rgba(20,184,166,0.08)}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--space-24)var(--space-8)var(--space-16);overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(20,184,166,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(20,184,166,0.04)1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(ellipse 60% 50% at center,black 30%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 60% 50% at center,black 30%,transparent 70%)}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(20,184,166,0.06),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-1)var(--space-4);background:rgba(20,184,166,0.1);border:1px solid rgba(20,184,166,0.25);border-radius:var(--radius-full);font-size:12px;font-weight:500;color:var(--accent-teal);margin-bottom:var(--space-6);letter-spacing:.3px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--success);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-title{font-size:48px;font-weight:800;line-height:1.15;margin-bottom:var(--space-6);letter-spacing:-1.5px}
+.hero-title .g1{background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title .g2{background:var(--gradient-accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:18px;color:var(--text-secondary);max-width:620px;margin:0 auto var(--space-10);line-height:1.7}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:var(--space-4);flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-3)var(--space-8);background:var(--gradient-primary);border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;color:#fff;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(20,184,166,0.4)}
+.btn-secondary{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-3)var(--space-6);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-weight:500;color:var(--text-secondary);background:transparent;cursor:pointer;transition:all .15s}
+.btn-secondary:hover{border-color:var(--accent-teal);color:var(--text-primary);background:rgba(20,184,166,0.06)}
+.hero-stats{position:relative;z-index:1;display:flex;gap:var(--space-12);margin-top:var(--space-16);padding-top:var(--space-10);border-top:1px solid var(--border);flex-wrap:wrap;justify-content:center}
+.hero-stat{text-align:center}
+.hero-stat-value{font-size:28px;font-weight:700;color:var(--text-primary)}
+.hero-stat-label{font-size:13px;color:var(--text-tertiary);margin-top:var(--space-1)}
+section{padding:var(--space-24)var(--space-8)}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{display:inline-block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:var(--space-3)}
+.section-title{font-size:32px;font-weight:700;margin-bottom:var(--space-4);letter-spacing:-.5px}
+.section-desc{font-size:16px;color:var(--text-secondary);max-width:600px;line-height:1.7;margin-bottom:var(--space-12)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-5)}
+.feature-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-6);transition:all .15s;cursor:default}
+.feature-card:hover{transform:translateY(-4px);border-color:rgba(20,184,166,0.3);box-shadow:var(--shadow-md)}
+.feature-icon{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-4);font-size:20px}
+.feature-icon.teal{background:rgba(20,184,166,0.12)}
+.feature-icon.blue{background:rgba(59,130,246,0.12)}
+.feature-icon.amber{background:rgba(245,158,11,0.12)}
+.feature-icon.green{background:rgba(16,185,129,0.12)}
+.feature-icon.purple{background:rgba(139,92,246,0.12)}
+.feature-title{font-size:16px;font-weight:600;margin-bottom:var(--space-2)}
+.feature-desc{font-size:14px;color:var(--text-secondary);line-height:1.7}
+.tech-grid{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.tech-tag{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2)var(--space-4);background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-full);font-size:13px;font-weight:500;color:var(--text-secondary);transition:all .15s}
+.tech-tag:hover{border-color:var(--accent-teal);color:var(--text-primary)}
+.tech-tag-dot{width:8px;height:8px;border-radius:50%}
+.cta-section{text-align:center;background:var(--bg-secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+footer{padding:var(--space-10)var(--space-8);text-align:center;font-size:13px;color:var(--text-tertiary);border-top:1px solid var(--border)}
+footer a{color:var(--text-tertiary)}footer a:hover{color:var(--text-primary)}
+.footer-links{display:flex;justify-content:center;gap:var(--space-6);margin-bottom:var(--space-4)}
+.footer-links a{font-size:13px;display:inline-flex;align-items:center;gap:var(--space-1)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg-primary)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+@media(max-width:768px){.hero-title{font-size:32px}.hero-sub{font-size:16px}.hero-stats{gap:var(--space-6)}.navbar-links a:not(.btn-ghost){display:none}section{padding:var(--space-16)var(--space-5)}.section-title{font-size:26px}.features-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<a href="#" class="navbar-brand"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" stroke="url(#ng)" stroke-width="2"/><text x="14" y="19" text-anchor="middle" fill="url(#ng)" font-size="14" font-weight="bold">P</text><defs><linearGradient id="ng" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#14b8a6"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs></svg>PCCES</a>
+<div class="navbar-links">
+<a href="#features">功能</a><a href="#tech">技術</a>
+<a href="https://github.com/liuxb99/pcces-web" target="_blank" rel="noopener" class="btn-ghost"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+</div></nav>
+
+<section class="hero">
+<div class="hero-grid"></div><div class="hero-glow"></div>
+<div class="hero-content">
+<div class="hero-badge"><span class="hero-badge-dot"></span>線上運作中</div>
+<h1 class="hero-title"><span class="g1">公共工程經費</span><br/><span class="g2">估算系統</span></h1>
+<p class="hero-sub">PCCES 公共工程經費估算系統網頁版 — 不需安裝、不需註冊，打開瀏覽器即可進行工程經費估算、預算編列與報價管理。</p>
+<div class="hero-actions">
+<a href="https://pcces-web-mauve.vercel.app" target="_blank" rel="noopener" class="btn-primary">開始使用 →</a>
+<a href="https://github.com/liuxb99/pcces-web" target="_blank" rel="noopener" class="btn-secondary"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>檢視原始碼</a>
+</div></div>
+<div class="hero-stats">
+<div class="hero-stat"><div class="hero-stat-value">100%</div><div class="hero-stat-label">瀏覽器執行</div></div>
+<div class="hero-stat"><div class="hero-stat-value">Flask</div><div class="hero-stat-label">Python 後端</div></div>
+<div class="hero-stat"><div class="hero-stat-value">React</div><div class="hero-stat-label">前端 UI</div></div>
+<div class="hero-stat"><div class="hero-stat-value">MIT</div><div class="hero-stat-label">開源授權</div></div>
+</div></section>
+
+<section id="features"><div class="section-inner">
+<span class="section-label" style="color:var(--accent-teal)">功能特色</span>
+<h2 class="section-title">完整的工程經費管理工具</h2>
+<p class="section-desc">涵蓋公共工程經費估算、預算編列、報價管理、Excel 匯出等完整功能。</p>
+<div class="features-grid">
+<div class="feature-card"><div class="feature-icon teal">💰</div><h3 class="feature-title">經費估算</h3><p class="feature-desc">依 PCCES 標準進行工程經費估算，支援多種工項模板與單價分析。</p></div>
+<div class="feature-card"><div class="feature-icon blue">📋</div><h3 class="feature-title">預算編列</h3><p class="feature-desc">工程預算編列與管理，支援直接工程費、間接工程費、利潤管理等。</p></div>
+<div class="feature-card"><div class="feature-icon amber">📊</div><h3 class="feature-title">報價管理</h3><p class="feature-desc">廠商報價登錄、比價分析、最低標/最有利標評選輔助。</p></div>
+<div class="feature-card"><div class="feature-icon green">📄</div><h3 class="feature-title">Excel 匯出</h3><p class="feature-desc">一鍵匯出標準 PCCES 格式 Excel，符合公共工程委員會規範。</p></div>
+<div class="feature-card"><div class="feature-icon teal">🔐</div><h3 class="feature-title">會員系統</h3><p class="feature-desc">JWT 認證、會員分級管理，支援資料庫持久化儲存。</p></div>
+<div class="feature-card"><div class="feature-icon purple">⚙️</div><h3 class="feature-title">C# 核心引擎</h3><p class="feature-desc">底層計算引擎使用 C# 實作，確保與 PCCES 桌面版完全相容。</p></div>
+</div></div></section>
+
+<section id="tech" style="background:var(--bg-secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)"><div class="section-inner">
+<span class="section-label" style="color:var(--accent-teal)">技術棧</span>
+<h2 class="section-title">全端 Web 技術</h2>
+<p class="section-desc">Flask + React 前後端分離架構，部署於 Vercel Serverless 平台。</p>
+<div class="tech-grid">
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#d22b08"></span>Flask</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#3776ab"></span>Python</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#61dafb"></span>React</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#f7df1e"></span>JavaScript</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#000"></span>SQLAlchemy</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#646cff"></span>Vite</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#8b5cf6"></span>JWT</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#512bd4"></span>C#</span>
+<span class="tech-tag"><span class="tech-tag-dot" style="background:#000"></span>Vercel</span>
+</div></div></section>
+
+<section class="cta-section"><div class="section-inner" style="text-align:center">
+<h2 class="section-title" style="margin-bottom:var(--space-4);background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">立即開始工程經費估算</h2>
+<p style="font-size:16px;color:var(--text-secondary);max-width:480px;margin:0 auto var(--space-8)">打開瀏覽器即可使用，無需安裝、無需註冊。</p>
+<a href="https://pcces-web-mauve.vercel.app" target="_blank" rel="noopener" class="btn-primary" style="font-size:17px;padding:var(--space-3)var(--space-10)">開啟 PCCES →</a>
+</div></section>
+
+<footer>
+<div class="footer-links">
+<a href="https://github.com/liuxb99/pcces-web" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+<a href="https://pcces-web-mauve.vercel.app" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>線上應用</a>
+</div>
+<p>PCCES &copy; 2026 &middot; 公共工程經費估算系統 &middot; Built with hua su-design</p>
+</footer>
+</body>
+</html>
